@@ -1,0 +1,61 @@
+{
+  "name": "@he-tree/vue2",
+  "version": "1.0.0",
+  "description": "A draggable sortable nested vue tree component.",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "unpkg": "dist/he-tree-vue.js",
+  "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
+  "homepage": "https://he-tree.phphe.com",
+  "bugs": {
+    "url": "https://github.com/phphe/he-tree/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phphe/he-tree.git"
+  },
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build-lib": "rollup -c scripts/build.js & node scripts/build.js --report",
+    "watch-lib": "rollup -c scripts/build.js --watch"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "draggable-helper": "^6.0.3",
+    "helper-js": "^2.0.6",
+    "tslib": "^1.14.1",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.1.2",
+    "vue-runtime-helpers": "^1.1.2"
+  },
+  "devDependencies": {
+    "@rollup-use/core": "^0.0.7",
+    "@rollup-use/vue2-ts": "^0.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/babel-preset-app": "^4.2.3",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.1.5",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "ts-node": "^10.2.0",
+    "typescript": "~4.1.5",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11"
+  }
+}

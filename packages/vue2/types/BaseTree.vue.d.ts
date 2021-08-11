@@ -1,0 +1,64 @@
+import { Vue } from "vue-property-decorator";
+import { obj, Node } from "./types";
+export declare const trees: Record<string, BaseTree>;
+export default class BaseTree extends Vue {
+    readonly idKey: string;
+    readonly parentIdKey: string;
+    readonly childrenKey: string;
+    readonly textKey: string;
+    readonly flatData: obj[];
+    readonly treeData: obj[];
+    readonly indent: number;
+    readonly rtl: boolean;
+    readonly virtualization: boolean;
+    readonly virtualizationPrerender: number;
+    readonly childrenLazyLoading: boolean;
+    readonly childrenLoader: (node: Node, vm: this) => Promise<Node[]>;
+    readonly defaultFolded: boolean;
+    nodes: Node[];
+    nodesByID: Record<string, Node>;
+    trees: Record<string, BaseTree>;
+    dragging: boolean;
+    treeID: string;
+    data(): {
+        tree: typeof BaseTree;
+    };
+    get rootNodeChildren(): Node[];
+    get rootNode(): {
+        $level: number;
+        $children: Node[];
+    };
+    get visibleNodes(): Node[];
+    onFlatDataChange(val: obj[] | null): void;
+    onTreeDataChange(val: obj[] | null): void;
+    initNodes(nodes: Node[]): void;
+    getTreeVmByTreeEl(treeEl: HTMLElement): this | undefined;
+    nodeIndentStyle(node: Node): {
+        [x: string]: string;
+    };
+    getNodeByEl(el: HTMLElement): Node;
+    getElByID(id: string | number): HTMLElement | undefined;
+    getParent(node?: Node): Node | undefined;
+    getChildren(node: Node | undefined): Node[];
+    countChildren(node: Node | undefined): number;
+    _checkIDExists(id: number | string): void;
+    _pidIndexToListIndex(pid: number | string | null, index: number): number;
+    addNode(node: obj, parentId: number | string | null, index?: number): void;
+    moveNode(node: Node, parentId: number | string | null, index?: number): void;
+    removeNode(node: Node): void;
+    outputNestedData(parent: Node | null, ignoreKeys?: string[], _returnFlat?: boolean): obj[];
+    outputFlatData(parent: Node | null, ignoreKeys?: string[]): Record<string, unknown>[];
+    isNodeParentFolded(node: Node): boolean;
+    isNodeVisible(node: Node): boolean;
+    forceVisible(node: Node): boolean;
+    foldAll(): void;
+    loadChildren(node: Node): Promise<void>;
+    loadAllChildren(node?: Node): Promise<void>;
+    unfoldAll(node?: Node): Promise<void> | undefined;
+    private unfoldInfo?;
+    unfold(node: Node): void | Promise<void>;
+    toggleFold(node: Node): void | Promise<void>;
+    updateChecked(node: Node): void;
+    getAllCheckedNodes(): Node[];
+    mounted(): void;
+}
