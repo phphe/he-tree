@@ -1,7 +1,7 @@
 <template lang="pug">
-VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
+VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :gap="gap" :afterCalcTop2="virtualizationListAfterCalcTop2" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
   template(v-slot="info")
-    .tree-node-outer.vl-item(:key="info.item.$id" :data-vindex="info.index" :data-id="info.item.$id" :style="[nodeIndentStyle(info.item), info.item.$outerStyle]" :class="info.item.$outerClass")
+    .tree-node-outer.vl-item(:key="info.item.$id" :data-vindex="info.index" :data-v-render-index="info.renderIndex" :data-id="info.item.$id" :style="[info.itemStyle, nodeIndentStyle(info.item), info.item.$outerStyle]" :class="info.item.$outerClass")
       .tree-node(:class="info.item.$nodeClass" :style="info.item.$nodeStyle")
         slot(:node="info.item" :tree="tree") {{info.item[textKey]}}
 </template>
@@ -30,6 +30,7 @@ export default class BaseTree extends Vue {
   @Prop({ type: Array }) readonly flatData!: obj[];
   @Prop({ type: Array }) readonly treeData!: obj[];
   @Prop({ default: 20 }) readonly indent!: number;
+  @Prop({ type: Number }) readonly gap!: number;
   @Prop({ type: Boolean, default: false }) readonly rtl!: boolean;
   @Prop({ type: Boolean, default: false }) readonly virtualization!: boolean;
   @Prop({ default: 20 }) readonly virtualizationPrerender!: number;
@@ -47,7 +48,7 @@ export default class BaseTree extends Vue {
   dragging = false;
   treeID = hp.randString();
   data() {
-    return { tree: BaseTree };
+    return { tree: BaseTree, virtualizationListAfterCalcTop2: undefined };
   }
 
   // computed
@@ -439,7 +440,6 @@ export default class BaseTree extends Vue {
       doAction();
     }
   }
-  private unfoldInfo?: obj;
   unfold(node: Node): void | Promise<void> {
     if (this.childrenLazyLoading) {
       return this.loadChildren(node).then(() => {

@@ -80,6 +80,23 @@ export default class Draggable extends BaseTree {
   store: Store3 | null = null;
   private unfoldWhenDragoverInfo?: obj;
 
+  data() {
+    return {
+      virtualizationListAfterCalcTop2: (top2: number) => {
+        if (this.dragging) {
+          const placeholder = this.$el!.querySelector(
+            "#hetree_drag_placeholder"
+          );
+          if (placeholder) {
+            top2 +=
+              hp.getBoundingClientRect(placeholder).height + (this.gap || 0);
+          }
+        }
+        return top2;
+      },
+    };
+  }
+
   // methods
   private isParentDragging(node: Node): boolean {
     const { nodesByID, draggingNode } = this;
@@ -101,7 +118,8 @@ export default class Draggable extends BaseTree {
     return (
       !node.$hidden &&
       !this.isNodeParentFolded(node) &&
-      !this.isParentDragging(node)
+      (!this.draggingNode ||
+        (node !== this.draggingNode && !this.isParentDragging(node)))
     );
   }
   // hooks
@@ -112,6 +130,7 @@ export default class Draggable extends BaseTree {
       nodeOuterClass: "tree-node-outer",
       draggingClassName: "dragging",
       placeholderClass: "tree-placeholder",
+      clone: true,
       onClone: (store: Store3, options: Options) => {
         store.isCloned = false;
         // @ts-ignore
@@ -138,7 +157,6 @@ export default class Draggable extends BaseTree {
     syncOption("unfoldWhenDragover");
     syncOption("unfoldWhenDragoverDelay");
     syncOption("draggingNodePositionMode");
-    syncOption("cloneWhenDrag", "clone");
     syncOption("edgeScroll");
     syncOption("edgeScrollTriggerMargin");
     syncOption("edgeScrollSpeed");
@@ -253,7 +271,7 @@ export default class Draggable extends BaseTree {
         },
         createPlaceholder: () =>
           hp.createElementFromHTML(`
-          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer">
+          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
             <div class="${options.placeholderClass} tree-node">
             </div>
           </div>

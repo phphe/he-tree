@@ -89,10 +89,3 @@ export function convertFlatDataToStandard<T extends obj>(
     }
   }
 }
-
-export function getOuterHeight(el: Element) {
-  return (
-    hp.getBoundingClientRect(<HTMLElement>el).height +
-    hp.getOuterAttachedWidth(el, { margin: true, border: false })
-  );
-}

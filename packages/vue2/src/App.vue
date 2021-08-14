@@ -50,7 +50,7 @@
         | &nbsp;
         span {{node.text}}
     h3 RTL
-    Draggable(:treeData="treeData5" virtualization style="height:200px;overflow:auto" edgeScroll rtl)
+    Draggable(:treeData="treeData5" virtualization style="height:200px;overflow:auto" edgeScroll rtl :gap="6")
       template(v-slot="{node, index, tree}")
         b(@click="tree.toggleFold(node)") {{node.$folded ? '+' : '-'}}&nbsp;
         input(type="checkbox" v-model="node.$checked" @change="tree.updateChecked(node)")
@@ -58,21 +58,21 @@
         span {{node.text}}
   .col-3
     h3 Style
-    Draggable.tree6(:treeData="treeData6" virtualization style="height:200px;overflow:auto" edgeScroll)
+    Draggable.tree6(:treeData="treeData6" virtualization style="height:200px;overflow:auto" edgeScroll :gap="6")
       template(v-slot="{node, index, tree}")
         b(@click="tree.toggleFold(node)") {{node.$folded ? '+' : '-'}}&nbsp;
         input(type="checkbox" v-model="node.$checked" @change="tree.updateChecked(node)")
         | &nbsp;
         span {{node.text}}
     br
-    Draggable.tree7(:treeData="treeData7" virtualization style="height:200px;overflow:auto" edgeScroll)
+    Draggable.tree7(:treeData="treeData7" virtualization style="height:200px;overflow:auto" edgeScroll :gap="6")
       template(v-slot="{node, index, tree}")
         b(@click="tree.toggleFold(node)") {{node.$folded ? '+' : '-'}}&nbsp;
         input(type="checkbox" v-model="node.$checked" @change="tree.updateChecked(node)")
         | &nbsp;
         span {{node.text}}
     h3 Custome Trigger
-    Draggable.tree8(:treeData="treeData8" virtualization style="height:500px;overflow:auto"  triggerClass="drag-trigger")
+    Draggable.tree8(:treeData="treeData8" virtualization style="height:500px;overflow:auto"  triggerClass="drag-trigger" edgeScroll :gap="6")
       template(v-slot="{node, index, tree}")
         button.drag-trigger(style="margin-right:.5em") drag
         b(@click="tree.toggleFold(node)") {{node.$folded ? '+' : '-'}}&nbsp;
@@ -235,7 +235,6 @@ export default class App extends Vue {
 
 .tree6 .tree-node {
   border: 1px solid #ccc;
-  margin-bottom: 6px;
   padding: 0 5px;
 }
 .tree7:not(.he-tree-dragging) .tree-node-outer:hover {
@@ -248,7 +247,6 @@ export default class App extends Vue {
   border-color: #ccc;
 }
 .tree7 .tree-node {
-  margin-bottom: 6px;
 }
 .tree7 .tree-node:not(.tree-placeholder) {
   border: 1px solid #ccc;
@@ -257,7 +255,6 @@ export default class App extends Vue {
 }
 .tree8 .tree-node {
   border: 1px solid #ccc;
-  margin-bottom: 6px;
   padding: 2px 5px;
 }
 </style>
