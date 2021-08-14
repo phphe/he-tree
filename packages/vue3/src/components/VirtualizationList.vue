@@ -1,15 +1,13 @@
 <template lang="pug">
-.VirtualizationList.virtualization-list(:is="listTag" @scroll.passive="update")
-  .vl-placeholder.top(:style="{height: top+'px'}")
-  template(v-for="info in visibleItems")
-    slot(:item="info.item" :index="info.index")
-  .vl-placeholder.bottom(:style="{height: bottom+'px'}")
+.VirtualizationList.virtualization-list(@scroll.passive="update")
+  component.vl-items(:is="listTag" :class="listClass" :style="{paddingTop: top + 'px',paddingBottom: bottom + 'px',height: totalHeight + 'px'}")
+    template(v-for="(info, i) in visibleItems")
+      slot(:item="info.item" :index="info.index" :renderIndex="i" :itemStyle="{marginBottom: gap+'px'}")
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, nextTick } from "vue";
 import { obj } from "../types";
-import { getOuterHeight } from "../utils";
 import * as hp from "helper-js";
 
 export default defineComponent({
@@ -23,7 +21,10 @@ export default defineComponent({
     minItemHeight: { type: Number, default: 20 },
     prerender: { type: Number, default: 20 },
     listTag: { type: String, default: "div" },
+    listClass: { type: String },
     itemClass: { type: String, default: "vl-item" },
+    gap: { type: Number },
+    afterCalcTop2: { type: Function as PropType<(top2: number) => number> },
   },
   data() {
     return {
@@ -31,6 +32,7 @@ export default defineComponent({
       end: -1,
       top: 0,
       bottom: 0,
+      totalHeight: 0,
       itemsHeight: <number[]>[],
       mountedPromise: new Promise((resolve, reject) => {
         this._mountedPromise_resolve = resolve;
@@ -49,7 +51,20 @@ export default defineComponent({
       return r;
     },
   },
+  watch: {
+    virtualization: {
+      immediate: true,
+      handler() {
+        if (!this.virtualization) {
+          this.totalHeight = undefined;
+        }
+      },
+    },
+  },
   methods: {
+    getItemElHeight(el: HTMLElement) {
+      return hp.getBoundingClientRect(el).height + this.gap;
+    },
     update() {
       const task = async () => {
         if (!this.enabled) {
@@ -60,10 +75,14 @@ export default defineComponent({
         await this.mountedPromise;
         let existingHeight = 0;
         let i = -1;
-        for (const child of this.$el!.querySelectorAll(".vl-item")) {
-          i++;
-          const index = this.start + i;
-          this.itemsHeight[index] = getOuterHeight(child);
+        for (const child of this.$el.querySelector(".vl-items")!.children) {
+          if (child.style.position === "" || child.style.position == null) {
+            i++;
+            const index = this.start + i;
+            this.itemsHeight[index] = this.getItemElHeight(
+              child as HTMLElement
+            );
+          }
         }
         const avgHeight = existingHeight / (i + 1) || this.minItemHeight;
         let { buffer, itemsHeight, items } = this;
@@ -83,6 +102,9 @@ export default defineComponent({
         }
         let top2 = top;
         let end = start;
+        if (this.afterCalcTop2) {
+          top2 = this.afterCalcTop2(top2);
+        }
         while (top2 < scrollTop + clientHeight + buffer && end <= maxIndex) {
           top2 += itemsHeight[end] || avgHeight;
           end++;
@@ -91,10 +113,20 @@ export default defineComponent({
         for (let index = end + 1; index < items.length; index++) {
           bottom += itemsHeight[index] || avgHeight;
         }
+        const totalHeight = top2 + bottom;
         this.start = start;
         this.end = end;
         this.top = top;
         this.bottom = bottom;
+        if (
+          this.totalHeight == null ||
+          scrollTop + clientHeight > this.totalHeight - buffer ||
+          Math.abs(this.totalHeight - totalHeight) > 100
+        ) {
+          if (this.totalHeight !== totalHeight) {
+            this.totalHeight = totalHeight;
+          }
+        }
 
         const waitDOMUpdated = () => {
           // eslint-disable-next-line no-async-promise-executor
@@ -105,13 +137,18 @@ export default defineComponent({
               .waitFor(
                 () => {
                   let startEl, endEl, startIndex, endIndex;
-                  const els = this.$el.querySelectorAll(".vl-item");
-                  startEl = els[0];
-                  // @ts-ignore
-                  endEl = hp.arrayLast(els);
-                  startIndex = parseInt(startEl.getAttribute("data-vindex")!);
-                  endIndex = parseInt(endEl.getAttribute("data-vindex")!);
-                  return startIndex == this.start && endIndex === this.end;
+                  startEl = this.$el.querySelector(
+                    `.${this.itemClass}[data-v-render-index="0"]`
+                  );
+                  endEl = this.$el.querySelector(
+                    `.${this.itemClass}[data-v-render-index="${this.visibleItems
+                      .length - 1}"]`
+                  );
+                  if (startEl && endEl) {
+                    startIndex = parseInt(startEl.getAttribute("data-vindex")!);
+                    endIndex = parseInt(endEl.getAttribute("data-vindex")!);
+                    return startIndex == this.start && endIndex === this.end;
+                  }
                 },
                 5,
                 10
@@ -150,12 +187,17 @@ export default defineComponent({
   },
   mounted() {
     this._mountedPromise_resolve!(null);
+    let updatedOnce = false;
     this.$watch(
       () => [this.items],
       () => {
         this.itemsHeight = [];
         nextTick(() => {
           this.update();
+          if (!updatedOnce) {
+            this.update();
+          }
+          updatedOnce = true;
         });
       },
       { immediate: true }

@@ -1,7 +1,7 @@
 <template lang="pug">
-VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
+VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :gap="gap" :afterCalcTop2="virtualizationListAfterCalcTop2" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
   template(v-slot="info")
-    .tree-node-outer.vl-item(:key="info.item.$id" :data-vindex="info.index" :data-id="info.item.$id" :style="[nodeIndentStyle(info.item), info.item.$outerStyle]" :class="info.item.$outerClass")
+    .tree-node-outer.vl-item(:key="info.item.$id" :data-vindex="info.index" :data-v-render-index="info.renderIndex" :data-id="info.item.$id" :style="[info.itemStyle, nodeIndentStyle(info.item), info.item.$outerStyle]" :class="info.item.$outerClass")
       .tree-node(:class="info.item.$nodeClass" :style="info.item.$nodeStyle")
         slot(:node="info.item" :tree="tree") {{info.item[textKey]}}
 </template>
@@ -40,6 +40,7 @@ export default defineComponent({
     flatData: { type: Array as PropType<obj[]> },
     treeData: { type: Array as PropType<obj[]> },
     indent: { type: Number, default: 20 },
+    gap: { type: Number },
     rtl: { type: Boolean, default: false },
     virtualization: { type: Boolean, default: false },
     virtualizationPrerender: { type: Number, default: 20 },
@@ -55,6 +56,7 @@ export default defineComponent({
       dragging: false,
       treeID: hp.randString(),
       tree: this,
+      virtualizationListAfterCalcTop2: undefined,
     };
   },
   computed: {

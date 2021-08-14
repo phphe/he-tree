@@ -1,5 +1,6 @@
 <script lang="tsx">
 // TODO replace top_left_corner to camelcase
+// TODO update placeholder gap to targetTree gap
 // @ts-nocheck
 import { defineComponent, PropType, ComponentPublicInstance } from "vue";
 import { obj, Node } from "../types";
@@ -34,6 +35,7 @@ export interface Store3 extends Store2 {
   dragChanged?: boolean;
   isCloned?: boolean;
 }
+export type PositionMode = "top_left_corner" | "mouse";
 
 export default defineComponent({
   extends: BaseTree,
@@ -59,14 +61,37 @@ export default defineComponent({
     isNodeUnfoldable: {
       type: Function as PropType<(store: Store3) => boolean>,
     },
-    top_left_corner: { type: String, default: "top_left_corner" },
-    edgeScrollSpecifiedContainerX: { type: [Object, Function] }, // type: HTMLElement | ((store: Store3) => HTMLElement)
-    edgeScrollSpecifiedContainerY: { type: [Object, Function] }, // type: HTMLElement | ((store: Store3) => HTMLElement)
+    draggingNodePositionMode: {
+      type: String as PropType<PositionMode>,
+      default: "top_left_corner",
+    },
+    preventTextSelection: { type: Boolean, default: true },
+    edgeScroll: { type: Boolean },
+    edgeScrollTriggerMargin: { type: Number, default: 50 },
+    edgeScrollSpeed: { type: Number, default: 0.35 },
+    edgeScrollTriggerMode: {
+      type: String as PropType<PositionMode>,
+      default: "top_left_corner",
+    },
+    edgeScrollSpecifiedContainerX: { type: [Object as PropType<HTMLElement>, Function as PropType<((store: Store3) => HTMLElement)>] }, // type: HTMLElement | ((store: Store3) => HTMLElement)
+    edgeScrollSpecifiedContainerY: { type: [Object as PropType<HTMLElement>, Function] as PropType<((store: Store3) => HTMLElement)> }, // type: HTMLElement | ((store: Store3) => HTMLElement)
   },
   data() {
     return {
       draggingNode: null,
       store: null,
+      virtualizationListAfterCalcTop2: (top2: number) => {
+        if (this.dragging) {
+          const placeholder = this.$el!.querySelector(
+            "#hetree_drag_placeholder"
+          );
+          if (placeholder) {
+            top2 +=
+              hp.getBoundingClientRect(placeholder).height + (this.gap || 0);
+          }
+        }
+        return top2;
+      },
     } as {
       draggingNode: Node | null;
       store: Store3 | null;
@@ -94,7 +119,8 @@ export default defineComponent({
       return (
         !node.$hidden &&
         !this.isNodeParentFolded(node) &&
-        !this.isParentDragging(node)
+        (!this.draggingNode ||
+          (node !== this.draggingNode && !this.isParentDragging(node)))
       );
     },
   },
@@ -106,6 +132,7 @@ export default defineComponent({
       nodeOuterClass: "tree-node-outer",
       draggingClassName: "dragging",
       placeholderClass: "tree-placeholder",
+      clone: true,
       onClone: (store: Store3, options: Options) => {
         store.isCloned = false;
         // @ts-ignore
@@ -132,7 +159,6 @@ export default defineComponent({
     syncOption("unfoldWhenDragover");
     syncOption("unfoldWhenDragoverDelay");
     syncOption("draggingNodePositionMode");
-    syncOption("cloneWhenDrag", "clone");
     syncOption("edgeScroll");
     syncOption("edgeScrollTriggerMargin");
     syncOption("edgeScrollSpeed");
@@ -247,7 +273,7 @@ export default defineComponent({
         },
         createPlaceholder: () =>
           hp.createElementFromHTML(`
-          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer">
+          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
             <div class="${options.placeholderClass} tree-node">
             </div>
           </div>
