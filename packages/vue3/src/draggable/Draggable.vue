@@ -1,6 +1,4 @@
-<script lang="tsx">
-// TODO replace top_left_corner to camelcase
-// TODO update placeholder gap to targetTree gap
+<script lang="ts">
 // @ts-nocheck
 import { defineComponent, PropType, ComponentPublicInstance } from "vue";
 import { obj, Node } from "../types";
@@ -11,6 +9,8 @@ import { Options } from "draggable-helper";
 import { genNodeID } from "../utils";
 
 type Draggable = ComponentPublicInstance;
+
+const placeholderID = "hetree_drag_placeholder";
 
 type eachDraggableFunc = (
   node: Node | undefined,
@@ -73,8 +73,12 @@ export default defineComponent({
       type: String as PropType<PositionMode>,
       default: "top_left_corner",
     },
-    edgeScrollSpecifiedContainerX: { type: [Object as PropType<HTMLElement>, Function as PropType<((store: Store3) => HTMLElement)>] }, // type: HTMLElement | ((store: Store3) => HTMLElement)
-    edgeScrollSpecifiedContainerY: { type: [Object as PropType<HTMLElement>, Function] as PropType<((store: Store3) => HTMLElement)> }, // type: HTMLElement | ((store: Store3) => HTMLElement)
+    edgeScrollSpecifiedContainerX: {
+      type: [Object, Function],
+    }, // type: HTMLElement | ((store: Store3) => HTMLElement)
+    edgeScrollSpecifiedContainerY: {
+      type: [Object, Function],
+    }, // type: HTMLElement | ((store: Store3) => HTMLElement)
   },
   data() {
     return {
@@ -82,9 +86,7 @@ export default defineComponent({
       store: null,
       virtualizationListAfterCalcTop2: (top2: number) => {
         if (this.dragging) {
-          const placeholder = this.$el!.querySelector(
-            "#hetree_drag_placeholder"
-          );
+          const placeholder = this.$el!.querySelector(`#${placeholderID}`);
           if (placeholder) {
             top2 +=
               hp.getBoundingClientRect(placeholder).height + (this.gap || 0);
@@ -97,7 +99,6 @@ export default defineComponent({
       store: Store3 | null;
     };
   },
-
   methods: {
     isParentDragging(node: Node): boolean {
       const { nodesByID, draggingNode } = this;
@@ -261,6 +262,7 @@ export default defineComponent({
           }
           for (const tree of Object.values(this.trees)) {
             tree.dragging = true;
+            tree.store = store;
           }
           store.startTree.$emit("before-first-move", store);
           store.startTree.$emit("drag", store);
@@ -273,7 +275,7 @@ export default defineComponent({
         },
         createPlaceholder: () =>
           hp.createElementFromHTML(`
-          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
+          <div id="${placeholderID}" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
             <div class="${options.placeholderClass} tree-node">
             </div>
           </div>
@@ -357,6 +359,13 @@ export default defineComponent({
         getTreeIndent: (treeEl, store) =>
           this.getTreeVmByTreeEl(treeEl)?.indent,
         moveEnd: (action, info = {}) => {
+          //
+          if (this.store.targetTreeEl.querySelector(`#${placeholderID}`)) {
+            this.store.placeholder.style[
+              "margin-bottom"
+            ] = `${this.store.targetTree.gap}px`;
+          }
+          //
           if (this.unfoldWhenDragoverInfo) {
             if (
               action !== "prepend" ||
@@ -502,10 +511,7 @@ export default defineComponent({
           let dragChanged = true;
           const that = store.targetTree;
           const { startTree, targetTree } = store;
-          if (
-            !document.getElementById("hetree_drag_placeholder") ||
-            !store.targetTreeEl
-          ) {
+          if (!document.getElementById(placeholderID) || !store.targetTreeEl) {
             // not moved
             dragChanged = false;
           } else {

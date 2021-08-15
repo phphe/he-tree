@@ -12,7 +12,7 @@ import * as hp from "helper-js";
 
 export default defineComponent({
   props: {
-    items: Array as PropType<obj[]>,
+    items: { type: Array as PropType<obj[]>, default: () => [] },
     enabled: { type: Boolean, default: true },
     buffer: {
       type: Number,
@@ -23,7 +23,7 @@ export default defineComponent({
     listTag: { type: String, default: "div" },
     listClass: { type: String },
     itemClass: { type: String, default: "vl-item" },
-    gap: { type: Number },
+    gap: { type: Number, default: 0 },
     afterCalcTop2: { type: Function as PropType<(top2: number) => number> },
   },
   data() {
@@ -52,10 +52,11 @@ export default defineComponent({
     },
   },
   watch: {
-    virtualization: {
+    enabled: {
       immediate: true,
       handler() {
-        if (!this.virtualization) {
+        if (!this.enabled) {
+          // @ts-ignore
           this.totalHeight = undefined;
         }
       },
@@ -149,6 +150,7 @@ export default defineComponent({
                     endIndex = parseInt(endEl.getAttribute("data-vindex")!);
                     return startIndex == this.start && endIndex === this.end;
                   }
+                  return false;
                 },
                 5,
                 10
@@ -165,19 +167,25 @@ export default defineComponent({
           });
         };
         await waitDOMUpdated();
+        // @ts-ignore
         if (this._waitingUpdate) {
+          // @ts-ignore
           const next = this._waitingUpdate;
           if (next !== task) {
             next();
           } else {
+            // @ts-ignore
             this._waitingUpdate = undefined;
           }
         }
       };
+      // @ts-ignore
       if (!this._waitingUpdate) {
+        // @ts-ignore
         this._waitingUpdate = task;
         task();
       } else {
+        // @ts-ignore
         this._waitingUpdate = task;
       }
     },
@@ -186,6 +194,7 @@ export default defineComponent({
     this.bottom = this.prerender - 1;
   },
   mounted() {
+    // @ts-ignore
     this._mountedPromise_resolve!(null);
     let updatedOnce = false;
     this.$watch(

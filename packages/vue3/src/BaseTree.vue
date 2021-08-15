@@ -121,6 +121,7 @@ export default defineComponent({
       const nodeInitializators = [];
       for (const key of Object.keys(this.$data)) {
         if (key.startsWith("nodeInitializator_")) {
+          // @ts-ignore
           nodeInitializators.push(this.$data[key]);
         }
       }
@@ -527,12 +528,8 @@ export default defineComponent({
     this.treeID = "hetree_" + hp.randString();
     this.trees[this.treeID] = this;
   },
-  setup() {
-    onBeforeUnmount(() => {
-      const vm = getCurrentInstance();
-      // @ts-ignore
-      delete trees[vm.treeID];
-    });
+  beforeUnmount() {
+    delete trees[this.treeID];
   },
 });
 </script>
