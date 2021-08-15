@@ -45,6 +45,9 @@ export default class Draggable extends BaseTree {
     draggingNode: Node | null;
     store: Store3 | null;
     private unfoldWhenDragoverInfo?;
+    data(): {
+        virtualizationListAfterCalcTop2: (top2: number) => number;
+    };
     private isParentDragging;
     isNodeVisible(node: Node): boolean;
     mounted(): void;

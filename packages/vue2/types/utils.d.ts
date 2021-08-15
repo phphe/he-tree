@@ -9,4 +9,3 @@ export declare function convertFlatDataToStandard<T extends obj>(data: T[], idKe
     nodes: (T & BaseNode)[];
     nodesByID: Record<string, T & BaseNode>;
 };
-export declare function getOuterHeight(el: Element): number;

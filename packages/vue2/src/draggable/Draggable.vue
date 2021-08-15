@@ -8,6 +8,8 @@ import BaseTree from "../BaseTree.vue";
 import { Options } from "draggable-helper";
 import { genNodeID } from "../utils";
 
+const placeholderID = "hetree_drag_placeholder";
+
 type eachDraggableFunc = (
   node: Node | undefined,
   store: Store3,
@@ -80,16 +82,16 @@ export default class Draggable extends BaseTree {
   store: Store3 | null = null;
   private unfoldWhenDragoverInfo?: obj;
 
+  // @ts-ignore
   data() {
     return {
       virtualizationListAfterCalcTop2: (top2: number) => {
         if (this.dragging) {
-          const placeholder = this.$el!.querySelector(
-            "#hetree_drag_placeholder"
-          );
+          const placeholder = this.$el!.querySelector(`#${placeholderID}`);
           if (placeholder) {
             top2 +=
-              hp.getBoundingClientRect(placeholder).height + (this.gap || 0);
+              hp.getBoundingClientRect(placeholder as HTMLElement).height +
+              (this.gap || 0);
           }
         }
         return top2;
@@ -259,6 +261,7 @@ export default class Draggable extends BaseTree {
           }
           for (const tree of Object.values(this.trees)) {
             tree.dragging = true;
+            tree.store = store;
           }
           store.startTree.$emit("before-first-move", store);
           store.startTree.$emit("drag", store);
@@ -271,7 +274,7 @@ export default class Draggable extends BaseTree {
         },
         createPlaceholder: () =>
           hp.createElementFromHTML(`
-          <div id="hetree_drag_placeholder" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
+          <div id="${placeholderID}" class="tree-placeholder-outer tree-node-outer" style="margin-bottom: ${this.gap}px;">
             <div class="${options.placeholderClass} tree-node">
             </div>
           </div>
@@ -355,6 +358,13 @@ export default class Draggable extends BaseTree {
         getTreeIndent: (treeEl, store) =>
           this.getTreeVmByTreeEl(treeEl)?.indent,
         moveEnd: (action, info = {}) => {
+          //
+          if (this.store.targetTreeEl.querySelector(`#${placeholderID}`)) {
+            this.store.placeholder.style[
+              "margin-bottom"
+            ] = `${this.store.targetTree.gap}px`;
+          }
+          //
           if (this.unfoldWhenDragoverInfo) {
             if (
               action !== "prepend" ||
@@ -500,10 +510,7 @@ export default class Draggable extends BaseTree {
           let dragChanged = true;
           const that = store.targetTree;
           const { startTree, targetTree } = store;
-          if (
-            !document.getElementById("hetree_drag_placeholder") ||
-            !store.targetTreeEl
-          ) {
+          if (!document.getElementById(placeholderID) || !store.targetTreeEl) {
             // not moved
             dragChanged = false;
           } else {

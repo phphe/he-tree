@@ -50,10 +50,10 @@ export default class VirtualizationList extends Vue {
     return r;
   }
 
-  @Watch("virtualization", { immediate: true })
-  onVirtualizationChange() {
-    // @ts-ignore
-    if (!this.virtualization) {
+  @Watch("enabled", { immediate: true })
+  onEnabledChange() {
+    if (!this.enabled) {
+      // @ts-ignore
       this.totalHeight = undefined;
     }
   }
@@ -72,7 +72,9 @@ export default class VirtualizationList extends Vue {
       await this.mountedPromise;
       let existingHeight = 0;
       let i = -1;
+      // @ts-ignore
       for (const child of this.$el.querySelector(".vl-items")!.children) {
+        // @ts-ignore
         if (child.style.position === "" || child.style.position == null) {
           i++;
           const index = this.start + i;
@@ -130,6 +132,7 @@ export default class VirtualizationList extends Vue {
           // every 5 ms, max 10 times
           await hp
             .waitFor(
+              // @ts-ignore
               () => {
                 let startEl, endEl, startIndex, endIndex;
                 startEl = this.$el.querySelector(

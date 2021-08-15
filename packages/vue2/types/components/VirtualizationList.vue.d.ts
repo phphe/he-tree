@@ -7,11 +7,15 @@ export default class VirtualizationList extends Vue {
     readonly minItemHeight: number;
     readonly prerender: number;
     readonly listTag: string;
+    readonly listClass: string;
     readonly itemClass: string;
+    readonly gap: number;
+    readonly afterCalcTop2: (top2: number) => number;
     start: number;
     end: number;
     top: number;
     bottom: number;
+    totalHeight: number | null;
     itemsHeight: number[];
     data(): {
         mountedPromise: Promise<unknown>;
@@ -22,6 +26,8 @@ export default class VirtualizationList extends Vue {
         item: obj;
         index: number;
     }[];
+    onEnabledChange(): void;
+    getItemElHeight(el: HTMLElement): number;
     update(): void;
     private _waitingUpdate?;
     created(): void;

@@ -9,6 +9,7 @@ export default class BaseTree extends Vue {
     readonly flatData: obj[];
     readonly treeData: obj[];
     readonly indent: number;
+    readonly gap: number;
     readonly rtl: boolean;
     readonly virtualization: boolean;
     readonly virtualizationPrerender: number;
@@ -22,6 +23,7 @@ export default class BaseTree extends Vue {
     treeID: string;
     data(): {
         tree: typeof BaseTree;
+        virtualizationListAfterCalcTop2: undefined;
     };
     get rootNodeChildren(): Node[];
     get rootNode(): {
@@ -55,7 +57,6 @@ export default class BaseTree extends Vue {
     loadChildren(node: Node): Promise<void>;
     loadAllChildren(node?: Node): Promise<void>;
     unfoldAll(node?: Node): Promise<void> | undefined;
-    private unfoldInfo?;
     unfold(node: Node): void | Promise<void>;
     toggleFold(node: Node): void | Promise<void>;
     updateChecked(node: Node): void;
