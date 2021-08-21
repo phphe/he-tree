@@ -161,5 +161,5 @@ function rmDir(src) {
 function replaceOrigin(html) {
   let s = sourceOrigin.replace(/\/$/, '')
   let o = origin.replace(/\/$/, '')
-  return html.replace(s, o)
+  return html.replace(new RegExp(s, 'g'), o)
 }
