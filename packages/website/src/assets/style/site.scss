@@ -1,0 +1,8 @@
+.site-container {
+  width: 800px;
+  margin: 0 auto;
+  @media screen and (max-width: 1200px) {
+    width: auto;
+    margin: 0 10px;
+  }
+}
