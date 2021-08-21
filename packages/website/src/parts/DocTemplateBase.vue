@@ -18,8 +18,9 @@
           const dirname = this.$route.path.replace(/\/[^\/]*$/, '')
           path = concatAndResolveUrl(dirname, path)
         }
-        if (path.startsWith('#')) {
-          path = path.toLowerCase()
+        let t = path.split('#')
+        if (t.length === 2) {
+          path = t[0] + '#' + t[1].toLowerCase()
         }
         return path
       },
