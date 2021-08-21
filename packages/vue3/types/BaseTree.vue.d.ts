@@ -15,7 +15,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-    text: {
+    textKey: {
         type: StringConstructor;
         default: string;
     };
@@ -65,7 +65,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
-        text?: unknown;
+        textKey?: unknown;
         flatData?: unknown;
         treeData?: unknown;
         indent?: unknown;
@@ -80,7 +80,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey: string;
         parentIdKey: string;
         childrenKey: string;
-        text: string;
+        textKey: string;
         indent: number;
         rtl: boolean;
         virtualization: boolean;
@@ -96,7 +96,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
-        text?: unknown;
+        textKey?: unknown;
         flatData?: unknown;
         treeData?: unknown;
         indent?: unknown;
@@ -111,7 +111,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey: string;
         parentIdKey: string;
         childrenKey: string;
-        text: string;
+        textKey: string;
         indent: number;
         rtl: boolean;
         virtualization: boolean;
@@ -127,7 +127,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
-        text?: unknown;
+        textKey?: unknown;
         flatData?: unknown;
         treeData?: unknown;
         indent?: unknown;
@@ -142,7 +142,7 @@ declare const _default: import("vue").DefineComponent<{
         idKey: string;
         parentIdKey: string;
         childrenKey: string;
-        text: string;
+        textKey: string;
         indent: number;
         rtl: boolean;
         virtualization: boolean;
@@ -199,7 +199,6 @@ declare const _default: import("vue").DefineComponent<{
     outputFlatData(parent: Node | null, ignoreKeys?: string[]): Record<string, unknown>[];
     isNodeParentFolded(node: Node): boolean;
     isNodeVisible(node: Node): boolean;
-    forceVisible(node: Node): boolean;
     foldAll(): void;
     loadChildren(node: Node): Promise<void>;
     loadAllChildren(node?: Node | undefined): Promise<void>;
@@ -231,7 +230,7 @@ declare const _default: import("vue").DefineComponent<{
     idKey?: unknown;
     parentIdKey?: unknown;
     childrenKey?: unknown;
-    text?: unknown;
+    textKey?: unknown;
     flatData?: unknown;
     treeData?: unknown;
     indent?: unknown;
@@ -246,7 +245,7 @@ declare const _default: import("vue").DefineComponent<{
     idKey: string;
     parentIdKey: string;
     childrenKey: string;
-    text: string;
+    textKey: string;
     indent: number;
     rtl: boolean;
     virtualization: boolean;
@@ -262,7 +261,7 @@ declare const _default: import("vue").DefineComponent<{
     idKey: string;
     parentIdKey: string;
     childrenKey: string;
-    text: string;
+    textKey: string;
     indent: number;
     rtl: boolean;
     virtualization: boolean;

@@ -7,6 +7,7 @@ VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visible
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import {
   defineComponent,
   PropType,
@@ -36,7 +37,7 @@ export default defineComponent({
     idKey: { type: String, default: "id" },
     parentIdKey: { type: String, default: "parent_id" },
     childrenKey: { type: String, default: "children" },
-    text: { type: String, default: "textKey" },
+    textKey: { type: String, default: "text" },
     flatData: { type: Array as PropType<obj[]> },
     treeData: { type: Array as PropType<obj[]> },
     indent: { type: Number, default: 20 },
@@ -61,7 +62,6 @@ export default defineComponent({
   },
   computed: {
     rootNodeChildren(): Node[] {
-      // readonly
       return this.nodes.filter(
         (node) => !node.$pid || !this.nodesByID[node.$pid]
       );
@@ -79,7 +79,6 @@ export default defineComponent({
   watch: {
     flatData: {
       immediate: true,
-      // @ts-ignore
       handler(val: obj[] | null): void {
         if (val) {
           const t = convertFlatDataToStandard(
@@ -100,7 +99,6 @@ export default defineComponent({
     },
     treeData: {
       immediate: true,
-      // @ts-ignore
       handler(val: obj[] | null): void {
         if (val) {
           const t = convertTreeDataToFlat(val, this.childrenKey, this.idKey);
@@ -121,7 +119,6 @@ export default defineComponent({
       const nodeInitializators = [];
       for (const key of Object.keys(this.$data)) {
         if (key.startsWith("nodeInitializator_")) {
-          // @ts-ignore
           nodeInitializators.push(this.$data[key]);
         }
       }
@@ -151,7 +148,6 @@ export default defineComponent({
     getTreeVmByTreeEl(
       treeEl: HTMLElement
     ): ComponentPublicInstance | undefined {
-      // @ts-ignore
       return this.trees[treeEl.getAttribute("id")!];
     },
     nodeIndentStyle(node: Node) {
@@ -160,7 +156,6 @@ export default defineComponent({
           this.indent * (node.$level - 1) + "px",
       };
     },
-    // get node by node outer element or node element
     getNodeByEl(el: HTMLElement): Node {
       const el2 = hp.findParent(
         el,
@@ -241,7 +236,6 @@ export default defineComponent({
     moveNode(node: Node, parentId: number | string | null, index = 0) {
       parentId != null && this._checkIDExists(parentId);
       const nodes: Node[] = [];
-      // remove from old position
       const oldParent = this.getParent(node);
       if (oldParent) {
         const oldIndex = oldParent.$children.indexOf(node);
@@ -250,7 +244,6 @@ export default defineComponent({
       const oldListIndex = this.nodes.indexOf(node);
       const removeLen = this.countChildren(node) + 1;
       this.nodes.splice(oldListIndex, removeLen);
-      // move to new position
       const parent = this.nodesByID[parentId!];
       hp.walkTreeData(
         node,
@@ -301,17 +294,14 @@ export default defineComponent({
       for (const node of nodes) {
         if (idKey !== "$id") {
           node[idKey] = node.$id;
-          // @ts-ignore
           delete node.$id;
         }
         if (parentIdKey !== "$pid") {
           node[parentIdKey] = node.$pid;
-          // @ts-ignore
           delete node.$pid;
         }
         if (childrenKey !== "$children") {
           node[childrenKey] = node.$children;
-          // @ts-ignore
           delete node.$children;
         }
         for (const key of Object.keys(node)) {
@@ -329,7 +319,6 @@ export default defineComponent({
     outputFlatData(parent: Node | null, ignoreKeys: string[] = []) {
       return this.outputNestedData(parent, ignoreKeys, true);
     },
-    // fold
     isNodeParentFolded(node: Node): boolean {
       const parent = this.getParent(node);
       return Boolean(
@@ -338,9 +327,6 @@ export default defineComponent({
     },
     isNodeVisible(node: Node): boolean {
       return !node.$hidden && !this.isNodeParentFolded(node);
-    },
-    forceVisible(node: Node): boolean {
-      return false;
     },
     foldAll() {
       for (const node of this.nodes) {
@@ -389,16 +375,12 @@ export default defineComponent({
         this.$emit("load-children", node);
         return promise;
       } else if (node.$childrenLoadStaus.status === "loading") {
-        // @ts-ignore
         return node.$childrenLoadStaus.promise;
       } else {
-        // loaded
         return Promise.resolve();
       }
     },
-    // load all children of a node or all nodes recursively
     loadAllChildren(node?: Node): Promise<void> {
-      // eslint-disable-next-line no-async-promise-executor
       return new Promise(async (resolve, reject) => {
         let promises = [];
         let nodes = node ? [node] : this.nodes;
@@ -407,19 +389,13 @@ export default defineComponent({
           for (const node of nodes) {
             promises.push(
               this.loadChildren(node).then(
-                () => {
-                  //
-                },
-                () => {
-                  // catch error
-                }
+                () => {},
+                () => {}
               )
             );
           }
           await Promise.all(promises).then(
-            () => {
-              //
-            },
+            () => {},
             () => {
               failed = true;
             }
@@ -441,7 +417,6 @@ export default defineComponent({
         }
       });
     },
-    // unfold all children of a node or all nodes recursively
     unfoldAll(node?: Node) {
       const doAction = () => {
         hp.walkTreeData(
@@ -486,7 +461,6 @@ export default defineComponent({
         this.$emit("fold", node);
       }
     },
-    // check
     updateChecked(node: Node) {
       const checkParent = (node: Node) => {
         const parent = this.getParent(node);
@@ -522,9 +496,7 @@ export default defineComponent({
       return this.nodes.filter((node) => node.$checked);
     },
   },
-  // hoooks ================
   mounted() {
-    //
     this.treeID = "hetree_" + hp.randString();
     this.trees[this.treeID] = this;
   },

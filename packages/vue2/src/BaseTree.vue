@@ -51,9 +51,7 @@ export default class BaseTree extends Vue {
     return { tree: BaseTree, virtualizationListAfterCalcTop2: undefined };
   }
 
-  // computed
   get rootNodeChildren() {
-    // readonly
     return this.nodes.filter(
       (node) => !node.$pid || !this.nodesByID[node.$pid]
     );
@@ -96,7 +94,6 @@ export default class BaseTree extends Vue {
       }
     }
   }
-  // methods =============
   initNodes(nodes: Node[]) {
     const nodeInitializators = [];
     for (const key of Object.keys(this.$data)) {
@@ -128,7 +125,6 @@ export default class BaseTree extends Vue {
     }
   }
   getTreeVmByTreeEl(treeEl: HTMLElement): this | undefined {
-    // @ts-ignore
     return this.trees[treeEl.getAttribute("id")!];
   }
   nodeIndentStyle(node: Node) {
@@ -137,7 +133,6 @@ export default class BaseTree extends Vue {
         this.indent * (node.$level - 1) + "px",
     };
   }
-  // get node by node outer element or node element
   getNodeByEl(el: HTMLElement): Node {
     const el2 = hp.findParent(el, (el) => hp.hasClass(el, "tree-node-outer"), {
       withSelf: true,
@@ -214,7 +209,6 @@ export default class BaseTree extends Vue {
   moveNode(node: Node, parentId: number | string | null, index = 0) {
     parentId != null && this._checkIDExists(parentId);
     const nodes: Node[] = [];
-    // remove from old position
     const oldParent = this.getParent(node);
     if (oldParent) {
       const oldIndex = oldParent.$children.indexOf(node);
@@ -223,7 +217,6 @@ export default class BaseTree extends Vue {
     const oldListIndex = this.nodes.indexOf(node);
     const removeLen = this.countChildren(node) + 1;
     this.nodes.splice(oldListIndex, removeLen);
-    // move to new position
     const parent = this.nodesByID[parentId!];
     hp.walkTreeData(
       node,
@@ -274,17 +267,14 @@ export default class BaseTree extends Vue {
     for (const node of nodes) {
       if (idKey !== "$id") {
         node[idKey] = node.$id;
-        // @ts-ignore
         delete node.$id;
       }
       if (parentIdKey !== "$pid") {
         node[parentIdKey] = node.$pid;
-        // @ts-ignore
         delete node.$pid;
       }
       if (childrenKey !== "$children") {
         node[childrenKey] = node.$children;
-        // @ts-ignore
         delete node.$children;
       }
       for (const key of Object.keys(node)) {
@@ -302,7 +292,6 @@ export default class BaseTree extends Vue {
   outputFlatData(parent: Node | null, ignoreKeys: string[] = []) {
     return this.outputNestedData(parent, ignoreKeys, true);
   }
-  // fold
   isNodeParentFolded(node: Node): boolean {
     const parent = this.getParent(node);
     return Boolean(
@@ -311,9 +300,6 @@ export default class BaseTree extends Vue {
   }
   isNodeVisible(node: Node): boolean {
     return !node.$hidden && !this.isNodeParentFolded(node);
-  }
-  forceVisible(node: Node): boolean {
-    return false;
   }
   foldAll() {
     for (const node of this.nodes) {
@@ -362,16 +348,12 @@ export default class BaseTree extends Vue {
       this.$emit("load-children", node);
       return promise;
     } else if (node.$childrenLoadStaus.status === "loading") {
-      // @ts-ignore
       return node.$childrenLoadStaus.promise;
     } else {
-      // loaded
       return Promise.resolve();
     }
   }
-  // load all children of a node or all nodes recursively
   loadAllChildren(node?: Node): Promise<void> {
-    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
       let promises = [];
       let nodes = node ? [node] : this.nodes;
@@ -380,19 +362,13 @@ export default class BaseTree extends Vue {
         for (const node of nodes) {
           promises.push(
             this.loadChildren(node).then(
-              () => {
-                //
-              },
-              () => {
-                // catch error
-              }
+              () => {},
+              () => {}
             )
           );
         }
         await Promise.all(promises).then(
-          () => {
-            //
-          },
+          () => {},
           () => {
             failed = true;
           }
@@ -414,7 +390,6 @@ export default class BaseTree extends Vue {
       }
     });
   }
-  // unfold all children of a node or all nodes recursively
   unfoldAll(node?: Node) {
     const doAction = () => {
       hp.walkTreeData(
@@ -459,7 +434,6 @@ export default class BaseTree extends Vue {
       this.$emit("fold", node);
     }
   }
-  // check
   updateChecked(node: Node) {
     const checkParent = (node: Node) => {
       const parent = this.getParent(node);
@@ -494,13 +468,10 @@ export default class BaseTree extends Vue {
   getAllCheckedNodes() {
     return this.nodes.filter((node) => node.$checked);
   }
-  // hoooks ================
   mounted() {
-    //
     this.treeID = "hetree_" + hp.randString();
     this.$set(this.trees, this.treeID, this);
     this.$once("hook:beforeDestroy", () => {
-      // @ts-ignore
       this.$delete(this.trees, this.treeID);
     });
   }

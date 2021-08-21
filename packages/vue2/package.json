@@ -1,20 +1,25 @@
 {
   "name": "@he-tree/vue2",
   "version": "1.0.0",
-  "description": "A draggable sortable nested vue tree component.",
+  "description": "Vue tree component. Features: draggable, drag sortable, virtualization list, Vue2, Vue3, Typescript, lazy load, RTL. Vue 树组件. 可拖拽, 拖拽排序, 虚拟列表, Vue2, Vue3, Typescript, 延迟加载子节点, 从右往左显示.",
   "files": [
     "dist",
     "types"
   ],
-  "unpkg": "dist/he-tree-vue.js",
+  "unpkg": "dist/he-tree-vue2.js",
+  "main": "dist/he-tree-vue2.cjs.js",
+  "module": "dist/he-tree-vue2.esm.js",
   "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
-  "homepage": "https://he-tree.phphe.com",
+  "homepage": "https://hetree.phphe.com",
   "bugs": {
     "url": "https://github.com/phphe/he-tree/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/phphe/he-tree.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "vue-cli-service serve",
