@@ -39,12 +39,11 @@ function scrapeOnePage(url, opt = {}, count = 0) {
       .evaluate(() => document.documentElement.outerHTML)
       .end()
       .then((html) => {
-        html = html
-          .replace(
-            '</head>',
-            '<script>window.__IS_GENERATED__ = true</script></head>'
-          )
-          .replace(new RegExp(sourceOrigin, 'g'), origin)
+        html = html.replace(
+          '</head>',
+          '<script>window.__IS_GENERATED__ = true</script></head>'
+        )
+        html = replaceOrigin(html)
         html = minifyHTML(`<!DOCTYPE html>${html}`)
         writeFileSyncRecursively(
           path.join(
@@ -157,4 +156,10 @@ function copyDir(src, dist) {
 
 function rmDir(src) {
   child_process.spawnSync('rm', ['-rf', src])
+}
+
+function replaceOrigin(html) {
+  let s = sourceOrigin.replace(/\/$/, '')
+  let o = origin.replace(/\/$/, '')
+  return html.replace(s, o)
 }
