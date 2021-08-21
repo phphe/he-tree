@@ -28,7 +28,10 @@ Anchor.DocsMenuItem(:to="to" v-bind="$attrs" @resolved="onResolve")
     computed: {
       submenuVisible(): boolean {
         if (this.submenu) {
-          return this.realTo && this.realTo.path === this.$route.path
+          return (
+            this.realTo &&
+            this.realTo.path === this.$route.path.replace(/\/$/, '')
+          )
         }
         return false
       },
