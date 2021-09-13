@@ -125,6 +125,7 @@ export default class BaseTree extends Vue {
     }
   }
   getTreeVmByTreeEl(treeEl: HTMLElement): this | undefined {
+    // @ts-ignore
     return this.trees[treeEl.getAttribute("id")!];
   }
   nodeIndentStyle(node: Node) {
@@ -267,6 +268,7 @@ export default class BaseTree extends Vue {
     for (const node of nodes) {
       if (idKey !== "$id") {
         node[idKey] = node.$id;
+        // @ts-ignore
         delete node.$id;
       }
       if (parentIdKey !== "$pid") {
@@ -275,6 +277,7 @@ export default class BaseTree extends Vue {
       }
       if (childrenKey !== "$children") {
         node[childrenKey] = node.$children;
+        // @ts-ignore
         delete node.$children;
       }
       for (const key of Object.keys(node)) {
@@ -348,12 +351,14 @@ export default class BaseTree extends Vue {
       this.$emit("load-children", node);
       return promise;
     } else if (node.$childrenLoadStaus.status === "loading") {
+      // @ts-ignore
       return node.$childrenLoadStaus.promise;
     } else {
       return Promise.resolve();
     }
   }
   loadAllChildren(node?: Node): Promise<void> {
+    // eslint-disable-next-line
     return new Promise(async (resolve, reject) => {
       let promises = [];
       let nodes = node ? [node] : this.nodes;
@@ -362,12 +367,15 @@ export default class BaseTree extends Vue {
         for (const node of nodes) {
           promises.push(
             this.loadChildren(node).then(
+              // eslint-disable-next-line
               () => {},
+              // eslint-disable-next-line
               () => {}
             )
           );
         }
         await Promise.all(promises).then(
+          // eslint-disable-next-line
           () => {},
           () => {
             failed = true;
