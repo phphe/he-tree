@@ -24,6 +24,9 @@ export default class BaseTree extends Vue {
     data(): {
         tree: typeof BaseTree;
         virtualizationListAfterCalcTop2: undefined;
+        store: null;
+        draggingNode: null;
+        isNodeForceVisibleInVL: (node: Node, index: number) => boolean;
     };
     get rootNodeChildren(): Node[];
     get rootNode(): {
@@ -52,7 +55,6 @@ export default class BaseTree extends Vue {
     outputFlatData(parent: Node | null, ignoreKeys?: string[]): Record<string, unknown>[];
     isNodeParentFolded(node: Node): boolean;
     isNodeVisible(node: Node): boolean;
-    forceVisible(node: Node): boolean;
     foldAll(): void;
     loadChildren(node: Node): Promise<void>;
     loadAllChildren(node?: Node): Promise<void>;

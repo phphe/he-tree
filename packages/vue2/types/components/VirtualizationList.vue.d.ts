@@ -11,6 +11,7 @@ export default class VirtualizationList extends Vue {
     readonly itemClass: string;
     readonly gap: number;
     readonly afterCalcTop2: (top2: number) => number;
+    readonly isForceVisible: (node: obj, index: number) => boolean;
     start: number;
     end: number;
     top: number;

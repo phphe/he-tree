@@ -20,10 +20,10 @@ declare const _default: import("vue").DefineComponent<{
         default: string;
     };
     flatData: {
-        type: PropType<Record<string, unknown>[]>;
+        type: PropType<obj[]>;
     };
     treeData: {
-        type: PropType<Record<string, unknown>[]>;
+        type: PropType<obj[]>;
     };
     indent: {
         type: NumberConstructor;
@@ -61,7 +61,7 @@ declare const _default: import("vue").DefineComponent<{
     trees: Record<string, ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>>;
     dragging: boolean;
     treeID: string;
-    tree: ComponentPublicInstance<Readonly<{
+    tree: import("vue").CreateComponentPublicInstance<Readonly<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
@@ -88,11 +88,13 @@ declare const _default: import("vue").DefineComponent<{
         childrenLazyLoading: boolean;
         defaultFolded: boolean;
     } & {
-        flatData?: Record<string, unknown>[] | undefined;
-        treeData?: Record<string, unknown>[] | undefined;
+        flatData?: obj[] | undefined;
+        treeData?: obj[] | undefined;
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, {}, Readonly<{
+    }> & {
+        [x: string & `on${string}`]: undefined;
+    }, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, Readonly<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
@@ -119,11 +121,20 @@ declare const _default: import("vue").DefineComponent<{
         childrenLazyLoading: boolean;
         defaultFolded: boolean;
     } & {
-        flatData?: Record<string, unknown>[] | undefined;
-        treeData?: Record<string, unknown>[] | undefined;
+        flatData?: obj[] | undefined;
+        treeData?: obj[] | undefined;
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
-    }> & {}, {}, false, import("vue").ComponentOptionsBase<Readonly<{
+    }> & {
+        [x: string & `on${string}`]: undefined;
+    }, {}, false, {
+        P: {};
+        B: {};
+        D: {};
+        C: {};
+        M: {};
+        Defaults: {};
+    }, Readonly<{
         idKey?: unknown;
         parentIdKey?: unknown;
         childrenKey?: unknown;
@@ -150,12 +161,17 @@ declare const _default: import("vue").DefineComponent<{
         childrenLazyLoading: boolean;
         defaultFolded: boolean;
     } & {
-        flatData?: Record<string, unknown>[] | undefined;
-        treeData?: Record<string, unknown>[] | undefined;
+        flatData?: obj[] | undefined;
+        treeData?: obj[] | undefined;
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
-    }> & {}, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {}>>;
+    }> & {
+        [x: string & `on${string}`]: undefined;
+    }, {}, {}, {}, import("vue").MethodOptions, {}>;
     virtualizationListAfterCalcTop2: undefined;
+    store: null;
+    draggingNode: null;
+    isNodeForceVisibleInVL: (node: Node, index: number) => boolean;
 }, {
     rootNodeChildren(): Node[];
     rootNode(): Node;
@@ -196,7 +212,7 @@ declare const _default: import("vue").DefineComponent<{
     moveNode(node: Node, parentId: number | string | null, index?: number): void;
     removeNode(node: Node): void;
     outputNestedData(parent: Node | null, ignoreKeys?: string[], _returnFlat?: boolean | undefined): obj[];
-    outputFlatData(parent: Node | null, ignoreKeys?: string[]): Record<string, unknown>[];
+    outputFlatData(parent: Node | null, ignoreKeys?: string[]): obj[];
     isNodeParentFolded(node: Node): boolean;
     isNodeVisible(node: Node): boolean;
     foldAll(): void;
@@ -253,11 +269,11 @@ declare const _default: import("vue").DefineComponent<{
     childrenLazyLoading: boolean;
     defaultFolded: boolean;
 } & {
-    flatData?: Record<string, unknown>[] | undefined;
-    treeData?: Record<string, unknown>[] | undefined;
+    flatData?: obj[] | undefined;
+    treeData?: obj[] | undefined;
     gap?: number | undefined;
     childrenLoader?: ChildrenLoader | undefined;
-}> & {}, {
+}>, {
     idKey: string;
     parentIdKey: string;
     childrenKey: string;

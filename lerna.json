@@ -5,6 +5,7 @@
       "conventionalCommits": true
     }
   },
+  "ignoreChanges": ["**/types/*.*", "**/dist/*.*"],
   "npmClient": "yarn",
   "version": "independent"
 }

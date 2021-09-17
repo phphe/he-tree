@@ -2,7 +2,7 @@ import { PropType } from "vue";
 import { obj } from "../types";
 declare const _default: import("vue").DefineComponent<{
     items: {
-        type: PropType<Record<string, unknown>[]>;
+        type: PropType<obj[]>;
         default: () => never[];
     };
     enabled: {
@@ -39,6 +39,9 @@ declare const _default: import("vue").DefineComponent<{
     afterCalcTop2: {
         type: PropType<(top2: number) => number>;
     };
+    isForceVisible: {
+        type: PropType<(node: obj, index: number) => boolean>;
+    };
 }, unknown, {
     start: number;
     end: number;
@@ -66,9 +69,10 @@ declare const _default: import("vue").DefineComponent<{
     itemClass?: unknown;
     gap?: unknown;
     afterCalcTop2?: unknown;
+    isForceVisible?: unknown;
 } & {
-    items: Record<string, unknown>[];
     enabled: boolean;
+    items: obj[];
     buffer: number;
     minItemHeight: number;
     prerender: number;
@@ -78,9 +82,10 @@ declare const _default: import("vue").DefineComponent<{
 } & {
     listClass?: string | undefined;
     afterCalcTop2?: ((top2: number) => number) | undefined;
-}> & {}, {
-    items: Record<string, unknown>[];
+    isForceVisible?: ((node: obj, index: number) => boolean) | undefined;
+}>, {
     enabled: boolean;
+    items: obj[];
     buffer: number;
     minItemHeight: number;
     prerender: number;

@@ -108,7 +108,7 @@ declare const _default: import("vue").DefineComponent<{
 }, {}, {
     isParentDragging(node: Node): boolean;
     isNodeVisible(node: Node): boolean;
-}, import("vue").ComponentOptionsMixin, import("vue").DefineComponent<{}, {}, any, Record<string, import("@vue/reactivity").ComputedGetter<any> | import("vue").WritableComputedOptions<any>>, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{} & {} & {}> & {}, {}>, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+}, import("vue").ComponentOptionsMixin, import("vue").DefineComponent<{}, {}, any, import("vue").ComputedOptions, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{} & {} & {}>, {}>, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     triggerClass?: unknown;
     triggerBySelf?: unknown;
     draggable?: unknown;
@@ -155,9 +155,9 @@ declare const _default: import("vue").DefineComponent<{
     ondragend?: ((store: Store3) => boolean) | undefined;
     afterPlaceholderCreated?: ((placeholder: HTMLElement, store: Store3) => void) | undefined;
     isNodeUnfoldable?: ((store: Store3) => boolean) | undefined;
-    edgeScrollSpecifiedContainerX?: unknown;
-    edgeScrollSpecifiedContainerY?: unknown;
-}> & {}, {
+    edgeScrollSpecifiedContainerX?: Function | Record<string, any> | undefined;
+    edgeScrollSpecifiedContainerY?: Function | Record<string, any> | undefined;
+}>, {
     triggerClass: string;
     triggerBySelf: boolean;
     draggable: boolean;
