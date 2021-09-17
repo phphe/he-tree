@@ -301,6 +301,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@he-tree/vue3@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.nlark.com/@he-tree/vue3/download/@he-tree/vue3-1.0.2.tgz#26cba0d8d51d8b530075538675e41e6555e290ed"
+  integrity sha1-Jsug2NUdi1MAdVOGdeQeZVXikO0=
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    draggable-helper "^6"
+    helper-js "^2"
+    tslib "^1.14.1"
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.nlark.com/@humanwhocodes/config-array/download/@humanwhocodes/config-array-0.5.0.tgz?cache=0&sync_timestamp=1625264021699&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40humanwhocodes%2Fconfig-array%2Fdownload%2F%40humanwhocodes%2Fconfig-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"
@@ -1612,6 +1622,24 @@ domutils@^2.5.2, domutils@^2.6.0, domutils@^2.7.0:
     domelementtype "^2.2.0"
     domhandler "^4.2.0"
 
+drag-event-service@^1.1.7:
+  version "1.1.10"
+  resolved "https://registry.nlark.com/drag-event-service/download/drag-event-service-1.1.10.tgz#707254d67a9543efe8fdb2325cfb9f9c40991103"
+  integrity sha1-cHJU1nqVQ+/o/bIyXPufnECZEQM=
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    helper-js "^2.0.0"
+
+draggable-helper@^6:
+  version "6.0.3"
+  resolved "https://registry.nlark.com/draggable-helper/download/draggable-helper-6.0.3.tgz#39c557c499dbb0c45e2292cb63405373b0686b9b"
+  integrity sha1-OcVXxJnbsMReIpLLY0BTc7Boa5s=
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    drag-event-service "^1.1.7"
+    helper-js "^2.0.4"
+    tslib "^1.11.2"
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.nlark.com/ecc-jsbn/download/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -2370,7 +2398,7 @@ he@^1.2.0:
   resolved "https://registry.npm.taobao.org/he/download/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
 
-helper-js@^2.0.3:
+helper-js@^2, helper-js@^2.0.0, helper-js@^2.0.3, helper-js@^2.0.4:
   version "2.0.6"
   resolved "https://registry.nlark.com/helper-js/download/helper-js-2.0.6.tgz#ae0d350f6dbf357a028bf70a9cbb8854f2fdf7a9"
   integrity sha1-rg01D22/NXoCi/cKnLuIVPL996k=
@@ -4992,7 +5020,7 @@ ts-node@^10.2.0:
     make-error "^1.1.1"
     yn "3.1.1"
 
-tslib@^1.11.2, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.11.2, tslib@^1.14.1, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.nlark.com/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1628722556410&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
