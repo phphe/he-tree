@@ -99,6 +99,7 @@ export default <rollup.RollupOptions[]>[
             declarationDir,
           },
         },
+        abortOnError: false,
       }),
       babel(esmBabelConfig),
       cjs(),
@@ -123,6 +124,7 @@ export default <rollup.RollupOptions[]>[
       node(),
       typescript({
         tsconfigOverride: { compilerOptions: { declaration: false } },
+        abortOnError: false,
       }),
       babel(cjsBabelConfig),
       cjs(),
@@ -147,6 +149,7 @@ export default <rollup.RollupOptions[]>[
       replace(umdReplace),
       typescript({
         tsconfigOverride: { compilerOptions: { declaration: false } },
+        abortOnError: false,
       }),
       babel(umdBabelConfig),
       cjs(),
@@ -172,6 +175,7 @@ export default <rollup.RollupOptions[]>[
       replace(umdReplace),
       typescript({
         tsconfigOverride: { compilerOptions: { declaration: false } },
+        abortOnError: false,
       }),
       babel(umdBabelConfig),
       cjs(),
