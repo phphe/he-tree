@@ -1,7 +1,7 @@
 <template lang="pug">
 .VirtualizationList.virtualization-list(@scroll.passive="update")
   component.vl-items(:is="listTag" :class="listClass" :style="{paddingTop: top + 'px',paddingBottom: bottom + 'px',height: totalHeight + 'px'}")
-    template(v-for="(info, i) in visibleItems")
+    template(v-for="(info, i) in visibleItems" :key="info.item.$id")
       slot(:item="info.item" :index="info.index" :renderIndex="i" :itemStyle="{marginBottom: gap+'px'}")
 </template>
 
@@ -25,6 +25,9 @@ export default defineComponent({
     itemClass: { type: String, default: "vl-item" },
     gap: { type: Number, default: 0 },
     afterCalcTop2: { type: Function as PropType<(top2: number) => number> },
+    isForceVisible: {
+      type: Function as PropType<(node: obj, index: number) => boolean>,
+    },
   },
   data() {
     return {
@@ -44,7 +47,10 @@ export default defineComponent({
     visibleItems(): { item: obj; index: number }[] {
       const r: { item: obj; index: number }[] = [];
       this.items.forEach((item: obj, index: number) => {
-        if (index >= this.start && index <= this.end) {
+        if (
+          (index >= this.start && index <= this.end) ||
+          (this.isForceVisible && this.isForceVisible(item, index))
+        ) {
           r.push({ item, index });
         }
       });
@@ -75,17 +81,21 @@ export default defineComponent({
         }
         await this.mountedPromise;
         let existingHeight = 0;
-        let i = -1;
+        let i = 0;
         for (const child of this.$el.querySelector(".vl-items")!.children) {
-          if (child.style.position === "" || child.style.position == null) {
+          if (
+            (child.style.position === "" || child.style.position == null) &&
+            child.style.display !== "none"
+          ) {
             i++;
-            const index = this.start + i;
+            const index = parseInt(child.getAttribute("data-vindex"));
             this.itemsHeight[index] = this.getItemElHeight(
               child as HTMLElement
             );
+            existingHeight += this.itemsHeight[index];
           }
         }
-        const avgHeight = existingHeight / (i + 1) || this.minItemHeight;
+        const avgHeight = existingHeight / i || this.minItemHeight;
         let { buffer, itemsHeight, items } = this;
         const { clientHeight, scrollTop } = this.$el;
         let start = 0,
@@ -142,8 +152,9 @@ export default defineComponent({
                     `.${this.itemClass}[data-v-render-index="0"]`
                   );
                   endEl = this.$el.querySelector(
-                    `.${this.itemClass}[data-v-render-index="${this.visibleItems
-                      .length - 1}"]`
+                    `.${this.itemClass}[data-v-render-index="${
+                      this.visibleItems.length - 1
+                    }"]`
                   );
                   if (startEl && endEl) {
                     startIndex = parseInt(startEl.getAttribute("data-vindex")!);

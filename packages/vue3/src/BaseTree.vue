@@ -1,7 +1,7 @@
 <template lang="pug">
-VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :gap="gap" :afterCalcTop2="virtualizationListAfterCalcTop2" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
+VirtualizationList.he-tree(:id="treeID" ref="virtualizationList" :items="visibleNodes" :enabled="virtualization" :prerender="virtualizationPrerender" :gap="gap" :afterCalcTop2="virtualizationListAfterCalcTop2" :isForceVisible="isNodeForceVisibleInVL" :class="{'he-tree-rtl': rtl, 'he-tree-dragging':dragging}")
   template(v-slot="info")
-    .tree-node-outer.vl-item(:key="info.item.$id" :data-vindex="info.index" :data-v-render-index="info.renderIndex" :data-id="info.item.$id" :style="[info.itemStyle, nodeIndentStyle(info.item), info.item.$outerStyle]" :class="info.item.$outerClass")
+    .tree-node-outer.vl-item(:data-vindex="info.index" :data-v-render-index="info.renderIndex" :data-id="info.item.$id" :style="[info.itemStyle, nodeIndentStyle(info.item), info.item.$outerStyle, {display: info.item === draggingNode && (!store || !store.isCloned) ? 'none' : ''}]" :class="info.item.$outerClass")
       .tree-node(:class="info.item.$nodeClass" :style="info.item.$nodeStyle")
         slot(:node="info.item" :tree="tree") {{info.item[textKey]}}
 </template>
@@ -58,6 +58,14 @@ export default defineComponent({
       treeID: hp.randString(),
       tree: this,
       virtualizationListAfterCalcTop2: undefined,
+      // for drag
+      store: null,
+      draggingNode: null,
+      // is node force visible in virtual list
+      isNodeForceVisibleInVL: (node: Node, index: number): boolean => {
+        // @ts-ignore
+        return this.draggingNode === node;
+      },
     };
   },
   computed: {

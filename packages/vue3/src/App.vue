@@ -255,4 +255,7 @@ export default defineComponent({
   border: 1px solid #ccc;
   padding: 2px 5px;
 }
+.drag-trigger {
+  touch-action: none;
+}
 </style>
