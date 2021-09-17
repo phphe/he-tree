@@ -108,5 +108,8 @@
 
 <style lang="scss">
   .home-view {
+    .drag-trigger {
+      touch-action: none;
+    }
   }
 </style>

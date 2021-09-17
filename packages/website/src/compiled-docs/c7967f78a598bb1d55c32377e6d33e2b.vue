@@ -203,6 +203,10 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <p>默认使用拖拽节点的左上角坐标来定位, 也可以设置使用鼠标位置来定位. <Anchor :to="resolveHref('api.md#draggingNodePositionMode')">draggingNodePositionMode</Anchor></p>
 <vheading :level="2" id="边缘滚动">边缘滚动</vheading>
 <p>这是属于拖拽插件的功能. 如果树处在一个滚动框中, 拖拽到其边缘时需要自动滚动. 此项默认关闭, 使用 prop<code v-pre>edgeScroll</code>开启. 相关 prop: <Anchor :to="resolveHref('api.md#edgeScrollTriggerMargin')">edgeScrollTriggerMargin</Anchor>, <Anchor :to="resolveHref('api.md#edgeScrollSpeed')">edgeScrollSpeed</Anchor>, <Anchor :to="resolveHref('api.md#edgeScrollTriggerMode')">edgeScrollTriggerMode</Anchor>.</p>
+<vheading :level="2" id="触摸">触摸</vheading>
+<p>支持触摸设备. 触摸拖拽时将会阻止默认行为, 但是有时无效. 所以请添加如下 css 阻止触摸时的默认行为例如滚动屏幕. css 目标是触发拖拽的元素. 如果未特别指定触发拖拽的元素, 则由<code v-pre>tree-node</code>触发.</p>
+<pre><code v-pre class="language-css">touch-action: none;
+</code></pre>
 <vheading :level="2" id="pro-插件需购买">Pro 插件(需购买)</vheading>
 <p><Anchor :to="resolveHref('/pro-plugin')">pro 插件</Anchor> 有以下高级功能.</p>
 <ul>
@@ -237,7 +241,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
     extends: DocTemplateBase,
     setup() {
       const vm = getCurrentInstance()
-      const data = {"name":"Guide","id":"guide","children":[{"name":"安装","id":"安装","children":[]},{"name":"引入","id":"引入","children":[]},{"name":"不要给节点设置外边距","id":"不要给节点设置外边距","children":[]},{"name":"treeData 或 flatData","id":"treedata-或-flatdata","children":[]},{"name":"HTML 结构","id":"html-结构","children":[]},{"name":"使用","id":"使用","children":[]},{"name":"输出数据","id":"输出数据","children":[]},{"name":"折叠和展开","id":"折叠和展开","children":[]},{"name":"按需加载子节点","id":"按需加载子节点","children":[]},{"name":"默认折叠所有节点","id":"默认折叠所有节点","children":[]},{"name":"勾选框","id":"勾选框","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"虚拟列表","id":"虚拟列表","children":[]},{"name":"拖拽","id":"拖拽","children":[]},{"name":"拖拽触发","id":"拖拽触发","children":[]},{"name":"阻止拖拽","id":"阻止拖拽","children":[]},{"name":"阻止放入","id":"阻止放入","children":[]},{"name":"拖拽过程中的运行时数据","id":"拖拽过程中的运行时数据","children":[]},{"name":"占位元素","id":"占位元素","children":[]},{"name":"拖拽到节点上时打开该节点","id":"拖拽到节点上时打开该节点","children":[]},{"name":"拖拽节点的定位","id":"拖拽节点的定位","children":[]},{"name":"边缘滚动","id":"边缘滚动","children":[]},{"name":"Pro 插件(需购买)","id":"pro-插件需购买","children":[]},{"name":"通过 script 标签引入","id":"通过-script-标签引入","children":[]}]}
+      const data = {"name":"Guide","id":"guide","children":[{"name":"安装","id":"安装","children":[]},{"name":"引入","id":"引入","children":[]},{"name":"不要给节点设置外边距","id":"不要给节点设置外边距","children":[]},{"name":"treeData 或 flatData","id":"treedata-或-flatdata","children":[]},{"name":"HTML 结构","id":"html-结构","children":[]},{"name":"使用","id":"使用","children":[]},{"name":"输出数据","id":"输出数据","children":[]},{"name":"折叠和展开","id":"折叠和展开","children":[]},{"name":"按需加载子节点","id":"按需加载子节点","children":[]},{"name":"默认折叠所有节点","id":"默认折叠所有节点","children":[]},{"name":"勾选框","id":"勾选框","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"虚拟列表","id":"虚拟列表","children":[]},{"name":"拖拽","id":"拖拽","children":[]},{"name":"拖拽触发","id":"拖拽触发","children":[]},{"name":"阻止拖拽","id":"阻止拖拽","children":[]},{"name":"阻止放入","id":"阻止放入","children":[]},{"name":"拖拽过程中的运行时数据","id":"拖拽过程中的运行时数据","children":[]},{"name":"占位元素","id":"占位元素","children":[]},{"name":"拖拽到节点上时打开该节点","id":"拖拽到节点上时打开该节点","children":[]},{"name":"拖拽节点的定位","id":"拖拽节点的定位","children":[]},{"name":"边缘滚动","id":"边缘滚动","children":[]},{"name":"触摸","id":"触摸","children":[]},{"name":"Pro 插件(需购买)","id":"pro-插件需购买","children":[]},{"name":"通过 script 标签引入","id":"通过-script-标签引入","children":[]}]}
       useTitle(data.name, vm)
       docsSubmenu.value = data.children
       onBeforeUnmount(() => {

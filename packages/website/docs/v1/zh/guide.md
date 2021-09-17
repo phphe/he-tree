@@ -256,6 +256,14 @@ flatData = [
 
 这是属于拖拽插件的功能. 如果树处在一个滚动框中, 拖拽到其边缘时需要自动滚动. 此项默认关闭, 使用 prop`edgeScroll`开启. 相关 prop: [edgeScrollTriggerMargin](api.md#edgeScrollTriggerMargin), [edgeScrollSpeed](api.md#edgeScrollSpeed), [edgeScrollTriggerMode](api.md#edgeScrollTriggerMode).
 
+## 触摸
+
+支持触摸设备. 触摸拖拽时将会阻止默认行为, 但是有时无效. 所以请添加如下 css 阻止触摸时的默认行为例如滚动屏幕. css 目标是触发拖拽的元素. 如果未特别指定触发拖拽的元素, 则由`tree-node`触发.
+
+```css
+touch-action: none;
+```
+
 ## Pro 插件(需购买)
 
 [pro 插件](/pro-plugin) 有以下高级功能.

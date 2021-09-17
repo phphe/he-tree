@@ -32,9 +32,9 @@ The tree is able to receive both tree data and flat data as initial data. When u
 treeData = [
   {
     text: 'node1',
-    children: [{ text: 'node1-1' }, { text: 'node1-2' }, { text: 'node1-3' }]
+    children: [{ text: 'node1-1' }, { text: 'node1-2' }, { text: 'node1-3' }],
   },
-  { text: 'node2' }
+  { text: 'node2' },
 ]
 ```
 
@@ -46,7 +46,7 @@ flatData = [
   { text: 'node2', id: 2 },
   { text: 'node1-1', id: 3, pid: 1 },
   { text: 'node1-2', id: 3, pid: 1 },
-  { text: 'node1-3', id: 3, pid: 1 }
+  { text: 'node1-3', id: 3, pid: 1 },
 ]
 ```
 
@@ -89,10 +89,10 @@ flatData = [
           { text: 'node2', id: 2 },
           { text: 'node1-1', id: 3, pid: 1 },
           { text: 'node1-2', id: 3, pid: 1 },
-          { text: 'node1-3', id: 3, pid: 1 }
-        ]
+          { text: 'node1-3', id: 3, pid: 1 },
+        ],
       }
-    }
+    },
   }
 </script>
 ```
@@ -125,10 +125,10 @@ Use methods `outputNestedData` or `outputFlatData` to get converted data without
           { text: 'node2', id: 2 },
           { text: 'node1-1', id: 3, pid: 1 },
           { text: 'node1-2', id: 3, pid: 1 },
-          { text: 'node1-3', id: 3, pid: 1 }
-        ]
+          { text: 'node1-3', id: 3, pid: 1 },
+        ],
       }
-    }
+    },
   }
 </script>
 ```
@@ -171,10 +171,10 @@ Use method `getAllCheckedNodes` to get all checked nodes.
           { text: 'node2', id: 2 },
           { text: 'node1-1', id: 3, pid: 1 },
           { text: 'node1-2', id: 3, pid: 1 },
-          { text: 'node1-3', id: 3, pid: 1 }
-        ]
+          { text: 'node1-3', id: 3, pid: 1 },
+        ],
       }
-    }
+    },
   }
 </script>
 ```
@@ -206,10 +206,10 @@ Improve performance when there are a lot of nodes. Use prop `virtualization` to 
           { text: 'node2', id: 2 },
           { text: 'node1-1', id: 3, pid: 1 },
           { text: 'node1-2', id: 3, pid: 1 },
-          { text: 'node1-3', id: 3, pid: 1 }
-        ]
+          { text: 'node1-3', id: 3, pid: 1 },
+        ],
       }
-    }
+    },
   }
 </script>
 ```
@@ -255,6 +255,14 @@ The top left corner of dragging node is used by default. Mouse position is also 
 ## Edge Scroll
 
 This function belongs to Draggable plugin. If the tree is in a scroll box, it needs to be automatically scrolled when dragged to its edge. This prop is diabled by default. Use prop `edgeScroll` control that. Related prop: [edgeScrollTriggerMargin](api.md#edgeScrollTriggerMargin), [edgeScrollSpeed](api.md#edgeScrollSpeed), [edgeScrollTriggerMode](api.md#edgeScrollTriggerMode).
+
+## Touch
+
+It works in touch devices. It will prevent default action when touch by drag, but sometimes that does not work. Use follow css to prevent default touch action such as scroll. The css target is the drag trigger element. If no drag trigger, it is `.tree-node`.
+
+```css
+touch-action: none;
+```
 
 ## Pro Plugin
 
