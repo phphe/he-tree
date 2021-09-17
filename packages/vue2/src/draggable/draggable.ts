@@ -157,10 +157,18 @@ export default function makeTreeListDraggable(
         public get visibleNodesElementsExcludeDragging() {
           if (!this._visibleNodesElements) {
             this._visibleNodesElements = store.targetTreeEl.querySelectorAll(
-              `.${options.nodeClass}:not(.${options.draggingClassName} .${options.nodeClass})`
+              `.${options.nodeClass}:not(.${options.draggingClassName} > .${options.nodeClass})`
             );
           }
-          return this._visibleNodesElements!;
+          const r: Node[] = [];
+          this._visibleNodesElements.forEach((node) => {
+            // @ts-ignore
+            if (node.parentElement.style.display !== "none") {
+              // node-outer visible
+              r.push(node);
+            }
+          });
+          return r;
         }
 
         // index is for visibleNodesElementsExcludeDragging

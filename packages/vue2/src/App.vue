@@ -257,4 +257,7 @@ export default class App extends Vue {
   border: 1px solid #ccc;
   padding: 2px 5px;
 }
+.drag-trigger {
+  touch-action: none;
+}
 </style>

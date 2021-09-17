@@ -110,6 +110,10 @@ export default class Draggable extends BaseTree {
     );
   }
   isNodeVisible(node: Node): boolean {
+    if (this.draggingNode === node) {
+      // keep event trigger, because touch event need it before event end
+      return true;
+    }
     if (
       this.draggingNode &&
       this.store!.isCloned &&
@@ -334,9 +338,9 @@ export default class Draggable extends BaseTree {
             dragNodesCount * nodeHeight,
             this.placeholderMaxHeight
           );
-          (store.placeholder.querySelector(
-            ".tree-node"
-          ) as HTMLElement).style.height = placeholderHeight + "px";
+          (
+            store.placeholder.querySelector(".tree-node") as HTMLElement
+          ).style.height = placeholderHeight + "px";
           //
           this.afterPlaceholderCreated?.(store.placeholder, store);
           if (isNodeDroppable0(store, this.getParent(store.draggingNode))) {
@@ -348,9 +352,8 @@ export default class Draggable extends BaseTree {
               .previousElementSibling as HTMLElement;
             if (placeholderPrevEl) {
               if (hp.hasClass(placeholderPrevEl, options.nodeOuterClass)) {
-                store.placeholderPrevNodeInTree = this.getNodeByEl(
-                  placeholderPrevEl
-                );
+                store.placeholderPrevNodeInTree =
+                  this.getNodeByEl(placeholderPrevEl);
               }
             }
           }

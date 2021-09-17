@@ -22,6 +22,10 @@ export default class VirtualizationList extends Vue {
   @Prop({ type: String, default: "vl-item" }) readonly itemClass!: string;
   @Prop({ type: Number }) readonly gap!: number;
   @Prop({ type: Function }) readonly afterCalcTop2!: (top2: number) => number;
+  @Prop({ type: Function }) readonly isForceVisible!: (
+    node: obj,
+    index: number
+  ) => boolean;
 
   start = 0;
   end = -1;
@@ -43,7 +47,10 @@ export default class VirtualizationList extends Vue {
   get visibleItems() {
     const r: { item: obj; index: number }[] = [];
     this.items.forEach((item, index) => {
-      if (index >= this.start && index <= this.end) {
+      if (
+        (index >= this.start && index <= this.end) ||
+        (this.isForceVisible && this.isForceVisible(item, index))
+      ) {
         r.push({ item, index });
       }
     });
@@ -71,17 +78,22 @@ export default class VirtualizationList extends Vue {
       }
       await this.mountedPromise;
       let existingHeight = 0;
-      let i = -1;
+      let i = 0;
       // @ts-ignore
       for (const child of this.$el.querySelector(".vl-items")!.children) {
         // @ts-ignore
-        if (child.style.position === "" || child.style.position == null) {
+        if (
+          (child.style.position === "" || child.style.position == null) &&
+          child.style.display !== "none"
+        ) {
           i++;
-          const index = this.start + i;
+          const index = parseInt(child.getAttribute("data-vindex"));
           this.itemsHeight[index] = this.getItemElHeight(child as HTMLElement);
+          existingHeight += this.itemsHeight[index];
         }
       }
-      const avgHeight = existingHeight / (i + 1) || this.minItemHeight;
+      const avgHeight = existingHeight / i || this.minItemHeight;
+
       let { buffer, itemsHeight, items } = this;
       const { clientHeight, scrollTop } = this.$el;
       let start = 0,
@@ -139,8 +151,9 @@ export default class VirtualizationList extends Vue {
                   `.${this.itemClass}[data-v-render-index="0"]`
                 );
                 endEl = this.$el.querySelector(
-                  `.${this.itemClass}[data-v-render-index="${this.visibleItems
-                    .length - 1}"]`
+                  `.${this.itemClass}[data-v-render-index="${
+                    this.visibleItems.length - 1
+                  }"]`
                 );
                 if (startEl && endEl) {
                   startIndex = parseInt(startEl.getAttribute("data-vindex")!);
