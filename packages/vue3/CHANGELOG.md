@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.0.2...@he-tree/vue3@1.0.3) (2021-09-18)
+
+
+### Bug Fixes
+
+* **BaseTree:** fix parma error of querySelector ([e80d61b](https://github.com/phphe/he-tree/commit/e80d61b79d62d247e034577af30222cd2d4e1a10))
+
+
+
+
+
 ## [1.0.2](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.0.1...@he-tree/vue3@1.0.2) (2021-09-17)
 
 **Note:** Version bump only for package @he-tree/vue3
