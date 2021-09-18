@@ -176,7 +176,7 @@ export default defineComponent({
       return this.nodesByID[id!];
     },
     getElByID(id: string | number): HTMLElement | undefined {
-      return this.$el.querySelector(`[data-id=${id}]`) as HTMLElement;
+      return this.$el.querySelector(`[data-id="${id}"]`) as HTMLElement;
     },
     getParent(node?: Node) {
       if (!node) {
