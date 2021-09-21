@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.1.2...@he-tree/vue2@1.3.0) (2021-09-21)
+
+
+### Features
+
+* **draggable:** ondragend hook supports promise ([371a8d6](https://github.com/phphe/he-tree/commit/371a8d6654ed55a91d90ed8ee447727e18909fd0))
+
+
+
+
+
 ## [1.1.2](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.1.1...@he-tree/vue2@1.1.2) (2021-09-18)
 
 
