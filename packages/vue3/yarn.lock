@@ -2559,10 +2559,10 @@ drag-event-service@^1.1.7:
     "@babel/runtime" "^7.7.7"
     helper-js "^2.0.0"
 
-draggable-helper@^6:
-  version "6.0.3"
-  resolved "https://registry.nlark.com/draggable-helper/download/draggable-helper-6.0.3.tgz#39c557c499dbb0c45e2292cb63405373b0686b9b"
-  integrity sha1-OcVXxJnbsMReIpLLY0BTc7Boa5s=
+draggable-helper@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.nlark.com/draggable-helper/download/draggable-helper-6.0.4.tgz?cache=0&sync_timestamp=1632202465126&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdraggable-helper%2Fdownload%2Fdraggable-helper-6.0.4.tgz#35552709aa39cfb0d11c24ebf0b8c9361ada8726"
+  integrity sha1-NVUnCao5z7DRHCTr8LjJNhrahyY=
   dependencies:
     "@babel/runtime" "^7.7.7"
     drag-event-service "^1.1.7"

@@ -47,7 +47,9 @@ export default class Draggable extends BaseTree {
   @Prop({ type: Boolean, default: true }) readonly rootDraggable!: boolean;
   @Prop({ type: Boolean, default: true }) readonly rootDroppable!: boolean;
   @Prop({ type: Function }) readonly ondragstart!: (store: Store3) => boolean;
-  @Prop({ type: Function }) readonly ondragend!: (store: Store3) => boolean;
+  @Prop({ type: Function }) readonly ondragend!: (
+    store: Store3
+  ) => boolean | Promise<boolean>;
   @Prop({ type: Function }) readonly afterPlaceholderCreated!: (
     placeholder: HTMLElement,
     store: Store3
@@ -509,7 +511,7 @@ export default class Draggable extends BaseTree {
           store.placeholderPrevNode = prevNode;
           store.placeholderPrevNodeInTree = prevNodeInTree;
         },
-        onDrop: (store: Store3, restoreStyle) => {
+        onDrop: async (store: Store3, restoreStyle) => {
           let dragChanged = true;
           const that = store.targetTree;
           const { startTree, targetTree } = store;
@@ -555,7 +557,7 @@ export default class Draggable extends BaseTree {
           const draggingNode = this.draggingNode!;
           store.dragChanged = dragChanged;
           // hook ondragend
-          if (that.ondragend && that.ondragend(store) === false) {
+          if (that.ondragend && (await that.ondragend(store)) === false) {
             return false;
           }
           if (dragChanged) {

@@ -53,7 +53,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<(store: Store3) => boolean>;
     };
     ondragend: {
-        type: PropType<(store: Store3) => boolean>;
+        type: PropType<(store: Store3) => boolean | Promise<boolean>>;
     };
     afterPlaceholderCreated: {
         type: PropType<(placeholder: HTMLElement, store: Store3) => void>;
@@ -152,7 +152,7 @@ declare const _default: import("vue").DefineComponent<{
     eachDraggable?: boolean | Function | undefined;
     eachDroppable?: boolean | Function | undefined;
     ondragstart?: ((store: Store3) => boolean) | undefined;
-    ondragend?: ((store: Store3) => boolean) | undefined;
+    ondragend?: ((store: Store3) => boolean | Promise<boolean>) | undefined;
     afterPlaceholderCreated?: ((placeholder: HTMLElement, store: Store3) => void) | undefined;
     isNodeUnfoldable?: ((store: Store3) => boolean) | undefined;
     edgeScrollSpecifiedContainerX?: Function | Record<string, any> | undefined;

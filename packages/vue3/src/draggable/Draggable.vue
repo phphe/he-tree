@@ -49,7 +49,9 @@ export default defineComponent({
     rootDraggable: { type: Boolean, default: true },
     rootDroppable: { type: Boolean, default: true },
     ondragstart: { type: Function as PropType<(store: Store3) => boolean> },
-    ondragend: { type: Function as PropType<(store: Store3) => boolean> },
+    ondragend: {
+      type: Function as PropType<(store: Store3) => boolean | Promise<boolean>>,
+    },
     afterPlaceholderCreated: {
       type: Function as PropType<
         (placeholder: HTMLElement, store: Store3) => void
@@ -510,7 +512,7 @@ export default defineComponent({
           store.placeholderPrevNode = prevNode;
           store.placeholderPrevNodeInTree = prevNodeInTree;
         },
-        onDrop: (store: Store3, restoreStyle) => {
+        onDrop: async (store: Store3, restoreStyle) => {
           let dragChanged = true;
           const that = store.targetTree;
           const { startTree, targetTree } = store;
@@ -556,7 +558,7 @@ export default defineComponent({
           const draggingNode = this.draggingNode!;
           store.dragChanged = dragChanged;
           // hook ondragend
-          if (that.ondragend && that.ondragend(store) === false) {
+          if (that.ondragend && (await that.ondragend(store)) === false) {
             return false;
           }
           if (dragChanged) {

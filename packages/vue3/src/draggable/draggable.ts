@@ -344,7 +344,7 @@ export default function makeTreeListDraggable(
         store.updateMovedElementStyle();
       };
       //
-      hooks.onDrop(store, restoreStyle);
+      return hooks.onDrop(store, restoreStyle);
     },
   };
   Object.keys(defaultOptions).forEach((key) => {

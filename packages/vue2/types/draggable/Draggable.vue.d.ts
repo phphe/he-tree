@@ -28,7 +28,7 @@ export default class Draggable extends BaseTree {
     readonly rootDraggable: boolean;
     readonly rootDroppable: boolean;
     readonly ondragstart: (store: Store3) => boolean;
-    readonly ondragend: (store: Store3) => boolean;
+    readonly ondragend: (store: Store3) => boolean | Promise<boolean>;
     readonly afterPlaceholderCreated: (placeholder: HTMLElement, store: Store3) => void;
     readonly placeholderMaxHeight: number;
     readonly unfoldWhenDragover: boolean;

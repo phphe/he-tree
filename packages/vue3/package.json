@@ -1,6 +1,6 @@
 {
   "name": "@he-tree/vue3",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Vue tree component. Features: draggable, drag sortable, virtualization list, Vue2, Vue3, Typescript, lazy load, RTL. Vue 树组件. 可拖拽, 拖拽排序, 虚拟列表, Vue2, Vue3, Typescript, 延迟加载子节点, 从右往左显示.",
   "files": [
     "dist",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "draggable-helper": "^6",
+    "draggable-helper": "^6.0.4",
     "helper-js": "^2",
     "tslib": "^1.14.1"
   },
