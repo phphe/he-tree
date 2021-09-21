@@ -189,7 +189,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <li>当 prop <code v-pre>droppable</code> 为 false, 任一节点不能放入这棵树.</li>
 <li>使用 prop <code v-pre>eachDroppable</code> 当拖动到一节点上时.</li>
 <li>当 prop <code v-pre>rootDroppable</code> 为 false, 被拖拽的节点不能成为顶级节点.</li>
-<li>使用 prop <code v-pre>ondragend</code> 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状.</li>
+<li>使用 prop <code v-pre>ondragend</code> 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持promise.</li>
 <li>设置 <code v-pre>node.$droppable</code> 为 false 控制单个节点是否可放入.</li>
 <li>当父节点不可放入而子节点可放入时, 例如设置子节点的 <code v-pre>$droppable</code> 为 true, 则此子节点可放入.</li>
 </ul>

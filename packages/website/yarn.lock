@@ -301,10 +301,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@he-tree/vue3@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.nlark.com/@he-tree/vue3/download/@he-tree/vue3-1.0.2.tgz#26cba0d8d51d8b530075538675e41e6555e290ed"
-  integrity sha1-Jsug2NUdi1MAdVOGdeQeZVXikO0=
+"@he-tree/vue3@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.nlark.com/@he-tree/vue3/download/@he-tree/vue3-1.0.3.tgz#e197c0d6d47ecb8fb1fa3bce6574700700d359e5"
+  integrity sha1-4ZfA1tR+y4+x+jvOZXRwBwDTWeU=
   dependencies:
     "@babel/runtime" "^7.7.7"
     draggable-helper "^6"

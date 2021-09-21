@@ -232,7 +232,7 @@ flatData = [
 - 当 prop `droppable` 为 false, 任一节点不能放入这棵树.
 - 使用 prop `eachDroppable` 当拖动到一节点上时.
 - 当 prop `rootDroppable` 为 false, 被拖拽的节点不能成为顶级节点.
-- 使用 prop `ondragend` 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状.
+- 使用 prop `ondragend` 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持promise.
 - 设置 `node.$droppable` 为 false 控制单个节点是否可放入.
 - 当父节点不可放入而子节点可放入时, 例如设置子节点的 `$droppable` 为 true, 则此子节点可放入.
 

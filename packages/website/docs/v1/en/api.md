@@ -301,6 +301,8 @@ Function type is [eachDraggableFunc](#eachDraggableFunc)
 }
 ```
 
+**`ondragend` supports promise, but `ondragstart` does not.**
+
 #### ondragend
 
 ```ts
@@ -308,6 +310,7 @@ Function type is [eachDraggableFunc](#eachDraggableFunc)
   type: Function as PropType<(store: Store3) => boolean>
 }
 ```
+**`ondragend` supports promise, but `ondragstart` does not.**
 
 #### afterPlaceholderCreated
 

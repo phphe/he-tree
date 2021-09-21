@@ -232,7 +232,7 @@ Use prop `triggerClass` to specify the css name of the element that triggers the
 - When prop `droppable` false, any nodes can't be dropped in to the tree.
 - Use prop `eachDroppable` when drag over a node.
 - When prop `rootDroppable` false, the root (level 1) can't be dropped.
-- Use hook prop `ondragend` before drop end.
+- Use hook prop `ondragend` before drop end. `ondragend` supports promise.
 - Set `node.$droppable` false to handle single node.
 - When parent node is not droppable, child node is droppable, such as set `$droppable` as true of child node, then this child node is droppable.
 

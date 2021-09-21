@@ -189,7 +189,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <li>When prop <code v-pre>droppable</code> false, any nodes can&#39;t be dropped in to the tree.</li>
 <li>Use prop <code v-pre>eachDroppable</code> when drag over a node.</li>
 <li>When prop <code v-pre>rootDroppable</code> false, the root (level 1) can&#39;t be dropped.</li>
-<li>Use hook prop <code v-pre>ondragend</code> before drop end.</li>
+<li>Use hook prop <code v-pre>ondragend</code> before drop end. <code v-pre>ondragend</code> supports promise.</li>
 <li>Set <code v-pre>node.$droppable</code> false to handle single node.</li>
 <li>When parent node is not droppable, child node is droppable, such as set <code v-pre>$droppable</code> as true of child node, then this child node is droppable.</li>
 </ul>

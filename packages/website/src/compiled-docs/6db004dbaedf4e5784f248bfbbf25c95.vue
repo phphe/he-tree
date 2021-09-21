@@ -45,7 +45,7 @@
 <p>I can work on the custom made of he-tree. Advanced Vue custom components. And other work about Vue. Please <Anchor :to="resolveHref('mailto:phphe@outlook.com?subject=&body=')">contact me</Anchor> by email.</p>
 <vheading :level="2" id="contact">Contact</vheading>
 <ul>
-<li>Email: <Anchor :to="resolveHref('mailto:&#112;&#x68;&#112;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;')">&#112;&#x68;&#112;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#x2e;&#99;&#x6f;&#109;</Anchor></li>
+<li>Email: <Anchor :to="resolveHref('mailto:&#112;&#104;&#x70;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#107;&#46;&#99;&#111;&#x6d;')">&#112;&#104;&#x70;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#107;&#46;&#99;&#111;&#x6d;</Anchor></li>
 </ul>
 
     </div>

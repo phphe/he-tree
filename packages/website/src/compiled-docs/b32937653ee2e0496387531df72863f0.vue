@@ -160,11 +160,13 @@
   type: Function as PropType&lt;(store: Store3) =&gt; boolean&gt;
 }
 </code></pre>
+<p><strong><code v-pre>ondragend</code> 支持 promise, 但 <code v-pre>ondragstart</code> 不支持.</strong></p>
 <vheading :level="4" id="ondragend">ondragend</vheading>
 <pre><code v-pre class="language-ts">{
   type: Function as PropType&lt;(store: Store3) =&gt; boolean&gt;
 }
 </code></pre>
+<p><strong><code v-pre>ondragend</code> 支持 promise, 但 <code v-pre>ondragstart</code> 不支持.</strong></p>
 <vheading :level="4" id="afterplaceholdercreated">afterPlaceholderCreated</vheading>
 <pre><code v-pre class="language-ts">(placeholder: HTMLElement, store: Store3) =&gt; void
 </code></pre>

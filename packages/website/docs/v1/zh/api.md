@@ -301,6 +301,8 @@ Boolean
 }
 ```
 
+**`ondragend` 支持 promise, 但 `ondragstart` 不支持.**
+
 #### ondragend
 
 ```ts
@@ -308,6 +310,8 @@ Boolean
   type: Function as PropType<(store: Store3) => boolean>
 }
 ```
+
+**`ondragend` 支持 promise, 但 `ondragstart` 不支持.**
 
 #### afterPlaceholderCreated
 
