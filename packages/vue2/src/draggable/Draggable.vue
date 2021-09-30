@@ -512,6 +512,10 @@ export default class Draggable extends BaseTree {
           store.placeholderPrevNodeInTree = prevNodeInTree;
         },
         onDrop: async (store: Store3, restoreStyle) => {
+          const done = () => {
+            // execute when completed or cancelled
+            this.draggingNode = null;
+          };
           let dragChanged = true;
           const that = store.targetTree;
           const { startTree, targetTree } = store;
@@ -558,6 +562,7 @@ export default class Draggable extends BaseTree {
           store.dragChanged = dragChanged;
           // hook ondragend
           if (that.ondragend && (await that.ondragend(store)) === false) {
+            done();
             return false;
           }
           if (dragChanged) {
@@ -644,7 +649,7 @@ export default class Draggable extends BaseTree {
               targetTree.$emit("drop-change", store);
             }
           }
-          this.draggingNode = null;
+          done();
         },
       }
     );
