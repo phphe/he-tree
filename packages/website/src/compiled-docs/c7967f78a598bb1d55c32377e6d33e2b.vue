@@ -77,7 +77,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 &lt;/script&gt;
 </code></pre>
 <vheading :level="2" id="输出数据">输出数据</vheading>
-<p>使用方法 <code v-pre>outputNestedData</code> 和 <code v-pre>outputFlatData</code> 以获得树形数据或扁平数据.</p>
+<p>使用方法 <code v-pre>outputNestedData</code> 和 <code v-pre>outputFlatData</code> 以获得树形数据或扁平数据. 在拖拽时为了获得改变后的数据, 可以在<Anchor :to="resolveHref('api.md#drop')"><code v-pre>drop</code></Anchor> 或 <Anchor :to="resolveHref('api.md#drop-change')"><code v-pre>drop-change</code></Anchor>事件中执行它们.</p>
 <vheading :level="2" id="折叠和展开">折叠和展开</vheading>
 <pre><code v-pre class="language-vue">&lt;template&gt;
   &lt;BaseTree :flatData=&quot;flatData&quot; idKey=&quot;id&quot; parentIdKey=&quot;pid&quot;&gt;
@@ -189,7 +189,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <li>当 prop <code v-pre>droppable</code> 为 false, 任一节点不能放入这棵树.</li>
 <li>使用 prop <code v-pre>eachDroppable</code> 当拖动到一节点上时.</li>
 <li>当 prop <code v-pre>rootDroppable</code> 为 false, 被拖拽的节点不能成为顶级节点.</li>
-<li>使用 prop <code v-pre>ondragend</code> 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持promise.</li>
+<li>使用 prop <code v-pre>ondragend</code> 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持 promise.</li>
 <li>设置 <code v-pre>node.$droppable</code> 为 false 控制单个节点是否可放入.</li>
 <li>当父节点不可放入而子节点可放入时, 例如设置子节点的 <code v-pre>$droppable</code> 为 true, 则此子节点可放入.</li>
 </ul>
@@ -206,6 +206,32 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <vheading :level="2" id="触摸">触摸</vheading>
 <p>支持触摸设备. 触摸拖拽时将会阻止默认行为, 但是有时无效. 所以请添加如下 css 阻止触摸时的默认行为例如滚动屏幕. css 目标是触发拖拽的元素. 如果未特别指定触发拖拽的元素, 则由<code v-pre>tree-node</code>触发.</p>
 <pre><code v-pre class="language-css">touch-action: none;
+</code></pre>
+<vheading :level="2" id="最大层级">最大层级</vheading>
+<p>拖拽时限制树的最大层级. 可使用 prop <code v-pre>eachDroppable</code>. 下面示例代码支持 Vue2 和 Vue3.</p>
+<pre><code v-pre class="language-html">&lt;Draggable :eachDroppable=&quot;eachDroppable&quot; /&gt;
+</code></pre>
+<pre><code v-pre class="language-js">data() {
+  return {
+    eachDroppable: (node, store, options, startTree) =&gt; {
+      const maxLevel = 3; // 按你需要修改
+      let draggingNodeMaxLevel = 0;
+      hp.walkTreeData(
+        store.draggingNode,
+        (childNode) =&gt; {
+          if (childNode.$level &gt; draggingNodeMaxLevel) {
+            draggingNodeMaxLevel = childNode.$level;
+          }
+        },
+        &quot;$children&quot;
+      );
+      draggingNodeMaxLevel = draggingNodeMaxLevel - store.draggingNode.$level;
+      if (node.$level + draggingNodeMaxLevel &gt;= maxLevel) {
+        return false;
+      }
+    },
+  }
+}
 </code></pre>
 <vheading :level="2" id="pro-插件需购买">Pro 插件(需购买)</vheading>
 <p><Anchor :to="resolveHref('/pro-plugin')">pro 插件</Anchor> 有以下高级功能.</p>
@@ -241,7 +267,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
     extends: DocTemplateBase,
     setup() {
       const vm = getCurrentInstance()
-      const data = {"name":"Guide","id":"guide","children":[{"name":"安装","id":"安装","children":[]},{"name":"引入","id":"引入","children":[]},{"name":"不要给节点设置外边距","id":"不要给节点设置外边距","children":[]},{"name":"treeData 或 flatData","id":"treedata-或-flatdata","children":[]},{"name":"HTML 结构","id":"html-结构","children":[]},{"name":"使用","id":"使用","children":[]},{"name":"输出数据","id":"输出数据","children":[]},{"name":"折叠和展开","id":"折叠和展开","children":[]},{"name":"按需加载子节点","id":"按需加载子节点","children":[]},{"name":"默认折叠所有节点","id":"默认折叠所有节点","children":[]},{"name":"勾选框","id":"勾选框","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"虚拟列表","id":"虚拟列表","children":[]},{"name":"拖拽","id":"拖拽","children":[]},{"name":"拖拽触发","id":"拖拽触发","children":[]},{"name":"阻止拖拽","id":"阻止拖拽","children":[]},{"name":"阻止放入","id":"阻止放入","children":[]},{"name":"拖拽过程中的运行时数据","id":"拖拽过程中的运行时数据","children":[]},{"name":"占位元素","id":"占位元素","children":[]},{"name":"拖拽到节点上时打开该节点","id":"拖拽到节点上时打开该节点","children":[]},{"name":"拖拽节点的定位","id":"拖拽节点的定位","children":[]},{"name":"边缘滚动","id":"边缘滚动","children":[]},{"name":"触摸","id":"触摸","children":[]},{"name":"Pro 插件(需购买)","id":"pro-插件需购买","children":[]},{"name":"通过 script 标签引入","id":"通过-script-标签引入","children":[]}]}
+      const data = {"name":"Guide","id":"guide","children":[{"name":"安装","id":"安装","children":[]},{"name":"引入","id":"引入","children":[]},{"name":"不要给节点设置外边距","id":"不要给节点设置外边距","children":[]},{"name":"treeData 或 flatData","id":"treedata-或-flatdata","children":[]},{"name":"HTML 结构","id":"html-结构","children":[]},{"name":"使用","id":"使用","children":[]},{"name":"输出数据","id":"输出数据","children":[]},{"name":"折叠和展开","id":"折叠和展开","children":[]},{"name":"按需加载子节点","id":"按需加载子节点","children":[]},{"name":"默认折叠所有节点","id":"默认折叠所有节点","children":[]},{"name":"勾选框","id":"勾选框","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"虚拟列表","id":"虚拟列表","children":[]},{"name":"拖拽","id":"拖拽","children":[]},{"name":"拖拽触发","id":"拖拽触发","children":[]},{"name":"阻止拖拽","id":"阻止拖拽","children":[]},{"name":"阻止放入","id":"阻止放入","children":[]},{"name":"拖拽过程中的运行时数据","id":"拖拽过程中的运行时数据","children":[]},{"name":"占位元素","id":"占位元素","children":[]},{"name":"拖拽到节点上时打开该节点","id":"拖拽到节点上时打开该节点","children":[]},{"name":"拖拽节点的定位","id":"拖拽节点的定位","children":[]},{"name":"边缘滚动","id":"边缘滚动","children":[]},{"name":"触摸","id":"触摸","children":[]},{"name":"最大层级","id":"最大层级","children":[]},{"name":"Pro 插件(需购买)","id":"pro-插件需购买","children":[]},{"name":"通过 script 标签引入","id":"通过-script-标签引入","children":[]}]}
       useTitle(data.name, vm)
       docsSubmenu.value = data.children
       onBeforeUnmount(() => {

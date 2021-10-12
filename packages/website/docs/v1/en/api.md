@@ -145,6 +145,44 @@ this
 Node[]
 ```
 
+### events
+
+#### fold
+
+```ts
+(node: Node)
+```
+
+#### unfold
+
+```ts
+(node: Node)
+```
+
+#### load-children
+
+For children lazy load. Start to load children
+
+```ts
+(node: Node)
+```
+
+#### load-children-success
+
+For children lazy load
+
+```ts
+(node: Node)
+```
+
+#### load-children-error
+
+For children lazy load. Get error by `node.$childrenLoadStaus.error`.
+
+```ts
+(node: Node)
+```
+
 ### methods
 
 #### countChildren
@@ -310,6 +348,7 @@ Function type is [eachDraggableFunc](#eachDraggableFunc)
   type: Function as PropType<(store: Store3) => boolean>
 }
 ```
+
 **`ondragend` supports promise, but `ondragstart` does not.**
 
 #### afterPlaceholderCreated
@@ -414,6 +453,48 @@ Runtime data of drag and drop.
 
 ```ts
 Store3 | null
+```
+
+### events
+
+#### drag
+
+Emit when drag start.
+
+```ts
+(store: Store3)
+```
+
+#### before-first-move
+
+Same with `drag`
+
+```ts
+(store: Store3)
+```
+
+#### drop
+
+Emit when drag end. Emit to drag start/source tree.
+
+```ts
+(store: Store3)
+```
+
+#### drop-into
+
+Emit when drag end. Emit to drag end/target tree.
+
+```ts
+(store: Store3)
+```
+
+#### drop-change
+
+Emit when the tree changed by drag. Emit to both drag start and end tree.
+
+```ts
+(store: Store3)
 ```
 
 ### methods
@@ -531,7 +612,10 @@ interface {
     $checked?: boolean | 0;
     $children: Node[];
     $childrenLoading?: boolean;
-    $childrenLoadStaus?: obj;
+    $childrenLoadStaus?: {
+      status: 'success'|'error',
+      error: Error
+    };
     $draggable?: boolean;
     $droppable?: boolean;
     $nodeStyle?: string | Record<string, string> | unknown;

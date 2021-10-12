@@ -99,7 +99,7 @@ flatData = [
 
 ## 输出数据
 
-使用方法 `outputNestedData` 和 `outputFlatData` 以获得树形数据或扁平数据.
+使用方法 `outputNestedData` 和 `outputFlatData` 以获得树形数据或扁平数据. 在拖拽时为了获得改变后的数据, 可以在[`drop`](api.md#drop) 或 [`drop-change`](api.md#drop-change)事件中执行它们.
 
 ## 折叠和展开
 
@@ -232,7 +232,7 @@ flatData = [
 - 当 prop `droppable` 为 false, 任一节点不能放入这棵树.
 - 使用 prop `eachDroppable` 当拖动到一节点上时.
 - 当 prop `rootDroppable` 为 false, 被拖拽的节点不能成为顶级节点.
-- 使用 prop `ondragend` 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持promise.
+- 使用 prop `ondragend` 在拖拽结束时, 若返回 false, 则恢复拖拽前的原状. 支持 promise.
 - 设置 `node.$droppable` 为 false 控制单个节点是否可放入.
 - 当父节点不可放入而子节点可放入时, 例如设置子节点的 `$droppable` 为 true, 则此子节点可放入.
 
@@ -262,6 +262,38 @@ flatData = [
 
 ```css
 touch-action: none;
+```
+
+## 最大层级
+
+拖拽时限制树的最大层级. 可使用 prop `eachDroppable`. 下面示例代码支持 Vue2 和 Vue3.
+
+```html
+<Draggable :eachDroppable="eachDroppable" />
+```
+
+```js
+data() {
+  return {
+    eachDroppable: (node, store, options, startTree) => {
+      const maxLevel = 3; // 按你需要修改
+      let draggingNodeMaxLevel = 0;
+      hp.walkTreeData(
+        store.draggingNode,
+        (childNode) => {
+          if (childNode.$level > draggingNodeMaxLevel) {
+            draggingNodeMaxLevel = childNode.$level;
+          }
+        },
+        "$children"
+      );
+      draggingNodeMaxLevel = draggingNodeMaxLevel - store.draggingNode.$level;
+      if (node.$level + draggingNodeMaxLevel >= maxLevel) {
+        return false;
+      }
+    },
+  }
+}
 ```
 
 ## Pro 插件(需购买)

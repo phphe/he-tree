@@ -99,7 +99,7 @@ flatData = [
 
 ## Ouput
 
-Use methods `outputNestedData` or `outputFlatData` to get converted data without runtime properties.
+Use methods `outputNestedData` or `outputFlatData` to get converted data without runtime properties. In order to get the changed data when drag, they should be executed in the [`drop`](api.md#drop) or [`drop-change`](api.md#drop-change) event.
 
 ## Fold & Expand
 
@@ -262,6 +262,38 @@ It works in touch devices. It will prevent default action when touch by drag, bu
 
 ```css
 touch-action: none;
+```
+
+## Max Level
+
+To limit the max level of the tree when drag. Use prop `eachDroppable`. Follow example code works in Vue2 and Vue3.
+
+```html
+<Draggable :eachDroppable="eachDroppable" />
+```
+
+```js
+data() {
+  return {
+    eachDroppable: (node, store, options, startTree) => {
+      const maxLevel = 3; // change it by your requirement
+      let draggingNodeMaxLevel = 0;
+      hp.walkTreeData(
+        store.draggingNode,
+        (childNode) => {
+          if (childNode.$level > draggingNodeMaxLevel) {
+            draggingNodeMaxLevel = childNode.$level;
+          }
+        },
+        "$children"
+      );
+      draggingNodeMaxLevel = draggingNodeMaxLevel - store.draggingNode.$level;
+      if (node.$level + draggingNodeMaxLevel >= maxLevel) {
+        return false;
+      }
+    },
+  }
+}
 ```
 
 ## Pro Plugin

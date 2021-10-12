@@ -79,6 +79,27 @@
 <vheading :level="4" id="visiblenodes">visibleNodes</vheading>
 <pre><code v-pre class="language-ts">Node[]
 </code></pre>
+<vheading :level="3" id="events">events</vheading>
+<vheading :level="4" id="fold">fold</vheading>
+<p>折叠节点时触发.</p>
+<pre><code v-pre class="language-ts">(node: Node)
+</code></pre>
+<vheading :level="4" id="unfold">unfold</vheading>
+<p>打开节点时触发.</p>
+<pre><code v-pre class="language-ts">(node: Node)
+</code></pre>
+<vheading :level="4" id="load-children">load-children</vheading>
+<p>针对子节点延迟加载. 加载子节点时触发.</p>
+<pre><code v-pre class="language-ts">(node: Node)
+</code></pre>
+<vheading :level="4" id="load-children-success">load-children-success</vheading>
+<p>针对子节点延迟加载. 加载子节点成功时触发.</p>
+<pre><code v-pre class="language-ts">(node: Node)
+</code></pre>
+<vheading :level="4" id="load-children-error">load-children-error</vheading>
+<p>针对子节点延迟加载. 加载子节点失败时触发. 通过<code v-pre>node.$childrenLoadStaus.error</code>获取错误信息.</p>
+<pre><code v-pre class="language-ts">(node: Node)
+</code></pre>
 <vheading :level="3" id="methods">methods</vheading>
 <vheading :level="4" id="countchildren">countChildren</vheading>
 <pre><code v-pre class="language-ts">(node: Node | undefined): number
@@ -110,7 +131,7 @@
 <vheading :level="4" id="unfoldall">unfoldAll</vheading>
 <pre><code v-pre class="language-ts">(node?: Node | undefined): Promise&lt;void&gt; | undefined;
 </code></pre>
-<vheading :level="4" id="unfold">unfold</vheading>
+<vheading :level="4" id="unfold-1">unfold</vheading>
 <pre><code v-pre class="language-ts">(node: Node): void | Promise&lt;void&gt;;
 </code></pre>
 <vheading :level="4" id="togglefold">toggleFold</vheading>
@@ -224,6 +245,27 @@ default: &quot;top_left_corner&quot;,
 <p>拖拽过程中的相关数据.</p>
 <pre><code v-pre class="language-ts">Store3 | null
 </code></pre>
+<vheading :level="3" id="events-1">events</vheading>
+<vheading :level="4" id="drag">drag</vheading>
+<p>拖拽开始时触发.</p>
+<pre><code v-pre class="language-ts">(store: Store3)
+</code></pre>
+<vheading :level="4" id="before-first-move">before-first-move</vheading>
+<p>与<code v-pre>drag</code>相同并同时触发.</p>
+<pre><code v-pre class="language-ts">(store: Store3)
+</code></pre>
+<vheading :level="4" id="drop">drop</vheading>
+<p>拖拽结束时触发. 触发到拖拽开始树.</p>
+<pre><code v-pre class="language-ts">(store: Store3)
+</code></pre>
+<vheading :level="4" id="drop-into">drop-into</vheading>
+<p>拖拽结束时触发. 触发到拖拽目标树(如果拖拽开始的树和结束的不是同一颗树, 即跨树).</p>
+<pre><code v-pre class="language-ts">(store: Store3)
+</code></pre>
+<vheading :level="4" id="drop-change">drop-change</vheading>
+<p>拖拽结束时触发. 同时触发到拖拽开始和目标树.</p>
+<pre><code v-pre class="language-ts">(store: Store3)
+</code></pre>
 <vheading :level="3" id="methods-1">methods</vheading>
 <vheading :level="4" id="isparentdragging">isParentDragging</vheading>
 <pre><code v-pre class="language-ts">(node: Node): boolean;
@@ -311,7 +353,10 @@ default: &quot;top_left_corner&quot;,
     $checked?: boolean | 0;
     $children: Node[];
     $childrenLoading?: boolean;
-    $childrenLoadStaus?: obj;
+    $childrenLoadStaus?: {
+      status: &#39;success&#39;|&#39;error&#39;,
+      error: Error
+    };
     $draggable?: boolean;
     $droppable?: boolean;
     $nodeStyle?: string | Record&lt;string, string&gt; | unknown;
@@ -338,7 +383,7 @@ default: &quot;top_left_corner&quot;,
     extends: DocTemplateBase,
     setup() {
       const vm = getCurrentInstance()
-      const data = {"name":"API","id":"api","children":[{"name":"BaseTree","id":"basetree","children":[{"name":"props","id":"props","children":[{"name":"idKey","id":"idkey","children":[]},{"name":"parentIdKey","id":"parentidkey","children":[]},{"name":"childrenKey","id":"childrenkey","children":[]},{"name":"textKey","id":"textkey","children":[]},{"name":"flatData","id":"flatdata","children":[]},{"name":"treeData","id":"treedata","children":[]},{"name":"indent","id":"indent","children":[]},{"name":"gap","id":"gap","children":[]},{"name":"rtl","id":"rtl","children":[]},{"name":"virtualization","id":"virtualization","children":[]},{"name":"virtualizationPrerender","id":"virtualizationprerender","children":[]},{"name":"childrenLazyLoading","id":"childrenlazyloading","children":[]},{"name":"childrenLoader","id":"childrenloader","children":[]},{"name":"defaultFolded","id":"defaultfolded","children":[]}]},{"name":"data","id":"data","children":[{"name":"nodes","id":"nodes","children":[]},{"name":"nodesByID","id":"nodesbyid","children":[]},{"name":"trees","id":"trees","children":[]},{"name":"dragging","id":"dragging","children":[]},{"name":"treeID","id":"treeid","children":[]},{"name":"tree","id":"tree","children":[]}]},{"name":"computed","id":"computed","children":[{"name":"visibleNodes","id":"visiblenodes","children":[]}]},{"name":"methods","id":"methods","children":[{"name":"countChildren","id":"countchildren","children":[]},{"name":"addNode","id":"addnode","children":[]},{"name":"moveNode","id":"movenode","children":[]},{"name":"removeNode","id":"removenode","children":[]},{"name":"outputNestedData","id":"outputnesteddata","children":[]},{"name":"outputFlatData","id":"outputflatdata","children":[]},{"name":"isNodeParentFolded","id":"isnodeparentfolded","children":[]},{"name":"isNodeVisible","id":"isnodevisible","children":[]},{"name":"foldAll","id":"foldall","children":[]},{"name":"unfoldAll","id":"unfoldall","children":[]},{"name":"unfold","id":"unfold","children":[]},{"name":"toggleFold","id":"togglefold","children":[]},{"name":"updateChecked","id":"updatechecked","children":[]},{"name":"getAllCheckedNodes","id":"getallcheckednodes","children":[]}]}]},{"name":"Draggable","id":"draggable","children":[{"name":"props","id":"props-1","children":[{"name":"triggerClass","id":"triggerclass","children":[]},{"name":"triggerBySelf","id":"triggerbyself","children":[]},{"name":"draggable","id":"draggable-1","children":[]},{"name":"droppable","id":"droppable","children":[]},{"name":"eachDraggable","id":"eachdraggable","children":[]},{"name":"eachDroppable","id":"eachdroppable","children":[]},{"name":"rootDraggable","id":"rootdraggable","children":[]},{"name":"rootDroppable","id":"rootdroppable","children":[]},{"name":"ondragstart","id":"ondragstart","children":[]},{"name":"ondragend","id":"ondragend","children":[]},{"name":"afterPlaceholderCreated","id":"afterplaceholdercreated","children":[]},{"name":"placeholderMaxHeight","id":"placeholdermaxheight","children":[]},{"name":"unfoldWhenDragover","id":"unfoldwhendragover","children":[]},{"name":"unfoldWhenDragoverDelay","id":"unfoldwhendragoverdelay","children":[]},{"name":"isNodeUnfoldable","id":"isnodeunfoldable","children":[]},{"name":"draggingNodePositionMode","id":"draggingnodepositionmode","children":[]},{"name":"preventTextSelection","id":"preventtextselection","children":[]},{"name":"edgeScroll","id":"edgescroll","children":[]},{"name":"edgeScrollTriggerMargin","id":"edgescrolltriggermargin","children":[]},{"name":"edgeScrollSpeed","id":"edgescrollspeed","children":[]},{"name":"edgeScrollTriggerMode","id":"edgescrolltriggermode","children":[]},{"name":"edgeScrollSpecifiedContainerX","id":"edgescrollspecifiedcontainerx","children":[]},{"name":"edgeScrollSpecifiedContainerY","id":"edgescrollspecifiedcontainery","children":[]}]},{"name":"data","id":"data-1","children":[{"name":"draggingNode","id":"draggingnode","children":[]},{"name":"store","id":"store","children":[]}]},{"name":"methods","id":"methods-1","children":[{"name":"isParentDragging","id":"isparentdragging","children":[]}]}]},{"name":"Other","id":"other","children":[{"name":"Draggable","id":"draggable-2","children":[]},{"name":"eachDraggableFunc","id":"eachdraggablefunc","children":[]},{"name":"PositionMode","id":"positionmode","children":[]},{"name":"Store3","id":"store3","children":[]},{"name":"EventPosition","id":"eventposition","children":[]},{"name":"EventPosition2","id":"eventposition2","children":[]},{"name":"obj","id":"obj","children":[]},{"name":"BaseNode","id":"basenode","children":[]},{"name":"Node","id":"node","children":[]}]}]}
+      const data = {"name":"API","id":"api","children":[{"name":"BaseTree","id":"basetree","children":[{"name":"props","id":"props","children":[{"name":"idKey","id":"idkey","children":[]},{"name":"parentIdKey","id":"parentidkey","children":[]},{"name":"childrenKey","id":"childrenkey","children":[]},{"name":"textKey","id":"textkey","children":[]},{"name":"flatData","id":"flatdata","children":[]},{"name":"treeData","id":"treedata","children":[]},{"name":"indent","id":"indent","children":[]},{"name":"gap","id":"gap","children":[]},{"name":"rtl","id":"rtl","children":[]},{"name":"virtualization","id":"virtualization","children":[]},{"name":"virtualizationPrerender","id":"virtualizationprerender","children":[]},{"name":"childrenLazyLoading","id":"childrenlazyloading","children":[]},{"name":"childrenLoader","id":"childrenloader","children":[]},{"name":"defaultFolded","id":"defaultfolded","children":[]}]},{"name":"data","id":"data","children":[{"name":"nodes","id":"nodes","children":[]},{"name":"nodesByID","id":"nodesbyid","children":[]},{"name":"trees","id":"trees","children":[]},{"name":"dragging","id":"dragging","children":[]},{"name":"treeID","id":"treeid","children":[]},{"name":"tree","id":"tree","children":[]}]},{"name":"computed","id":"computed","children":[{"name":"visibleNodes","id":"visiblenodes","children":[]}]},{"name":"events","id":"events","children":[{"name":"fold","id":"fold","children":[]},{"name":"unfold","id":"unfold","children":[]},{"name":"load-children","id":"load-children","children":[]},{"name":"load-children-success","id":"load-children-success","children":[]},{"name":"load-children-error","id":"load-children-error","children":[]}]},{"name":"methods","id":"methods","children":[{"name":"countChildren","id":"countchildren","children":[]},{"name":"addNode","id":"addnode","children":[]},{"name":"moveNode","id":"movenode","children":[]},{"name":"removeNode","id":"removenode","children":[]},{"name":"outputNestedData","id":"outputnesteddata","children":[]},{"name":"outputFlatData","id":"outputflatdata","children":[]},{"name":"isNodeParentFolded","id":"isnodeparentfolded","children":[]},{"name":"isNodeVisible","id":"isnodevisible","children":[]},{"name":"foldAll","id":"foldall","children":[]},{"name":"unfoldAll","id":"unfoldall","children":[]},{"name":"unfold","id":"unfold-1","children":[]},{"name":"toggleFold","id":"togglefold","children":[]},{"name":"updateChecked","id":"updatechecked","children":[]},{"name":"getAllCheckedNodes","id":"getallcheckednodes","children":[]}]}]},{"name":"Draggable","id":"draggable","children":[{"name":"props","id":"props-1","children":[{"name":"triggerClass","id":"triggerclass","children":[]},{"name":"triggerBySelf","id":"triggerbyself","children":[]},{"name":"draggable","id":"draggable-1","children":[]},{"name":"droppable","id":"droppable","children":[]},{"name":"eachDraggable","id":"eachdraggable","children":[]},{"name":"eachDroppable","id":"eachdroppable","children":[]},{"name":"rootDraggable","id":"rootdraggable","children":[]},{"name":"rootDroppable","id":"rootdroppable","children":[]},{"name":"ondragstart","id":"ondragstart","children":[]},{"name":"ondragend","id":"ondragend","children":[]},{"name":"afterPlaceholderCreated","id":"afterplaceholdercreated","children":[]},{"name":"placeholderMaxHeight","id":"placeholdermaxheight","children":[]},{"name":"unfoldWhenDragover","id":"unfoldwhendragover","children":[]},{"name":"unfoldWhenDragoverDelay","id":"unfoldwhendragoverdelay","children":[]},{"name":"isNodeUnfoldable","id":"isnodeunfoldable","children":[]},{"name":"draggingNodePositionMode","id":"draggingnodepositionmode","children":[]},{"name":"preventTextSelection","id":"preventtextselection","children":[]},{"name":"edgeScroll","id":"edgescroll","children":[]},{"name":"edgeScrollTriggerMargin","id":"edgescrolltriggermargin","children":[]},{"name":"edgeScrollSpeed","id":"edgescrollspeed","children":[]},{"name":"edgeScrollTriggerMode","id":"edgescrolltriggermode","children":[]},{"name":"edgeScrollSpecifiedContainerX","id":"edgescrollspecifiedcontainerx","children":[]},{"name":"edgeScrollSpecifiedContainerY","id":"edgescrollspecifiedcontainery","children":[]}]},{"name":"data","id":"data-1","children":[{"name":"draggingNode","id":"draggingnode","children":[]},{"name":"store","id":"store","children":[]}]},{"name":"events","id":"events-1","children":[{"name":"drag","id":"drag","children":[]},{"name":"before-first-move","id":"before-first-move","children":[]},{"name":"drop","id":"drop","children":[]},{"name":"drop-into","id":"drop-into","children":[]},{"name":"drop-change","id":"drop-change","children":[]}]},{"name":"methods","id":"methods-1","children":[{"name":"isParentDragging","id":"isparentdragging","children":[]}]}]},{"name":"Other","id":"other","children":[{"name":"Draggable","id":"draggable-2","children":[]},{"name":"eachDraggableFunc","id":"eachdraggablefunc","children":[]},{"name":"PositionMode","id":"positionmode","children":[]},{"name":"Store3","id":"store3","children":[]},{"name":"EventPosition","id":"eventposition","children":[]},{"name":"EventPosition2","id":"eventposition2","children":[]},{"name":"obj","id":"obj","children":[]},{"name":"BaseNode","id":"basenode","children":[]},{"name":"Node","id":"node","children":[]}]}]}
       useTitle(data.name, vm)
       docsSubmenu.value = data.children
       onBeforeUnmount(() => {

@@ -77,7 +77,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 &lt;/script&gt;
 </code></pre>
 <vheading :level="2" id="ouput">Ouput</vheading>
-<p>Use methods <code v-pre>outputNestedData</code> or <code v-pre>outputFlatData</code> to get converted data without runtime properties.</p>
+<p>Use methods <code v-pre>outputNestedData</code> or <code v-pre>outputFlatData</code> to get converted data without runtime properties. In order to get the changed data when drag, they should be executed in the <Anchor :to="resolveHref('api.md#drop')"><code v-pre>drop</code></Anchor> or <Anchor :to="resolveHref('api.md#drop-change')"><code v-pre>drop-change</code></Anchor> event.</p>
 <vheading :level="2" id="fold--expand">Fold &amp; Expand</vheading>
 <pre><code v-pre class="language-vue">&lt;template&gt;
   &lt;BaseTree :flatData=&quot;flatData&quot; idKey=&quot;id&quot; parentIdKey=&quot;pid&quot;&gt;
@@ -207,6 +207,32 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <p>It works in touch devices. It will prevent default action when touch by drag, but sometimes that does not work. Use follow css to prevent default touch action such as scroll. The css target is the drag trigger element. If no drag trigger, it is <code v-pre>.tree-node</code>.</p>
 <pre><code v-pre class="language-css">touch-action: none;
 </code></pre>
+<vheading :level="2" id="max-level">Max Level</vheading>
+<p>To limit the max level of the tree when drag. Use prop <code v-pre>eachDroppable</code>. Follow example code works in Vue2 and Vue3.</p>
+<pre><code v-pre class="language-html">&lt;Draggable :eachDroppable=&quot;eachDroppable&quot; /&gt;
+</code></pre>
+<pre><code v-pre class="language-js">data() {
+  return {
+    eachDroppable: (node, store, options, startTree) =&gt; {
+      const maxLevel = 3; // change it by your requirement
+      let draggingNodeMaxLevel = 0;
+      hp.walkTreeData(
+        store.draggingNode,
+        (childNode) =&gt; {
+          if (childNode.$level &gt; draggingNodeMaxLevel) {
+            draggingNodeMaxLevel = childNode.$level;
+          }
+        },
+        &quot;$children&quot;
+      );
+      draggingNodeMaxLevel = draggingNodeMaxLevel - store.draggingNode.$level;
+      if (node.$level + draggingNodeMaxLevel &gt;= maxLevel) {
+        return false;
+      }
+    },
+  }
+}
+</code></pre>
 <vheading :level="2" id="pro-plugin">Pro Plugin</vheading>
 <p>The <Anchor :to="resolveHref('/pro-plugin')">pro plugin</Anchor> has advanced features.</p>
 <ul>
@@ -240,7 +266,7 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
     extends: DocTemplateBase,
     setup() {
       const vm = getCurrentInstance()
-      const data = {"name":"Guide","id":"guide","children":[{"name":"Installation","id":"installation","children":[]},{"name":"Import","id":"import","children":[]},{"name":"Don't use margin out of node","id":"dont-use-margin-out-of-node","children":[]},{"name":"treeData or flatData","id":"treedata-or-flatdata","children":[]},{"name":"Structure","id":"structure","children":[]},{"name":"Usage","id":"usage","children":[]},{"name":"Ouput","id":"ouput","children":[]},{"name":"Fold & Expand","id":"fold--expand","children":[]},{"name":"Lazy Load","id":"lazy-load","children":[]},{"name":"Folde all nodes by default","id":"folde-all-nodes-by-default","children":[]},{"name":"Checkbox","id":"checkbox","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"Virtualization","id":"virtualization","children":[]},{"name":"Draggable","id":"draggable","children":[]},{"name":"Drag Trigger","id":"drag-trigger","children":[]},{"name":"Prevent Drag","id":"prevent-drag","children":[]},{"name":"Prevent Drop","id":"prevent-drop","children":[]},{"name":"Runtime data in drag and drop process","id":"runtime-data-in-drag-and-drop-process","children":[]},{"name":"Placeholder","id":"placeholder","children":[]},{"name":"Open folded node when dragging","id":"open-folded-node-when-dragging","children":[]},{"name":"How to locate the dragging node","id":"how-to-locate-the-dragging-node","children":[]},{"name":"Edge Scroll","id":"edge-scroll","children":[]},{"name":"Touch","id":"touch","children":[]},{"name":"Pro Plugin","id":"pro-plugin","children":[]},{"name":"Import by script tag","id":"import-by-script-tag","children":[]}]}
+      const data = {"name":"Guide","id":"guide","children":[{"name":"Installation","id":"installation","children":[]},{"name":"Import","id":"import","children":[]},{"name":"Don't use margin out of node","id":"dont-use-margin-out-of-node","children":[]},{"name":"treeData or flatData","id":"treedata-or-flatdata","children":[]},{"name":"Structure","id":"structure","children":[]},{"name":"Usage","id":"usage","children":[]},{"name":"Ouput","id":"ouput","children":[]},{"name":"Fold & Expand","id":"fold--expand","children":[]},{"name":"Lazy Load","id":"lazy-load","children":[]},{"name":"Folde all nodes by default","id":"folde-all-nodes-by-default","children":[]},{"name":"Checkbox","id":"checkbox","children":[]},{"name":"RTL","id":"rtl","children":[]},{"name":"Virtualization","id":"virtualization","children":[]},{"name":"Draggable","id":"draggable","children":[]},{"name":"Drag Trigger","id":"drag-trigger","children":[]},{"name":"Prevent Drag","id":"prevent-drag","children":[]},{"name":"Prevent Drop","id":"prevent-drop","children":[]},{"name":"Runtime data in drag and drop process","id":"runtime-data-in-drag-and-drop-process","children":[]},{"name":"Placeholder","id":"placeholder","children":[]},{"name":"Open folded node when dragging","id":"open-folded-node-when-dragging","children":[]},{"name":"How to locate the dragging node","id":"how-to-locate-the-dragging-node","children":[]},{"name":"Edge Scroll","id":"edge-scroll","children":[]},{"name":"Touch","id":"touch","children":[]},{"name":"Max Level","id":"max-level","children":[]},{"name":"Pro Plugin","id":"pro-plugin","children":[]},{"name":"Import by script tag","id":"import-by-script-tag","children":[]}]}
       useTitle(data.name, vm)
       docsSubmenu.value = data.children
       onBeforeUnmount(() => {

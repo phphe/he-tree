@@ -145,6 +145,48 @@ this
 Node[]
 ```
 
+### events
+
+#### fold
+
+折叠节点时触发.
+
+```ts
+(node: Node)
+```
+
+#### unfold
+
+打开节点时触发.
+
+```ts
+(node: Node)
+```
+
+#### load-children
+
+针对子节点延迟加载. 加载子节点时触发.
+
+```ts
+(node: Node)
+```
+
+#### load-children-success
+
+针对子节点延迟加载. 加载子节点成功时触发.
+
+```ts
+(node: Node)
+```
+
+#### load-children-error
+
+针对子节点延迟加载. 加载子节点失败时触发. 通过`node.$childrenLoadStaus.error`获取错误信息.
+
+```ts
+(node: Node)
+```
+
 ### methods
 
 #### countChildren
@@ -417,6 +459,48 @@ Node | null
 Store3 | null
 ```
 
+### events
+
+#### drag
+
+拖拽开始时触发.
+
+```ts
+(store: Store3)
+```
+
+#### before-first-move
+
+与`drag`相同并同时触发.
+
+```ts
+(store: Store3)
+```
+
+#### drop
+
+拖拽结束时触发. 触发到拖拽开始树.
+
+```ts
+(store: Store3)
+```
+
+#### drop-into
+
+拖拽结束时触发. 触发到拖拽目标树(如果拖拽开始的树和结束的不是同一颗树, 即跨树).
+
+```ts
+(store: Store3)
+```
+
+#### drop-change
+
+拖拽结束时触发. 同时触发到拖拽开始和目标树.
+
+```ts
+(store: Store3)
+```
+
 ### methods
 
 #### isParentDragging
@@ -532,7 +616,10 @@ interface {
     $checked?: boolean | 0;
     $children: Node[];
     $childrenLoading?: boolean;
-    $childrenLoadStaus?: obj;
+    $childrenLoadStaus?: {
+      status: 'success'|'error',
+      error: Error
+    };
     $draggable?: boolean;
     $droppable?: boolean;
     $nodeStyle?: string | Record<string, string> | unknown;
