@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.1...@he-tree/vue2@1.3.2) (2021-10-12)
+
+
+### Bug Fixes
+
+* **base tree:** vm.tree has wrong value ([5276182](https://github.com/phphe/he-tree/commit/527618245b9101de0d6cb73ee27a18d2c178ddf1))
+
+
+
+
+
 ## [1.3.1](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.0...@he-tree/vue2@1.3.1) (2021-09-30)
 
 
