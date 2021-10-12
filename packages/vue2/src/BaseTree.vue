@@ -49,7 +49,7 @@ export default class BaseTree extends Vue {
   treeID = hp.randString();
   data() {
     return {
-      tree: BaseTree,
+      tree: this,
       virtualizationListAfterCalcTop2: undefined,
       // for drag
       store: null,
