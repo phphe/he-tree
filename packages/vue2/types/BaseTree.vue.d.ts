@@ -22,7 +22,7 @@ export default class BaseTree extends Vue {
     dragging: boolean;
     treeID: string;
     data(): {
-        tree: typeof BaseTree;
+        tree: BaseTree;
         virtualizationListAfterCalcTop2: undefined;
         store: null;
         draggingNode: null;

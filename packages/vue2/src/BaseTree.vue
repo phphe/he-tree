@@ -49,7 +49,7 @@ export default class BaseTree extends Vue {
   treeID = hp.randString();
   data() {
     return {
-      tree: this,
+      tree: this as BaseTree,
       virtualizationListAfterCalcTop2: undefined,
       // for drag
       store: null,
@@ -203,10 +203,11 @@ export default class BaseTree extends Vue {
     const parent = this.nodesByID[parentId!];
     hp.walkTreeData(
       node,
-      (child, index, parent) => {
+      (child, index, childParent) => {
         this.initNodes([child]);
-        child.$level = parent ? parent.$level : 1;
-        child.$pid = parent ? parent.$id : parentId;
+        const parent2 = childParent || parent;
+        child.$level = parent2 ? parent2.$level + 1 : 1;
+        child.$pid = parent2 ? parent2.$id : null;
         child.$children = child[this.childrenKey] || [];
         nodes.push(child);
       },
@@ -220,7 +221,7 @@ export default class BaseTree extends Vue {
   }
   moveNode(node: Node, parentId: number | string | null, index = 0) {
     parentId != null && this._checkIDExists(parentId);
-    const nodes: Node[] = [];
+    const flatNodes: Node[] = [];
     const oldParent = this.getParent(node);
     if (oldParent) {
       const oldIndex = oldParent.$children.indexOf(node);
@@ -229,21 +230,22 @@ export default class BaseTree extends Vue {
     const oldListIndex = this.nodes.indexOf(node);
     const removeLen = this.countChildren(node) + 1;
     this.nodes.splice(oldListIndex, removeLen);
-    const parent = this.nodesByID[parentId!];
+    const newParent = this.nodesByID[parentId!];
     hp.walkTreeData(
       node,
-      (child, index, parent) => {
-        child.$level = parent ? parent.$level : 1;
-        nodes.push(child);
+      (child, index, childParent) => {
+        const parent2 = childParent || newParent;
+        child.$level = parent2 ? parent2.$level + 1 : 1;
+        flatNodes.push(child);
       },
-      this.childrenKey
+      "$children"
     );
     node.$pid = parentId == null ? undefined : parentId;
-    if (parent) {
-      parent.$children.splice(index, 0, node);
+    if (newParent) {
+      newParent.$children.splice(index, 0, node);
     }
     const listIndex = this._pidIndexToListIndex(parentId, index);
-    this.nodes.splice(listIndex, 0, ...nodes);
+    this.nodes.splice(listIndex, 0, ...flatNodes);
   }
   removeNode(node: Node) {
     const parent = this.getParent(node);

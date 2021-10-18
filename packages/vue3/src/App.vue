@@ -72,7 +72,8 @@
         | &nbsp;
         span {{node.text}}
     h3 Custome Trigger
-    Draggable.tree8(:treeData="treeData8" virtualization style="height:500px;overflow:auto"  triggerClass="drag-trigger" edgeScroll :gap="6")
+    button(@click="tree8move") tree8 move rootChildren[1] to rootChildren[0][0]
+    Draggable.tree8(ref="tree8" :treeData="treeData8" virtualization style="height:500px;overflow:auto"  triggerClass="drag-trigger" edgeScroll :gap="6")
       template(v-slot="{node, index, tree}")
         button.drag-trigger(style="margin-right:.5em") drag
         b(@click="tree.toggleFold(node)") {{node.$folded ? '+' : '-'}}&nbsp;
@@ -105,6 +106,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, PropType, ComponentPublicInstance } from "vue";
 import BaseTree from "./BaseTree.vue";
 import Draggable from "./draggable/Draggable.vue";
@@ -222,6 +224,14 @@ export default defineComponent({
           r.push({ text: `node_${hp.randString(3).toLowerCase()}` });
         }
         return r;
+      },
+      tree8move: () => {
+        const tree8 = this.$refs.tree8;
+        // @ts-ignore
+        tree8.moveNode(
+          tree8.rootNodeChildren[1],
+          tree8.rootNodeChildren[0].$children[0].$id
+        );
       },
     };
   },
