@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.1...@he-tree/vue3@1.2.2) (2021-10-18)
+
+
+### Bug Fixes
+
+* **BaseTree:** fix methods: addNode, moveNode ([8632538](https://github.com/phphe/he-tree/commit/86325385bf784654b0d6ebc51d64867010c0504a))
+
+
+
+
+
 ## [1.2.1](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.0...@he-tree/vue3@1.2.1) (2021-09-30)
 
 

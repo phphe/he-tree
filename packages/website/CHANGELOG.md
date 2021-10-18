@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://github.com/phphe/he-tree/compare/he-tree-website@1.0.6...he-tree-website@1.0.7) (2021-10-18)
+
+**Note:** Version bump only for package he-tree-website
+
+
+
+
+
 ## [1.0.6](https://github.com/phphe/he-tree/compare/he-tree-website@1.0.5...he-tree-website@1.0.6) (2021-10-12)
 
 **Note:** Version bump only for package he-tree-website
