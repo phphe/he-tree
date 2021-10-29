@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.2...@he-tree/vue3@1.2.3) (2021-10-29)
+
+
+### Bug Fixes
+
+* types ([4c2cc8f](https://github.com/phphe/he-tree/commit/4c2cc8f849ab4cdcddbba6b2961ec1b6815510fd))
+
+
+
+
+
 ## [1.2.2](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.1...@he-tree/vue3@1.2.2) (2021-10-18)
 
 

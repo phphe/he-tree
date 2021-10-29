@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.3...@he-tree/vue2@1.3.4) (2021-10-29)
+
+
+### Bug Fixes
+
+* **typescript:** add types field in package.json ([babdcb8](https://github.com/phphe/he-tree/commit/babdcb8c76679183d2b2ebb612c620f7946fd729))
+
+
+
+
+
 ## [1.3.3](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.2...@he-tree/vue2@1.3.3) (2021-10-18)
 
 
