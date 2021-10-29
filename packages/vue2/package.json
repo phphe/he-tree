@@ -9,6 +9,7 @@
   "unpkg": "dist/he-tree-vue2.js",
   "main": "dist/he-tree-vue2.cjs.js",
   "module": "dist/he-tree-vue2.esm.js",
+  "types": "types/lib-entry.d.ts",
   "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
   "homepage": "https://hetree.phphe.com",
   "bugs": {
