@@ -1,6 +1,6 @@
 <template lang="pug">
 .VirtualizationList.virtualization-list(@scroll.passive="update")
-  component.vl-items(:is="listTag" :class="listClass" :style="{paddingTop: top + 'px',paddingBottom: bottom + 'px',height: totalHeight + 'px'}")
+  component.vl-items(:is="listTag" :class="listClass" :style="enabled && {paddingTop: top + 'px',paddingBottom: bottom + 'px',height: totalHeight + 'px'}")
     template(v-for="(info, i) in visibleItems" :key="info.item.$id")
       slot(:item="info.item" :index="info.index" :renderIndex="i" :itemStyle="{marginBottom: gap+'px'}")
 </template>
