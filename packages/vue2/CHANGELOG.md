@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.4...@he-tree/vue2@1.3.5) (2021-11-03)
+
+
+### Bug Fixes
+
+* **virtual list:** remove extra 'padding-bottom' when virtual list disabled ([3a7f369](https://github.com/phphe/he-tree/commit/3a7f36950f7f8d042d4587588e9b611e8c7762ee))
+
+
+
+
+
 ## [1.3.4](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.3...@he-tree/vue2@1.3.4) (2021-10-29)
 
 
