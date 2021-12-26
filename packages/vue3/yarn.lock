@@ -2559,15 +2559,15 @@ drag-event-service@^1.1.7:
     "@babel/runtime" "^7.7.7"
     helper-js "^2.0.0"
 
-draggable-helper@^6.0.4:
-  version "6.0.4"
-  resolved "https://registry.nlark.com/draggable-helper/download/draggable-helper-6.0.4.tgz?cache=0&sync_timestamp=1632202465126&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdraggable-helper%2Fdownload%2Fdraggable-helper-6.0.4.tgz#35552709aa39cfb0d11c24ebf0b8c9361ada8726"
-  integrity sha1-NVUnCao5z7DRHCTr8LjJNhrahyY=
+draggable-helper@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.npmmirror.com/draggable-helper/download/draggable-helper-6.0.5.tgz#472a5eae2aef1b0e093d9c84a34157127d9d9121"
+  integrity sha512-J741PL2if2nWn03J0F4fqhWV20vSXV4IL5qy/AqoiLb9QxyhKynr29z1GFCqswrZAA6AUkvyvJFcUbdS1Aa/HQ==
   dependencies:
     "@babel/runtime" "^7.7.7"
     drag-event-service "^1.1.7"
-    helper-js "^2.0.4"
-    tslib "^1.11.2"
+    helper-js "^2.0.7"
+    tslib "^2"
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.7.1"
@@ -3132,13 +3132,21 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-helper-js@^2, helper-js@^2.0.0, helper-js@^2.0.4:
+helper-js@^2.0.0:
   version "2.0.6"
   resolved "https://registry.nlark.com/helper-js/download/helper-js-2.0.6.tgz#ae0d350f6dbf357a028bf70a9cbb8854f2fdf7a9"
   integrity sha1-rg01D22/NXoCi/cKnLuIVPL996k=
   dependencies:
     "@babel/runtime" "^7.7.7"
     tslib "^1.11.2"
+
+helper-js@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npmmirror.com/helper-js/download/helper-js-2.0.7.tgz#7ed172d79db5a2a8c6d0ee99905b17ef28f2a1ea"
+  integrity sha512-qdagluMOcYL5P9fYLqbGedq9LCWH1W4BM2/yTH+XIy6MIYLE+qAHWU6acZ5CyWJslXMhKCKPl1yDYVJCKGgS6A==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    tslib "^2"
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
@@ -5243,10 +5251,15 @@ tslib@2.1.0:
   resolved "https://registry.nlark.com/tslib/download/tslib-2.1.0.tgz?cache=0&sync_timestamp=1628722556410&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha1-2mCGDxwuyqVwOrfTm8Bba/mIuXo=
 
-tslib@^1.11.2, tslib@^1.14.1:
+tslib@^1.11.2:
   version "1.14.1"
   resolved "https://registry.nlark.com/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1628722556410&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
+
+tslib@^2:
+  version "2.3.1"
+  resolved "https://registry.nlark.com/tslib/download/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
 
 tty-browserify@0.0.0:
   version "0.0.0"
