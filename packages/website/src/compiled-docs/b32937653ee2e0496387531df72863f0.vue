@@ -188,6 +188,7 @@
 }
 </code></pre>
 <p><strong><code v-pre>ondragend</code> 支持 promise, 但 <code v-pre>ondragstart</code> 不支持.</strong></p>
+<p><strong>执行<code v-pre>ondragend</code>时, 数据尚未更新.</strong></p>
 <vheading :level="4" id="afterplaceholdercreated">afterPlaceholderCreated</vheading>
 <pre><code v-pre class="language-ts">(placeholder: HTMLElement, store: Store3) =&gt; void
 </code></pre>
@@ -274,8 +275,12 @@ default: &quot;top_left_corner&quot;,
 <vheading :level="3" id="draggable-2">Draggable</vheading>
 <p>Draggable 组件的 Vue 实例(vm).</p>
 <vheading :level="3" id="eachdraggablefunc">eachDraggableFunc</vheading>
-<pre><code v-pre class="language-ts">;(node: Node | undefined, store: Store3, options: Options2, vm: Draggable) =&gt;
-  boolean | undefined
+<pre><code v-pre class="language-ts">type eachDraggableFunc = (
+  node: Node | undefined,
+  store: Store3,
+  options: Options2,
+  vm: Draggable
+) =&gt; boolean | undefined
 </code></pre>
 <vheading :level="3" id="positionmode">PositionMode</vheading>
 <pre><code v-pre class="language-ts">&#39;top_left_corner&#39; | &#39;mouse&#39;

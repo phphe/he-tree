@@ -149,6 +149,12 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <p>从右到左显示. 使用 prop <code v-pre>rtl</code> 控制.</p>
 <vheading :level="2" id="虚拟列表">虚拟列表</vheading>
 <p>此功能可以在有许多节点时提高渲染性能. 使用 prop <code v-pre>virtualization</code> 启用. 使用 prop <code v-pre>virtualizationPrerender</code> 设置开始时显示的节点数量.</p>
+<p>一定要给树添加样式<code v-pre>overflow:auto</code>, 并指定高度, 可以设置固定值, 也可以使用 max-height 或者 flex 动态设置高度.</p>
+<pre><code v-pre class="language-html">&lt;Draggable virtualization style=&quot;height:300px;overflow:auto&quot; /&gt;
+</code></pre>
+<p>使用以下代码手动更新虚拟列表:</p>
+<pre><code v-pre class="language-js">tree.$refs.virtualizationList.update()
+</code></pre>
 <vheading :level="2" id="拖拽">拖拽</vheading>
 <pre><code v-pre class="language-vue">&lt;template&gt;
   &lt;Draggable :flatData=&quot;flatData&quot; idKey=&quot;id&quot; parentIdKey=&quot;pid&quot; /&gt;

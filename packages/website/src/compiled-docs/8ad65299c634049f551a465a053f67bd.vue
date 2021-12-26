@@ -149,6 +149,12 @@ import &#39;@he-tree/vue3/dist/he-tree-vue3.css&#39;
 <p>Use prop <code v-pre>rtl</code> to enable.</p>
 <vheading :level="2" id="virtualization">Virtualization</vheading>
 <p>Improve performance when there are a lot of nodes. Use prop <code v-pre>virtualization</code> to enable. Use prop <code v-pre>virtualizationPrerender</code> to define render length at start.</p>
+<p>Must add style <code v-pre>overflow:auto</code> for tree. And set height. The height can be fixed value. Use <code v-pre>max-height</code> or <code v-pre>display:flex</code> to set dynamic height also works.</p>
+<pre><code v-pre class="language-html">&lt;Draggable virtualization style=&quot;height:300px;overflow:auto&quot; /&gt;
+</code></pre>
+<p>You can use follow code update virtualization list manually:</p>
+<pre><code v-pre class="language-js">tree.$refs.virtualizationList.update()
+</code></pre>
 <vheading :level="2" id="draggable">Draggable</vheading>
 <pre><code v-pre class="language-vue">&lt;template&gt;
   &lt;Draggable :flatData=&quot;flatData&quot; idKey=&quot;id&quot; parentIdKey=&quot;pid&quot; /&gt;

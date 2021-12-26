@@ -10,7 +10,8 @@
     "serve": "vite preview",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
     "lint:style": "stylelint src/**/*.{css,scss,vue}",
-    "compile-docs": "ts-node scripts/compile-docs.ts"
+    "compile-docs": "ts-node scripts/compile-docs.ts",
+    "deploy": "sh deploy.sh"
   },
   "dependencies": {
     "@he-tree/vue3": "^1.2.5",

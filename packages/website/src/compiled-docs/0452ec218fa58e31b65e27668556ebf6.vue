@@ -39,7 +39,7 @@
 <p>我可以提供 he-tree 定制开发, 高级 Vue 组件定制, 或其他 Vue 相关开发. <Anchor :to="resolveHref('mailto:phphe@outlook.com?subject=&body=')">请联系我</Anchor>.</p>
 <vheading :level="2" id="联系方式">联系方式</vheading>
 <ul>
-<li>Email: <Anchor :to="resolveHref('mailto:&#x70;&#104;&#x70;&#x68;&#x65;&#x40;&#111;&#x75;&#116;&#108;&#111;&#x6f;&#107;&#x2e;&#99;&#111;&#x6d;')">&#x70;&#104;&#x70;&#x68;&#x65;&#x40;&#111;&#x75;&#116;&#108;&#111;&#x6f;&#107;&#x2e;&#99;&#111;&#x6d;</Anchor></li>
+<li>Email: <Anchor :to="resolveHref('mailto:&#x70;&#104;&#112;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#107;&#46;&#x63;&#111;&#x6d;')">&#x70;&#104;&#112;&#104;&#x65;&#x40;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#107;&#46;&#x63;&#111;&#x6d;</Anchor></li>
 </ul>
 
     </div>

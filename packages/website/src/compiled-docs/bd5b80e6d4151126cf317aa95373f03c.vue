@@ -186,6 +186,7 @@
 }
 </code></pre>
 <p><strong><code v-pre>ondragend</code> supports promise, but <code v-pre>ondragstart</code> does not.</strong></p>
+<p><strong>The data is not updated in <code v-pre>ondragend</code>.</strong></p>
 <vheading :level="4" id="afterplaceholdercreated">afterPlaceholderCreated</vheading>
 <pre><code v-pre class="language-ts">(placeholder: HTMLElement, store: Store3) =&gt; void
 </code></pre>
@@ -272,8 +273,12 @@ default: &quot;top_left_corner&quot;,
 <vheading :level="3" id="draggable-2">Draggable</vheading>
 <p>The Vue instance(vm) of the Draggable component.</p>
 <vheading :level="3" id="eachdraggablefunc">eachDraggableFunc</vheading>
-<pre><code v-pre class="language-ts">;(node: Node | undefined, store: Store3, options: Options2, vm: Draggable) =&gt;
-  boolean | undefined
+<pre><code v-pre class="language-ts">type eachDraggableFunc = (
+  node: Node | undefined,
+  store: Store3,
+  options: Options2,
+  vm: Draggable
+) =&gt; boolean | undefined
 </code></pre>
 <vheading :level="3" id="positionmode">PositionMode</vheading>
 <pre><code v-pre class="language-ts">&#39;top_left_corner&#39; | &#39;mouse&#39;
