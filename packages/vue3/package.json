@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "draggable-helper": "^6.0.4",
-    "helper-js": "^2",
-    "tslib": "^1.14.1"
+    "draggable-helper": "^6.0.5",
+    "helper-js": "^2.0.7",
+    "tslib": "^2"
   },
   "devDependencies": {
     "@rollup-use/core": "^0.0.8",
