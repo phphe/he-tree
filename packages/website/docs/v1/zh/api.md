@@ -355,6 +355,8 @@ Boolean
 
 **`ondragend` 支持 promise, 但 `ondragstart` 不支持.**
 
+**执行`ondragend`时, 数据尚未更新.**
+
 #### afterPlaceholderCreated
 
 ```ts

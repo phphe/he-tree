@@ -187,6 +187,18 @@ flatData = [
 
 此功能可以在有许多节点时提高渲染性能. 使用 prop `virtualization` 启用. 使用 prop `virtualizationPrerender` 设置开始时显示的节点数量.
 
+一定要给树添加样式`overflow:auto`, 并指定高度, 可以设置固定值, 也可以使用 max-height 或者 flex 动态设置高度.
+
+```html
+<Draggable virtualization style="height:300px;overflow:auto" />
+```
+
+使用以下代码手动更新虚拟列表:
+
+```js
+tree.$refs.virtualizationList.update()
+```
+
 ## 拖拽
 
 ```vue

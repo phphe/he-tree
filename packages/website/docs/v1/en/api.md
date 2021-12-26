@@ -351,6 +351,8 @@ Function type is [eachDraggableFunc](#eachDraggableFunc)
 
 **`ondragend` supports promise, but `ondragstart` does not.**
 
+**The data is not updated in `ondragend`.**
+
 #### afterPlaceholderCreated
 
 ```ts

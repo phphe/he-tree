@@ -187,6 +187,18 @@ Use prop `rtl` to enable.
 
 Improve performance when there are a lot of nodes. Use prop `virtualization` to enable. Use prop `virtualizationPrerender` to define render length at start.
 
+Must add style `overflow:auto` for tree. And set height. The height can be fixed value. Use `max-height` or `display:flex` to set dynamic height also works.
+
+```html
+<Draggable virtualization style="height:300px;overflow:auto" />
+```
+
+You can use follow code update virtualization list manually:
+
+```js
+tree.$refs.virtualizationList.update()
+```
+
 ## Draggable
 
 ```vue
