@@ -518,8 +518,12 @@ Draggable 组件的 Vue 实例(vm).
 ### eachDraggableFunc
 
 ```ts
-;(node: Node | undefined, store: Store3, options: Options2, vm: Draggable) =>
-  boolean | undefined
+type eachDraggableFunc = (
+  node: Node | undefined,
+  store: Store3,
+  options: Options2,
+  vm: Draggable
+) => boolean | undefined
 ```
 
 ### PositionMode

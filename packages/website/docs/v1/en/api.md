@@ -514,8 +514,12 @@ The Vue instance(vm) of the Draggable component.
 ### eachDraggableFunc
 
 ```ts
-;(node: Node | undefined, store: Store3, options: Options2, vm: Draggable) =>
-  boolean | undefined
+type eachDraggableFunc = (
+  node: Node | undefined,
+  store: Store3,
+  options: Options2,
+  vm: Draggable
+) => boolean | undefined
 ```
 
 ### PositionMode
