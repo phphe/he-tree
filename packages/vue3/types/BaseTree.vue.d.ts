@@ -93,7 +93,7 @@ declare const _default: import("vue").DefineComponent<{
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
     }> & {
-        [x: string & `on${string}`]: undefined;
+        [x: string & `on${string}`]: ((...args: any[]) => any) | ((...args: unknown[]) => any) | undefined;
     }, {}, {}, {}, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, Readonly<{
         idKey?: unknown;
         parentIdKey?: unknown;
@@ -126,7 +126,7 @@ declare const _default: import("vue").DefineComponent<{
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
     }> & {
-        [x: string & `on${string}`]: undefined;
+        [x: string & `on${string}`]: ((...args: any[]) => any) | ((...args: unknown[]) => any) | undefined;
     }, {}, false, {
         P: {};
         B: {};
@@ -166,7 +166,7 @@ declare const _default: import("vue").DefineComponent<{
         gap?: number | undefined;
         childrenLoader?: ChildrenLoader | undefined;
     }> & {
-        [x: string & `on${string}`]: undefined;
+        [x: string & `on${string}`]: ((...args: any[]) => any) | ((...args: unknown[]) => any) | undefined;
     }, {}, {}, {}, import("vue").MethodOptions, {}>;
     virtualizationListAfterCalcTop2: undefined;
     store: null;
