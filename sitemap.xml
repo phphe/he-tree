@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+  <loc>https://hetree.phphe.com/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/zh/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/pro-plugin/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/zh/pro-plugin/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/examples/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/zh/examples/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/v1/guide/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/zh/v1/guide/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/v1/api/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hetree.phphe.com/zh/v1/api/</loc>
+  <lastmod>2021-12-26T17:16:33.310Z</lastmod>
+  <priority>0.80</priority>
+</url>
+</urlset>
