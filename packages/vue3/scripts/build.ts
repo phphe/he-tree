@@ -162,6 +162,7 @@ export default <rollup.RollupOptions[]>[
       sourcemap: false,
       name: moduleName,
       exports: outputExports,
+      globals: { vue: "Vue" },
     },
   },
   // umd min
@@ -189,6 +190,7 @@ export default <rollup.RollupOptions[]>[
       sourcemap: false,
       name: moduleName,
       exports: outputExports,
+      globals: { vue: "Vue" },
     },
   },
 ];
