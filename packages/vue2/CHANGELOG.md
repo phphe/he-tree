@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.6](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.5...@he-tree/vue2@1.3.6) (2021-12-26)
+
+
+### Bug Fixes
+
+* **dependence:** update tslib to 2 from 1 ([1d14939](https://github.com/phphe/he-tree/commit/1d149390e76c16669791e9575889192af01d55a6))
+
+
+
+
+
 ## [1.3.5](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.4...@he-tree/vue2@1.3.5) (2021-11-03)
 
 
