@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.6...@he-tree/vue2@1.3.7) (2021-12-26)
+
+**Note:** Version bump only for package @he-tree/vue2
+
+
+
+
+
 ## [1.3.6](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.5...@he-tree/vue2@1.3.6) (2021-12-26)
 
 
