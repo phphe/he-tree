@@ -387,7 +387,7 @@ export default class Draggable extends BaseTree {
           const that = store.targetTree;
           let parent: Node | undefined,
             prevNode: Node | undefined,
-            prevNodeInTree: Node | undefined;
+            prevNodeInTree: Node | undefined; // prev droppable node
           // find parent
           if (el) {
             prevNode = that.getNodeByEl(el);
@@ -447,6 +447,7 @@ export default class Draggable extends BaseTree {
             parent = that.getParent(parent);
           }
           const parentDroppable = parent ? true : isNodeDroppable(); // isNodeDroppable() get root droppable
+          let noAction = false;
           if (parentDroppable) {
             if (!prevNode) {
               // prepend to root
@@ -507,9 +508,12 @@ export default class Draggable extends BaseTree {
           } else {
             // can't drop
             hooks.moveEnd("no_action");
+            noAction = true;
           }
-          store.placeholderPrevNode = prevNode;
-          store.placeholderPrevNodeInTree = prevNodeInTree;
+          if (!noAction) {
+            store.placeholderPrevNode = prevNode;
+            store.placeholderPrevNodeInTree = prevNodeInTree;
+          }
         },
         onDrop: async (store: Store3, restoreStyle) => {
           const done = () => {
