@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.8](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.7...@he-tree/vue2@1.3.8) (2021-12-28)
+
+
+### Bug Fixes
+
+* **draggable:** $droppable set to false is still able to be dropped into ([c920a63](https://github.com/phphe/he-tree/commit/c920a6319281453cb936831a8c61393f9ae5580d)), closes [#17](https://github.com/phphe/he-tree/issues/17)
+
+
+
+
+
 ## [1.3.7](https://github.com/phphe/he-tree/compare/@he-tree/vue2@1.3.6...@he-tree/vue2@1.3.7) (2021-12-26)
 
 **Note:** Version bump only for package @he-tree/vue2
