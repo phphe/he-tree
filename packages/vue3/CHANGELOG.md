@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.8](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.7...@he-tree/vue3@1.2.8) (2021-12-29)
+
+
+### Bug Fixes
+
+* **BaseTree:** fix wrong display filter when virtualization list disabled ([68b6049](https://github.com/phphe/he-tree/commit/68b60491fd781e628dfdc6e730cbfaa4d1a2a086)), closes [#3](https://github.com/phphe/he-tree/issues/3)
+
+
+
+
+
 ## [1.2.7](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.6...@he-tree/vue3@1.2.7) (2021-12-28)
 
 

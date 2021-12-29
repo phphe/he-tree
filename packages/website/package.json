@@ -1,6 +1,6 @@
 {
   "name": "he-tree-website",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
-    "@he-tree/vue3": "^1.2.7",
+    "@he-tree/vue3": "^1.2.8",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/typography": "^0.4.0",
     "axios": "^0.21.1",
