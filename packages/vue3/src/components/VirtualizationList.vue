@@ -47,7 +47,9 @@ export default defineComponent({
     visibleItems(): { item: obj; index: number }[] {
       const r: { item: obj; index: number }[] = [];
       this.items.forEach((item: obj, index: number) => {
-        if (
+        if (!this.enabled) {
+          r.push({ item, index });
+        } else if (
           (index >= this.start && index <= this.end) ||
           (this.isForceVisible && this.isForceVisible(item, index))
         ) {

@@ -47,7 +47,9 @@ export default class VirtualizationList extends Vue {
   get visibleItems() {
     const r: { item: obj; index: number }[] = [];
     this.items.forEach((item, index) => {
-      if (
+      if (!this.enabled) {
+        r.push({ item, index });
+      } else if (
         (index >= this.start && index <= this.end) ||
         (this.isForceVisible && this.isForceVisible(item, index))
       ) {
