@@ -263,6 +263,12 @@ export default defineComponent({
           if (!isNodeDraggable(store.draggingNode)) {
             return false;
           }
+          if (
+            store.startTree.rootDraggable === false &&
+            store.draggingNode.$level === 1
+          ) {
+            return false;
+          }
           if (this.ondragstart && this.ondragstart(store) === false) {
             return false;
           }
