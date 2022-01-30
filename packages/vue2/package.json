@@ -1,6 +1,6 @@
 {
   "name": "@he-tree/vue2",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "description": "Vue tree component. Features: draggable, drag sortable, virtualization list, Vue2, Vue3, Typescript, lazy load, RTL. Vue 树组件. 可拖拽, 拖拽排序, 虚拟列表, Vue2, Vue3, Typescript, 延迟加载子节点, 从右往左显示.",
   "files": [
     "dist",

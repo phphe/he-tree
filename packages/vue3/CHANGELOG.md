@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.8...@he-tree/vue3@1.2.9) (2022-01-30)
+
+
+### Bug Fixes
+
+* **Draggable:** rootDraggable does not work ([96d9f05](https://github.com/phphe/he-tree/commit/96d9f05154baabccaad6ecaed1743a295c90724c)), closes [#19](https://github.com/phphe/he-tree/issues/19)
+
+
+
+
+
 ## [1.2.8](https://github.com/phphe/he-tree/compare/@he-tree/vue3@1.2.7...@he-tree/vue3@1.2.8) (2021-12-29)
 
 
