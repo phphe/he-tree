@@ -1,0 +1,15 @@
+{
+  "name": "sub-vue2",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@vue/composition-api": "^1.4.4",
+    "vite": "^2.7.12",
+    "vite-plugin-dts": "^0.9.9",
+    "vite-plugin-vue2": "1.9.0",
+    "vue": "2.6.14",
+    "vue-demi": "^0.12.1",
+    "helper-js": "^2.0.3",
+    "vue-template-compiler": "2.6.14"
+  }
+}

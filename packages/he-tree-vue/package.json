@@ -1,0 +1,66 @@
+{
+  "name": "@he-tree/vue",
+  "version": "0.0.2",
+  "engines": {
+    "node": ">=12"
+  },
+  "repository": "https://github.com/phphe/he-tree.git",
+  "license": "MIT",
+  "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
+  "homepage": "TODO",
+  "main": "dist/v3/index.cjs.js",
+  "module": "dist/v3/index.es.js",
+  "types": "dist/index.d.ts",
+  "jsdelivr": "dist/v3/index.iife.js",
+  "unpkg": "dist/v3/index.iife.js",
+  "files": [
+    "dist",
+    "types",
+    "vue2"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/v3/index.cjs.js",
+      "import": "./dist/v3/index.es.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./vue2": {
+      "require": "./vue2/index.js",
+      "import": "./vue2/index.mjs",
+      "types": "./vue2/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite --config vite.dev.js",
+    "dev2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite --config vite.dev.js",
+    "build": "npm run build3 && npm run build2",
+    "build3": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite build",
+    "build2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "helper-js": "^3.1.2",
+    "@virtual-list/vue": "^1.1.4",
+    "@he-tree/tree-utils": "latest",
+    "@he-tree/dnd-utils": "latest",
+    "vue-demi": "latest"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.4.6",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.0",
+    "vite": "^2.8.0",
+    "vite-plugin-dts": "^0.9.9",
+    "vue": "^3.2.25"
+  }
+}

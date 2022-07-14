@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "packages/*",
+    "packages/he-tree-vue/sub-vue2"
+  ],
+  "version": "independent"
+}
