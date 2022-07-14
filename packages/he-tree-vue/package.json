@@ -1,6 +1,6 @@
 {
   "name": "@he-tree/vue",
-  "version": "0.0.2",
+  "version": "0.0.3-alpha.0",
   "engines": {
     "node": ">=12"
   },
@@ -42,10 +42,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "helper-js": "^3.1.2",
-    "@virtual-list/vue": "^1.1.4",
-    "@he-tree/tree-utils": "latest",
     "@he-tree/dnd-utils": "latest",
+    "@he-tree/tree-utils": "latest",
+    "@virtual-list/vue": "^1.1.4",
+    "helper-js": "^3.1.2",
     "vue-demi": "latest"
   },
   "peerDependencies": {
