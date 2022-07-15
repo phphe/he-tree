@@ -36,11 +36,14 @@
       >
         <template #default="{ indentStyle }">
           <template v-if="stat.data === placeholderData">
-            <div v-if="!table" class="drag-placeholder">
+            <div
+              v-if="!table"
+              class="drag-placeholder he-tree-drag-placeholder"
+            >
               <slot name="placeholder" :tree="self"></slot>
             </div>
             <td v-else :style="indentStyle" :colspan="placeholderColspan">
-              <div class="drag-placeholder">
+              <div class="drag-placeholder he-tree-drag-placeholder">
                 <slot name="placeholder" :tree="self"></slot>
               </div>
             </td>

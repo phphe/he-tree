@@ -573,7 +573,7 @@ const cpt = defineComponent({
               let t: Stat<any> | null = prevNode!;
               let t3: (Stat<any> | null)[] = [];
               while (t && t.level >= minLevel) {
-                t = t.parent;
+                t = t.parent || null; // null mean root
                 t3.unshift(t);
               }
               let i = 0;
@@ -810,7 +810,7 @@ export type TargetInfo = StartInfo;
 </script>
 
 <style>
-.he-tree .drag-placeholder {
+.he-tree-drag-placeholder {
   background: #ddf2f9;
   border: 1px dashed #00d9ff;
   height: 22px;

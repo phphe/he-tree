@@ -26,4 +26,13 @@ export default class App extends Vue {
 }
 </script>
 
-<style></style>
+<style>
+.he-tree--rtl {
+  direction: rtl;
+}
+.he-tree .drag-placeholder {
+  background: #ddf2f9;
+  border: 1px dashed #00d9ff;
+  height: 22px;
+}
+</style>
