@@ -2,8 +2,6 @@
 export { default as BaseTree } from "./components/BaseTree.vue";
 import Draggable from "./components/DraggableTree.vue";
 export { default as Draggable } from "./components/DraggableTree.vue";
-// export an empty object. if no default export may get error
-export default {};
 
 export function pro(account: string, secretKey: string): typeof Draggable {
   try {
