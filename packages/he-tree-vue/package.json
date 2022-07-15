@@ -16,7 +16,8 @@
   "files": [
     "dist",
     "types",
-    "vue2"
+    "vue2",
+    "style"
   ],
   "publishConfig": {
     "access": "public"
