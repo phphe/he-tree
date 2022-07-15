@@ -1,3 +1,20 @@
+<script lang="ts">
+import { Draggable } from "@he-tree/vue";
+import "@he-tree/vue/style/default.css";
+import { reactive, defineComponent, onMounted } from "vue";
+import data from "./data.json";
+
+export default defineComponent({
+  components: { Draggable },
+  data() {
+    return {
+      data,
+    };
+  },
+  mounted() {},
+});
+</script>
+
 <template>
   <div>
     <Draggable v-model="data" ref="tree" virtualization style="height: 500px">
@@ -12,19 +29,5 @@
     </Draggable>
   </div>
 </template>
-
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { Draggable } from "@he-tree/vue/vue2";
-import "@he-tree/vue/style/default.css";
-import data from "./data.json";
-
-@Component({
-  components: { Draggable },
-})
-export default class App extends Vue {
-  data = data;
-}
-</script>
 
 <style></style>

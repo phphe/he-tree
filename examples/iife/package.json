@@ -1,0 +1,11 @@
+{
+  "name": "example-iife",
+  "private": true,
+  "dependencies": {
+    "vue-demi": "latest",
+    "vue2": "npm:vue@^2",
+    "vue": "^3",
+    "@vue/composition-api": "^1.4.6",
+    "@he-tree/vue": "latest"
+  }
+}

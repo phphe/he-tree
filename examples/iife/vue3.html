@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- horizontal -->
+      <h1>horizontal</h1>
+      <v-list
+        ref="list"
+        :items="items"
+        :first-render="10"
+        style="width: 1000px"
+        horizontal
+      >
+        <template #default="{ item, index }">
+          <h2 style="border: 1px solid #ccc" :style="{ width: item.width }">
+            ITEM: {{ index }} - {{ item["text"] }}
+          </h2>
+        </template>
+      </v-list>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px">
+        <div>
+          <!-- vertical -->
+          <h1>vertical</h1>
+          <v-list
+            ref="list"
+            :items="items"
+            :first-render="10"
+            style="height: 600px"
+          >
+            <template #default="{ item, index }">
+              <h2
+                style="border: 1px solid #ccc"
+                :style="{ lineHeight: item.lineHeight }"
+              >
+                ITEM: {{ index }} - {{ item["text"] }}
+              </h2>
+            </template>
+          </v-list>
+        </div>
+        <div>
+          <h1>vertical with key</h1>
+          <v-list
+            ref="list"
+            :items="items"
+            :first-render="10"
+            style="height: 600px"
+            item-key="index"
+          >
+            <template #default="{ item, index }">
+              <h2
+                style="border: 1px solid #ccc"
+                :style="{ lineHeight: item.lineHeight }"
+              >
+                ITEM: {{ index }} - {{ item["text"] }}
+                <input />
+              </h2>
+            </template>
+          </v-list>
+        </div>
+        <div>
+          <h1>table</h1>
+          <v-list
+            ref="list"
+            :items="items"
+            :first-render="10"
+            style="height: 600px"
+            table
+            class="list-table"
+          >
+            <template #prepend>
+              <thead>
+                <tr>
+                  <th>Text</th>
+                  <th>Index</th>
+                </tr>
+              </thead>
+            </template>
+            <template #default="{ item, index }">
+              <tr>
+                <td>{{ index }}</td>
+                <td>ITEM: {{ index }} - {{ item["text"] }}</td>
+              </tr>
+            </template>
+          </v-list>
+        </div>
+      </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.global.prod.js"></script>
+    <script src="./node_modules/vue-demi/lib/index.iife.js"></script>
+    <script src="./node_modules/@virtual-list/vue/dist/v3/index.iife.js"></script>
+    <script>
+      var app = Vue.createApp({
+        components: { "v-list": virtualListVue },
+        data() {
+          return {
+            items: new Array(1000).fill(1).map((v, i) => ({
+              text: "Item " + i,
+              lineHeight: 20 + (i % 20) + "px",
+              width: 100 + (i % 30) + "px",
+            })),
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+    <style>
+      .list-table table,
+      .list-table td,
+      .list-table th {
+        border: 1px solid #ccc;
+      }
+      .list-table table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+    </style>
+  </body>
+</html>
