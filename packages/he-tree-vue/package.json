@@ -39,8 +39,8 @@
     "dev": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite --config vite.dev.js",
     "dev2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite --config vite.dev.js",
     "build": "npm run build2 && npm run build3 && cp dist/v3/style.css style/default.css",
-    "build3": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite build",
-    "build2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite build",
+    "build3": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite build && vite build -- --iife",
+    "build2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite build && vite build -- --iife",
     "preview": "vite preview"
   },
   "dependencies": {
