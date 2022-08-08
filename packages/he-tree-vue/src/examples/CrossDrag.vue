@@ -50,7 +50,7 @@ import DraggableTree, {
   PropDraggable,
   BeforeDragOpen,
   DraggableTreeType,
-} from "../components/DraggableTree.vue";
+} from "../components/DraggableTree";
 import { pro } from "../index";
 import data0 from "./data.json";
 import { reactive, ref, getCurrentInstance, onMounted } from "vue";

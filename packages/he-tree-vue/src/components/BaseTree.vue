@@ -107,7 +107,6 @@ const cpt = defineComponent({
      * Render count for virtual list at start. 虚拟列表初始渲染数量.
      */
     virtualizationPrerenderCount: { type: Number, default: 20 },
-    // asynchronousLoader: { type: Function as PropType<ChildrenLoader> },
     /**
      * Open all nodes by default. 默认打开所有节点.
      */
@@ -120,11 +119,12 @@ const cpt = defineComponent({
     /**
      * From bottom to top. 由下向上显示
      */
-    btt: { type: Boolean },
+    btt: { type: Boolean, default: false },
     /**
      * Display as table
      */
-    table: { type: Boolean },
+    table: { type: Boolean, default: false },
+    watermark: { type: Boolean, default: true },
   },
   emits: [
     "update:modelValue",
@@ -360,6 +360,24 @@ const cpt = defineComponent({
     },
   },
   created() {},
+  mounted() {
+    if (this.watermark === false) {
+      // @ts-ignore
+      window._heTreeWatermarkDisabled = true;
+    }
+    // @ts-ignore
+    if (this.watermark && !window._heTreeWatermarkDisabled) {
+      // @ts-ignore
+      if (!window._heTreeWatermark) {
+        // @ts-ignore
+        window._heTreeWatermark = true;
+        console.log(
+          `%c[he-tree] Vue tree component:  https://hetree.phphe.com`,
+          "color:#0075ff; font-size:14px;"
+        );
+      }
+    }
+  },
 });
 
 export default cpt;
@@ -394,5 +412,10 @@ function reactiveFirstArg(func: any) {
 <style>
 .he-tree--rtl {
   direction: rtl;
+}
+.he-tree-drag-placeholder {
+  background: #ddf2f9;
+  border: 1px dashed #00d9ff;
+  height: 22px;
 }
 </style>

@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import DraggableTree from "../components/DraggableTree.vue";
+import DraggableTree from "../components/DraggableTree";
 import data0 from "./data.json";
 import { ref } from "vue";
 import * as hp from "helper-js";

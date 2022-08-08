@@ -1,4 +1,3 @@
-<script lang="ts">
 import { PropType, defineComponent } from "vue-demi";
 import BaseTree from "./BaseTree.vue";
 import { Stat, CHILDREN } from "@he-tree/tree-utils";
@@ -157,23 +156,23 @@ const cpt = defineComponent({
     },
   },
   mounted() {
-    // watermark
-    const hetreeWatermark = window["_hetreeWatermark"];
-    window["_hetreeWatermark"] = () =>
-      hp.resolveValueOrGettter(document["_hetreeWatermark"], [
-        true,
-        false,
-        true,
-      ]);
-    if (
-      hp.resolveValueOrGettter(!window["_hetreeWatermark"]()) &&
-      !hetreeWatermark
-    ) {
-      console.log(
-        `%cThe Vue tree component in use: [he-tree] https://hetree.phphe.com`,
-        "color:orange; font-size:17px; font-weight:bold;"
-      );
-    }
+    // Deprecated old watermark
+    // const hetreeWatermark = window["_hetreeWatermark"];
+    // window["_hetreeWatermark"] = () =>
+    //   hp.resolveValueOrGettter(document["_hetreeWatermark"], [
+    //     true,
+    //     false,
+    //     true,
+    //   ]);
+    // if (
+    //   hp.resolveValueOrGettter(!window["_hetreeWatermark"]()) &&
+    //   !hetreeWatermark
+    // ) {
+    //   console.log(
+    //     `%c[he-tree] Vue tree component:  https://hetree.phphe.com`,
+    //     "color:#0075ff; font-size:14px;"
+    //   );
+    // }
     //
     const isMoved = (mouse: Point, lastMouse: Point) => {
       let r = true;
@@ -335,6 +334,10 @@ const cpt = defineComponent({
           indexBeforeDrop,
         };
         targetTree = this;
+        event.dataTransfer?.setData(
+          "text",
+          `he-tree drag start at ${new Date().toISOString()}`
+        ); // required for Chrome Andriod, or Drag and Drop API does't  work
         if (!startTree._eachDroppable()) {
           setTimeout(() => {
             dragNode!.hidden = true;
@@ -807,12 +810,3 @@ export interface StartInfo {
   indexBeforeDrop: number;
 }
 export type TargetInfo = StartInfo;
-</script>
-
-<style>
-.he-tree-drag-placeholder {
-  background: #ddf2f9;
-  border: 1px dashed #00d9ff;
-  height: 22px;
-}
-</style>
