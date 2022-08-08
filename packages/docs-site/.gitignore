@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+dist-prerendered
+*.local
+.tmp/
+compiled-docs/
