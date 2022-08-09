@@ -22,6 +22,10 @@ export default {
       text: 'Pro',
       path: '/pro',
     },
+    {
+      text: 'Hire Me',
+      path: '/hire-me',
+    },
   ],
   SUBPATH: [
     {

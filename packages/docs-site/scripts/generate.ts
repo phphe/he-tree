@@ -16,7 +16,8 @@ async function start() {
   const preview = spawn('npx' + (isWin ? '.cmd' : ''), ['vite', 'preview'])
   preview.stdout.on('data', (data) => {
     console.log('step3: ' + data.toString())
-    if (data.toString().includes('Local:')) {
+    if (data.toString().includes('http://')) {
+      console.log('step3 resolve')
       step3.resolve()
     }
   })

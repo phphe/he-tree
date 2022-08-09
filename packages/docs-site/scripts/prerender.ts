@@ -76,6 +76,8 @@ function rmDir(src: string) {
  * @returns urls in the page
  */
 function scrapeOnePage(url: string, opt = {}, count = 0) {
+  console.log(url)
+
   const urlWithoutHost = removeHost(url)
   return new Promise<string[]>((resolve, reject) => {
     const nightmare = Nightmare({ show: false, ...opt })

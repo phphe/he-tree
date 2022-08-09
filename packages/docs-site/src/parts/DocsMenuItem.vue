@@ -33,7 +33,8 @@ Anchor.DocsMenuItem(:to="to" v-bind="$attrs" @resolved="onResolve")
           const getPath = (to: any) => (typeof to === 'string' ? to : to.path)
           return Boolean(
             this.realTo &&
-              getPath(this.realTo) === this.$route.path.replace(/\/$/, '')
+              getPath(this.realTo) === this.$route.path.replace(/\/$/, '') &&
+              this.submenu.length > 0
           )
         }
         return false
