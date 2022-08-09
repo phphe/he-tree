@@ -12,7 +12,7 @@ if (!domain.includes('.github.io')) {
   // custom domain
   codeStr = codeStr.replace(
     `# echo "{domain}" > CNAME`,
-    `# echo "${domain}" > CNAME`
+    `echo "${domain}" > CNAME`
   )
 }
 codeStr = codeStr.replace(`{git_name}`, baseConfig.GIT_NAME)
