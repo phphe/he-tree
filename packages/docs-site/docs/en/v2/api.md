@@ -313,7 +313,7 @@ Can be used to customize node ui. Parameters:
 
 - node: node data
 - stat: runtime info of node
-- indentStyle: node indent style. 仅当渲染为表格时需要使用者将其应用到一列上. TODO 这列怎么找
+- indentStyle: node indent style. Only when rendering as a table, user should apply it to a column, usually the first column.
 - tree: tree instance.
 
 #### placeholder

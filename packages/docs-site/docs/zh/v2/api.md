@@ -313,7 +313,7 @@ for (const parentStat of tree.iterateParent(nodeStat, { withSelf: false })) {
 
 - node: 节点数据
 - stat: 节点内部信息
-- indentStyle: 节点缩进样式. 仅当渲染为表格时需要使用者将其应用到一列上. TODO 这列怎么找
+- indentStyle: 节点缩进样式. 仅当渲染为表格时需要使用者将其应用到某列上, 一般是第一列.
 - tree: 树的实例.
 
 #### placeholder

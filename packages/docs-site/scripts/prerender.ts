@@ -196,4 +196,3 @@ function genSitemapAndRobotsTXT(urls: string[]) {
     `Sitemap: ${hostname}/sitemap.xml`.trim()
   )
 }
-// TODO ts-node prerender.ts throw error
