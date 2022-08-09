@@ -7,7 +7,7 @@
   "repository": "https://github.com/phphe/he-tree.git",
   "license": "MIT",
   "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
-  "homepage": "TODO",
+  "homepage": "https://hetree.phphe.com/",
   "main": "dist/v3/index.cjs.js",
   "module": "dist/v3/index.es.js",
   "types": "dist/index.d.ts",
