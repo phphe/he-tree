@@ -153,7 +153,7 @@ start()
 
 function genUrl(locale: string, pathWithoutLocale: string) {
   let t = `/${pathWithoutLocale.replace('.md', '')}`
-  if (locale !== baseConfig.LOCALE) {
+  if (locale !== baseConfig.I18N.locale) {
     t = `/${locale}` + t
   }
   t = t.replace(/index$/, '')
@@ -178,6 +178,22 @@ function handleHtmlForVue(
     html = html.replace(new RegExp(`<h${i}`, 'g'), `<vheading :level="${i}"`)
     html = html.replace(new RegExp(`</h${i}>`, 'g'), `</vheading>`)
   }
+  // replace code to component
+  html = html.replace(
+    /<pre><code v-pre class="language-.+?">.*?<\/pre>/gs,
+    (mathced) => {
+      const m = mathced.match(
+        /<pre>(<code v-pre class="language-(.+?)">(.*?)<\/code>)<\/pre>/s
+      )!
+      const codeOuter = m[1]
+      const codeLanguage = m[2]
+      const code = m[3]
+      return `<CodeContainer codeLanguage="${codeLanguage}" code="${code.replace(
+        /"/g,
+        '\\"'
+      )}"/>`
+    }
+  )
   // replace link to component
   const reg = /<a(.*?)href="(.*?)"(.*?)>(.*?)<\/a>/g
   html = html.replace(reg, (matched) => {
@@ -242,13 +258,14 @@ function resolveMdStructure(html: string) {
 
 function handleCodeDemo(str: string) {
   return str.replace(
-    /(?<=\n|^)<!-- code & demo -->\n\n\`\`\`(\w+)([\s\S]*?)\n\`\`\`/g,
+    /(?<=\n|^)<!-- code & demo .*?-->\n\n\`\`\`(\w+)([\s\S]*?)\n\`\`\`/g,
     (mathced) => {
       const m = mathced.match(
-        /^<!-- code & demo -->\n\n\`\`\`(\w+)([\s\S]*?)\n\`\`\`$/
+        /^<!-- code & demo (.*?)-->\n\n\`\`\`(\w+)([\s\S]*?)\n\`\`\`$/
       )!
-      const lang = m[1]
-      const code = m[2]
+      const attrs = m[1]
+      const codeLanguage = m[2]
+      const code = m[3]
       const md5Name = md5(code)
       const componentPath = path.join(compiledDir, md5Name + '.vue')
       fs.writeFileSync(componentPath, code)
@@ -266,6 +283,8 @@ function handleCodeDemo(str: string) {
         .readFileSync(path.join(__dirname, 'tpl/CodeDemoWrapper.vue'))
         .toString()
       wrapperStr = wrapperStr
+        .replace(`::codeLanguage`, codeLanguage)
+        .replace(`::attrs`, attrs)
         .replace(
           '/*__import__*/',
           `import v_${md5Name} from ${JSON.stringify(

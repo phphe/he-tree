@@ -24,13 +24,29 @@ async function start() {
   copyDir('dist', DIST_PRERENDERED)
   // start urls
   const locales = getLocales()
-  const urls: string[] = []
-  urls.push('/')
+  const urls0: string[] = []
+  urls0.push('/')
   locales.forEach((v) => {
-    if (v !== baseConfig.LOCALE) {
-      urls.push('/' + v)
+    if (v !== baseConfig.I18N.locale) {
+      urls0.push('/' + v)
     }
   })
+  if (baseConfig.MENU) {
+    for (const item of baseConfig.MENU) {
+      urls0.push(item.path)
+    }
+  }
+  if (baseConfig.SUBPATH) {
+    for (const sub of baseConfig.SUBPATH) {
+      urls0.push(sub.homePath)
+      if (sub.menu) {
+        for (const item of sub.menu) {
+          urls0.push(item.path)
+        }
+      }
+    }
+  }
+  const urls = hp.arrayDistinct(urls0).map((v) => v)
   //
   const usedUrls: string[] = []
   const successfulUrls: string[] = []

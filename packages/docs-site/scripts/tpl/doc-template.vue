@@ -11,10 +11,12 @@
   import { onBeforeUnmount, getCurrentInstance } from 'vue'
   import { useTitle } from '../HTMLHead'
   import DocTemplateBase from '../parts/DocTemplateBase.vue'
+  import CodeContainer from '../components/CodeContainer.vue'
 
   export default {
     extends: DocTemplateBase,
     components: {
+      CodeContainer,
       /*__components__*/
     },
     setup() {

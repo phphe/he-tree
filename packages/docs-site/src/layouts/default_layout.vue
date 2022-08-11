@@ -14,24 +14,23 @@
           span {{config.APP_NAME}}
         template(v-if="!versions")
         small.ml-2(v-else-if="versions.length === 1") {{version}}
-        Popup.ml-2(v-else caret menu hover )
-          small(:title="$t('Version')") {{version}}
-          template(v-slot:card)
+        v-hover-menu.ml-2(v-else)
+          small(:title="$t('Version')") {{version}} <Caret/>
+          template(#popper)
             .shadow.rounded.text-sm
               Anchor.block.py-2.px-3(v-for="item in versions" class="hover:bg-gray-100" :to="item.homePath") {{$t(item.version)}}
       .main-menu.mt-2.text-gray-600.h-0.flex-grow.flex.flex-col.pb-4
         DocsMenuItem.main-menu-item(v-for="item in menu" :to="item.path") {{$t(item.text)}}
         .main-menu-item
-          Popup(caret menu hover)
-            span {{$t('Languages')}}
-            template(v-slot:card)
+          v-hover-menu
+            span {{$t('Languages')}}<Caret/>
+            template(#popper)
               .shadow.rounded.text-sm
-                Anchor.block.py-2.px-3(class="hover:bg-gray-100" @click="switchLocale('en')") English
-                Anchor.block.py-2.px-3(class="hover:bg-gray-100" @click="switchLocale('zh')") 简体中文
+                Anchor.block.py-2.px-3(class="hover:bg-gray-100" v-for="(text, key) in config.I18N.locales" @click="switchLocale(key)") {{text}}
         .main-menu-item
-          Popup(v-if="versions && versions.length > 1" caret menu hover )
-            span {{$t('Version')}} <small>{{version}}</small>
-            template(v-slot:card)
+          v-hover-menu(v-if="versions && versions.length > 1")
+            span {{$t('Version')}} <small>{{version}}</small><Caret/>
+            template(#popper)
               .shadow.rounded.text-sm
                 Anchor.block.py-2.px-3(v-for="item in versions" class="hover:bg-gray-100" :to="item.homePath") {{$t(item.version)}}
         Anchor.main-menu-item(:to="'https://github.com/'+config.GIT_NAME") Github

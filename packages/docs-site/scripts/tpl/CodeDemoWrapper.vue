@@ -1,17 +1,17 @@
 <!-- code demo wrapper -->
 <template>
-  <CodeDemo :code="code">
+  <CodeContainer :code="code" demo codeLanguage="::codeLanguage" ::attrs>
     <Demo />
-  </CodeDemo>
+  </CodeContainer>
 </template>
 
 <script>
-  import CodeDemo from '../components/CodeDemo.vue'
+  import CodeContainer from '../components/CodeContainer.vue'
   /*__import__*/
 
   export default {
     components: {
-      CodeDemo,
+      CodeContainer,
       /*__demo__*/
     },
     data() {

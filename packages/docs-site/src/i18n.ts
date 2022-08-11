@@ -13,34 +13,7 @@ import * as hp from 'helper-js'
 import config from './config'
 
 export const i18n = createI18n({
-  locale: config.LOCALE, // set locale
-  fallbackLocale: config.LOCALE, // set fallback locale
-  messages: {
-    en: {
-      Languages: 'Languages',
-      Home: 'Home',
-      Works: 'Works',
-      About: 'About',
-      Version: 'Version',
-      Guide: 'Guide',
-      API: 'API',
-      Examples: 'Examples',
-      'Get Started': 'Get Started',
-      'More Examples': 'More Examples',
-    },
-    zh: {
-      Languages: '语言',
-      Home: '首页',
-      Works: '作品',
-      About: '关于',
-      Version: '版本',
-      Guide: '使用指南',
-      API: 'API',
-      Examples: '例子',
-      'Get Started': '快速开始',
-      'More Examples': '更多例子',
-    },
-  },
+  ...config.I18N,
 })
 
 export function initI18n(app: ReturnType<typeof createApp>) {
