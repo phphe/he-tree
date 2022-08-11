@@ -17,7 +17,6 @@ async function start() {
   preview.stdout.on('data', (data) => {
     console.log('step3: ' + data.toString())
     if (data.toString().includes('http://')) {
-      console.log('step3 resolve')
       step3.resolve()
     }
   })
@@ -33,6 +32,7 @@ async function start() {
   execSync('npx ts-node scripts/prerender.ts', { stdio: 'inherit' })
   // end
   preview.kill()
-  console.log('done')
+  console.log('generate done')
+  console.log('=========================== end ===========================')
   process.exit(0)
 }

@@ -14,9 +14,12 @@ import { getLocales } from './utils'
 const PREVIEW_URL = `http://localhost:4173` // vite preview
 const DIST_PRERENDERED = 'dist-prerendered'
 const RETRY = 3
+const WORKERS = 5
+const MAX_TIMES = 1000
+let urlPool: string[] = []
+const usedUrls: string[] = []
 
 start()
-
 async function start() {
   if (fs.existsSync(DIST_PRERENDERED)) {
     rmDir(DIST_PRERENDERED)
@@ -46,28 +49,37 @@ async function start() {
       }
     }
   }
-  const urls = hp.arrayDistinct(urls0).map((v) => v)
+  for (const url of urls0) {
+    addUrl(url)
+  }
   //
-  const usedUrls: string[] = []
   const successfulUrls: string[] = []
   let tempUrl: string
   let i = 0
-  while (urls.length > 0) {
-    tempUrl = urls.shift()!
-    usedUrls.push(tempUrl)
-    const newUrls = await scrapeOnePage(PREVIEW_URL + tempUrl)
-      .then((urls) => {
-        successfulUrls.push(tempUrl)
-        return urls
-      })
-      .catch((e) => [])
-    newUrls.forEach((v) => {
-      if (!urls.includes(v) && !usedUrls.includes(v)) {
-        urls.push(v)
+  while (urlPool.length > 0) {
+    const workers = []
+    for (let index = 0; index < WORKERS; index++) {
+      tempUrl = urlPool.shift()!
+      if (!tempUrl) {
+        break
       }
-    })
+      usedUrls.push(tempUrl)
+      workers.push(
+        scrapeOnePage(PREVIEW_URL + tempUrl)
+          .then((urls) => {
+            successfulUrls.push(tempUrl)
+            return urls
+          })
+          .catch((e) => [])
+      )
+    }
+    for (const newUrls of await Promise.all(workers)) {
+      for (const url of newUrls) {
+        addUrl(url)
+      }
+    }
     i++
-    if (i > 1000) {
+    if (i > MAX_TIMES) {
       throw 'loop error'
     }
   }
@@ -92,8 +104,6 @@ function rmDir(src: string) {
  * @returns urls in the page
  */
 function scrapeOnePage(url: string, opt = {}, count = 0) {
-  console.log(url)
-
   const urlWithoutHost = removeHost(url)
   return new Promise<string[]>((resolve, reject) => {
     const nightmare = Nightmare({ show: false, ...opt })
@@ -211,4 +221,19 @@ function genSitemapAndRobotsTXT(urls: string[]) {
     path.join(DIST_PRERENDERED, 'robots.txt'),
     `Sitemap: ${hostname}/sitemap.xml`.trim()
   )
+}
+
+function addUrl(url: string) {
+  if (!url || typeof url !== 'string' || !isInternalUrl(url)) {
+    return
+  }
+  url = url.replace(/#.*$/, '') // remove hash
+  url = removeHost(url)
+  url = url.replace(/\/index.html?$/, '').replace(/\/$/, '')
+  if (url === '') {
+    url = '/'
+  }
+  if (!urlPool.includes(url) && !usedUrls.includes(url)) {
+    urlPool.push(url)
+  }
 }
