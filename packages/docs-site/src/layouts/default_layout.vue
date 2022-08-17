@@ -1,8 +1,6 @@
 <template lang="pug">
 .default-layout.fixed.w-full.h-full.flex
   .main-sidebar.flex-shrink-0.w-56.h-full.overflow-hidden.flex.flex-col(:class="{'fixed bg-white z-10 border-r-2': sm}" v-show="!sm || sidebarVisible")
-    .text-center.p-2.bg-gray-50.pointer(v-if="sm" @click="sidebarVisible=false")
-      VIconMDI(:icon="mdiArrowBack")
     .flex-grow.overflow-y-auto.overflow-x-hidden.px-4.flex.flex-col
       //- .contents-block.p-4.border-b-2(v-show="state.tableOfContents.visible")
       //-   .text-xl {{$t('Contents')}}
@@ -37,15 +35,20 @@
         //- Anchor.main-menu-item(v-if="config.IS_DEVLOPMENT" @click="reloadRouteView()") Reload Route
     //- .flex-shrink-0.py-2.text-center
   .main-right.flex-grow.overflow-auto.relative()
-    .px-6.main-body
+    .mobile-menu-nav.border-b.items-center.px-2.flex(class="sm:hidden")
+      Anchor.mobile-main-title.text-gray-700.px-2(:to="homeUrl")
+        span {{config.APP_NAME}}
+      .flex-grow
+      Anchor.px-2(@click="sidebarVisible=!sidebarVisible")
+        VIconMDI(:icon="mdiMenu")
+    .px-4.main-body(class="sm:px-6")
       router-view(:key="routeViewKey")
     //- .py-10.text-center.text-sm.text-gray-500 Copyright © {{config.APP_NAME}} {{year}}. All rights reserved.
-    .github-buttons-area.absolute.right-4.top-4.hidden(v-if="githubURL" class="sm:block")
+    .github-buttons-area.absolute.right-4.top-4.hidden(v-if="githubURL && config.UI && config.UI.github_buttons" class="sm:block")
       <github-button class="ml-2" :href="githubURL + '/subscription'" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch phphe/he-tree on GitHub">Watch</github-button>
       <github-button class="ml-2" :href="githubURL + '/fork'" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork phphe/he-tree on GitHub">Fork</github-button>
       GithubButton( class="ml-2" :href="githubURL" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star phphe/he-tree on GitHub") Star
-  button.fixed.bottom-5.right-2(v-if="sm" color="primary" class="h-10 border border-gray-300 bg-white text-gray-800 hover:bg-gray-100 px-2 rounded" @click="sidebarVisible=!sidebarVisible")
-    VIconMDI(:icon="mdiMenu")
+  .mobile-page-mask.fixed.w-full.h-full.bg-black.opacity-50(v-show="sm &&sidebarVisible" @click="sidebarVisible=false")
 </template>
 
 <script lang="ts">
@@ -58,7 +61,7 @@
   import useWindowSize from '../plugins/useWindowSize'
   import config from '../config'
   import DocsMenuItem from '../parts/DocsMenuItem.vue'
-  import { mdiArrowBack, mdiMenu } from 'mdi-js/filled'
+  import { mdiMenu } from 'mdi-js/filled'
   import { useRouter } from 'vue-router'
   import GithubButton from 'vue-github-button'
 
@@ -103,7 +106,6 @@
         routeViewKey,
         reloadRouteView,
         sm,
-        mdiArrowBack,
         mdiMenu,
         menu,
         versions,
@@ -141,5 +143,13 @@
   .main-body {
     min-height: 750px;
     min-height: calc(100vh - 100px);
+  }
+  .mobile-menu-nav {
+    $h: 48px;
+    height: $h;
+    line-height: $h;
+  }
+  .mobile-main-title {
+    font-size: 1.3em;
   }
 </style>

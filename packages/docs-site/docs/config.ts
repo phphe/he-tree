@@ -74,4 +74,7 @@ export default {
       },
     },
   },
+  UI: {
+    github_buttons: true,
+  },
 }

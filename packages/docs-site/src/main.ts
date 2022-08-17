@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createSSRApp, createApp } from 'vue'
 import './assets/style/tailwind.css'
 import './assets/style/transitions/fade.scss'
 import './assets/style/site.scss'
@@ -11,10 +11,14 @@ import { globalDirectivesInit } from './directives'
 import * as globalComponents from './components/globalComponents'
 import { initAnalytics } from './analytics'
 import initFloatingVue from './plugins/floating-vue'
+import prerenderFix from './plugins/prerender-fix'
 import config from './config'
 import '../docs/style.scss'
 
-const app = createApp(App)
+const mountPoint = '#app'
+prerenderFix(mountPoint)
+const app = createSSRApp(App)
+
 initScrollToHash(router)
 initI18n(app)
 i18nInitRouter(router)
@@ -25,4 +29,4 @@ initAnalytics(app, config.ANALYTICS_ID)
 initFloatingVue(app)
 //
 app.use(router)
-app.mount('#app')
+app.mount(mountPoint)
