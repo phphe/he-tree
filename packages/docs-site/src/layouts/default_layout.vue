@@ -33,13 +33,17 @@
             template(#popper)
               .shadow.rounded.text-sm
                 Anchor.block.py-2.px-3(v-for="item in versions" class="hover:bg-gray-100" :to="item.homePath") {{$t(item.version)}}
-        Anchor.main-menu-item(:to="'https://github.com/'+config.GIT_NAME") Github
+        Anchor.main-menu-item(:to="githubURL" v-if="githubURL") Github
         //- Anchor.main-menu-item(v-if="config.IS_DEVLOPMENT" @click="reloadRouteView()") Reload Route
     //- .flex-shrink-0.py-2.text-center
-  .main-right.flex-grow.overflow-auto()
+  .main-right.flex-grow.overflow-auto.relative()
     .px-6.main-body
       router-view(:key="routeViewKey")
     //- .py-10.text-center.text-sm.text-gray-500 Copyright © {{config.APP_NAME}} {{year}}. All rights reserved.
+    .github-buttons-area.absolute.right-4.top-4.hidden(v-if="githubURL" class="sm:block")
+      <github-button class="ml-2" :href="githubURL + '/subscription'" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch phphe/he-tree on GitHub">Watch</github-button>
+      <github-button class="ml-2" :href="githubURL + '/fork'" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork phphe/he-tree on GitHub">Fork</github-button>
+      GithubButton( class="ml-2" :href="githubURL" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star phphe/he-tree on GitHub") Star
   button.fixed.bottom-5.right-2(v-if="sm" color="primary" class="h-10 border border-gray-300 bg-white text-gray-800 hover:bg-gray-100 px-2 rounded" @click="sidebarVisible=!sidebarVisible")
     VIconMDI(:icon="mdiMenu")
 </template>
@@ -56,9 +60,10 @@
   import DocsMenuItem from '../parts/DocsMenuItem.vue'
   import { mdiArrowBack, mdiMenu } from 'mdi-js/filled'
   import { useRouter } from 'vue-router'
+  import GithubButton from 'vue-github-button'
 
   export default defineComponent({
-    components: { DocsMenuItem },
+    components: { DocsMenuItem, GithubButton },
     setup(props) {
       const router = useRouter()
       const windowSize = useWindowSize()
@@ -91,6 +96,9 @@
       const homeUrl = computed(
         () => currentSubpathConfig.value?.homePath || '/'
       )
+      const githubURL = computed(() =>
+        config.GIT_NAME ? 'https://github.com/' + config.GIT_NAME : ''
+      )
       return {
         routeViewKey,
         reloadRouteView,
@@ -101,6 +109,7 @@
         versions,
         version,
         homeUrl,
+        githubURL,
       }
     },
     data() {

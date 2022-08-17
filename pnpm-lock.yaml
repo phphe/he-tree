@@ -92,6 +92,7 @@ importers:
       vite: ^3.0.4
       vue: ^3.0.5
       vue-demi: latest
+      vue-github-button: ^3.0.3
       vue-gtag: ^2.0.1
       vue-i18n: ^9.2.0
       vue-router: ^4.0.6
@@ -116,6 +117,7 @@ importers:
       terser: 5.12.0
       vue: 3.2.31
       vue-demi: 0.13.8_vue@3.2.31
+      vue-github-button: 3.0.3
       vue-gtag: 2.0.1_vue@3.2.31
       vue-i18n: 9.2.0_vue@3.2.31
       vue-router: 4.1.3_vue@3.2.31
@@ -2375,6 +2377,15 @@ packages:
       write-pkg: 4.0.0
     dev: true
 
+  /@lerna/package/5.4.3:
+    resolution: {integrity: sha512-EIw82v4ijzS3qRCSKHNSJ/UTnFDroaEp6mj7pzLO6lIrAqg7MgtKeThMhzEAMvF4yNB7BL+UR+dZ0jI47WgQJQ==}
+    engines: {node: ^14.15.0 || >=16.0.0}
+    dependencies:
+      load-json-file: 6.2.0
+      npm-package-arg: 8.1.1
+      write-pkg: 4.0.0
+    dev: true
+
   /@lerna/prerelease-id-from-version/4.0.0:
     resolution: {integrity: sha512-GQqguzETdsYRxOSmdFZ6zDBXDErIETWOqomLERRY54f4p+tk4aJjoVdd9xKwehC9TBfIFvlRbL1V9uQGHh1opg==}
     engines: {node: '>= 10.18.0'}
@@ -2404,6 +2415,24 @@ packages:
       globby: 11.1.0
       load-json-file: 6.2.0
       npmlog: 4.1.2
+      p-map: 4.0.0
+      resolve-from: 5.0.0
+      write-json-file: 4.3.0
+    dev: true
+
+  /@lerna/project/5.4.3:
+    resolution: {integrity: sha512-j2EeuwdbHsL++jy0s2ShDbdOPirPOL/FNMRf7Qtwl4pEWoOiSYmv/LnIt2pV7cwww9Lx8Y682/7CQwlXdgrrMw==}
+    engines: {node: ^14.15.0 || >=16.0.0}
+    dependencies:
+      '@lerna/package': 5.4.3
+      '@lerna/validation-error': 5.4.3
+      cosmiconfig: 7.0.1
+      dedent: 0.7.0
+      dot-prop: 6.0.1
+      glob-parent: 5.1.2
+      globby: 11.1.0
+      load-json-file: 6.2.0
+      npmlog: 6.0.2
       p-map: 4.0.0
       resolve-from: 5.0.0
       write-json-file: 4.3.0
@@ -2552,6 +2581,13 @@ packages:
     engines: {node: '>= 10.18.0'}
     dependencies:
       npmlog: 4.1.2
+    dev: true
+
+  /@lerna/validation-error/5.4.3:
+    resolution: {integrity: sha512-edf9vbQaDViffhHqL/wHdGs83RV7uJ4N5E3VEpjXefWIUfgmw9wYjkX338WYUh/XqDYbSV6C1M8A24FT3/0uzw==}
+    engines: {node: ^14.15.0 || >=16.0.0}
+    dependencies:
+      npmlog: 6.0.2
     dev: true
 
   /@lerna/version/4.0.0:
@@ -3733,6 +3769,14 @@ packages:
       readable-stream: 2.3.7
     dev: true
 
+  /are-we-there-yet/3.0.1:
+    resolution: {integrity: sha512-QZW4EDmGwlYur0Yyf/b2uGucHQMa8aFUP7eu9ddR73vvhFyt4V0Vl3QHPcTNJ8l6qYOBdxgXdnBXQrHilfRQBg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      delegates: 1.0.0
+      readable-stream: 3.6.0
+    dev: true
+
   /arg/4.1.3:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
 
@@ -4776,6 +4820,11 @@ packages:
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
+  /color-support/1.1.3:
+    resolution: {integrity: sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==}
+    hasBin: true
+    dev: true
+
   /colorette/2.0.19:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
     dev: true
@@ -5447,6 +5496,7 @@ packages:
     peerDependencies:
       lerna: ^3.0.0
     dependencies:
+      '@lerna/project': 5.4.3
       '@semantic-release/commit-analyzer': 6.3.3
       chalk: 1.1.3
       cz-customizable: 4.0.0
@@ -6931,6 +6981,20 @@ packages:
       wide-align: 1.1.5
     dev: true
 
+  /gauge/4.0.4:
+    resolution: {integrity: sha512-f9m+BEN5jkg6a0fZjleidjN51VE1X+mPFQ2DJ0uv1V39oCLCbsGe6yjbBnp7eK7z/+GAon99a3nHuqbuuthyPg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      aproba: 2.0.0
+      color-support: 1.1.3
+      console-control-strings: 1.1.0
+      has-unicode: 2.0.1
+      signal-exit: 3.0.7
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wide-align: 1.1.5
+    dev: true
+
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -7067,6 +7131,10 @@ packages:
     dependencies:
       ini: 1.3.8
     dev: true
+
+  /github-buttons/2.22.0:
+    resolution: {integrity: sha512-N5bk01s1WgK1FVtoeSUVkRkJpkaSu8yHMPcjye+PTa0jsRjMRNrYqVLgpUf2RA5Kvec05DfHYAT6/68fwkdqPw==}
+    dev: false
 
   /github-markdown-css/2.8.0:
     resolution: {integrity: sha512-4EqUN/DyAfV5RoTF3gDzuTFiCc7NraexNnIB9TxWE8/abaW/rZKv0NCCEpLqwBlAjFpKKDr7qBlOZos02wqazQ==}
@@ -7311,6 +7379,13 @@ packages:
 
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
+    dev: true
+
+  /hosted-git-info/3.0.8:
+    resolution: {integrity: sha512-aXpmwoOhRBrw6X3j0h5RloK4x1OzsxMPyxqIHyNfSe2pypkVTZFpEiRoSipPEPlMrh0HW/XsjkJ5WgnCirpNUw==}
+    engines: {node: '>=10'}
+    dependencies:
+      lru-cache: 6.0.0
     dev: true
 
   /hosted-git-info/4.1.0:
@@ -8160,7 +8235,7 @@ packages:
     dev: true
 
   /load-json-file/4.0.0:
-    resolution: {integrity: sha1-L19Fq5HjMhYjT9U62rZo607AmTs=}
+    resolution: {integrity: sha512-Kx8hMakjX03tiGTLAIdJ+lL0htKnXjEZN6hk/tozf/WOuYGdZBJrZ+rCJRbVCugsjB3jMLn9746NsQIf5VjBMw==}
     engines: {node: '>=4'}
     dependencies:
       graceful-fs: 4.2.9
@@ -8867,6 +8942,15 @@ packages:
     resolution: {integrity: sha512-EPfafl6JL5/rU+ot6P3gRSCpPDW5VmIzX959Ob1+ySFUuuYHWHekXpwdUZcKP5C+DS4GEtdJluwBjnsNDl+fSA==}
     dev: true
 
+  /npm-package-arg/8.1.1:
+    resolution: {integrity: sha512-CsP95FhWQDwNqiYS+Q0mZ7FAEDytDZAkNxQqea6IaAFJTAY9Lhhqyl0irU/6PMc7BGfUmnsbHcqxJD7XuVM/rg==}
+    engines: {node: '>=10'}
+    dependencies:
+      hosted-git-info: 3.0.8
+      semver: 7.3.5
+      validate-npm-package-name: 3.0.0
+    dev: true
+
   /npm-package-arg/8.1.5:
     resolution: {integrity: sha512-LhgZrg0n0VgvzVdSm1oiZworPbTxYHUJCgtsJW8mGvlDpxTM1vSJc3m5QZeUkhAHIzbz3VCHd/R4osi1L1Tg/Q==}
     engines: {node: '>=10'}
@@ -8941,6 +9025,16 @@ packages:
       are-we-there-yet: 1.1.7
       console-control-strings: 1.1.0
       gauge: 2.7.4
+      set-blocking: 2.0.0
+    dev: true
+
+  /npmlog/6.0.2:
+    resolution: {integrity: sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      are-we-there-yet: 3.0.1
+      console-control-strings: 1.1.0
+      gauge: 4.0.4
       set-blocking: 2.0.0
     dev: true
 
@@ -9207,7 +9301,7 @@ packages:
     dev: true
 
   /parse-json/4.0.0:
-    resolution: {integrity: sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=}
+    resolution: {integrity: sha512-aOIos8bujGN93/8Ox/jPLh7RwVnPEysynVFE+fQZyg6jKELEHwzgKdLRFHUgXJL6kylijVSBC4BvN9OmsB48Rw==}
     engines: {node: '>=4'}
     dependencies:
       error-ex: 1.3.2
@@ -9338,7 +9432,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   /pify/3.0.0:
-    resolution: {integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=}
+    resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
     dev: true
 
@@ -10835,7 +10929,7 @@ packages:
     dev: true
 
   /strip-bom/3.0.0:
-    resolution: {integrity: sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=}
+    resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
     engines: {node: '>=4'}
     dev: true
 
@@ -11858,6 +11952,12 @@ packages:
       - supports-color
     dev: true
 
+  /vue-github-button/3.0.3:
+    resolution: {integrity: sha512-O2Kv5HxRMn1qqgt2sSy8N7y2C6WGOeICzgGj6y+JFcnLjorTTzNR8vY5abiPOYDiW03WZ/9hUIn7Gm9CG9pIuA==}
+    dependencies:
+      github-buttons: 2.22.0
+    dev: false
+
   /vue-gtag/2.0.1_vue@3.2.31:
     resolution: {integrity: sha512-aM4A58FVL0wV2ptYi+xzAjeg+pQVRyUcfBc5UkXAwQrR4t3WBhor50Izp2I+3Oo7+l+vWJ7u78DGcNzReb8S/A==}
     peerDependencies:
@@ -11985,7 +12085,7 @@ packages:
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: true
 
   /winston/2.1.0:

@@ -7,6 +7,12 @@ function readPackage(pkg, context) {
     };
     console.log("Force set dependence vue for vue-template-compiler.\n");
   }
+  if (pkg.name === "cz-lerna-changelog") {
+    pkg.dependencies = {
+      ...pkg.dependencies,
+      "@lerna/project": "latest",
+    };
+  }
 
   return pkg;
 }
