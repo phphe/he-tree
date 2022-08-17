@@ -80,7 +80,7 @@ importers:
       pug: ^3.0.2
       sass: ^1.32.8
       scriptjs: ^2.5.9
-      spa-prerender-cli: ^0.0.5
+      spa-prerender-cli: ^0.0.7
       stylelint: ^13.12.0
       stylelint-config-recommended: ^4.0.0
       stylelint-config-standard: ^21.0.0
@@ -142,7 +142,7 @@ importers:
       prettier: 2.5.1
       pug: 3.0.2
       sass: 1.54.0
-      spa-prerender-cli: 0.0.5_vbwedximhoubmklytlbuapsnri
+      spa-prerender-cli: 0.0.7_vbwedximhoubmklytlbuapsnri
       stylelint: 13.13.1
       stylelint-config-recommended: 4.0.0_stylelint@13.13.1
       stylelint-config-standard: 21.0.0_stylelint@13.13.1
@@ -10693,8 +10693,8 @@ packages:
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
 
-  /spa-prerender-cli/0.0.5_vbwedximhoubmklytlbuapsnri:
-    resolution: {integrity: sha512-RDJHMg0fcEwpNPcuoiJKLXJUh0bbwu8XD0as7cKjeI69ZoTbxPASJzSqcKISxlbCPzuUzU9CepuyQgwo/Dl6IQ==}
+  /spa-prerender-cli/0.0.7_vbwedximhoubmklytlbuapsnri:
+    resolution: {integrity: sha512-DeAxuCsaGK3nsE3GIzXWt0oVNFijCCQSiWv8wU9UIx+1KlVhxmBZbxtWA7Xorpyx/NTyRoH4On8qO3rwFAPLdw==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.18.9
