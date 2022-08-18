@@ -1,8 +1,9 @@
 <template lang="pug">
-I18n
-div(v-is="layout")
-PageProgressBar
-HTMLHead
+.app-inner
+  I18n
+  div(v-is="layout")
+  PageProgressBar
+  HTMLHead
 </template>
 
 <script lang="ts">

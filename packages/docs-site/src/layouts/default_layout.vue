@@ -148,6 +148,10 @@
     $h: 48px;
     height: $h;
     line-height: $h;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1;
   }
   .mobile-main-title {
     font-size: 1.3em;
