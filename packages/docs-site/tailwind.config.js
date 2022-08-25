@@ -3,6 +3,12 @@ const colors = require('tailwindcss/colors')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultConfig = require('tailwindcss/defaultConfig')
 
+const sizeNamed = {
+  sm: '30px',
+  md: '34px',
+  lg: '42px',
+}
+
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'media', // 'media' or 'class'
@@ -19,10 +25,14 @@ module.exports = {
         danger: colors.red,
         success: colors.green,
       },
+      borderRadius: { base: defaultConfig.theme.borderRadius.DEFAULT },
+      width: { ...sizeNamed },
+      height: { ...sizeNamed },
+      lineHeight: { ...sizeNamed },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography')],
 }

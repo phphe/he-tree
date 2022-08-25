@@ -17,6 +17,8 @@
           template(#popper)
             .shadow.rounded.text-sm
               Anchor.block.py-2.px-3(v-for="item in versions" class="hover:bg-gray-100" :to="item.homePath") {{$t(item.version)}}
+        span.flex-grow
+        VIconMDI.ml-2.cursor-pointer.main-search-icon(class="hover:text-gray-500" :icon="mdiSearch" :size="20" v-tooltip="$t('Search')" @click="searchModalOpen=true")
       .main-menu.mt-2.text-gray-600.h-0.flex-grow.flex.flex-col.pb-4
         DocsMenuItem.main-menu-item(v-for="item in menu" :to="item.path") {{$t(item.text)}}
         .main-menu-item
@@ -39,6 +41,7 @@
       Anchor.mobile-main-title.text-gray-700.px-2(:to="homeUrl")
         span {{config.APP_NAME}}
       .flex-grow
+      VIconMDI.ml-2.cursor-pointer(:icon="mdiSearch" :size="20" @click="searchModalOpen=true")
       Anchor.px-2(@click="sidebarVisible=!sidebarVisible")
         VIconMDI(:icon="mdiMenu")
     .px-4.main-body(class="sm:px-6")
@@ -49,56 +52,30 @@
       <github-button class="ml-2" :href="githubURL + '/fork'" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork phphe/he-tree on GitHub">Fork</github-button>
       GithubButton( class="ml-2" :href="githubURL" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star phphe/he-tree on GitHub") Star
   .mobile-page-mask.fixed.w-full.h-full.bg-black.opacity-50(v-show="sm &&sidebarVisible" @click="sidebarVisible=false")
+  SearchModal(v-model="searchModalOpen")
 </template>
 
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
   import { routeViewKey, reloadRouteView } from '../router'
   import { state } from '../store'
-  import { currentSubpathConfig } from '../runtimeConfig'
+  import { versions, version, menu, homeUrl } from '../current'
   import { switchLocale } from '../i18n'
   import * as hp from 'helper-js'
   import useWindowSize from '../plugins/useWindowSize'
   import config from '../config'
   import DocsMenuItem from '../parts/DocsMenuItem.vue'
-  import { mdiMenu } from 'mdi-js/filled'
+  import SearchModal from '../parts/SearchModal.vue'
+  import { mdiMenu, mdiSearch } from 'mdi-js/filled'
   import { useRouter } from 'vue-router'
   import GithubButton from 'vue-github-button'
 
   export default defineComponent({
-    components: { DocsMenuItem, GithubButton },
+    components: { DocsMenuItem, SearchModal, GithubButton },
     setup(props) {
       const router = useRouter()
       const windowSize = useWindowSize()
       const sm = computed(() => windowSize.value.innerWidth < 760)
-      const menu = computed(
-        // @ts-ignore
-        () => currentSubpathConfig.value?.menu || config.MENU || []
-      )
-      const versions = computed(() => {
-        if (!config.VERSION) {
-          return null
-        }
-        const versions = (config.SUBPATH || []).filter((v) => v.version)
-        // @ts-ignore
-        versions.push({
-          version: config.VERSION,
-          homePath: '/',
-        })
-        return versions.length > 0 ? versions : null
-      })
-      const version = computed({
-        set(value) {
-          const item = versions.value!.find((v) => v.version === value)!
-          router.push(item.homePath)
-        },
-        get() {
-          return currentSubpathConfig.value?.version || config.VERSION
-        },
-      })
-      const homeUrl = computed(
-        () => currentSubpathConfig.value?.homePath || '/'
-      )
       const githubURL = computed(() =>
         config.GIT_NAME ? 'https://github.com/' + config.GIT_NAME : ''
       )
@@ -107,6 +84,7 @@
         reloadRouteView,
         sm,
         mdiMenu,
+        mdiSearch,
         menu,
         versions,
         version,
@@ -120,6 +98,7 @@
         sidebarVisible: false,
         year: new Date().getFullYear(),
         config,
+        searchModalOpen: false,
       }
     },
     watch: {},
@@ -155,5 +134,8 @@
   }
   .mobile-main-title {
     font-size: 1.3em;
+  }
+  .main-search-icon {
+    align-self: flex-end;
   }
 </style>

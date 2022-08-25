@@ -6,6 +6,7 @@ span.icon.inline-flex.items-center
 </template>
 
 <script lang="ts">
+  // suitable for google material design icons that imported by css
   import { defineComponent } from 'vue'
   export default defineComponent({
     props: {

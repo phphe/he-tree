@@ -1,7 +1,6 @@
 import * as hp from 'helper-js'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 import * as path from 'path'
-import { execSync } from 'child_process'
 import * as chokidar from 'chokidar'
 import * as crypto from 'crypto'
 import * as cheerio from 'cheerio'
@@ -13,11 +12,7 @@ import { docsDir, getLocales } from './utils'
 const compiledDir = 'src/compiled-docs'
 
 const start = () => {
-  if (fs.existsSync(compiledDir)) {
-    execSync(`rm ${compiledDir} -rf`)
-  }
-  fs.mkdirSync(compiledDir)
-
+  fs.emptyDirSync(compiledDir) // empty dir; create dir if not existing
   const watcher = chokidar.watch(docsDir)
   const data = {
     routes: {},
@@ -29,6 +24,7 @@ const start = () => {
         componentPath: string
         path: string
         meta: Object
+        searchData?: boolean
       }
     }
   }
@@ -47,6 +43,19 @@ const start = () => {
     routesContent = routesContent.replace(/"(import\(.*?\))"/g, '() => $1')
     routesContent = 'export default ' + routesContent
     fs.writeFileSync(path.join(compiledDir, 'routes.ts'), routesContent)
+  }, 100).action
+
+  const updateSearchDataLoader = hp.debounceTrailing(() => {
+    let r = `export default {`
+    for (const info of Object.values(data.routes)) {
+      if (info.searchData) {
+        r +=
+          '\n' +
+          `"${info.path}": async () => (await import("./searchData/${info.md5Name}.json")).default,`
+      }
+    }
+    r += '}'
+    fs.outputFileSync(path.join(compiledDir, 'searchDataLoader.ts'), r)
   }, 100).action
 
   console.log('start watching doc files')
@@ -77,7 +86,9 @@ const start = () => {
       fs.unlinkSync(componentPath)
     } else {
       const locales = getLocales()
+      const searchUrls = new Set(getSearchUrls(locales))
       let t = filepath.split(path.sep)
+      let searchData = false
       const locale = t[1]
       const pathWithoutLocale = t.slice(2).join('/')
       const fileContent = fs.readFileSync(filepath).toString()
@@ -86,6 +97,7 @@ const start = () => {
       const html = marked(codeDemoReplaced)
       let injectedComponents: Record<string, string> = {}
       const vueTemplate = handleHtmlForVue(html, filepath, injectedComponents)
+      const urlPath = genUrl(locale, pathWithoutLocale)
 
       const structure = resolveMdStructure(html)
 
@@ -95,6 +107,7 @@ const start = () => {
       const componentContent = tpl
         .replace('<!-- :template -->', vueTemplate)
         .replace("':data'", JSON.stringify(structure))
+        .replaceAll(':url', urlPath)
         .replace(
           /(?<=\n|^)(<script.*?>)/,
           '$1\n' +
@@ -115,7 +128,27 @@ const start = () => {
             ).replace(/:"(.*?)"/g, ':$1')
         )
       fs.writeFileSync(componentPath, componentContent)
-      const urlPath = genUrl(locale, pathWithoutLocale)
+      if (searchUrls.has(urlPath)) {
+        const searchDataPath = path.join(
+          compiledDir,
+          './searchData',
+          md5Name + '.json'
+        )
+        searchData = true
+        const flatSearchData: unknown[] = []
+        const nodeIDMapping = new WeakMap()
+        let nodeIndex = 0
+        hp.walkTreeData(structure, (node, i, parent) => {
+          nodeIDMapping.set(node, nodeIndex)
+          flatSearchData.push({
+            title: node.name,
+            url: urlPath + '#' + node.id,
+            pid: parent ? nodeIDMapping.get(parent) : null,
+          })
+          nodeIndex++
+        })
+        fs.outputJSONSync(searchDataPath, flatSearchData)
+      }
       const alternate: any = {}
       for (const locale2 of locales) {
         const alternateFile = path.join(docsDir, locale2, pathWithoutLocale)
@@ -130,6 +163,7 @@ const start = () => {
         componentPath,
         path: urlPath,
         meta: routeMeta,
+        searchData,
       }
       // update alternate routes
       const alternatePaths = Object.values(alternate)
@@ -142,6 +176,7 @@ const start = () => {
     }
     //
     updateRoutes()
+    updateSearchDataLoader()
     //
     if (first) {
       firstDone()
@@ -152,13 +187,16 @@ const start = () => {
 start()
 
 function genUrl(locale: string, pathWithoutLocale: string) {
-  let t = `/${pathWithoutLocale.replace('.md', '')}`
+  let t = `/${pathWithoutLocale.replace('.md', '')}`.replace(/^\/\//, '/')
+  if (t === '/') {
+    t = ''
+  }
   if (locale !== baseConfig.I18N.locale) {
     t = `/${locale}` + t
   }
-  t = t.replace(/index$/, '')
-  if (!t) {
-    t = '/'
+  t = t.replace(/(^|\/)index/, '$1')
+  if (t[0] !== '/') {
+    t = '/' + t
   }
   return t
 }
@@ -339,4 +377,25 @@ function internalDocHrefToUrl(href: string, docPath: string) {
     url += '#' + hash.toLowerCase()
   }
   return url
+}
+
+function getSearchUrls(locales: string[]) {
+  const r: string[] = []
+  if (baseConfig.SEARCH) {
+    r.push(...baseConfig.SEARCH)
+  }
+  if (baseConfig.SUBPATH) {
+    for (const sp of baseConfig.SUBPATH) {
+      if (sp.search) {
+        r.push(...sp.search)
+      }
+    }
+  }
+  const r2: string[] = []
+  for (const url of r) {
+    for (const locale of locales) {
+      r2.push(genUrl(locale, url))
+    }
+  }
+  return r2
 }

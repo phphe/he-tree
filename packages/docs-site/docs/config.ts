@@ -1,4 +1,5 @@
 // Don't modify config when runtime
+// 'path' should't contains locale and must start with '/'
 
 import { urlHasDir } from '../src/utils'
 
@@ -41,25 +42,16 @@ export default {
           path: '/v1/api',
         },
       ],
+      search: ['/v1/guide', '/v1/api'],
     },
   ],
+  SEARCH: ['/v2/guide', '/v2/api'],
   I18N: {
     locale: 'en',
     fallbackLocale: 'en',
     locales: { en: 'English', zh: '简体中文' },
     messages: {
-      en: {
-        Languages: 'Languages',
-        Home: 'Home',
-        Works: 'Works',
-        About: 'About',
-        Version: 'Version',
-        Guide: 'Guide',
-        API: 'API',
-        Examples: 'Examples',
-        'Get Started': 'Get Started',
-        'More Examples': 'More Examples',
-      },
+      en: {},
       zh: {
         Languages: '语言',
         Home: '首页',
@@ -71,6 +63,8 @@ export default {
         Examples: '例子',
         'Get Started': '快速开始',
         'More Examples': '更多例子',
+        Search: '搜索',
+        'No search results': '没有匹配的结果',
       },
     },
   },
