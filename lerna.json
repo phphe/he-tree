@@ -3,5 +3,10 @@
     "packages/*",
     "packages/he-tree-vue/sub-vue2"
   ],
+  "command": {
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "version": "independent"
 }
