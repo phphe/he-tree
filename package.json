@@ -3,15 +3,17 @@
   "private": true,
   "devDependencies": {
     "commitizen": "^4.1.2",
-    "cz-lerna-changelog": "^2.0.2",
-    "lerna": "^4.0.0"
+    "cz-conventional-changelog-lerna": "^0.1.0",
+    "lerna": "^5.0.0"
   },
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "commit-all": "git add . && cz",
+    "publish": "lerna publish"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
+      "path": "./node_modules/cz-conventional-changelog-lerna"
     }
   }
 }
