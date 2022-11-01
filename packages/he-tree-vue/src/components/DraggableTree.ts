@@ -246,6 +246,7 @@ const cpt = defineComponent({
     const rootEl = this.getRootEl();
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
+        // triggerElement trigger click
         if (!ctx.triggerElement) {
           return;
         }
@@ -254,13 +255,23 @@ const cpt = defineComponent({
           triggerClass = "tree-node";
         }
         let triggerClasses = hp.toArrayIfNot(triggerClass);
-        let dragElement = hp.findParent(
+        let triggerDragElement = hp.findParent(
           ctx.triggerElement,
           (el) => {
             if (hp.hasClassIn(el, triggerClasses)) {
               return true;
             } else if (hp.hasClass(el, "tree-node")) {
               return "break";
+            }
+          },
+          { withSelf: true, until: rootEl }
+        );
+        // dragElement is the drag node element
+        let dragElement = hp.findParent(
+          triggerDragElement,
+          (el) => {
+            if (hp.hasClass(el, "tree-node")) {
+              return true;
             }
           },
           { withSelf: true, until: rootEl }
