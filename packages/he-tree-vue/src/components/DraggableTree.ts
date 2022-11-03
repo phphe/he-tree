@@ -245,6 +245,20 @@ const cpt = defineComponent({
     let lastMouse = { x: 0, y: 0 }; // for dragover to detect if moved
     const rootEl = this.getRootEl();
     let dragElement: HTMLElement | null = null; // dragElement is the drag node element
+    const removePlaceholderWhenEnd = () => {
+      if (targetTree!.has(targetTree!.placeholderData)) {
+        targetTree!.ignoreUpdate(() => {
+          targetTree!.remove(
+            targetTree!.getStat(targetTree!.placeholderData)
+          );
+          // update together to prevent flick
+          if (startTree) {
+            startTree.dragNode!.hidden = false;
+            startTree.dragOvering = false;
+          }
+        });
+      }
+    }
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
         // triggerElement trigger click
@@ -736,19 +750,7 @@ const cpt = defineComponent({
           };
         }
         (() => {
-          // remove placeholder
-          if (targetTree!.has(targetTree!.placeholderData)) {
-            targetTree!.ignoreUpdate(() => {
-              targetTree!.remove(
-                targetTree!.getStat(targetTree!.placeholderData)
-              );
-              // update together to prevent flick
-              if (startTree) {
-                startTree.dragNode!.hidden = false;
-                startTree.dragOvering = false;
-              }
-            });
-          }
+          removePlaceholderWhenEnd()
           if (dragChanged) {
             // resolve targetIndex
             let targetIndex = targetInfo.indexBeforeDrop;
@@ -802,7 +804,8 @@ const cpt = defineComponent({
           }
         })();
       },
-      onDragEnd: (event) => {
+      onDragEnd:(event) => {
+        removePlaceholderWhenEnd()
         // reset
         if (startTree) {
           startTree.dragNode && (startTree.dragNode.hidden = false);
