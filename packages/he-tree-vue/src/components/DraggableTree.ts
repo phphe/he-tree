@@ -244,6 +244,7 @@ const cpt = defineComponent({
     };
     let lastMouse = { x: 0, y: 0 }; // for dragover to detect if moved
     const rootEl = this.getRootEl();
+    let dragElement: HTMLElement | null = null; // dragElement is the drag node element
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
         // triggerElement trigger click
@@ -267,7 +268,7 @@ const cpt = defineComponent({
           { withSelf: true, until: rootEl }
         );
         // dragElement is the drag node element
-        let dragElement = hp.findParent(
+        dragElement = hp.findParent(
           triggerDragElement,
           (el) => {
             if (hp.hasClass(el, "tree-node")) {
@@ -286,11 +287,20 @@ const cpt = defineComponent({
         if (!this.isDraggable(dragNode)) {
           return;
         }
-        return dragElement;
+        return rootEl;
       },
       onDragStart: (event) => {
-        if (!ctx.dragElement || !dragNode) {
+        if (!dragElement || !dragNode) {
           return;
+        }
+        {
+          const { x, y } = dragElement.getBoundingClientRect();
+          const { clientX, clientY } = event;
+          event.dataTransfer?.setDragImage(
+            dragElement,
+            clientX - x,
+            clientY - y
+          );
         }
         const mouse = { x: event.clientX, y: event.clientY };
         startMouse = mouse;
@@ -300,20 +310,19 @@ const cpt = defineComponent({
           if (this.resolveStartMovePoint === "mouse") {
             return { x: event.clientX, y: event.clientY };
           } else if (typeof this.resolveStartMovePoint === "function") {
-            return this.resolveStartMovePoint(ctx.dragElement);
+            return this.resolveStartMovePoint(dragElement);
           } else {
             // top_left
             let point: Point;
             let height = 0;
             if (!this.table) {
               if (!this.rtl) {
-                point = ctx.dragElement.children[0]
+                point = dragElement.children[0]
                   .getBoundingClientRect()
                   .toJSON();
                 height = (<DOMRect>point).height;
               } else {
-                const rect =
-                  ctx.dragElement.children[0].getBoundingClientRect();
+                const rect = dragElement.children[0].getBoundingClientRect();
                 point = {
                   x: rect.right,
                   y: rect.y,
@@ -321,7 +330,7 @@ const cpt = defineComponent({
                 height = rect.height;
               }
             } else {
-              let rect = ctx.dragElement.getBoundingClientRect();
+              let rect = dragElement.getBoundingClientRect();
               point = { x: rect.x, y: rect.y };
               if (this.rtl) {
                 point.x = rect.right;
