@@ -11,10 +11,6 @@ export const context = {
 };
 const ctx = context;
 
-// listen drag strat and end on window
-let dragging = false; // listened dragging. don't know external drag, such as drag file.
-let dragID = 0;
-
 function syncDropEffect(e: DragEvent) {
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = ctx.dropEffect;
@@ -55,8 +51,6 @@ export function extendedDND(root: Element, options: Options = {}) {
   }
 
   function onDragStart(e: DragEvent) {
-    dragging = true;
-    dragID++;
     ctx.internal = true;
     opt.onDragStart?.(e);
     syncDropEffect(e);
@@ -73,7 +67,6 @@ export function extendedDND(root: Element, options: Options = {}) {
     if (ctx.dragElement) {
       ctx.dragElement.removeAttribute("draggable");
     }
-    dragging = false;
     ctx.triggerElement = null;
     ctx.dragElement = null;
     ctx.dropEffect = "none";
@@ -151,7 +144,13 @@ export type Point = {
   y: number;
 };
 export type Options = Partial<typeof defaultOptions> & {
+  /**
+   * custom event, like mouseenter. event belongs to dragenter or dragover
+   */
   onEnter?: (event: DragEvent) => void;
+  /**
+   * custom event, like mouseleave. event belongs to dragenter or dragover
+   */
   onLeave?: (event: DragEvent) => void;
 };
 
@@ -171,11 +170,14 @@ export function extendedDropZone(
   opt: {
     onEnter?: (event: DragEvent) => void;
     onLeave?: (event: DragEvent) => void;
-    onEndBeforeLeave?: (event: MouseEvent | TouchEvent | KeyboardEvent) => void;
     onDragEnter?: (event: DragEvent) => void;
     onDragOver?: (event: DragEvent) => void;
     onDragLeave?: (event: DragEvent) => void;
     onDrop?: (event: DragEvent) => void;
+    /**
+     * for extendedDND's onEnter and onLeave; 用以实现 extendedDND 的 onEnter 和 onLeave
+     */
+    onEndBeforeLeave?: (event: MouseEvent | TouchEvent | KeyboardEvent) => void;
   } = {}
 ) {
   let entered = false;
@@ -198,16 +200,26 @@ export function extendedDropZone(
   };
   const onDragLeave = (e: DragEvent) => {
     opt.onDragLeave?.(e);
-    const destroy = hp.once(window, "dragover", (e2: DragEvent) => {
-      if (!hp.pointIn(e.clientX, e.clientY, el)) {
-        entered = false;
-        opt.onLeave?.(e);
-        endListeners.stop();
-      }
-    });
-    setTimeout(() => {
-      destroy();
-    }, 1000);
+    const doLeave = (event = e) => {
+      entered = false;
+      opt.onLeave?.(event);
+      endListeners.stop();
+    }
+    if (e.target === el) {
+      doLeave()
+    } else {
+      // @ts-ignore
+      el._onLeave_dragover_destroy?.()
+      // @ts-ignore
+      const destroy = el._onLeave_dragover_destroy = hp.once(window, "dragover", (e2: DragEvent) => {
+        if (!hp.pointIn(e2.clientX, e2.clientY, el)) {
+          doLeave(e2)
+        }
+      });
+      setTimeout(() => {
+        destroy();
+      }, 1000);
+    }
   };
 
   const onDrop = (e: DragEvent) => {
