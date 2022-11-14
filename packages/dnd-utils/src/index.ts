@@ -8,6 +8,7 @@ export const context = {
   dragElement: null as Nullable<HTMLElement>,
   internal: false, // if the dragstart event is internal
   dropEffect: "none" as DataTransfer["dropEffect"],
+  preventDefault: false,
 };
 const ctx = context;
 
@@ -127,7 +128,11 @@ export function extendedDND(root: Element, options: Options = {}) {
 export const defaultOptions = {
   ingoreHTMLTags: ["INPUT", "TEXTAREA", "SELECT", "OPTGROUP", "OPTION"], // uppercase
   ifPreventDefault(event: DragEvent): boolean {
-    return Boolean(context.dragElement);
+    if (context.dragElement) {
+      return true
+    }
+    return ctx.preventDefault;
+    
   },
   beforeDragStart(event: MouseEvent | TouchEvent): void | HTMLElement {},
   onDragStart(event: DragEvent) {},
