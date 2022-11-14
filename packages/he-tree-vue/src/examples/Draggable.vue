@@ -86,6 +86,8 @@
         :rtl="rtl"
         :btt="btt"
         style="height: 500px"
+        :onExternalDragOver="()=> true"
+        :externalDataHandler="externalDataHandler"
       >
         <template #default="{ node, stat }">
           <span v-if="stat.children.length" @click="stat.open = !stat.open">
@@ -97,6 +99,11 @@
         </template>
       </DraggableTree></Refresh
     >
+    <hr/>
+    Follow list item can be dragged into above tree
+    <ul>
+      <li v-for="i in 10" draggable="true" @dragstart="ondragstart($event, i)">{{i}}</li>
+    </ul>
   </div>
 </template>
 
@@ -166,6 +173,13 @@ const beforeDragOpen: BeforeDragOpen = (stat) => {
     );
   }
 };
+const ondragstart = (e, i) => {
+  e.dataTransfer.setData('text', 'any') // required. 必须
+  window._externalDraggingData = i
+}
+const externalDataHandler = (e) => {
+  return {text: 'external_'+ window._externalDraggingData}
+}
 </script>
 
 <style lang="scss"></style>
