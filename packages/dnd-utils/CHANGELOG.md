@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.2](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.1...@he-tree/dnd-utils@0.1.0-alpha.2) (2022-11-14)
+
+
+### Features
+
+* **dnd-utils:** allow control preventDefault easily ([f4a7959](https://github.com/phphe/he-tree/commit/f4a7959c92a8b3ecd8ac091172f88a92e477e0a0))
+
+
+
+
+
 # [0.1.0-alpha.1](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.0...@he-tree/dnd-utils@0.1.0-alpha.1) (2022-11-06)
 
 

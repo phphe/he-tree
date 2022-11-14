@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.1.0...@he-tree/vue@2.2.0) (2022-11-14)
+
+
+### Features
+
+* **external drag:** fix bug of external drag ([39dd2d7](https://github.com/phphe/he-tree/commit/39dd2d7f27078550fb87bff5d22580cec4ae9b89))
+
+
+
+
+
 # [2.1.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.0.5...@he-tree/vue@2.1.0) (2022-11-06)
 
 
