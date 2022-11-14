@@ -386,6 +386,7 @@ const cpt = defineComponent({
       onLeave: (event) => {
         dragOpenLastNode = null;
         this.dragOvering = false;
+        ctx.preventDefault = false
         removePlaceholder();
         this.$emit("leave", event);
       },
@@ -398,6 +399,8 @@ const cpt = defineComponent({
               this.onExternalDragOver(event) === false
             ) {
               return;
+            } else {
+              ctx.preventDefault = true
             }
           }
           // return if not moved
@@ -411,10 +414,10 @@ const cpt = defineComponent({
           this.dragOvering = true;
           //
           targetTree = this;
-          const movePoint = {
+          const movePoint = startMovePoint ? {
             x: startMovePoint.x + (mouse.x - startMouse.x),
             y: startMovePoint.y + (mouse.y - startMouse.y),
-          };
+          } : {...mouse}
           const { btt, rtl } = targetTree;
           // if undroppable, return
           if (targetTree!.disableDrop) {
@@ -797,7 +800,7 @@ const cpt = defineComponent({
           }
           targetTree!.$emit("after-drop");
           if (dragChanged) {
-            startTree!.$emit("change");
+            startTree?.$emit("change");
             if (targetTree !== startTree) {
               targetTree!.$emit("change");
             }
