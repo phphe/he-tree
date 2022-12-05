@@ -800,7 +800,12 @@ const cpt = defineComponent({
           }
           targetTree!.$emit("after-drop");
           if (dragChanged) {
-            startTree?.$emit("change");
+            if (startTree) {
+              // don't emit change when dragCopy
+              if (!startTree.dragCopy) {
+                startTree.$emit("change");
+              }
+            }
             if (targetTree !== startTree) {
               targetTree!.$emit("change");
             }
