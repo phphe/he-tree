@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.1...@he-tree/vue@2.2.2) (2022-12-05)
+
+
+### Bug Fixes
+
+* **draggable:** make startTree don't emit change event when dragCopy ([a71d609](https://github.com/phphe/he-tree/commit/a71d6096c0e11a8aa196a336557588b2c6b05a48))
+
+
+
+
+
 ## [2.2.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.0...@he-tree/vue@2.2.1) (2022-12-05)
 
 

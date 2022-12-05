@@ -1,6 +1,6 @@
 {
   "name": "@he-tree/vue",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Vue tree component. Features: Vue2 & 3, TypeScript, SSR, nested, virtual list, draggable, sortable, placeholder for drag, table tree, based on Drag and Drop API, deal with any other code based on Drag and Drop API.",
   "keywords": [
     "Vue tree component",
