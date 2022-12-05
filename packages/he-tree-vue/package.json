@@ -55,7 +55,7 @@
   "dependencies": {
     "@he-tree/dnd-utils": "latest",
     "@he-tree/tree-utils": "latest",
-    "@virtual-list/vue": "^1.1.4",
+    "@virtual-list/vue": "^1.1.6",
     "helper-js": "^3.1.2",
     "vue-demi": "latest"
   },
