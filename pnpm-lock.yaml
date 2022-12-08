@@ -156,7 +156,7 @@ importers:
     specifiers:
       '@he-tree/dnd-utils': latest
       '@he-tree/tree-utils': latest
-      '@virtual-list/vue': ^1.1.8
+      '@virtual-list/vue': ^1.1.9
       '@vitejs/plugin-vue': ^2.2.0
       helper-js: ^3.1.2
       vite: ^2.8.0
@@ -166,7 +166,7 @@ importers:
     dependencies:
       '@he-tree/dnd-utils': link:../dnd-utils
       '@he-tree/tree-utils': link:../tree-utils
-      '@virtual-list/vue': 1.1.8_vue@3.2.31
+      '@virtual-list/vue': 1.1.9_vue@3.2.31
       helper-js: 3.1.2
       vue-demi: 0.13.11_vue@3.2.31
     devDependencies:
@@ -3116,8 +3116,8 @@ packages:
       eslint-visitor-keys: 2.1.0
     dev: true
 
-  /@virtual-list/vue/1.1.8_vue@3.2.31:
-    resolution: {integrity: sha512-ZR5Kze8mykwUYv2Yloy6Q8XsEjpX6ngUhCXH+oeLxHLY1Tuv7mbK4lTV8ja82Cpl4HmQEwzFTUZ76omXFgRX6w==}
+  /@virtual-list/vue/1.1.9_vue@3.2.31:
+    resolution: {integrity: sha512-BCDb6+GMjshPVENC1fiaK4wjGnOmw3jlV8KufP23NsBrjO3uoB6frfrt/v3RrUcD9KTb1acm4mVC19z706k+XQ==}
     engines: {node: '>=12'}
     peerDependencies:
       '@vue/composition-api': ^1.4.6
