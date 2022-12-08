@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.5](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.4...@he-tree/vue@2.2.5) (2022-12-08)
+
+
+### Bug Fixes
+
+* **virtual-list:** update virtual-list to 1.1.9 ([c5b682a](https://github.com/phphe/he-tree/commit/c5b682af053ded927734b7a77c2f98e96abd8310))
+
+
+
+
+
 ## [2.2.4](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.3...@he-tree/vue@2.2.4) (2022-12-08)
 
 
