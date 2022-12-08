@@ -6,6 +6,7 @@ interface State {
     visible: boolean
     value: { text: string; url: string }[]
   },
+  currentAnchors: string[],
 }
 
 export const state = reactive<State>({
@@ -13,4 +14,5 @@ export const state = reactive<State>({
     visible: false,
     value: [],
   },
+  currentAnchors: [],
 })

@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "packages/docs-site",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: dev - packages/docs-site"
+		}, 
+		{
+			"type": "npm",
+			"script": "watch-compile-docs",
+			"path": "packages/docs-site",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: watch-compile-docs - packages/docs-site"
+    },
+		{
+      "label": "Document Dev",
+      "dependsOn": ["npm: watch-compile-docs - packages/docs-site", "npm: dev - packages/docs-site"]
+    }
+	]
+}
