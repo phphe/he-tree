@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.6](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.5...@he-tree/vue@2.2.6) (2023-02-18)
+
+
+### Bug Fixes
+
+* **updatebehavior:** fix batchUpdate still emit model update event in ignoreUpdate ([3c14df9](https://github.com/phphe/he-tree/commit/3c14df921944c696669d04f186262179e55cbfc9))
+
+
+
+
+
 ## [2.2.5](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.4...@he-tree/vue@2.2.5) (2022-12-08)
 
 
