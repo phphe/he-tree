@@ -1,45 +1,24 @@
 <template>
-  <VirtualList
-    class="he-tree"
-    :class="{
-      'he-tree--rtl rtl': rtl,
-      'he-tree--drag-overing drag-overing': dragOvering,
-    }"
-    ref="vtlist"
-    :items="visibleStats"
-    :disabled="!virtualization"
-    :table="table"
-  >
+  <VirtualList class="he-tree" :class="{
+    'he-tree--rtl rtl': rtl,
+    'he-tree--drag-overing drag-overing': dragOvering,
+  }" ref="vtlist" :items="visibleStats" :disabled="!virtualization" :table="table">
     <template #prepend>
       <slot name="prepend" :tree="self"></slot>
     </template>
     <template #default="{ item: stat, index }">
-      <TreeNode
-        :vt-index="index"
-        :class="[
-          stat.class,
-          {
-            'drag-placeholder-wrapper': stat.data === placeholderData,
-            'dragging-node': stat === dragNode,
-          },
-        ]"
-        :style="stat.style"
-        :stat="stat"
-        :rtl="rtl"
-        :indent="indent"
-        :table="table"
-        :processor="processor"
-        @click="$emit('click:node', stat)"
-        @open="$emit('open:node', $event)"
-        @close="$emit('close:node', $event)"
-        @check="$emit('check:node', $event)"
-      >
+      <TreeNode :vt-index="index" :class="[
+        stat.class,
+        {
+          'drag-placeholder-wrapper': stat.data === placeholderData,
+          'dragging-node': stat === dragNode,
+        },
+      ]" :style="stat.style" :stat="stat" :rtl="rtl" :indent="indent" :table="table" :processor="processor"
+        @click="$emit('click:node', stat)" @open="$emit('open:node', $event)" @close="$emit('close:node', $event)"
+        @check="$emit('check:node', $event)">
         <template #default="{ indentStyle }">
           <template v-if="stat.data === placeholderData">
-            <div
-              v-if="!table"
-              class="drag-placeholder he-tree-drag-placeholder"
-            >
+            <div v-if="!table" class="drag-placeholder he-tree-drag-placeholder">
               <slot name="placeholder" :tree="self"></slot>
             </div>
             <td v-else :style="indentStyle" :colspan="placeholderColspan">
@@ -48,15 +27,9 @@
               </div>
             </td>
           </template>
-          <slot
-            v-else
-            :node="stat.data"
-            :stat="stat"
-            :indentStyle="indentStyle"
-            :tree="self"
-            >{{ stat.data[textKey] }}</slot
-          ></template
-        >
+          <slot v-else :node="stat.data" :stat="stat" :indentStyle="indentStyle" :tree="self">{{ stat.data[textKey] }}
+          </slot>
+        </template>
       </TreeNode>
     </template>
     <template #append>
@@ -250,9 +223,11 @@ const cpt = defineComponent({
     },
     batchUpdate(task: () => any | Promise<any>) {
       const r = this.ignoreUpdate(task);
-      this._updateValue(
-        this.updateBehavior === "new" ? this.getData() : this.valueComputed
-      );
+      if (!this.batchUpdateWaiting) {
+        this._updateValue(
+          this.updateBehavior === "new" ? this.getData() : this.valueComputed
+        );
+      }
       return r;
     },
     ignoreUpdate(task: () => any | Promise<any>) {
@@ -282,11 +257,11 @@ const cpt = defineComponent({
           };
           processor["_statHandler2"] = this.statHandler
             ? (stat) => {
-                if (stat.data === this.placeholderData) {
-                  return stat;
-                }
-                return this.statHandler!(stat);
+              if (stat.data === this.placeholderData) {
+                return stat;
               }
+              return this.statHandler!(stat);
+            }
             : null;
           processor.afterSetStat = (stat, parent, index) => {
             const { childrenKey, updateBehavior } = this;
@@ -359,7 +334,7 @@ const cpt = defineComponent({
       },
     },
   },
-  created() {},
+  created() { },
   mounted() {
     if (this.watermark === false) {
       // @ts-ignore
@@ -413,6 +388,7 @@ function reactiveFirstArg(func: any) {
 .he-tree--rtl {
   direction: rtl;
 }
+
 .he-tree-drag-placeholder {
   background: #ddf2f9;
   border: 1px dashed #00d9ff;
