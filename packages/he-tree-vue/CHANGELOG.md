@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.8](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.7...@he-tree/vue@2.2.8) (2023-03-19)
+
+
+### Bug Fixes
+
+* **basetree:** update dependence virtual-list to fix long list(3000 length) error ([2dc4937](https://github.com/phphe/he-tree/commit/2dc49375b9ffd31bc065630d7e54f5b1d82def89))
+
+
+
+
+
 ## [2.2.7](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.6...@he-tree/vue@2.2.7) (2023-02-18)
 
 
