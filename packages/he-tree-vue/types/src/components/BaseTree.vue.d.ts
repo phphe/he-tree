@@ -158,6 +158,10 @@ declare const cpt: DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    nodeKey: {
+        type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
+        default: string;
+    };
 }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
     value: {
         required: boolean;
@@ -316,6 +320,10 @@ declare const cpt: DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    nodeKey: {
+        type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
+        default: string;
+    };
 }>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -376,6 +384,7 @@ declare const cpt: DefineComponent<{
     virtualizationPrerenderCount: number;
     btt: boolean;
     watermark: boolean;
+    nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
 }>;
 export default cpt;
 export declare type BaseTreeType = InstanceType<typeof cpt>;

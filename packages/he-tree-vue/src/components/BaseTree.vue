@@ -2,7 +2,7 @@
   <VirtualList class="he-tree" :class="{
     'he-tree--rtl rtl': rtl,
     'he-tree--drag-overing drag-overing': dragOvering,
-  }" ref="vtlist" :items="visibleStats" :disabled="!virtualization" :table="table">
+  }" ref="vtlist" :items="visibleStats" :disabled="!virtualization" :table="table" :itemKey="nodeKey">
     <template #prepend>
       <slot name="prepend" :tree="self"></slot>
     </template>
@@ -98,6 +98,12 @@ const cpt = defineComponent({
      */
     table: { type: Boolean, default: false },
     watermark: { type: Boolean, default: true },
+    nodeKey: {
+      type: [String, Function] as PropType<
+        "index" | ((stat: Stat<any>, index: number) => any)
+      >,
+      default: 'index',
+    },
   },
   emits: [
     "update:modelValue",

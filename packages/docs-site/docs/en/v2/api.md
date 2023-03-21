@@ -107,6 +107,14 @@ Render as table.
 
 Print a watermark information to browser console.
 
+#### nodeKey
+
+Use`index` or return a unique value as key for Vue loop.
+
+```js
+{ type:  "index" | ((stat: Stat<any>, index: number) => any), default: 'index' }
+```
+
 ### data
 
 #### stats

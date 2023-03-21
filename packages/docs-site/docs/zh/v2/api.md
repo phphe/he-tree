@@ -107,6 +107,14 @@
 
 向浏览器控制台输出一条水印信息.
 
+#### nodeKey
+
+使用 index 或者返回一个唯一值作为 Vue 循环的 key。
+
+```js
+{ type:  "index" | ((stat: Stat<any>, index: number) => any), default: 'index' }
+```
+
 ### data
 
 #### stats
