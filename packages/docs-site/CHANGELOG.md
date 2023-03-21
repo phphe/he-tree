@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/phphe/he-tree/compare/docs-site@1.1.1...docs-site@1.2.0) (2023-03-21)
+
+
+### Features
+
+* add prop 'nodeKey' for Vue loop key ([9e9fc9f](https://github.com/phphe/he-tree/commit/9e9fc9fde6c3d9f8a39862057326a574eea98c30))
+
+
+
+
+
 ## [1.1.1](https://github.com/phphe/he-tree/compare/docs-site@1.1.0...docs-site@1.1.1) (2022-12-08)
 
 

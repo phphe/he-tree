@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.8...@he-tree/vue@2.3.0) (2023-03-21)
+
+
+### Features
+
+* add prop 'nodeKey' for Vue loop key ([9e9fc9f](https://github.com/phphe/he-tree/commit/9e9fc9fde6c3d9f8a39862057326a574eea98c30))
+
+
+
+
+
 ## [2.2.8](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.7...@he-tree/vue@2.2.8) (2023-03-19)
 
 
