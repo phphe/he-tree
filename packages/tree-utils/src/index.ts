@@ -152,7 +152,7 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
     },
     getChecked(withDemi = false) {
       return this.statsFlat!.filter((v) => {
-        return v.checked || (withDemi && v.checked === null);
+        return v.checked || (withDemi && v.checked === 0);
       });
     },
     getUnchecked(withDemi = true) {
@@ -397,7 +397,7 @@ export function statDefault() {
   } as {
     isStat: true;
     hidden: boolean;
-    checked: boolean | null; // null mean just part of children checked
+    checked: boolean | 0; // 0 mean just part of children checked
     draggable: boolean | null; //null mean inhert parent
     droppable: boolean | null; //null mean inhert parent
     style: any;
