@@ -154,6 +154,9 @@ const cpt = defineComponent({
       }
       return items.filter((stat) => isVisible(stat));
     },
+    rootChildren() {
+      return this.stats
+    },
   },
   methods: {
     _emitValue(value: any[]) {
