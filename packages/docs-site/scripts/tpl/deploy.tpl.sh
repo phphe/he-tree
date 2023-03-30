@@ -14,7 +14,7 @@ git commit -m 'deploy'
 git commit -m 'rebuild pages' --allow-empty
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:{git_name}.git master:gh-pages
+git push -f git@github.com:{git_name}.git main:gh-pages
 
 rm -rf dist-prerendered/.git
 cd -
