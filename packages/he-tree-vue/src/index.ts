@@ -6,6 +6,7 @@ export {
   default as Draggable,
   context as dragContext,
 } from "./components/DraggableTree";
+export { walkTreeData } from "helper-js";
 
 export function pro(account: string, secretKey: string): typeof Draggable {
   try {
