@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/phphe/he-tree/compare/docs-site@1.2.0...docs-site@1.3.0) (2023-03-30)
+
+
+### Features
+
+* change font ([32bce6b](https://github.com/phphe/he-tree/commit/32bce6b853f8502d72615540257004353424ebad))
+* change scrollbar style ([52a3289](https://github.com/phphe/he-tree/commit/52a328906a5a5a9e2afc925d7519541ef0816a8f))
+* document optimization ([8dea4cb](https://github.com/phphe/he-tree/commit/8dea4cb272ef8f86a26c4eae115871e513fa7a61))
+
+
+
+
+
 # [1.2.0](https://github.com/phphe/he-tree/compare/docs-site@1.1.1...docs-site@1.2.0) (2023-03-21)
 
 

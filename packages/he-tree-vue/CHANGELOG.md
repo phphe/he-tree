@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.3.0...@he-tree/vue@2.4.0) (2023-03-30)
+
+
+### Features
+
+* **basetree:** add computed property: rootChildren ([dbe0564](https://github.com/phphe/he-tree/commit/dbe05642de47af0c0938c773bb7d01c9b806cc78))
+* document optimization ([8dea4cb](https://github.com/phphe/he-tree/commit/8dea4cb272ef8f86a26c4eae115871e513fa7a61))
+* export walkTreeData method to helper iterate tree data ([54e6d12](https://github.com/phphe/he-tree/commit/54e6d12fc9cd8531e9a35dd3fda896f4cae63e9b))
+
+
+
+
+
 # [2.3.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.2.8...@he-tree/vue@2.3.0) (2023-03-21)
 
 
