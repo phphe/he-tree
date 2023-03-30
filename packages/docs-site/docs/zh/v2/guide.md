@@ -174,7 +174,7 @@ import '@he-tree/vue/style/default.css'
 </script>
 ```
 
-仅提供折叠与勾选的逻辑, 你需要通过 Vue 插槽传入你自己的样式代码. 其中`stat.checked` 有 3 个值:`true, false, null`. `null`表示子级部分选中, 你可以用其确定半选状态. 相关方法: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible).
+仅提供折叠与勾选的逻辑, 你需要通过 Vue 插槽传入你自己的样式代码. 其中`stat.checked` 有 3 个值:`true, false, 0`. `0`表示子级部分选中, 你可以用其确定半选状态. 当父节点勾选时，所有子节点将被勾选. 当所有子节点勾选时，父节点将被勾选。当部分子节点勾选时，父节点的`checked`值变为`0`. 如果你需要其他勾选逻辑，不要死磕`checked`, 你可以在节点上增加一个其他属性来实现. 相关方法: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible).
 
 ### 拖拽
 
@@ -331,6 +331,77 @@ import '@he-tree/vue/style/default.css'
 使用虚拟列表时需要给树或其父元素设置高度, 否则会自动扩展高度为最大. 相关 props: [virtualization](api.md#virtualization), [virtualizationPrerenderCount](api.md#virtualizationPrerenderCount)
 
 虚拟列表由我的另一个库`virtual-list`实现. [virtual-list](https://github.com/phphe/virtual-list).
+
+## 遍历树形数据
+
+使用`walkTreeData`方法遍历树形数据。
+
+```js
+// Vue3
+import { walkTreeData } from '@he-tree/vue'
+// Vue2
+import { walkTreeData } from '@he-tree/vue/vue2'
+
+walkTreeData(node, (node, index, parent) => {}, {
+  childrenKey: 'children',
+  reverse: false,
+  childFirst: false,
+})
+```
+
+树形数据示例, `childrenKey`必须正确：
+
+```js
+let treeData1 = { a: 1, children: [{ b: 1 }] }
+let treeData2 = [{ a: 1, children: [{ b: 1 }] }, { c: 1 }]
+let treeData3 = { a: 1, sub: [{ b: 1 }] }
+```
+
+详细类型：
+
+```ts
+declare function walkTreeData<T extends Object>(
+  obj: T | T[],
+  handler: WalkTreeDataHandler<T>,
+  opt?: WalkTreeDataOptions
+): void
+declare type WalkTreeDataHandler<T> = (
+  node: T,
+  index: number,
+  parent: T | null,
+  path: TreeDataPath
+) => void | false | 'skip children' | 'skip siblings'
+declare type WalkTreeDataOptions = {
+  childrenKey?: string
+  reverse?: boolean
+  childFirst?: boolean
+}
+```
+
+`WalkTreeDataHandler` 返回不同的值的效果：
+
+- `false`: 停止遍历
+- `skip children`: 跳过当前节点的子节点
+- `skip siblings`: 跳过当前节点的同级节点
+- 其他值: 无影响
+
+`WalkTreeDataOptions`:
+
+- `childrenKey`: 树形数据子节点的`key`, 默认是`children`.
+- `reverse`: 遍历节点数组时，从后往前遍历。
+- `childFirst`: 先遍历子节点。
+
+例子，寻找所有 2 级节点：
+
+```js
+let results = []
+walkTreeData(tree.rootChildren, (stat) => {
+  if (stat.level === 2) {
+    results.push(stat)
+    return `skip children`
+  }
+})
+```
 
 ## 默认展开所有节点
 

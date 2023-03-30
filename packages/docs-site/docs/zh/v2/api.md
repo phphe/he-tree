@@ -1,6 +1,6 @@
 # API
 
-`he-tree`导出两个组件, BaseTree 和 Draggable. BaseTree 是基础组件. Draggable 继承于前者, 包含拖拽功能. 下文中的内容根据此粗略地分成了两部分.
+`he-tree`导出两个组件, [BaseTree](#basetree) 和 [Draggable](#draggable). BaseTree 是基础组件. Draggable 继承于前者, 包含拖拽功能. 下文中的内容根据此粗略地分成了两部分.
 
 下文中的`Stat<never>`, `Stat<unknown>`是 TypeScript 的类型格式. 其中的`unknown`, `never`, `any`基本都是指使用者提供的节点数据类型. `Stat<never>`和`Stat<unknown>`是一样的, 表示使用者的节点数据的[stat](#Stat).
 
@@ -10,13 +10,13 @@
 
 ### props
 
-#### updateBehavior
+#### btt
 
-当内部数据变动时, 更新到外部的方式.
+```js
+{ type: Boolean, default: false }
+```
 
-- modify: 默认. 直接修改绑定的数据对象.
-- new: 提交一个新的数据对象, 适用于 vuex.
-- disabled: 不提交. 你可以使用[getData](api.md#getData)方法手动生成并获取当前数据.
+由下向上显示.
 
 #### childrenKey
 
@@ -25,6 +25,54 @@
 ```
 
 指定数据中的`children` key
+
+#### defaultOpen
+
+```js
+{ type: Boolean, default: true }
+```
+
+默认展开所有节点.
+
+#### indent
+
+```js
+{ type: Number, default: 20 }
+```
+
+节点缩进像素.
+
+#### nodeKey
+
+使用 index 或者返回一个唯一值作为 Vue 循环的 key。
+
+```js
+{ type:  "index" | ((stat: Stat<any>, index: number) => any), default: 'index' }
+```
+
+#### rtl
+
+```js
+{ type: Boolean, default: false }
+```
+
+由右向左显示.
+
+#### statHandler
+
+```js
+{ type: (stat: Stat<any>) => Stat<any> }
+```
+
+钩子函数. 数据初始时处理每一个[stat](#Stat).
+
+#### table
+
+```js
+{ type: Boolean, default: false }
+```
+
+渲染为表格.
 
 #### textKey
 
@@ -35,13 +83,13 @@
 
 指定数据中的`text` key. 默认模板会显示它. 如果你通过插槽自定义了节点, 这个可能就不需要了.
 
-#### indent
+#### updateBehavior
 
-```js
-{ type: Number, default: 20 }
-```
+当内部数据变动时, 更新到外部的方式.
 
-节点缩进像素.
+- modify: 默认. 直接修改绑定的数据对象.
+- new: 提交一个新的数据对象, 适用于 vuex.
+- disabled: 不提交. 你可以使用[getData](api.md#getData)方法手动生成并获取当前数据.
 
 #### virtualization
 
@@ -59,46 +107,6 @@
 
 虚拟列表初始渲染数量.用于 SSR(服务端渲染).
 
-#### defaultOpen
-
-```js
-{ type: Boolean, default: true }
-```
-
-默认展开所有节点.
-
-#### statHandler
-
-```js
-{ type: (stat: Stat<any>) => Stat<any> }
-```
-
-钩子函数. 数据初始时处理每一个[stat](#Stat).
-
-#### rtl
-
-```js
-{ type: Boolean, default: false }
-```
-
-由右向左显示.
-
-#### btt
-
-```js
-{ type: Boolean, default: false }
-```
-
-由下向上显示.
-
-#### table
-
-```js
-{ type: Boolean, default: false }
-```
-
-渲染为表格.
-
 #### watermark
 
 ```js
@@ -107,23 +115,7 @@
 
 向浏览器控制台输出一条水印信息.
 
-#### nodeKey
-
-使用 index 或者返回一个唯一值作为 Vue 循环的 key。
-
-```js
-{ type:  "index" | ((stat: Stat<any>, index: number) => any), default: 'index' }
-```
-
 ### data
-
-#### stats
-
-所有 stats, 树形结构.
-
-#### statsFlat
-
-所有 stats, 扁平结构.
 
 #### dragNode
 
@@ -137,79 +129,161 @@
 
 此树实例, 即`this`.
 
+#### stats
+
+```ts
+type 类型 = Stat<你的节点类型>[]
+```
+
+所有 stats, 树形结构.
+
+#### statsFlat
+
+```ts
+type 类型 = Stat<你的节点类型>[]
+```
+
+所有 stats, 扁平结构.
+
+### computed
+
+#### rootChildren
+
+```ts
+type 类型 = Stat<你的节点类型>[]
+```
+
+树的第一级节点的数组的 stats。可以看作不存在的根节点的子集。
+
 ### methods(方法)
 
-#### getStat
+#### methods examples
 
-```ts
-(nodeData: unknown): Stat<unknown>
+一些方法的例子，点击右上角图标查看源码。
+
+<!-- code & demo -->
+
+```vue
+<template>
+  <div>
+    <BaseTree ref="tree" v-model="treeData"
+      ><template #default="{ node, stat }">
+        <input type="checkbox" v-model="stat.checked" />
+        {{ node.text }}
+      </template></BaseTree
+    >
+    <div class="actions">
+      <button @click="addAppendToFirstNode()">add: append to first node</button>
+      <button @click="addAfterSecondNode()">add: after second node</button>
+      <button @click="addNestedNewNodes()">add: nested new nodes</button>
+      <button @click="addMulti()">addMulti</button>
+      <br />
+      <button @click="batchUpdate()">batchUpdate</button>
+      <br />
+      <button @click="$refs.tree.closeAll()">closeAll</button>
+      <button @click="$refs.tree.openAll()">openAll</button>
+      <button @click="getChecked()">getChecked</button>
+      <button @click="getChecked(true)">getChecked(true)</button>
+      <br />
+      <button @click="getDataAll()">getData: all</button>
+      <button @click="getDataFirstNode()">getData: first node</button>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { BaseTree } from '@he-tree/vue'
+  import '@he-tree/vue/style/default.css'
+
+  export default {
+    components: { BaseTree },
+    data() {
+      return {
+        treeData: [
+          {
+            text: 'Projects',
+            children: [
+              {
+                text: 'Frontend',
+              },
+              {
+                text: 'Backend',
+              },
+            ],
+          },
+          { text: 'Photos' },
+          { text: 'Videos' },
+        ],
+      }
+    },
+    methods: {
+      notify() {
+        alert(`已经输出结果到浏览器控制台，请检查`)
+      },
+      addAppendToFirstNode() {
+        this.$refs.tree.add(
+          { text: 'new node' },
+          this.$refs.tree.rootChildren[0],
+          this.$refs.tree.rootChildren[0].children.length
+        )
+      },
+      addAfterSecondNode() {
+        this.$refs.tree.add({ text: 'new node' }, null, 2)
+      },
+      addNestedNewNodes() {
+        this.$refs.tree.add(
+          { text: 'new parent', children: [{ text: 'new child' }] },
+          null,
+          2
+        )
+      },
+      addMulti() {
+        // nested new nodes supported
+        this.$refs.tree.addMulti(
+          [{ text: 'addMulti1' }, { text: 'addMulti2' }],
+          this.$refs.tree.rootChildren[1],
+          0
+        )
+      },
+      batchUpdate() {
+        this.$refs.tree.batchUpdate(() => {
+          this.addAppendToFirstNode()
+          this.addMulti()
+        })
+      },
+      getChecked(withDemi) {
+        console.log(this.$refs.tree.getChecked(withDemi))
+        this.notify()
+      },
+      getDataAll() {
+        console.log(this.$refs.tree.getData())
+        this.notify()
+      },
+      getDataFirstNode() {
+        console.log(
+          this.$refs.tree.getData(null, this.$refs.tree.rootChildren[0])
+        )
+        this.notify()
+      },
+    },
+  }
+</script>
+<style scoped>
+  .actions {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  button {
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    font-size: small;
+  }
+</style>
 ```
-
-根据节点数据获取节点的`stat`.
-
-#### has
-
-```ts
-(nodeData: unknown): boolean
-```
-
-判断此树是否包含对应节点数据的`stat`.
-
-#### getChecked
-
-```ts
-(withDemi?: boolean | undefined): Stat<unknown>[]
-```
-
-获取所有勾选的节点 stat. 参数`withDemi`表示是否包含半选的节点(后代节点未完全选中).
-
-#### getUnchecked
-
-```ts
-(withDemi?: boolean | undefined): Stat<unknown>[]
-```
-
-获取所有未勾选的节点 stat. 参数`withDemi`表示是否包含半选的节点(后代节点未完全选中).
-
-#### updateCheck
-
-```ts
-(): void
-```
-
-从末端到根, 重新计算每个节点的勾选状态.
-
-#### openAll
-
-```ts
-(): void
-```
-
-展开所有节点.
-
-#### closeAll
-
-```ts
-(): void
-```
-
-折叠所有节点.
-
-#### isVisible
-
-```ts
-(statOrNodeData: Stat<unknown>|unknown): boolean;
-```
-
-判断节点是否可见. 如果父级折叠, 则后代不可见. 参数可以是节点数据或 stat.
-
-#### move
-
-```ts
-(stat: Stat<unknown>, parent: Stat<unknown> | null, index: number): boolean;
-```
-
-移动节点. parent 为 null 时代表根节点.
 
 #### add
 
@@ -217,7 +291,7 @@
 (nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
 ```
 
-增加节点. parent 为 null 时代表根节点.
+增加节点. parent 为 null 时代表根节点. [示例](#methods-examples)
 
 #### addMulti
 
@@ -229,31 +303,87 @@
 ): void;
 ```
 
-增加多个连续节点. parent 为 null 时代表根节点.
-
-#### remove
-
-```ts
-(stat: Stat<unknown>): boolean;
-```
-
-删除节点.
-
-#### removeMulti
-
-```ts
-(dataArr: any[]): boolean;
-```
-
-删除多个节点.
+增加多个连续节点. parent 为 null 时代表根节点. [示例](#methods-examples)
 
 #### batchUpdate
 
 ```ts
-(task: () => any | Promise<any>): void;
+(task: () => any): void;
 ```
 
-操作数据时, 会导致组件内部提交整个树的新数据. 此方法可以合并多个操作, 从而只提交一次.
+操作数据时, 会导致组件内部提交整个树的新数据. 此方法可以合并多个操作, 从而只提交一次. [示例](#methods-examples)
+
+#### closeAll
+
+```ts
+(): void
+```
+
+折叠所有节点. [示例](#methods-examples)
+
+#### getChecked
+
+```ts
+(withDemi?: boolean | undefined): Stat<unknown>[]
+```
+
+获取所有勾选的节点 stat. 参数`withDemi`表示是否包含半选的节点(后代节点未完全选中). [示例](#methods-examples)
+
+#### getData
+
+```ts
+(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
+```
+
+生成并获取当前树的树形数据. 移除了 stat. 参数`filter`可以对每个数据进行处理. [示例](#methods-examples)
+
+#### getRootEl
+
+```ts
+(): HTMLElement;
+```
+
+获取当前树的根元素.
+
+#### getSiblings
+
+```ts
+(stat: Stat<never>): Stat<never>[];
+```
+
+获取一个节点的同级.
+
+#### getStat
+
+```ts
+(nodeData: unknown): Stat<unknown>
+```
+
+根据节点数据获取节点的`stat`.
+
+#### getUnchecked
+
+```ts
+(withDemi?: boolean | undefined): Stat<unknown>[]
+```
+
+获取所有未勾选的节点 stat. 参数`withDemi`表示是否包含半选的节点(后代节点未完全选中).
+
+#### has
+
+```ts
+(nodeData: unknown): boolean
+```
+
+判断此树是否包含对应节点数据的`stat`.
+
+#### isVisible
+
+```ts
+(statOrNodeData: Stat<unknown>|unknown): boolean;
+```
+
+判断节点是否可见. 如果父级折叠, 则后代不可见. 参数可以是节点数据或 stat.
 
 #### iterateParent
 
@@ -271,47 +401,63 @@ for (const parentStat of tree.iterateParent(nodeStat, { withSelf: false })) {
 }
 ```
 
-#### getSiblings
+#### move
 
 ```ts
-(stat: Stat<never>): Stat<never>[];
+(stat: Stat<unknown>, parent: Stat<unknown> | null, index: number): boolean;
 ```
 
-获取一个节点的同级.
+移动节点. parent 为 null 时代表根节点. 参考`add`的例子：[示例](#methods-examples)
 
-#### getData
+#### openAll
 
 ```ts
-(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
+(): void
 ```
 
-生成并获取当前树的树形数据. 移除了 stat. 参数`filter`可以对每个数据进行处理.
+展开所有节点. [示例](#methods-examples)
 
-#### getRootEl
+#### remove
 
 ```ts
-(): HTMLElement;
+(stat: Stat<unknown>): boolean;
 ```
 
-获取当前树的根元素.
+删除节点.
+
+#### removeMulti
+
+```ts
+(dataArr: any[]): boolean;
+```
+
+删除多个节点.
+
+#### updateCheck
+
+```ts
+(): void
+```
+
+从末端到根, 重新计算每个节点的勾选状态.
 
 ### events(事件)
+
+#### check:node
+
+参数: stat. 节点勾选状态改变时触发.
 
 #### click:node
 
 参数: stat. 点击节点时触发.
 
-#### open:node
-
-参数: stat. 展开节点时触发.
-
 #### close:node
 
 参数: stat. 折叠节点时触发.
 
-#### check:node
+#### open:node
 
-参数: stat. 节点勾选状态改变时触发.
+参数: stat. 展开节点时触发.
 
 ### slots(插槽)
 
@@ -346,15 +492,13 @@ for (const parentStat of tree.iterateParent(nodeStat, { withSelf: false })) {
 
 ### props
 
-#### triggerClass
+#### beforeDragOpen
 
-```js
-{
-  type: [String, Array]
-} // string | string[]
+```ts
+(stat: Stat<any>) : void | Promise<void>
 ```
 
-触发拖拽的元素样式. 默认是节点本身. 可以设置成节点的某个子元素. 支持多个样式.
+钩子函数. 拖动到节点上层时打开节点前执行. 可以返回 Promise.
 
 #### disableDrag
 
@@ -376,30 +520,6 @@ for (const parentStat of tree.iterateParent(nodeStat, { withSelf: false })) {
 
 禁用此树的**拖入**功能.
 
-#### eachDraggable
-
-```ts
-(stat: Stat<any>) : boolean | null
-```
-
-钩子函数. 设置每个节点是否可**拖动**. 子级如果没有指定, 会继承父级的值.
-
-#### eachDroppable
-
-```ts
-(stat: Stat<any>) : boolean | null
-```
-
-钩子函数. 设置每个节点是否可**拖入**. 子级如果没有指定, 会继承父级的值.
-
-#### rootDroppable
-
-```ts
-boolean | () : boolean
-```
-
-钩子函数. 设置最高级(根)是否可**拖入**. 默认`true`.
-
 #### dragOpen
 
 ```js
@@ -416,21 +536,29 @@ boolean | () : boolean
 
 拖动到节点上层时打开节点前的等待的毫秒.
 
-#### beforeDragOpen
+#### eachDraggable
 
 ```ts
-(stat: Stat<any>) : void | Promise<void>
+(stat: Stat<any>) : boolean | null
 ```
 
-钩子函数. 拖动到节点上层时打开节点前执行. 可以返回 Promise.
+钩子函数. 设置每个节点是否可**拖动**. 子级如果没有指定, 会继承父级的值.
 
-#### resolveStartMovePoint
+#### eachDroppable
 
 ```ts
-"mouse" | "default" | ((dragElement: HTMLElement) : Point)
+(stat: Stat<any>) : boolean | null
 ```
 
-拖动节点将被看做一个点. 拖动开始时如何获取拖动点的坐标. 默认获取节点的左上角. `mouse`表示使用鼠标坐标. 或者传入函数返回自定义坐标: `{x:number,y:number}`.
+钩子函数. 设置每个节点是否可**拖入**. 子级如果没有指定, 会继承父级的值.
+
+#### externalDataHandler
+
+```ts
+(event: DragEvent) : any
+```
+
+当外部使用 Drag and Drop API 拖拽到树上层并结束拖拽时发生. 用来告知树此次拖拽应该接收的数据.
 
 #### keepPlaceholder
 
@@ -458,13 +586,31 @@ boolean | () : boolean
 
 当外部使用 Drag and Drop API 拖拽到树上层时发生. 参数 event 是 Drag and Drop API 原生事件`dragover`的事件对象. 返回布尔值判断是否处理该事件.
 
-#### externalDataHandler
+#### resolveStartMovePoint
 
 ```ts
-(event: DragEvent) : any
+"mouse" | "default" | ((dragElement: HTMLElement) : Point)
 ```
 
-当外部使用 Drag and Drop API 拖拽到树上层并结束拖拽时发生. 用来告知树此次拖拽应该接收的数据.
+拖动节点将被看做一个点. 拖动开始时如何获取拖动点的坐标. 默认获取节点的左上角. `mouse`表示使用鼠标坐标. 或者传入函数返回自定义坐标: `{x:number,y:number}`.
+
+#### rootDroppable
+
+```ts
+boolean | () : boolean
+```
+
+钩子函数. 设置最高级(根)是否可**拖入**. 默认`true`.
+
+#### triggerClass
+
+```js
+{
+  type: [String, Array]
+} // string | string[]
+```
+
+触发拖拽的元素样式. 默认是节点本身. 可以设置成节点的某个子元素. 支持多个样式.
 
 ### methods(方法)
 
@@ -494,14 +640,6 @@ boolean | () : boolean
 
 ### events(事件)
 
-#### enter
-
-参数: DragEvent. 拖拽进入时触发.
-
-#### leave
-
-参数: DragEvent. 拖拽离开时触发.
-
 #### after-drop
 
 参数: 无. 拖拽完成时触发. 跨树时, 仅在**拖入**的树触发.
@@ -509,6 +647,14 @@ boolean | () : boolean
 #### change
 
 参数: 无. 拖拽完成且造成改变时触发. 跨树时, 两棵树都会触发.
+
+#### enter
+
+参数: DragEvent. 拖拽进入时触发.
+
+#### leave
+
+参数: DragEvent. 拖拽离开时触发.
 
 ## Others
 
@@ -526,7 +672,7 @@ boolean | () : boolean
   level: number // 层级. 层级从1开始.
   isStat: boolean // 是否是stat对象
   hidden: boolean // 是否隐藏
-  checked: boolean | null // 是否勾选. null表示后代节点部分勾选
+  checked: boolean | 0 // 是否勾选. 0表示后代节点部分勾选
   draggable: boolean | null // 是否可拖动. null表示继承父级.
   droppable: boolean | null // 是否可拖入. null表示继承父级.
   style: any // 自定义样式. 支持Vue的style格式.

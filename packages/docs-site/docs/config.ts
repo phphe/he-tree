@@ -8,7 +8,7 @@ export default {
   ANALYTICS_ID: 'G-L74NT4DL5X',
   ORIGIN_PROD: 'https://hetree.phphe.com', // production host name
   GIT_NAME: 'phphe/he-tree',
-  VERSION: '2.*.*',
+  VERSION: '2.x',
   MENU: [
     {
       text: 'Guide',
@@ -30,7 +30,7 @@ export default {
   SUBPATH: [
     {
       match: (url: string) => urlHasDir(url, 'v1'),
-      version: '1.*.*',
+      version: '1.x',
       homePath: '/v1',
       menu: [
         {
@@ -65,6 +65,8 @@ export default {
         'More Examples': '更多例子',
         Search: '搜索',
         'No search results': '没有匹配的结果',
+        Pro: 'Pro',
+        'Hire Me': '雇佣我',
       },
     },
   },

@@ -174,7 +174,7 @@ import '@he-tree/vue/style/default.css'
 </script>
 ```
 
-Only function provided, you need add your own ui by slot. `stat.checked` has 3 value:`true, false, null`. `null` mean some child checked. Related methods: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible).
+Only function provided, you need add your own ui by slot. `stat.checked` has 3 value:`true, false, 0`. `0` mean only some child checked. When the parent node is checked, all child nodes will be checked. When all child nodes are checked, the parent node will be checked. When some child nodes are checked, the checked value of the parent node becomes 0. If you need other checkbox logic, don't stick to the "checked" attribute. You can add another attribute to the node to achieve it. Related methods: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible).
 
 ### Drag and Drop
 
@@ -331,6 +331,77 @@ The methods to handle data: [getStat](api.md#getStat), [has](api.md#has), [updat
 Set `height` or `max-height` fot tree or its parent, or it will not work.Related props: [virtualization](api.md#virtualization), [virtualizationPrerenderCount](api.md#virtualizationPrerenderCount)
 
 Virtual list is implemented by another library of mine: [virtual-list](https://github.com/phphe/virtual-list).
+
+## Iterate tree-data
+
+Use `walkTreeData`
+
+```js
+// Vue3
+import { walkTreeData } from '@he-tree/vue'
+// Vue2
+import { walkTreeData } from '@he-tree/vue/vue2'
+
+walkTreeData(node, (node, index, parent) => {}, {
+  childrenKey: 'children',
+  reverse: false,
+  childFirst: false,
+})
+```
+
+Tree-data examples, `childrenKey` must be same with the data's:
+
+```js
+let treeData1 = { a: 1, children: [{ b: 1 }] }
+let treeData2 = [{ a: 1, children: [{ b: 1 }] }, { c: 1 }]
+let treeData3 = { a: 1, sub: [{ b: 1 }] }
+```
+
+Typescript type：
+
+```ts
+declare function walkTreeData<T extends Object>(
+  obj: T | T[],
+  handler: WalkTreeDataHandler<T>,
+  opt?: WalkTreeDataOptions
+): void
+declare type WalkTreeDataHandler<T> = (
+  node: T,
+  index: number,
+  parent: T | null,
+  path: TreeDataPath
+) => void | false | 'skip children' | 'skip siblings'
+declare type WalkTreeDataOptions = {
+  childrenKey?: string
+  reverse?: boolean
+  childFirst?: boolean
+}
+```
+
+`WalkTreeDataHandler` return values:
+
+- `false`: stop iterating
+- `skip children`: skip current node's child nodes
+- `skip siblings`: skip current node's siblings
+- other values: no effect
+
+`WalkTreeDataOptions`:
+
+- `childrenKey`: `key` of tree-data's children, default `children`.
+- `reverse`: iterate from last to first
+- `childFirst`: iterate child node first
+
+Example, find all level-2 nodes:
+
+```js
+let results = []
+walkTreeData(tree.rootChildren, (stat) => {
+  if (stat.level === 2) {
+    results.push(stat)
+    return `skip children`
+  }
+})
+```
 
 ## Open all nodes by default
 
