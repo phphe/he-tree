@@ -254,11 +254,33 @@ Follow is example data. Key `children` can be modified by prop [childrenKey](api
 
 ## Data update by component
 
-`v-model` works. The component will clone data as inner data. When inner data changed, there are 3 ways to emit new data. It modifies binded data directly by default. Use prop [updateBehavior](api.md#updateBehavior) to set the new data emit behavior. Available values of updateBehavior:
+First use `v-model`. The component will clone data as inner data. When inner data changed, there are 3 ways to emit new data. It modifies binded data directly by default. Use prop [updateBehavior](api.md#updateBehavior) to set the new data emit behavior. Available values of updateBehavior:
 
-- modify: modify binded data.
-- new: emit new data, suit for vuex.
+- modify: modify binded data. For example, when a node changes, only that node is modified while the data object binded to `v-model` remains the same.
+- new: emit new data, suit for vuex. The data object binded to `v-model` will be a new object. More check below's Vuex example.
 - disabled: don't do anything. You can use [getData](api.md#getData) method to generate and get new data when you want.
+
+### Vuex Example
+
+```vue
+<template>
+  <YourTree v-model="treeData" />
+</template>
+<script>
+  export default {
+    computed: {
+      treeData: {
+        get() {
+          return this.$store.state.treeData
+        },
+        set(value) {
+          this.$store.commit('updateTreeData', value)
+        },
+      },
+    },
+  }
+</script>
+```
 
 ## Data update by user
 
@@ -583,9 +605,11 @@ When drag over a node, it will be open by default. Use prop [dragOpen](api.md#dr
 
 ### Placeholder
 
-It will use a light blue box to mark droppable position when drag. Use slot `placeholder` to customize it, such as add tips.
+It is the drop area when drag. It will use a light blue box to mark droppable position when drag. Use slot `placeholder` to customize it, such as add tips.
 
 When drag leave tree, placeholder will be removed. Use prop [keepPlaceholder](api.md#keepPlaceholder) to keep placeholder even leave tree.
+
+It has css class name `drag-placeholder`. You can use the name to customize its style.
 
 ### Runtime info when drag
 

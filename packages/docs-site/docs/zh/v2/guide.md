@@ -254,11 +254,33 @@ import '@he-tree/vue/style/default.css'
 
 ## 数据更新(内部行为)
 
-可以使用`v-model`绑定数据. 本组件会复制数据对象作为内部数据. 当内部数据变动时, 例如拖拽时, 有 3 种方式提交新数据到外部. 默认情况下直接修改绑定的数据对象. 通过 prop [updateBehavior](api.md#updateBehavior)设置. updateBehavior 的值:
+可以使用`v-model`绑定数据. 本组件会复制数据对象作为内部数据. 当内部数据变动时, 例如拖拽时, 有 3 种方式提交新数据到外部. 默认情况下直接修改绑定的数据对象的变动的局部. 通过 prop [updateBehavior](api.md#updateBehavior)设置数据提交方式. updateBehavior 的值:
 
-- modify: 直接修改绑定的数据对象.
-- new: 提交一个新的数据对象, 适用于 vuex.
+- modify: 直接修改绑定的数据对象. 例如当一个节点改变时，将修改此节点，而`v-model`绑定的对象还是原对象。
+- new: 提交一个新的数据对象, 适用于 vuex. `v-model`绑定的对象将变为新对象。参考下一节的 vuex 例子。
 - disabled: 不提交. 你可以使用[getData](api.md#getData)方法手动生成并获取当前数据.
+
+### Vuex 例子
+
+```vue
+<template>
+  <YourTree v-model="treeData" />
+</template>
+<script>
+  export default {
+    computed: {
+      treeData: {
+        get() {
+          return this.$store.state.treeData
+        },
+        set(value) {
+          this.$store.commit('updateTreeData', value)
+        },
+      },
+    },
+  }
+</script>
+```
 
 ## 数据修改(外部操作)
 
@@ -583,9 +605,11 @@ walkTreeData(tree.rootChildren, (stat) => {
 
 ### 占位元素
 
-拖拽时, 会生成一个元素默认淡蓝色背景, 用以标识可放置的位置. 使用插槽`placeholder`控制它, 例如添加提示文字.
+表示拖拽时的可放置区域。拖拽时, 会生成一个元素默认淡蓝色背景, 用以标识可放置的位置. 使用插槽`placeholder`控制它, 例如添加提示文字.
 
 拖拽时, 如果离开树, 占位元素将会被删掉, 如果此时停止拖拽, 树将恢复原状. 通过 prop [keepPlaceholder](api.md#keepPlaceholder)可使占位元素在拖拽结束前一直保留.
+
+占位元素有类: `drag-placeholder`. 可以使用这个类名自定义它的样式。
 
 ### 拖拽时相关信息
 
