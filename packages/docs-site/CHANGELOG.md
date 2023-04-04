@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/phphe/he-tree/compare/docs-site@1.3.0...docs-site@1.4.0) (2023-04-04)
+
+
+### Bug Fixes
+
+* update deploy script ([c8fac8b](https://github.com/phphe/he-tree/commit/c8fac8b908ee70efe65c20a5af17c62735eccf77))
+
+
+### Features
+
+* add dragContext example ([20a0a38](https://github.com/phphe/he-tree/commit/20a0a389c9656f85a442716cf71d23768640a89d))
+* add vuex example ([4db3174](https://github.com/phphe/he-tree/commit/4db3174498b176a095f008f6fdb91d9e97d1a7ea))
+* code & demo add bottom switcher ([3ad2963](https://github.com/phphe/he-tree/commit/3ad2963bac9e8d3af0813dd8b82226cf293eef6d))
+
+
+
+
+
 # [1.3.0](https://github.com/phphe/he-tree/compare/docs-site@1.2.0...docs-site@1.3.0) (2023-03-30)
 
 
