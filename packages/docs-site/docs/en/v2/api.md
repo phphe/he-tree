@@ -653,11 +653,11 @@ Parameters: nothing. Triggered after changed by drop. Triggered on both 2 trees 
 
 #### enter
 
-Parameters: DragEvent. Triggered when drag enter.
+Parameters: DragEvent. Triggered when drag enter a tree.
 
 #### leave
 
-Parameters: DragEvent. Triggered when drag leave.
+Parameters: DragEvent. Triggered when drag leave a tree.
 
 ## Others
 
@@ -685,7 +685,7 @@ Each node has a stat created by tree. It stores runtime info.
 
 ### dragContext
 
-Runtime info when drag. including: startInfo, targetInfo, dragNode, startTree, targetTree. Import:
+Runtime info when drag. [Example](#example---dragcontext). including: startInfo, targetInfo, dragNode, startTree, targetTree. Import:
 
 ```ts
 // vue3
@@ -713,6 +713,47 @@ Draggable component instance. The tree drag start at.
 #### targetTree
 
 Draggable component instance. Drag target tree.
+
+#### Example - dragContext
+
+Use the dragContext to obtain the dragNode in [eachDroppable](#eachdroppable) and achieve the following effect: odd nodes only accept odd nodes, even nodes only accept even nodes.
+
+<!-- code & demo -->
+
+```vue
+<template>
+  <Draggable ref="tree" v-model="treeData" :eachDroppable="eachDroppable" />
+</template>
+
+<script>
+  import { Draggable, dragContext } from '@he-tree/vue'
+  import '@he-tree/vue/style/default.css'
+
+  export default {
+    components: { Draggable },
+    data() {
+      return {
+        treeData: [
+          { text: '1' },
+          { text: '2' },
+          { text: '3' },
+          { text: '4' },
+          { text: '5' },
+          { text: '6' },
+        ],
+      }
+    },
+    methods: {
+      eachDroppable(targetStat) {
+        const isOdd = (n) => parseInt(n) % 2 === 1
+        return (
+          isOdd(targetStat.data.text) === isOdd(dragContext.dragNode.data.text)
+        )
+      },
+    },
+  }
+</script>
+```
 
 ### StartInfo
 

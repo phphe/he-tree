@@ -650,11 +650,11 @@ boolean | () : boolean
 
 #### enter
 
-参数: DragEvent. 拖拽进入时触发.
+参数: DragEvent. 拖拽进入树元素边界时触发.
 
 #### leave
 
-参数: DragEvent. 拖拽离开时触发.
+参数: DragEvent. 拖拽离开树元素边界时触发.
 
 ## Others
 
@@ -682,7 +682,7 @@ boolean | () : boolean
 
 ### dragContext
 
-拖拽时的相关信息对象. 包括属性: startInfo, targetInfo, dragNode, startTree, targetTree. 引入:
+拖拽时的相关信息对象，[例子](#example---dragcontext). 包括属性: startInfo, targetInfo, dragNode, startTree, targetTree. 引入:
 
 ```ts
 // vue3
@@ -710,6 +710,47 @@ Draggable 组件实例. 拖拽的起始树.
 #### targetTree
 
 Draggable 组件实例. 拖拽的目标树.
+
+#### Example - dragContext
+
+在[eachDroppable](#eachdroppable)中通过 dragContext 获取 dragNode，达成效果：奇数节点只接收奇数节点，偶数节点只接收偶数节点。
+
+<!-- code & demo -->
+
+```vue
+<template>
+  <Draggable ref="tree" v-model="treeData" :eachDroppable="eachDroppable" />
+</template>
+
+<script>
+  import { Draggable, dragContext } from '@he-tree/vue'
+  import '@he-tree/vue/style/default.css'
+
+  export default {
+    components: { Draggable },
+    data() {
+      return {
+        treeData: [
+          { text: '1' },
+          { text: '2' },
+          { text: '3' },
+          { text: '4' },
+          { text: '5' },
+          { text: '6' },
+        ],
+      }
+    },
+    methods: {
+      eachDroppable(targetStat) {
+        const isOdd = (n) => parseInt(n) % 2 === 1
+        return (
+          isOdd(targetStat.data.text) === isOdd(dragContext.dragNode.data.text)
+        )
+      },
+    },
+  }
+</script>
+```
 
 ### StartInfo
 
