@@ -248,9 +248,7 @@ const cpt = defineComponent({
     const removePlaceholderWhenEnd = () => {
       if (targetTree!.has(targetTree!.placeholderData)) {
         targetTree!.ignoreUpdate(() => {
-          targetTree!.remove(
-            targetTree!.getStat(targetTree!.placeholderData)
-          );
+          targetTree!.remove(targetTree!.getStat(targetTree!.placeholderData));
           // update together to prevent flick
           if (startTree) {
             startTree.dragNode!.hidden = false;
@@ -258,7 +256,7 @@ const cpt = defineComponent({
           }
         });
       }
-    }
+    };
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
         // triggerElement trigger click
@@ -386,7 +384,7 @@ const cpt = defineComponent({
       onLeave: (event) => {
         dragOpenLastNode = null;
         this.dragOvering = false;
-        ctx.preventDefault = false
+        ctx.preventDefault = false;
         removePlaceholder();
         this.$emit("leave", event);
       },
@@ -400,7 +398,7 @@ const cpt = defineComponent({
             ) {
               return;
             } else {
-              ctx.preventDefault = true
+              ctx.preventDefault = true;
             }
           }
           // return if not moved
@@ -414,10 +412,12 @@ const cpt = defineComponent({
           this.dragOvering = true;
           //
           targetTree = this;
-          const movePoint = startMovePoint ? {
-            x: startMovePoint.x + (mouse.x - startMouse.x),
-            y: startMovePoint.y + (mouse.y - startMouse.y),
-          } : {...mouse}
+          const movePoint = startMovePoint
+            ? {
+                x: startMovePoint.x + (mouse.x - startMouse.x),
+                y: startMovePoint.y + (mouse.y - startMouse.y),
+              }
+            : { ...mouse };
           const { btt, rtl } = targetTree;
           // if undroppable, return
           if (targetTree!.disableDrop) {
@@ -753,7 +753,7 @@ const cpt = defineComponent({
           };
         }
         (() => {
-          removePlaceholderWhenEnd()
+          removePlaceholderWhenEnd();
           if (dragChanged) {
             // resolve targetIndex
             let targetIndex = targetInfo.indexBeforeDrop;
@@ -812,8 +812,8 @@ const cpt = defineComponent({
           }
         })();
       },
-      onDragEnd:(event) => {
-        removePlaceholderWhenEnd()
+      onDragEnd: (event) => {
+        removePlaceholderWhenEnd();
         // reset
         if (startTree) {
           startTree.dragNode && (startTree.dragNode.hidden = false);

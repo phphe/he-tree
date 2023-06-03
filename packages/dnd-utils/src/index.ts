@@ -129,10 +129,9 @@ export const defaultOptions = {
   ingoreHTMLTags: ["INPUT", "TEXTAREA", "SELECT", "OPTGROUP", "OPTION"], // uppercase
   ifPreventDefault(event: DragEvent): boolean {
     if (context.dragElement) {
-      return true
+      return true;
     }
     return ctx.preventDefault;
-    
   },
   beforeDragStart(event: MouseEvent | TouchEvent): void | HTMLElement {},
   onDragStart(event: DragEvent) {},
@@ -170,6 +169,22 @@ export type ExtendedDND = Required<Options> & {
   destroy: () => void;
 };
 
+/*
+## extendedDropZone
+为元素绑定DND相关事件。
+其中onEnter和onLeave不是原生事件。
+onEnter原理：
+使用变量表示是否进入，每次触发onDragEnter和onDragOver都会使该变量为真。
+onLeave原理：
+当进入子元素时，会依次触发onDragEnter和onDragLeave事件。onDragEnter时短暂记住事件target，onDragLeave检查是否刚刚触发onDragLeave事件，且事件target是子元素，否则触发onLeave。
+*/
+let justEnteredTarget: Element | null = null;
+const setJustEnteredTarget = (el: Element) => {
+  justEnteredTarget = el;
+  setTimeout(() => {
+    justEnteredTarget = null;
+  }, 20);
+};
 export function extendedDropZone(
   el: Element,
   opt: {
@@ -185,6 +200,7 @@ export function extendedDropZone(
     onEndBeforeLeave?: (event: MouseEvent | TouchEvent | KeyboardEvent) => void;
   } = {}
 ) {
+  const dropZone = el; // just rename
   let entered = false;
   const onEnter = (e: DragEvent) => {
     entered = true;
@@ -192,6 +208,7 @@ export function extendedDropZone(
     endListeners.resume();
   };
   const onDragEnter = (e: DragEvent) => {
+    setJustEnteredTarget(e.target as Element);
     opt.onDragEnter?.(e);
     if (!entered) {
       onEnter(e);
@@ -209,21 +226,13 @@ export function extendedDropZone(
       entered = false;
       opt.onLeave?.(event);
       endListeners.stop();
-    }
-    if (e.target === el) {
-      doLeave()
+    };
+    const justEnter = justEnteredTarget;
+    justEnteredTarget = null;
+    if (justEnter && hp.isDescendantOf(justEnter, dropZone)) {
+      // enter child, does not leave
     } else {
-      // @ts-ignore
-      el._onLeave_dragover_destroy?.()
-      // @ts-ignore
-      const destroy = el._onLeave_dragover_destroy = hp.once(window, "dragover", (e2: DragEvent) => {
-        if (!hp.pointIn(e2.clientX, e2.clientY, el)) {
-          doLeave(e2)
-        }
-      });
-      setTimeout(() => {
-        destroy();
-      }, 1000);
+      doLeave();
     }
   };
 
