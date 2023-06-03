@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.3](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.2...@he-tree/dnd-utils@0.1.0-alpha.3) (2023-06-03)
+
+
+### Bug Fixes
+
+* **cross tree drag:** fix: placeholder does not disappear when drag cross trees ([86bc0e6](https://github.com/phphe/he-tree/commit/86bc0e6b5d552f8e9ef315fcb93ac208ecceb219)), closes [#59](https://github.com/phphe/he-tree/issues/59)
+
+
+
+
+
 # [0.1.0-alpha.2](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.1...@he-tree/dnd-utils@0.1.0-alpha.2) (2022-11-14)
 
 
