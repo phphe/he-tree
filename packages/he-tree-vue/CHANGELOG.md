@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.4.1...@he-tree/vue@2.4.2) (2023-07-02)
+
+
+### Bug Fixes
+
+* **v-model:** tree won't render when v-model change ([5f7f3c1](https://github.com/phphe/he-tree/commit/5f7f3c10e66d39bc7e237f0d3ea0faf96a1a21cd))
+
+
+
+
+
 ## [2.4.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.4.0...@he-tree/vue@2.4.1) (2023-06-03)
 
 
