@@ -168,9 +168,12 @@ const cpt = defineComponent({
      * @param value
      */
     _updateValue(value: any[]) {
-      this._ignoreValueChangeOnce = true;
       if (this.updateBehavior === "disabled") {
         return false;
+      }
+      // if value changed, ignore change once
+      if (value !== this.valueComputed) {
+        this._ignoreValueChangeOnce = true;
       }
       this._emitValue(value);
       return true;
