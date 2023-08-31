@@ -299,6 +299,7 @@ const cpt = defineComponent({
         if (!this.isDraggable(dragNode)) {
           return;
         }
+        this.$emit("beforeDragStart", dragNode);
         return rootEl;
       },
       onDragStart: (event) => {
