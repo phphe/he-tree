@@ -222,6 +222,8 @@ export declare const context: {
             "onOpen:node"?: ((...args: any[]) => any) | undefined;
             "onClose:node"?: ((...args: any[]) => any) | undefined;
             "onCheck:node"?: ((...args: any[]) => any) | undefined;
+            onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+            "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
             "onAfter-drop"?: ((...args: any[]) => any) | undefined;
             onChange?: ((...args: any[]) => any) | undefined;
             onEnter?: ((...args: any[]) => any) | undefined;
@@ -517,7 +519,7 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
-        }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
+        }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
             value: {
                 required: boolean;
                 type: PropType<any[]>;
@@ -661,6 +663,8 @@ export declare const context: {
             "onOpen:node"?: ((...args: any[]) => any) | undefined;
             "onClose:node"?: ((...args: any[]) => any) | undefined;
             "onCheck:node"?: ((...args: any[]) => any) | undefined;
+            onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+            "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
             "onAfter-drop"?: ((...args: any[]) => any) | undefined;
             onChange?: ((...args: any[]) => any) | undefined;
             onEnter?: ((...args: any[]) => any) | undefined;
@@ -888,6 +892,8 @@ export declare const context: {
         "onOpen:node"?: ((...args: any[]) => any) | undefined;
         "onClose:node"?: ((...args: any[]) => any) | undefined;
         "onCheck:node"?: ((...args: any[]) => any) | undefined;
+        onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+        "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
         "onAfter-drop"?: ((...args: any[]) => any) | undefined;
         onChange?: ((...args: any[]) => any) | undefined;
         onEnter?: ((...args: any[]) => any) | undefined;
@@ -1190,6 +1196,8 @@ export declare const context: {
             "onOpen:node"?: ((...args: any[]) => any) | undefined;
             "onClose:node"?: ((...args: any[]) => any) | undefined;
             "onCheck:node"?: ((...args: any[]) => any) | undefined;
+            onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+            "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
             "onAfter-drop"?: ((...args: any[]) => any) | undefined;
             onChange?: ((...args: any[]) => any) | undefined;
             onEnter?: ((...args: any[]) => any) | undefined;
@@ -1485,7 +1493,7 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
-        }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
+        }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
             value: {
                 required: boolean;
                 type: PropType<any[]>;
@@ -1629,6 +1637,8 @@ export declare const context: {
             "onOpen:node"?: ((...args: any[]) => any) | undefined;
             "onClose:node"?: ((...args: any[]) => any) | undefined;
             "onCheck:node"?: ((...args: any[]) => any) | undefined;
+            onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+            "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
             "onAfter-drop"?: ((...args: any[]) => any) | undefined;
             onChange?: ((...args: any[]) => any) | undefined;
             onEnter?: ((...args: any[]) => any) | undefined;
@@ -1856,6 +1866,8 @@ export declare const context: {
         "onOpen:node"?: ((...args: any[]) => any) | undefined;
         "onClose:node"?: ((...args: any[]) => any) | undefined;
         "onCheck:node"?: ((...args: any[]) => any) | undefined;
+        onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+        "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
         "onAfter-drop"?: ((...args: any[]) => any) | undefined;
         onChange?: ((...args: any[]) => any) | undefined;
         onEnter?: ((...args: any[]) => any) | undefined;
@@ -2162,7 +2174,7 @@ declare const cpt: DefineComponent<{
         type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
         default: string;
     };
-}, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
+}, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
     value: {
         required: boolean;
         type: PropType<any[]>;
@@ -2306,6 +2318,8 @@ declare const cpt: DefineComponent<{
     "onOpen:node"?: ((...args: any[]) => any) | undefined;
     "onClose:node"?: ((...args: any[]) => any) | undefined;
     "onCheck:node"?: ((...args: any[]) => any) | undefined;
+    onBeforeDragStart?: ((...args: any[]) => any) | undefined;
+    "onBefore-drag-start"?: ((...args: any[]) => any) | undefined;
     "onAfter-drop"?: ((...args: any[]) => any) | undefined;
     onChange?: ((...args: any[]) => any) | undefined;
     onEnter?: ((...args: any[]) => any) | undefined;
