@@ -113,6 +113,8 @@ const cpt = defineComponent({
     "open:node",
     "close:node",
     "check:node",
+    "beforeDragStart",
+    "before-drag-start",
     "after-drop",
     "change",
     "enter",
