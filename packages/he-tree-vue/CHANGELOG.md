@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.5.0...@he-tree/vue@2.5.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* **events:** add event before-drag-start ([83fa666](https://github.com/phphe/he-tree/commit/83fa6669a039ef3faa0d9434f70423938d57a6d5))
+* **types:** types updated ([5d8cae5](https://github.com/phphe/he-tree/commit/5d8cae5f9be18c88805b628a20bb6ee0aaa11299))
+
+
+
+
+
 # [2.5.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.4.2...@he-tree/vue@2.5.0) (2023-08-31)
 
 
