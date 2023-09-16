@@ -13,9 +13,9 @@
           'drag-placeholder-wrapper': stat.data === placeholderData,
           'dragging-node': stat === dragNode,
         },
-      ]" :style="stat.style" :stat="stat" :rtl="rtl" :indent="indent" :table="table" :processor="processor"
-        @click="$emit('click:node', stat)" @open="$emit('open:node', $event)" @close="$emit('close:node', $event)"
-        @check="$emit('check:node', $event)">
+      ]" :style="stat.style" :stat="stat" :rtl="rtl" :indent="indent" :table="table" :treeLine="treeLine"
+        :treeLineOffset="treeLineOffset" :processor="processor" @click="$emit('click:node', stat)"
+        @open="$emit('open:node', $event)" @close="$emit('close:node', $event)" @check="$emit('check:node', $event)">
         <template #default="{ indentStyle }">
           <template v-if="stat.data === placeholderData">
             <div v-if="!table" class="drag-placeholder he-tree-drag-placeholder">
@@ -106,6 +106,8 @@ const cpt = defineComponent({
       >,
       default: 'index',
     },
+    treeLine: { type: Boolean, default: false },
+    treeLineOffset: { type: Number, default: 8 },
   },
   emits: [
     "update:modelValue",
@@ -409,5 +411,6 @@ function reactiveFirstArg(func: any) {
   background: #ddf2f9;
   border: 1px dashed #00d9ff;
   height: 22px;
+  width: 100%;
 }
 </style>

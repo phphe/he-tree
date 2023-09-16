@@ -1,5 +1,9 @@
 <template>
-  <div v-if="!table" class="tree-node" :style="indentStyle" ref="el">
+  <div v-if="!table" class="tree-node" :class="{ 'tree-node--with-tree-line': treeLine }" :style="indentStyle" ref="el">
+    <template v-if="treeLine">
+      <div v-for="line in vLines" class="tree-line tree-vline" :style="line.style"></div>
+      <div v-if="stat.level > 1" class="tree-line tree-hline" :style="hLineStyle"></div>
+    </template>
     <div class="tree-node-inner">
       <slot :indentStyle="indentStyle"></slot>
     </div>
@@ -14,7 +18,7 @@ import { defineComponent, computed, watch } from "vue-demi";
 
 const cpt = defineComponent({
   // components: {},
-  props: ["stat", "rtl", "indent", "table", "processor"],
+  props: ["stat", "rtl", "indent", "table", "treeLine", "treeLineOffset", "processor"],
   emits: ["open", "close", "check"],
   setup(props, { emit }) {
     const indentStyle = computed(() => {
@@ -43,7 +47,58 @@ const cpt = defineComponent({
         }
       }
     );
-    return { indentStyle };
+    // tree lines
+    const vLines = computed(() => {
+      const lines: { style: object }[] = [];
+      const hasNextVisibleNode = (stat) => {
+        if (stat.parent) {
+          let i = stat.parent?.children.indexOf(stat);
+          do {
+            i++
+            let next = stat.parent.children[i]
+            if (next) {
+              if (!next.hidden) {
+                return true
+              }
+            } else {
+              break
+            }
+          } while (true);
+        }
+        return false
+      }
+      const leftOrRight = props.rtl ? 'right' : 'left'
+      let current = props.stat
+      while (current) {
+        let left = (current.level - 2) * props.indent + props.treeLineOffset
+        const hasNext = hasNextVisibleNode(current)
+        const addLine = () => {
+          lines.push({
+            style: {
+              [leftOrRight]: left + 'px',
+              bottom: hasNext ? 0 : '50%',
+            }
+          })
+        }
+        if (current === props.stat) {
+          if (current.level > 1) {
+            addLine()
+          }
+        } else if (hasNext) {
+          addLine()
+        }
+        current = current.parent
+      }
+      return lines
+    })
+    const hLineStyle = computed(() => {
+      let left = (props.stat.level - 2) * props.indent + props.treeLineOffset
+      const leftOrRight = props.rtl ? 'right' : 'left'
+      return {
+        [leftOrRight]: left + 'px',
+      }
+    })
+    return { indentStyle, vLines, hLineStyle, }
   },
   // data() {
   //   return {}
@@ -57,3 +112,28 @@ const cpt = defineComponent({
 export default cpt;
 export type TreeNodeType = InstanceType<typeof cpt>;
 </script>
+
+<style>
+/* tree line start */
+.tree-node--with-tree-line {
+  position: relative;
+}
+
+.tree-line {
+  position: absolute;
+  background-color: #bbbbbb;
+  top: 0px;
+}
+
+.tree-vline {
+  width: 1px;
+}
+
+.tree-hline {
+  height: 1px;
+  top: 50%;
+  width: 10px;
+}
+
+/* tree line end */
+</style>
