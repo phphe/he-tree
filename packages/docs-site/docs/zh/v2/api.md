@@ -107,10 +107,26 @@
 
 虚拟列表初始渲染数量.用于 SSR(服务端渲染).
 
+#### treeLine
+
+```js
+{ type: Boolean, default: false }
+```
+
+显示树连接线。**此功能在表格模式下无效。**
+
+#### treeLineOffset
+
+```js
+{ type: Number, default: 8 }
+```
+
+树连接线水平方向位移，单位：像素。
+
 #### watermark
 
 ```js
-{ type: Boolean, default: true }
+{ type: Boolean, default: false }
 ```
 
 向浏览器控制台输出一条水印信息.
@@ -639,6 +655,10 @@ boolean | () : boolean
 判断节点是否可**拖入**.
 
 ### events(事件)
+
+#### before-drag-start
+
+参数: dragNode. 拖拽开始前触发.
 
 #### after-drop
 

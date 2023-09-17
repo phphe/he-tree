@@ -2,6 +2,7 @@
 
 ![NPM](https://img.shields.io/npm/l/@he-tree/vue?style=for-the-badge)
 ![npm](https://img.shields.io/npm/v/@he-tree/vue?style=for-the-badge)
+![npm](https://img.shields.io/npm/dm/%40he-tree/vue?style=for-the-badge)
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@he-tree/vue?style=for-the-badge)
 
 Vue tree component. Features: Vue2, Vue3, TypeScript, SSR, nested, virtual list, draggable, sortable, placeholder for drag, table tree, based on Drag and Drop API, deal with any other code based on Drag and Drop API.

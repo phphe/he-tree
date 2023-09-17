@@ -2,6 +2,22 @@
 
 he-tree 遵循 MIT 协议, 保留版权即可自由使用. he-tree pro 是一个付费插件, 包含几个高级功能: 跨树拖拽, 拖拽时克隆, 可拖拽表格. 如果您有需要, 请购买 he-tree pro. 购买时请填写您的邮箱和名字, 一旦您购买, 相关文件会在 24 小时内发送给您. 购买后, 如果有更新, 您也可以使用新版本.
 
+**pro 插件不会连接互联网。**
+
+## 演示
+
+### 跨树拖拽
+
+<video width="620" src="/videos/he-tree cross tree drag.mp4" loop muted autoplay/>
+
+### 拖拽时复制节点
+
+<video width="620" src="/videos/he-tree drag copy.mp4" loop muted autoplay/>
+
+### 可拖拽表格
+
+<video width="620" src="/videos/he-tree drag table.mp4" loop muted autoplay/>
+
 ## 购买许可协议
 
 ### Regular License

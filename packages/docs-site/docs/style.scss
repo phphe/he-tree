@@ -1,5 +1,10 @@
 .main-body {
-  max-width: 900px;
+  $maxWidth: 900px;
+  $sidebar: 320px;
+  max-width: $maxWidth;
   margin-left: auto;
   margin-right: auto;
+  @media (min-width:1450px){
+    margin-left: calc((100vw - $maxWidth) / 2 - $sidebar);
+  }
 }

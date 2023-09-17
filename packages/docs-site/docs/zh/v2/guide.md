@@ -235,6 +235,83 @@ import '@he-tree/vue/style/default.css'
 </script>
 ```
 
+<a name="simpleStyleAndLine"></a>
+
+### 简单样式 Material Design 和连接线
+
+<!-- code & demo -->
+
+```vue
+<template>
+  <Draggable class="mtl-tree" v-model="treeData" treeLine>
+    <template #default="{ node, stat }">
+      <OpenIcon
+        v-if="stat.children.length"
+        :open="stat.open"
+        class="mtl-mr"
+        @click.native="stat.open = !stat.open"
+      />
+      <input
+        class="mtl-checkbox mtl-mr"
+        type="checkbox"
+        v-model="stat.checked"
+      />
+      <span class="mtl-ml">{{ node.text }}</span>
+    </template>
+  </Draggable>
+</template>
+
+<script>
+  import { BaseTree, Draggable, pro, OpenIcon } from '@he-tree/vue'
+  import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
+
+  export default {
+    components: { Draggable, OpenIcon },
+    data() {
+      return {
+        treeData: [
+          {
+            text: 'Projects',
+            children: [
+              {
+                text: 'Frontend',
+                children: [
+                  {
+                    text: 'Vue',
+                    children: [
+                      {
+                        text: 'Nuxt',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'React',
+                    children: [
+                      {
+                        text: 'Next',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'Angular',
+                  },
+                ],
+              },
+              {
+                text: 'Backend',
+              },
+            ],
+          },
+          { text: 'Photos' },
+          { text: 'Videos' },
+        ],
+      }
+    },
+  }
+</script>
+```
+
 ## 节点缩进
 
 不要用 css 设置节点缩进, 而是用 prop [indent](api.md#indent).
@@ -287,6 +364,49 @@ import '@he-tree/vue/style/default.css'
 绑定的数据对象由外部改变时, 组件内部将会为每一个节点创建[stat](api.md#stat)对象, 用来存储相关信息, 如 `open`, `parent`, `children`, `level`. 可通过钩子 prop [statHandler](api.md#statHandler) 在 stat 创建之后修改每一个 stat. 相关 data: [stats](api.md#stats), [statsFlat](api.md#statsFlat).
 
 操作数据的方法: [getStat](api.md#getStat), [has](api.md#has), [updateCheck](api.md#updateCheck), [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible), [move](api.md#move), [add](api.md#add), [addMulti](api.md#addMulti), [remove](api.md#remove), [removeMulti](api.md#removeMulti), [iterateParent](api.md#iterateParent), [getSiblings](api.md#getSiblings), [getData](api.md#getData).
+
+## Material Design (预置样式)
+
+[代码和演示](#simpleStyleAndLine)。库预置了简单样式，Material Design 风格。通过如下步骤启用：
+
+- 引入 css
+  ```js
+  import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
+  ```
+- 添加 css 名：`mtl-tree`
+  ```html
+  <Draggable class="mtl-tree" v-model="treeData" />
+  ```
+- 库包含一个折叠图标组件`OpenIcon`, 你可以使用它作为你的折叠图标。`material-design.css`包含一个简单的勾选框样式`mtl-checkbox`, 你可以添加到勾选框上美化它。[代码和演示](#simpleStyleAndLine)。
+
+## Tree Line (连接线)
+
+[代码和演示](#simpleStyleAndLine)。使用 prop [treeLine](api.md#treeLine) 启用它，使用 prop [treeLineOffset](api.md#treeLineOffset) 设置位移。**此功能在表格模式下无效。**
+
+Tree Line 的样式可以通过 css 类控制。例如：
+
+- `tree-line`: 可以设置 Tree Line 的颜色。
+  ```css
+  .your-tree .tree-line {
+    background: red;
+  }
+  ```
+- `tree-vline`: 可以设置 Tree Line 竖线的颜色，宽度。
+  ```css
+  .your-tree .tree-vline {
+    background: red;
+    width: 1px;
+  }
+  ```
+- `tree-hline`: 可以设置 Tree Line 横线的颜色，宽度。
+  ```css
+  .your-tree .tree-hline {
+    background: red;
+    height: 1px;
+    width: 10px;
+  }
+  ```
 
 ## 虚拟列表
 
@@ -632,7 +752,7 @@ import { dragContext } from '@he-tree/vue/vue2'
 
 ## 水印
 
-此组件会在浏览器控制台输出一条水印信息. 可使用 prop [watermark](api.md#watermark)关闭.
+**此项默认关闭**。 此组件会在浏览器控制台输出一条水印信息. 可使用 prop [watermark](api.md#watermark)关闭.
 
 ## Pro
 

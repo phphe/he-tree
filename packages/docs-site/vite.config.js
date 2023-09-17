@@ -16,7 +16,13 @@ export default defineConfig({
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
   },
-  build: {},
+  build: {
+    rollupOptions: {
+      external: [
+        /^\/videos\//,
+      ]
+    }
+  },
   preview: {
     strictPort: true,
   },

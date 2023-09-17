@@ -27,7 +27,7 @@
       class="absolute right-0 bottom-0 bg-black text-white py-2 px-2 rounded text-xs cursor-pointer hover:bg-gray-600">
       {{ $t('message.View Source') }}
     </div>
-    <div v-if="demo && tab === 'code'" @click="tab = 'demo'"
+    <div v-if="demo && tab === 'code'" @click="onclickBottomRun()"
       class="absolute right-1 bottom-1 bg-blue-500 text-white py-2 px-2 rounded text-xs cursor-pointer hover:bg-blue-400">
       {{ $t('message.Run') }}
     </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { ref, PropType, defineComponent } from 'vue-demi'
+import { ref, PropType, defineComponent, nextTick } from 'vue-demi'
 import {
   mdiCode,
   mdiPlayCircle,
@@ -84,6 +84,11 @@ const highlightMixin = defineComponent({
         highlightjsReady.resolve(hljs)
       })
     },
+    async onclickBottomRun() {
+      this.tab = 'demo'
+      await nextTick()
+      this.$el.scrollIntoView({ block: 'center' })
+    }
   },
   mounted() {
     this.loadScripts()

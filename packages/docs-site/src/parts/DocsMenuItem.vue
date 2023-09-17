@@ -3,31 +3,35 @@ Anchor.DocsMenuItem(:to="to" v-bind="$attrs" @resolved="onResolve")
   slot
 .docs-submenu.overflow-auto.mb-1.text-sm(v-if="submenuVisible")
   .pl-2
-    BaseTree(ref="tree" v-model="submenu" updateBehavior="disabled" :indent="8")
+    BaseTree(ref="tree" v-model="submenu" updateBehavior="disabled" :indent="20" treeLine :tree-line-offset="8")
       template(v-slot="{ node, tree, stat }")
-        a(v-anchor :href="'#'+node.id" :class="'docs-submenu-a docs-submenu-level'+stat.level" @click="onSubmenuClick(stat)")
+        a(v-anchor :href="'#'+node.id" :class="['docs-submenu-a docs-submenu-level'+stat.level, {'active-a': activeID===node.id}]" @click="onSubmenuClick(stat)")
+          OpenIcon.dsi-open-icon(v-if="stat.level===1 && stat.children?.length>0" :open="stat.open")
           span {{nodeText(node.name)}}
-          VIconMDI.dsi-open-icon(v-if="stat.level===1 && stat.children?.length>0" :icon="mdiExpandMore")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue-demi'
-import { BaseTree } from '@he-tree/vue'
+import { defineComponent, ref } from 'vue-demi'
+import { BaseTree, OpenIcon } from '@he-tree/vue'
 import '@he-tree/vue/style/default.css'
 import submenuRef from '../docsSubmenu'
 import { state } from '../store'
-import VIconMDI from '../components/VIconMDI.vue'
-import { mdiExpandMore } from "mdi-js/filled";
+
+const activeID = ref('')
 
 export default defineComponent({
-  components: { BaseTree, VIconMDI },
+  components: { BaseTree, OpenIcon },
   props: {
     to: {},
+  },
+  setup() {
+    return {
+      activeID,
+    }
   },
   data() {
     return {
       realTo: null,
-      mdiExpandMore,
     }
   },
   computed: {
@@ -57,6 +61,7 @@ export default defineComponent({
       return str
     },
     onSubmenuClick(stat) {
+      activeID.value = stat.data.id
       if (stat.level === 1) {
         stat.open = !stat.open
       }
@@ -94,17 +99,27 @@ export default defineComponent({
   @apply text-gray-500;
 
   .tree-node:not(:last-child) {
-    margin-bottom: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .tree-line {
+    background-color: #acacac;
+  }
+
+  .active-a {
+    text-decoration: underline;
+    @apply text-blue-600;
   }
 }
 
 .docs-submenu-level1 {
   font-size: 1rem;
-  @apply font-medium;
+  // @apply font-medium;
+  font-size: 500;
 }
 
 .docs-submenu-level2 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   @apply italic text-gray-700;
 }
 

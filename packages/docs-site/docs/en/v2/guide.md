@@ -235,6 +235,83 @@ Only function provided, you need add your own ui by slot. `stat.checked` has 3 v
 </script>
 ```
 
+<a name="simpleStyleAndLine"></a>
+
+### Material Design and Tree line
+
+<!-- code & demo -->
+
+```vue
+<template>
+  <Draggable class="mtl-tree" v-model="treeData" treeLine>
+    <template #default="{ node, stat }">
+      <OpenIcon
+        v-if="stat.children.length"
+        :open="stat.open"
+        class="mtl-mr"
+        @click.native="stat.open = !stat.open"
+      />
+      <input
+        class="mtl-checkbox mtl-mr"
+        type="checkbox"
+        v-model="stat.checked"
+      />
+      <span class="mtl-ml">{{ node.text }}</span>
+    </template>
+  </Draggable>
+</template>
+
+<script>
+  import { BaseTree, Draggable, pro, OpenIcon } from '@he-tree/vue'
+  import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
+
+  export default {
+    components: { Draggable, OpenIcon },
+    data() {
+      return {
+        treeData: [
+          {
+            text: 'Projects',
+            children: [
+              {
+                text: 'Frontend',
+                children: [
+                  {
+                    text: 'Vue',
+                    children: [
+                      {
+                        text: 'Nuxt',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'React',
+                    children: [
+                      {
+                        text: 'Next',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'Angular',
+                  },
+                ],
+              },
+              {
+                text: 'Backend',
+              },
+            ],
+          },
+          { text: 'Photos' },
+          { text: 'Videos' },
+        ],
+      }
+    },
+  }
+</script>
+```
+
 ## Indent
 
 Don't set node indent by css. Use prop [indent](api.md#indent).
@@ -287,6 +364,51 @@ First use `v-model`. The component will clone data as inner data. When inner dat
 The component creates [stat](api.md#stat) object for every node. It stores runtime info, such as `open`, `parent`, `children`, `level`. You can use prop [statHandler](api.md#statHandler) handle each stat after they created. Related data: [stats](api.md#stats), [statsFlat](api.md#statsFlat).
 
 The methods to handle data: [getStat](api.md#getStat), [has](api.md#has), [updateCheck](api.md#updateCheck), [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible), [move](api.md#move), [add](api.md#add), [addMulti](api.md#addMulti), [remove](api.md#remove), [removeMulti](api.md#removeMulti), [iterateParent](api.md#iterateParent), [getSiblings](api.md#getSiblings), [getData](api.md#getData).
+
+## Material Design
+
+[Code and demo](#simpleStyleAndLine). The library provides predefined simple styles with Material Design. To enable them, follow these steps:
+
+- Import CSS:
+
+  ```js
+  import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
+  ```
+
+- Add CSS class `mtl-tree`:
+  ```html
+  <Draggable class="mtl-tree" v-model="treeData" />
+  ```
+- The library includes a collapsible icon component `OpenIcon`, which you can use as your collapsible icon. `material-design.css` includes a simple checkbox style `mtl-checkbox`, which you can apply to your checkboxes for decoration. [Code and demo](#simpleStyleAndLine).
+
+## Tree Line
+
+[Code and Demo](#simpleStyleAndLine). Enable it with the [treeLine](api.md#treeLine) prop and set the offset with the [treeLineOffset](api.md#treeLineOffset) prop. **This feature is not valid in table mode.**
+
+The style of the tree line can be controlled by css classes. For example:
+
+- `tree-line`: sets the color of the tree line.
+  ```css
+  .your-tree .tree-line {
+    background: red;
+  }
+  ```
+- `tree-vline`: sets the color and width of the vertical tree line.
+  ```css
+  .your-tree .tree-vline {
+    background: red;
+    width: 1px;
+  }
+  ```
+- `tree-hline`: sets the color, width, and height of the horizontal tree line.
+  ```css
+  .your-tree .tree-hline {
+    background: red;
+    height: 1px;
+    width: 10px;
+  }
+  ```
 
 ## Virtual List
 
@@ -632,7 +754,7 @@ It is based on HTML5 Drag and Drop API. So it works in any device that supports 
 
 ## Watermark
 
-It prints a watermark information to browser console. Use prop [watermark](api.md#watermark) to disable it.
+**This is disabled by default**. It prints a watermark information to browser console. Use prop [watermark](api.md#watermark) to disable it.
 
 ## Pro
 

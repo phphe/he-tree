@@ -107,10 +107,26 @@ Enable virtual list.
 
 The number of rendered list items at start. Suits for SSR(Server Side Render).
 
+#### treeLine
+
+```js
+{ type: Boolean, default: false }
+```
+
+Display tree line. **This feature is not valid in table mode.**
+
+#### treeLineOffset
+
+```js
+{ type: Number, default: 8 }
+```
+
+Horizontal displacement of tree lines, unit: pixels.
+
 #### watermark
 
 ```js
-{ type: Boolean, default: true }
+{ type: Boolean, default: false }
 ```
 
 Print a watermark information to browser console.
@@ -642,6 +658,10 @@ Detect if node draggable.
 Detect if node droppable.
 
 ### events
+
+#### before-drag-start
+
+Parameters: dragNode. Triggered before drag start.
 
 #### after-drop
 

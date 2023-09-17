@@ -1,6 +1,6 @@
 <template lang="pug">
 .default-layout.fixed.w-full.h-full.flex
-  .main-sidebar.flex-shrink-0.w-56.h-full.overflow-hidden.flex.flex-col(:class="{'fixed bg-white z-10 border-r-2': sm}" v-show="!sm || sidebarVisible")
+  .main-sidebar.flex-shrink-0.w-80.h-full.overflow-hidden.flex.flex-col(:class="{'fixed bg-white z-10 border-r-2': sm}" v-show="!sm || sidebarVisible")
     .flex-grow.overflow-y-auto.overflow-x-hidden.px-4.flex.flex-col
       //- .contents-block.p-4.border-b-2(v-show="state.tableOfContents.visible")
       //-   .text-xl {{$t('Contents')}}
@@ -35,7 +35,7 @@
                 Anchor.block.py-2.px-3(v-for="item in versions" class="hover:bg-gray-100" :to="item.homePath") {{$t(item.version)}}
         Anchor.main-menu-item(:to="githubURL" v-if="githubURL") Github
         //- Anchor.main-menu-item(v-if="config.IS_DEVLOPMENT" @click="reloadRouteView()") Reload Route
-    //- .flex-shrink-0.py-2.text-center
+        //- .flex-shrink-0.py-2.text-center
   .main-right.flex-grow.overflow-auto.relative()
     .mobile-menu-nav.border-b.items-center.px-2.flex(class="sm:hidden")
       Anchor.mobile-main-title.text-gray-700.px-2(:to="homeUrl")
@@ -56,86 +56,91 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
-  import { routeViewKey, reloadRouteView } from '../router'
-  import { state } from '../store'
-  import { versions, version, menu, homeUrl } from '../current'
-  import { switchLocale } from '../i18n'
-  import * as hp from 'helper-js'
-  import useWindowSize from '../plugins/useWindowSize'
-  import config from '../config'
-  import DocsMenuItem from '../parts/DocsMenuItem.vue'
-  import SearchModal from '../parts/SearchModal.vue'
-  import { mdiMenu, mdiSearch } from 'mdi-js/filled'
-  import { useRouter } from 'vue-router'
-  import GithubButton from 'vue-github-button'
+import { defineComponent, computed } from 'vue'
+import { routeViewKey, reloadRouteView } from '../router'
+import { state } from '../store'
+import { versions, version, menu, homeUrl } from '../current'
+import { switchLocale } from '../i18n'
+import * as hp from 'helper-js'
+import useWindowSize from '../plugins/useWindowSize'
+import config from '../config'
+import DocsMenuItem from '../parts/DocsMenuItem.vue'
+import SearchModal from '../parts/SearchModal.vue'
+import { mdiMenu, mdiSearch } from 'mdi-js/filled'
+import { useRouter } from 'vue-router'
+import GithubButton from 'vue-github-button'
 
-  export default defineComponent({
-    components: { DocsMenuItem, SearchModal, GithubButton },
-    setup(props) {
-      const router = useRouter()
-      const windowSize = useWindowSize()
-      const sm = computed(() => windowSize.value.innerWidth < 760)
-      const githubURL = computed(() =>
-        config.GIT_NAME ? 'https://github.com/' + config.GIT_NAME : ''
-      )
-      return {
-        routeViewKey,
-        reloadRouteView,
-        sm,
-        mdiMenu,
-        mdiSearch,
-        menu,
-        versions,
-        version,
-        homeUrl,
-        githubURL,
-      }
+export default defineComponent({
+  components: { DocsMenuItem, SearchModal, GithubButton },
+  setup(props) {
+    const router = useRouter()
+    const windowSize = useWindowSize()
+    const sm = computed(() => windowSize.value.innerWidth < 760)
+    const githubURL = computed(() =>
+      config.GIT_NAME ? 'https://github.com/' + config.GIT_NAME : ''
+    )
+    return {
+      routeViewKey,
+      reloadRouteView,
+      sm,
+      mdiMenu,
+      mdiSearch,
+      menu,
+      versions,
+      version,
+      homeUrl,
+      githubURL,
+    }
+  },
+  data() {
+    return {
+      state,
+      sidebarVisible: false,
+      year: new Date().getFullYear(),
+      config,
+      searchModalOpen: false,
+    }
+  },
+  watch: {},
+  async created() { },
+  mounted() { },
+  methods: {
+    switchLocale(to: string) {
+      switchLocale(to, this.$router, this.$route)
     },
-    data() {
-      return {
-        state,
-        sidebarVisible: false,
-        year: new Date().getFullYear(),
-        config,
-        searchModalOpen: false,
-      }
-    },
-    watch: {},
-    async created() {},
-    mounted() {},
-    methods: {
-      switchLocale(to: string) {
-        switchLocale(to, this.$router, this.$route)
-      },
-    },
-  })
+  },
+})
 </script>
 
 <style lang="scss">
-  .main-menu-item {
-    @apply block mb-2 font-semibold;
-    &.router-link-active {
-      @apply text-primary-500 text-lg;
-    }
+.main-menu-item {
+  @apply block mb-2 font-semibold;
+
+  &.router-link-active {
+    @apply text-primary-500 text-lg;
   }
-  .main-body {
-    min-height: 750px;
-    min-height: calc(100vh - 100px);
-  }
-  .mobile-menu-nav {
-    $h: 48px;
-    height: $h;
-    line-height: $h;
-    position: sticky;
-    top: 0;
-    background: #fff;
-    z-index: 1;
-  }
-  .mobile-main-title {
-    font-size: 1.3em;
-  }
-  .main-search-icon {
-    align-self: flex-end;
-  }
+}
+
+.main-body {
+  min-height: 750px;
+  min-height: calc(100vh - 100px);
+}
+
+.mobile-menu-nav {
+  $h: 48px;
+  height: $h;
+  line-height: $h;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.mobile-main-title {
+  font-size: 1.3em;
+}
+
+.main-search-icon {
+  align-self: flex-end;
+}
 </style>
