@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>he-tree</h3>
-    <DraggableTree class="mtl-tree" v-model="data" ref="tree" treeLine dragCopy>
+    <DraggableTree class="mtl-tree" v-model="data" ref="tree" treeLine>
       <template #default="{ node, stat }">
         <OpenIcon v-if="stat.children.length" :open="stat.open" class="mtl-mr" @click.native="stat.open = !stat.open" />
         <input class="mtl-checkbox mtl-mr" type="checkbox" v-model="stat.checked" />
