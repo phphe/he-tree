@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.5.1...@he-tree/vue@2.6.0) (2023-09-17)
+
+
+### Bug Fixes
+
+* **style:** fix material design ([67d8854](https://github.com/phphe/he-tree/commit/67d88547091584492da95fe95942be563f18c49b))
+* **tree line:** fix tree line for btt(displat from bottom to top) ([600a699](https://github.com/phphe/he-tree/commit/600a6998ea30b59cc5f59ae910b33ec893061dfc))
+* **types:** update types (*.d.ts files) ([438cd79](https://github.com/phphe/he-tree/commit/438cd796f18ca9edaf61e08b066a2b2505633437))
+
+
+### Features
+
+* **style:** add material design style ([271b024](https://github.com/phphe/he-tree/commit/271b024ce83415699e4ac0bb5a5e50718bdf2173))
+* **ui:** add tree line: auxiliary lines connecting nodes ([a26b1b8](https://github.com/phphe/he-tree/commit/a26b1b8db4656a2a5a7bbb6c1a43e7f6924dfe4c))
+* **watermark:** make console watermark disabled by default ([903f29b](https://github.com/phphe/he-tree/commit/903f29b717f96290313f165b7a44d16a39409fbb))
+
+
+
+
+
 ## [2.5.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.5.0...@he-tree/vue@2.5.1) (2023-09-08)
 
 
