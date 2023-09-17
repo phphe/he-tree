@@ -18,7 +18,7 @@ import { defineComponent, computed, watch } from "vue-demi";
 
 const cpt = defineComponent({
   // components: {},
-  props: ["stat", "rtl", "indent", "table", "treeLine", "treeLineOffset", "processor"],
+  props: ["stat", "rtl", "btt", "indent", "table", "treeLine", "treeLineOffset", "processor"],
   emits: ["open", "close", "check"],
   setup(props, { emit }) {
     const indentStyle = computed(() => {
@@ -68,6 +68,7 @@ const cpt = defineComponent({
         return false
       }
       const leftOrRight = props.rtl ? 'right' : 'left'
+      const bottomOrTop = props.btt ? 'top' : 'bottom'
       let current = props.stat
       while (current) {
         let left = (current.level - 2) * props.indent + props.treeLineOffset
@@ -76,7 +77,7 @@ const cpt = defineComponent({
           lines.push({
             style: {
               [leftOrRight]: left + 'px',
-              bottom: hasNext ? 0 : '50%',
+              [bottomOrTop]: hasNext ? 0 : '50%',
             }
           })
         }
@@ -122,11 +123,12 @@ export type TreeNodeType = InstanceType<typeof cpt>;
 .tree-line {
   position: absolute;
   background-color: #bbbbbb;
-  top: 0px;
 }
 
 .tree-vline {
   width: 1px;
+  top: 0;
+  bottom: 0;
 }
 
 .tree-hline {

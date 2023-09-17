@@ -1,12 +1,15 @@
 // library entry
 export { default as BaseTree } from "./components/BaseTree.vue";
+export { default as TreeNode } from "./components/TreeNode.vue"; // Internal component, not recommended
 import Draggable from "./components/DraggableTree";
-export * from "./components/DraggableTree";
 export {
   default as Draggable,
   context as dragContext,
 } from "./components/DraggableTree";
+export * from "./components/DraggableTree"; // export types
 export { walkTreeData } from "helper-js";
+// material design
+export { default as OpenIcon } from "./components/OpenIcon.vue";
 
 export function pro(account: string, secretKey: string): typeof Draggable {
   try {

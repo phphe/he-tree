@@ -13,7 +13,7 @@
           'drag-placeholder-wrapper': stat.data === placeholderData,
           'dragging-node': stat === dragNode,
         },
-      ]" :style="stat.style" :stat="stat" :rtl="rtl" :indent="indent" :table="table" :treeLine="treeLine"
+      ]" :style="stat.style" :stat="stat" :rtl="rtl" :btt="btt" :indent="indent" :table="table" :treeLine="treeLine"
         :treeLineOffset="treeLineOffset" :processor="processor" @click="$emit('click:node', stat)"
         @open="$emit('open:node', $event)" @close="$emit('close:node', $event)" @check="$emit('check:node', $event)">
         <template #default="{ indentStyle }">
