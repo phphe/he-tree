@@ -4,9 +4,17 @@ declare const cpt: DefineComponent<Readonly<{
     rtl?: any;
     indent?: any;
     table?: any;
+    treeLine?: any;
+    treeLineOffset?: any;
     processor?: any;
 }>, {
     indentStyle: ComputedRef<{
+        [x: string]: string;
+    }>;
+    vLines: ComputedRef<{
+        style: object;
+    }[]>;
+    hLineStyle: ComputedRef<{
         [x: string]: string;
     }>;
 }, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("open" | "close" | "check")[], "open" | "close" | "check", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<Readonly<{
@@ -14,6 +22,8 @@ declare const cpt: DefineComponent<Readonly<{
     rtl?: any;
     indent?: any;
     table?: any;
+    treeLine?: any;
+    treeLineOffset?: any;
     processor?: any;
 }>>> & {
     onOpen?: ((...args: any[]) => any) | undefined;
@@ -24,6 +34,8 @@ declare const cpt: DefineComponent<Readonly<{
     rtl: any;
     indent: any;
     table: any;
+    treeLine: any;
+    treeLineOffset: any;
     processor: any;
 }>;
 export default cpt;

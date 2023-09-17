@@ -23,6 +23,8 @@ export declare const context: {
             rtl: boolean;
             indent: number;
             table: boolean;
+            treeLine: boolean;
+            treeLineOffset: number;
             processor: {
                 data: unknown[];
                 stats: Stat<unknown>[] | null;
@@ -216,6 +218,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }>> & {
             "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -294,7 +304,7 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
-        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
+        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
         };
@@ -519,6 +529,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
             value: {
                 required: boolean;
@@ -657,6 +675,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }>> & {
             "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -673,6 +699,8 @@ export declare const context: {
             rtl: boolean;
             indent: number;
             table: boolean;
+            treeLine: boolean;
+            treeLineOffset: number;
             processor: {
                 data: unknown[];
                 stats: Stat<unknown>[] | null;
@@ -885,6 +913,14 @@ export declare const context: {
         nodeKey: {
             type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
             default: string;
+        };
+        treeLine: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        treeLineOffset: {
+            type: NumberConstructor;
+            default: number;
         };
     }>> & {
         "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
@@ -997,6 +1033,8 @@ export declare const context: {
             rtl: boolean;
             indent: number;
             table: boolean;
+            treeLine: boolean;
+            treeLineOffset: number;
             processor: {
                 data: unknown[];
                 stats: Stat<unknown>[] | null;
@@ -1190,6 +1228,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }>> & {
             "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -1268,7 +1314,7 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
-        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
+        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
         };
@@ -1493,6 +1539,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
             value: {
                 required: boolean;
@@ -1631,6 +1685,14 @@ export declare const context: {
                 type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
                 default: string;
             };
+            treeLine: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            treeLineOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
         }>> & {
             "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -1647,6 +1709,8 @@ export declare const context: {
             rtl: boolean;
             indent: number;
             table: boolean;
+            treeLine: boolean;
+            treeLineOffset: number;
             processor: {
                 data: unknown[];
                 stats: Stat<unknown>[] | null;
@@ -1859,6 +1923,14 @@ export declare const context: {
         nodeKey: {
             type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
             default: string;
+        };
+        treeLine: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        treeLineOffset: {
+            type: NumberConstructor;
+            default: number;
         };
     }>> & {
         "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
@@ -2174,6 +2246,14 @@ declare const cpt: DefineComponent<{
         type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
         default: string;
     };
+    treeLine: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    treeLineOffset: {
+        type: NumberConstructor;
+        default: number;
+    };
 }, unknown, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave")[], "update:modelValue" | "click:node" | "open:node" | "close:node" | "check:node" | "beforeDragStart" | "before-drag-start" | "after-drop" | "change" | "enter" | "leave", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{
     value: {
         required: boolean;
@@ -2312,6 +2392,14 @@ declare const cpt: DefineComponent<{
         type: PropType<"index" | ((stat: Stat<any>, index: number) => any)>;
         default: string;
     };
+    treeLine: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    treeLineOffset: {
+        type: NumberConstructor;
+        default: number;
+    };
 }>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     "onClick:node"?: ((...args: any[]) => any) | undefined;
@@ -2328,6 +2416,8 @@ declare const cpt: DefineComponent<{
     rtl: boolean;
     indent: number;
     table: boolean;
+    treeLine: boolean;
+    treeLineOffset: number;
     processor: {
         data: unknown[];
         stats: Stat<unknown>[] | null;
