@@ -24,20 +24,18 @@
       <input type="checkbox" v-model="table" />
       table
     </label>
+    <label>
+      <input type="checkbox" v-model="treeLine" />
+      Tree Line
+    </label>
     <div>
       indent
       <input type="number" v-model="indent" />
     </div>
     <hr />
     <Refresh :watch="defaultOpen">
-      <BaseTree
-        v-model="data"
-        :defaultOpen="defaultOpen"
-        :rtl="rtl"
-        :indent="indent"
-        :btt="btt"
-        :table="table"
-      />
+      <BaseTree v-model="data" :defaultOpen="defaultOpen" :rtl="rtl" :indent="indent" :btt="btt" :table="table"
+        :treeLine="treeLine" />
     </Refresh>
   </div>
 </template>
@@ -54,6 +52,7 @@ const rtl = ref(false);
 const indent = ref(20);
 const btt = ref(false);
 const table = ref(false);
+const treeLine = ref(true);
 </script>
 
 <style lang="scss"></style>
