@@ -2,6 +2,7 @@ import type { DefineComponent, ComputedRef, ComponentOptionsMixin, VNodeProps, A
 declare const cpt: DefineComponent<Readonly<{
     stat?: any;
     rtl?: any;
+    btt?: any;
     indent?: any;
     table?: any;
     treeLine?: any;
@@ -20,6 +21,7 @@ declare const cpt: DefineComponent<Readonly<{
 }, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("open" | "close" | "check")[], "open" | "close" | "check", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<Readonly<{
     stat?: any;
     rtl?: any;
+    btt?: any;
     indent?: any;
     table?: any;
     treeLine?: any;
@@ -32,6 +34,7 @@ declare const cpt: DefineComponent<Readonly<{
 }, {
     stat: any;
     rtl: any;
+    btt: any;
     indent: any;
     table: any;
     treeLine: any;

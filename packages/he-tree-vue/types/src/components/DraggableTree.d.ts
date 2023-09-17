@@ -21,6 +21,7 @@ export declare const context: {
         };
         $props: Partial<{
             rtl: boolean;
+            btt: boolean;
             indent: number;
             table: boolean;
             treeLine: boolean;
@@ -69,7 +70,6 @@ export declare const context: {
             textKey: string;
             virtualization: boolean;
             virtualizationPrerenderCount: number;
-            btt: boolean;
             watermark: boolean;
             nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
         } & {
@@ -304,7 +304,7 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
-        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
+        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "btt" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
         };
@@ -697,6 +697,7 @@ export declare const context: {
             onLeave?: ((...args: any[]) => any) | undefined;
         }, {
             rtl: boolean;
+            btt: boolean;
             indent: number;
             table: boolean;
             treeLine: boolean;
@@ -745,7 +746,6 @@ export declare const context: {
             textKey: string;
             virtualization: boolean;
             virtualizationPrerenderCount: number;
-            btt: boolean;
             watermark: boolean;
             nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
         }>, Record<string, any>, string, {
@@ -1031,6 +1031,7 @@ export declare const context: {
         };
         $props: Partial<{
             rtl: boolean;
+            btt: boolean;
             indent: number;
             table: boolean;
             treeLine: boolean;
@@ -1079,7 +1080,6 @@ export declare const context: {
             textKey: string;
             virtualization: boolean;
             virtualizationPrerenderCount: number;
-            btt: boolean;
             watermark: boolean;
             nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
         } & {
@@ -1314,7 +1314,7 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
-        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "btt" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
+        }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "btt" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
         };
@@ -1707,6 +1707,7 @@ export declare const context: {
             onLeave?: ((...args: any[]) => any) | undefined;
         }, {
             rtl: boolean;
+            btt: boolean;
             indent: number;
             table: boolean;
             treeLine: boolean;
@@ -1755,7 +1756,6 @@ export declare const context: {
             textKey: string;
             virtualization: boolean;
             virtualizationPrerenderCount: number;
-            btt: boolean;
             watermark: boolean;
             nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
         }>, Record<string, any>, string, {
@@ -2414,6 +2414,7 @@ declare const cpt: DefineComponent<{
     onLeave?: ((...args: any[]) => any) | undefined;
 }, {
     rtl: boolean;
+    btt: boolean;
     indent: number;
     table: boolean;
     treeLine: boolean;
@@ -2462,7 +2463,6 @@ declare const cpt: DefineComponent<{
     textKey: string;
     virtualization: boolean;
     virtualizationPrerenderCount: number;
-    btt: boolean;
     watermark: boolean;
     nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
 }>, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<{

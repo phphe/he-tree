@@ -366,6 +366,7 @@ declare const cpt: DefineComponent<{
     onLeave?: ((...args: any[]) => any) | undefined;
 }, {
     rtl: boolean;
+    btt: boolean;
     indent: number;
     table: boolean;
     treeLine: boolean;
@@ -417,7 +418,6 @@ declare const cpt: DefineComponent<{
     textKey: string;
     virtualization: boolean;
     virtualizationPrerenderCount: number;
-    btt: boolean;
     watermark: boolean;
     nodeKey: "index" | ((stat: Stat<any>, index: number) => any);
 }>;
