@@ -99,7 +99,7 @@ const cpt = defineComponent({
      * Display as table
      */
     table: { type: Boolean, default: false },
-    watermark: { type: Boolean, default: true },
+    watermark: { type: Boolean, default: false },
     nodeKey: {
       type: [String, Function] as PropType<
         "index" | ((stat: Stat<any>, index: number) => any)
