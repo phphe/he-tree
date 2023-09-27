@@ -176,6 +176,15 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
         stat.open = false;
       }
     },
+    openNodeAndParents(nodeOrStat: T | Stat<T>) {
+      // @ts-ignore
+      const stat:Stat<T> = nodeOrStat["isStat"] ? nodeOrStat : this.getStat(nodeOrStat) // prettier-ignore
+      for (const parentStat of this.iterateParent(stat, {
+        withSelf: true,
+      })) {
+        parentStat.open = true;
+      }
+    },
     // actions
     _calcFlatIndex(parent: Stat<T> | null, index: number) {
       let flatIndex = parent ? this.statsFlat!.indexOf(parent) + 1 : 0;

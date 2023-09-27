@@ -43,6 +43,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -111,6 +112,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -149,6 +151,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -422,6 +425,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -460,6 +464,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -568,6 +573,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -606,6 +612,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -719,6 +726,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -807,6 +815,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -845,6 +854,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: Stat<never>): void;
                 _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                 add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<never>): boolean;
@@ -1053,6 +1063,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -1121,6 +1132,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -1159,6 +1171,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -1432,6 +1445,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -1470,6 +1484,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -1578,6 +1593,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: unknown): void;
                     _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                     add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<unknown>): boolean;
@@ -1616,6 +1632,7 @@ export declare const context: {
                     getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                     openAll(): void;
                     closeAll(): void;
+                    openNodeAndParents(nodeOrStat: Stat<never>): void;
                     _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                     add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                     remove(stat: Stat<never>): boolean;
@@ -1729,6 +1746,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -1817,6 +1835,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: unknown): void;
                 _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
                 add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<unknown>): boolean;
@@ -1855,6 +1874,7 @@ export declare const context: {
                 getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
                 openAll(): void;
                 closeAll(): void;
+                openNodeAndParents(nodeOrStat: Stat<never>): void;
                 _calcFlatIndex(parent: Stat<never> | null, index: number): number;
                 add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
                 remove(stat: Stat<never>): boolean;
@@ -2139,6 +2159,7 @@ declare const cpt: DefineComponent<{
             getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
             openAll(): void;
             closeAll(): void;
+            openNodeAndParents(nodeOrStat: unknown): void;
             _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
             add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<unknown>): boolean;
@@ -2177,6 +2198,7 @@ declare const cpt: DefineComponent<{
             getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
             openAll(): void;
             closeAll(): void;
+            openNodeAndParents(nodeOrStat: Stat<never>): void;
             _calcFlatIndex(parent: Stat<never> | null, index: number): number;
             add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<never>): boolean;
@@ -2285,6 +2307,7 @@ declare const cpt: DefineComponent<{
             getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
             openAll(): void;
             closeAll(): void;
+            openNodeAndParents(nodeOrStat: unknown): void;
             _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
             add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<unknown>): boolean;
@@ -2323,6 +2346,7 @@ declare const cpt: DefineComponent<{
             getUnchecked(withDemi?: boolean | undefined): Stat<never>[];
             openAll(): void;
             closeAll(): void;
+            openNodeAndParents(nodeOrStat: Stat<never>): void;
             _calcFlatIndex(parent: Stat<never> | null, index: number): number;
             add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<never>): boolean;
@@ -2436,6 +2460,7 @@ declare const cpt: DefineComponent<{
         getUnchecked(withDemi?: boolean | undefined): Stat<unknown>[];
         openAll(): void;
         closeAll(): void;
+        openNodeAndParents(nodeOrStat: unknown): void;
         _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
         add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
         remove(stat: Stat<unknown>): boolean;

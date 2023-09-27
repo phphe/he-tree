@@ -197,6 +197,7 @@ const cpt = defineComponent({
     ) as TreeProcessor["getUnchecked"],
     openAll: processorMethodProxy("openAll") as TreeProcessor["openAll"],
     closeAll: processorMethodProxy("closeAll") as TreeProcessor["closeAll"],
+    openNodeAndParents: processorMethodProxy("openNodeAndParents") as TreeProcessor["openNodeAndParents"],
     isVisible: processorMethodProxy("isVisible") as TreeProcessor["isVisible"],
     move: processorMethodProxyWithBatchUpdate("move") as TreeProcessor["move"],
     add: reactiveFirstArg(

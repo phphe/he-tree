@@ -17,6 +17,7 @@ export declare function vueMakeTreeProcessor<T>(data: T[], options?: Options): {
     getUnchecked(withDemi?: boolean | undefined): Stat<T>[];
     openAll(): void;
     closeAll(): void;
+    openNodeAndParents(nodeOrStat: T | Stat<T>): void;
     _calcFlatIndex(parent: Stat<T> | null, index: number): number;
     add(nodeData: T, parent?: Stat<T> | null | undefined, index?: number | null | undefined): void;
     remove(stat: Stat<T>): boolean;
