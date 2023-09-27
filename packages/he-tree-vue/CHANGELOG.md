@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.6.0...@he-tree/vue@2.7.0) (2023-09-27)
+
+
+### Features
+
+* **node's open and close:** add method openNodeAndParents ([4b60d4a](https://github.com/phphe/he-tree/commit/4b60d4a7950727f2f031ff35ff06d479d6388b47))
+
+
+
+
+
 # [2.6.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.5.1...@he-tree/vue@2.6.0) (2023-09-17)
 
 
