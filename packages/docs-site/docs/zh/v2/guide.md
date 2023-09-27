@@ -363,7 +363,7 @@ import '@he-tree/vue/style/default.css'
 
 绑定的数据对象由外部改变时, 组件内部将会为每一个节点创建[stat](api.md#stat)对象, 用来存储相关信息, 如 `open`, `parent`, `children`, `level`. 可通过钩子 prop [statHandler](api.md#statHandler) 在 stat 创建之后修改每一个 stat. 相关 data: [stats](api.md#stats), [statsFlat](api.md#statsFlat).
 
-操作数据的方法: [getStat](api.md#getStat), [has](api.md#has), [updateCheck](api.md#updateCheck), [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible), [move](api.md#move), [add](api.md#add), [addMulti](api.md#addMulti), [remove](api.md#remove), [removeMulti](api.md#removeMulti), [iterateParent](api.md#iterateParent), [getSiblings](api.md#getSiblings), [getData](api.md#getData).
+操作数据的方法: [getStat](api.md#getStat), [has](api.md#has), [updateCheck](api.md#updateCheck), [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [openNodeAndParents](api.md#openNodeAndParents), [isVisible](api.md#isVisible), [move](api.md#move), [add](api.md#add), [addMulti](api.md#addMulti), [remove](api.md#remove), [removeMulti](api.md#removeMulti), [iterateParent](api.md#iterateParent), [getSiblings](api.md#getSiblings), [getData](api.md#getData).
 
 ## Material Design (预置样式)
 

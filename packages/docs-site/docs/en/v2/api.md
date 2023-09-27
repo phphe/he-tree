@@ -173,8 +173,6 @@ The top-level nodes' stats. Can be considered as a subset of a non-existent root
 
 ### methods
 
-#### Examples
-
 #### methods examples
 
 Some methods' examples. Click top right icon to view source code.
@@ -184,11 +182,21 @@ Some methods' examples. Click top right icon to view source code.
 ```vue
 <template>
   <div>
-    <BaseTree ref="tree" v-model="treeData"
+    <Draggable ref="tree" class="mtl-tree" v-model="treeData" treeLine
       ><template #default="{ node, stat }">
-        <input type="checkbox" v-model="stat.checked" />
-        {{ node.text }}
-      </template></BaseTree
+        <OpenIcon
+          v-if="stat.children.length"
+          :open="stat.open"
+          class="mtl-mr"
+          @click.native="stat.open = !stat.open"
+        />
+        <input
+          class="mtl-checkbox mtl-mr"
+          type="checkbox"
+          v-model="stat.checked"
+        />
+        <span class="mtl-ml">{{ node.text }}</span>
+      </template></Draggable
     >
     <div class="actions">
       <button @click="addAppendToFirstNode()">add: append to first node</button>
@@ -200,6 +208,15 @@ Some methods' examples. Click top right icon to view source code.
       <br />
       <button @click="$refs.tree.closeAll()">closeAll</button>
       <button @click="$refs.tree.openAll()">openAll</button>
+      <button
+        @click="
+          $refs.tree.openNodeAndParents(
+            treeData[0].children[0].children[1].children[0]
+          )
+        "
+      >
+        openNodeAndParents
+      </button>
       <button @click="getChecked()">getChecked</button>
       <button @click="getChecked(true)">getChecked(true)</button>
       <br />
@@ -210,11 +227,12 @@ Some methods' examples. Click top right icon to view source code.
 </template>
 
 <script>
-  import { BaseTree } from '@he-tree/vue'
+  import { BaseTree, Draggable, pro, OpenIcon } from '@he-tree/vue'
   import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
 
   export default {
-    components: { BaseTree },
+    components: { Draggable, OpenIcon },
     data() {
       return {
         treeData: [
@@ -223,6 +241,27 @@ Some methods' examples. Click top right icon to view source code.
             children: [
               {
                 text: 'Frontend',
+                children: [
+                  {
+                    text: 'Vue',
+                    children: [
+                      {
+                        text: 'Nuxt',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'React',
+                    children: [
+                      {
+                        text: 'Next',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'Angular',
+                  },
+                ],
               },
               {
                 text: 'Backend',
@@ -434,6 +473,14 @@ Move node. parent is null means root. Similar to `add`, check the example of `ad
 ```
 
 Open all nodes. [Example](#methods-examples)
+
+#### openNodeAndParents
+
+```ts
+(nodeDataOrStat): void
+```
+
+Open a node and its all parents to make it visible. The argument `nodeDataOrStat` can be node data or node stat. [Example](#methods-examples)
 
 #### remove
 

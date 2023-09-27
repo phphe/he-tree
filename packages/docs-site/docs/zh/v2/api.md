@@ -182,11 +182,21 @@ type 类型 = Stat<你的节点类型>[]
 ```vue
 <template>
   <div>
-    <BaseTree ref="tree" v-model="treeData"
+    <Draggable ref="tree" class="mtl-tree" v-model="treeData" treeLine
       ><template #default="{ node, stat }">
-        <input type="checkbox" v-model="stat.checked" />
-        {{ node.text }}
-      </template></BaseTree
+        <OpenIcon
+          v-if="stat.children.length"
+          :open="stat.open"
+          class="mtl-mr"
+          @click.native="stat.open = !stat.open"
+        />
+        <input
+          class="mtl-checkbox mtl-mr"
+          type="checkbox"
+          v-model="stat.checked"
+        />
+        <span class="mtl-ml">{{ node.text }}</span>
+      </template></Draggable
     >
     <div class="actions">
       <button @click="addAppendToFirstNode()">add: append to first node</button>
@@ -198,6 +208,15 @@ type 类型 = Stat<你的节点类型>[]
       <br />
       <button @click="$refs.tree.closeAll()">closeAll</button>
       <button @click="$refs.tree.openAll()">openAll</button>
+      <button
+        @click="
+          $refs.tree.openNodeAndParents(
+            treeData[0].children[0].children[1].children[0]
+          )
+        "
+      >
+        openNodeAndParents
+      </button>
       <button @click="getChecked()">getChecked</button>
       <button @click="getChecked(true)">getChecked(true)</button>
       <br />
@@ -208,11 +227,12 @@ type 类型 = Stat<你的节点类型>[]
 </template>
 
 <script>
-  import { BaseTree } from '@he-tree/vue'
+  import { BaseTree, Draggable, pro, OpenIcon } from '@he-tree/vue'
   import '@he-tree/vue/style/default.css'
+  import '@he-tree/vue/style/material-design.css'
 
   export default {
-    components: { BaseTree },
+    components: { Draggable, OpenIcon },
     data() {
       return {
         treeData: [
@@ -221,6 +241,27 @@ type 类型 = Stat<你的节点类型>[]
             children: [
               {
                 text: 'Frontend',
+                children: [
+                  {
+                    text: 'Vue',
+                    children: [
+                      {
+                        text: 'Nuxt',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'React',
+                    children: [
+                      {
+                        text: 'Next',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'Angular',
+                  },
+                ],
               },
               {
                 text: 'Backend',
@@ -234,7 +275,7 @@ type 类型 = Stat<你的节点类型>[]
     },
     methods: {
       notify() {
-        alert(`已经输出结果到浏览器控制台，请检查`)
+        alert(`Outputed to browser console, please check`)
       },
       addAppendToFirstNode() {
         this.$refs.tree.add(
@@ -432,6 +473,14 @@ for (const parentStat of tree.iterateParent(nodeStat, { withSelf: false })) {
 ```
 
 展开所有节点. [示例](#methods-examples)
+
+#### openNodeAndParents
+
+```ts
+(nodeDataOrStat): void
+```
+
+打开节点及其所有父级节点，以确保该节点不会因为父级未打开而不显示. 参数 `nodeDataOrStat` 可以是节点数据或者节点`stat`. [示例](#methods-examples)
 
 #### remove
 

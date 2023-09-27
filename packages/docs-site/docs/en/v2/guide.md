@@ -174,7 +174,7 @@ import '@he-tree/vue/style/default.css'
 </script>
 ```
 
-Only function provided, you need add your own ui by slot. `stat.checked` has 3 value:`true, false, 0`. `0` mean only some child checked. When the parent node is checked, all child nodes will be checked. When all child nodes are checked, the parent node will be checked. When some child nodes are checked, the checked value of the parent node becomes 0. If you need other checkbox logic, don't stick to the "checked" attribute. You can add another attribute to the node to achieve it. Related methods: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [isVisible](api.md#isVisible).
+Only function provided, you need add your own ui by slot. `stat.checked` has 3 value:`true, false, 0`. `0` mean only some child checked. When the parent node is checked, all child nodes will be checked. When all child nodes are checked, the parent node will be checked. When some child nodes are checked, the checked value of the parent node becomes 0. If you need other checkbox logic, don't stick to the "checked" attribute. You can add another attribute to the node to achieve it. Related methods: [getChecked](api.md#getChecked), [getUnchecked](api.md#getUnchecked), [updateCheck](api.md#updateCheck), [openAll](api.md#openAll), [closeAll](api.md#closeAll), [openNodeAndParents](api.md#openNodeAndParents), [isVisible](api.md#isVisible).
 
 ### Drag and Drop
 
