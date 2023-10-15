@@ -8,15 +8,15 @@ The he-tree follows the MIT license, and you can use it for free. The he-tree pr
 
 ### Drag cross trees
 
-<video width="620" src="/videos/he-tree cross tree drag.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-cross-tree-drag.mp4" loop muted autoplay/>
 
 ### Copy node when drag
 
-<video width="620" src="/videos/he-tree drag copy.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-drag-copy.mp4" loop muted autoplay/>
 
 ### Draggable table
 
-<video width="620" src="/videos/he-tree drag table.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-drag-table.mp4" loop muted autoplay/>
 
 ## Licenses
 

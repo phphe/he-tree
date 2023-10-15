@@ -8,15 +8,15 @@ he-tree 遵循 MIT 协议, 保留版权即可自由使用. he-tree pro 是一个
 
 ### 跨树拖拽
 
-<video width="620" src="/videos/he-tree cross tree drag.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-cross-tree-drag.mp4" loop muted autoplay/>
 
 ### 拖拽时复制节点
 
-<video width="620" src="/videos/he-tree drag copy.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-drag-copy.mp4" loop muted autoplay/>
 
 ### 可拖拽表格
 
-<video width="620" src="/videos/he-tree drag table.mp4" loop muted autoplay/>
+<video width="620" src="/videos/he-tree-drag-table.mp4" loop muted autoplay/>
 
 ## 购买许可协议
 
