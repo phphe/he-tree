@@ -1,5 +1,5 @@
 <template lang="pug">
-.v-heading.relative(v-is="'h'+level" ref="root")
+component.v-heading.relative(:is="'h'+level" ref="root")
   slot
   a(v-if="level > 1" v-anchor :href="'#'+$attrs.id") #
 </template>

@@ -1,7 +1,7 @@
 <template lang="pug">
 .app-inner.font-default
   I18n
-  div(v-is="layout")
+  component(:is="layout")
   VModals
   PageProgressBar
   HTMLHead
