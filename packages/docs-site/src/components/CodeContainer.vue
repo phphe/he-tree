@@ -4,7 +4,8 @@
       <slot />
     </div>
     <div class="relative" v-show="tab === 'code' || !demo">
-      <div v-html="codeHightlight || code"></div>
+      <div v-if="codeHightlight" v-html="codeHightlight"></div>
+      <pre v-else><code :class="'language-' + codeLanguage">{{ code }}</code></pre>
       <div class="absolute top-1 right-3 text-center text-sm">
         <span class="ml-2 text-gray-400">{{ codeLanguage }}</span>
       </div>
@@ -42,15 +43,25 @@ import {
   mdiDone,
 } from 'mdi-js/filled'
 import * as hp from 'helper-js'
-import { getHighlighter } from 'shikiji'
+import { getHighlighterCore } from 'shikiji'
+import { getWasmInlined } from 'shikiji/wasm'
+import shikijiTheme from 'shikiji/themes/one-dark-pro.mjs'
+const shikijiThemeName = 'one-dark-pro'
 
-const shiki = await getHighlighter({
-  themes: ['solarized-light'],
+let shikiPromise = hp.promisePin()
+getHighlighterCore({
+  themes: [
+    shikijiTheme
+  ],
+  langs: [
+    import('shikiji/langs/vue.mjs'),
+    import('shikiji/langs/typescript.mjs'),
+    import('shikiji/langs/shellscript.mjs'),
+  ],
+  loadWasm: getWasmInlined
+}).then(shiki => {
+  shikiPromise.resolve(shiki)
 })
-await shiki.loadLanguage('javascript')
-await shiki.loadLanguage('html')
-await shiki.loadLanguage('ts')
-await shiki.loadLanguage('sh')
 
 const highlightMixin = defineComponent({
   data() {
@@ -67,9 +78,8 @@ const highlightMixin = defineComponent({
   },
   mounted() {
     const hightlightCode = async () => {
-      // optionally, load themes and languages after creation
-      await shiki.loadLanguage(this.codeLanguage)
-      this.codeHightlight = shiki.codeToHtml(this.code, { lang: this.codeLanguage, theme: 'solarized-light' })
+      const shiki = await shikiPromise.promise
+      this.codeHightlight = shiki.codeToHtml(this.code, { lang: this.codeLanguage, theme: shikijiThemeName })
 
     }
     this.$watch(
