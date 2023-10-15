@@ -28,7 +28,7 @@
     "fuse.js": "^6.6.2",
     "gitalk": "^1.7.2",
     "helper-js": "^3.1.2",
-    "highlight.js": "^11.6.0",
+    "shikiji": "^0.6.10",
     "marked": "^4.0.18",
     "mdi-js": "^1.0.1",
     "scriptjs": "^2.5.9",

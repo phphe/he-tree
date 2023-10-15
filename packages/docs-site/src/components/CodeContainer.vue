@@ -4,8 +4,7 @@
       <slot />
     </div>
     <div class="relative" v-show="tab === 'code' || !demo">
-      <pre
-        ref="pre"><slot name="code-outer"><code :class="'language-' + codeLanguage"><slot name="code">{{ code }}</slot></code></slot></pre>
+      <div v-html="codeHightlight || code"></div>
       <div class="absolute top-1 right-3 text-center text-sm">
         <span class="ml-2 text-gray-400">{{ codeLanguage }}</span>
       </div>
@@ -43,47 +42,23 @@ import {
   mdiDone,
 } from 'mdi-js/filled'
 import * as hp from 'helper-js'
+import { getHighlighter } from 'shikiji'
 
-const highlightjsReady = hp.promisePin()
-let scriptsLoading = false
+const shiki = await getHighlighter({
+  themes: ['solarized-light'],
+})
+await shiki.loadLanguage('javascript')
+await shiki.loadLanguage('html')
+await shiki.loadLanguage('ts')
+await shiki.loadLanguage('sh')
+
 const highlightMixin = defineComponent({
+  data() {
+    return {
+      codeHightlight: null,
+    }
+  },
   methods: {
-    loadScripts() {
-      if (scriptsLoading) {
-        return
-      }
-      scriptsLoading = true
-      const waitLoadScript = import('scriptjs')
-      const waitLangs = Promise.all([
-        import('highlight.js/lib/languages/bash'),
-        import('highlight.js/lib/languages/css'),
-        import('highlight.js/lib/languages/xml'),
-        import('highlight.js/lib/languages/json'),
-        import('highlight.js/lib/languages/javascript'),
-        import('highlight.js/lib/languages/scss'),
-        import('highlight.js/lib/languages/typescript'),
-      ])
-      import('highlight.js/styles/tomorrow-night-blue.css')
-      import('highlight.js/lib/core').then(async ({ default: hljs }) => {
-        const langs = await waitLangs
-        const langsObj = {}
-        for (const langName of [
-          'bash',
-          'css',
-          'xml',
-          'json',
-          'javascript',
-          'scss',
-          'typescript',
-        ]) {
-          langsObj[langName] = langs.shift().default
-          hljs.registerLanguage(langName, langsObj[langName])
-        }
-        hljs.registerLanguage('sh', langsObj['bash'])
-        hljs.registerLanguage('vue', langsObj['xml'])
-        highlightjsReady.resolve(hljs)
-      })
-    },
     async onclickBottomRun() {
       this.tab = 'demo'
       await nextTick()
@@ -91,27 +66,11 @@ const highlightMixin = defineComponent({
     }
   },
   mounted() {
-    this.loadScripts()
-    const hightlightCode = () => {
-      highlightjsReady.promise.then(async (hljs) => {
-        const pre = this.$refs.pre as HTMLElement
-        const code = pre?.querySelector('code') as HTMLElement
-        if (code) {
-          if (!hljs.getLanguage(this.codeLanguage)) {
-            const scriptjs = (await import('scriptjs')).default
-            const wait = hp.promisePin()
-            scriptjs(
-              `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/${this.codeLanguage}.min.js`,
-              () => {
-                wait.resolve()
-              }
-            )
-            await wait.promise
-          }
-          // @ts-ignore
-          hljs.highlightElement(code)
-        }
-      })
+    const hightlightCode = async () => {
+      // optionally, load themes and languages after creation
+      await shiki.loadLanguage(this.codeLanguage)
+      this.codeHightlight = shiki.codeToHtml(this.code, { lang: this.codeLanguage, theme: 'solarized-light' })
+
     }
     this.$watch(
       () => [this.tab, this.code, this.demo],
@@ -182,9 +141,7 @@ export default defineComponent({
   },
   methods: {
     copyCode() {
-      const pre = this.$refs.pre as HTMLElement
-      const code = pre.querySelector('code') as HTMLElement
-      hp.copyTextToClipboard(code.innerText)
+      hp.copyTextToClipboard(this.code)
       this.copied = true
       setTimeout(() => {
         this.copied = false
@@ -197,15 +154,4 @@ export default defineComponent({
 
 <style lang="scss">
 .code-container {}
-
-// hightlight
-.code-container-hightlight {
-  pre {
-    background: #002451 !important;
-
-    code.hljs {
-      padding: unset;
-    }
-  }
-}
 </style>
