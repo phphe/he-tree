@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.0...@he-tree/vue@2.7.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* **maxlevel:** fix maxLevel does not work for external drag ([afa67bb](https://github.com/phphe/he-tree/commit/afa67bbf08e86071ebb19dc341201efefcef4da5))
+
+
+
+
+
 # [2.7.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.6.0...@he-tree/vue@2.7.0) (2023-09-27)
 
 

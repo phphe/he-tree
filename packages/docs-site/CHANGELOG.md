@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/phphe/he-tree/compare/docs-site@1.4.2...docs-site@1.4.3) (2023-11-24)
+
+
+### Bug Fixes
+
+* **docs:** remove space of videos' name ([af8be46](https://github.com/phphe/he-tree/commit/af8be46cc8e8846809142cc1f3881597b677b5a6))
+* fix doc site video issue ([0e790fc](https://github.com/phphe/he-tree/commit/0e790fcefe1e1c0c88bbf2d8af762be0620c3530))
+
+
+
+
+
 ## [1.4.2](https://github.com/phphe/he-tree/compare/docs-site@1.4.1...docs-site@1.4.2) (2023-09-27)
 
 **Note:** Version bump only for package docs-site
