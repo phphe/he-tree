@@ -666,29 +666,26 @@ const cpt = defineComponent({
               return;
             }
             // check max level
-            if (
-              startTree &&
-              targetTree!.maxLevel != null &&
-              targetTree!.maxLevel > 0
-            ) {
-              const dragNode = startTree.dragNode!;
-              let childMaxLevel = 0;
-              hp.walkTreeData(
-                dragNode,
-                (node) => {
-                  if (node!.level > childMaxLevel) {
-                    childMaxLevel = node!.level;
+            if (targetTree!.maxLevel != null && targetTree!.maxLevel > 0) {
+              let dragNodeWithChildLevel = 1;
+              if (startTree) {
+                const dragNode = startTree.dragNode!;
+                let childMaxLevel = 0;
+                hp.walkTreeData(
+                  dragNode,
+                  (node) => {
+                    if (node!.level > childMaxLevel) {
+                      childMaxLevel = node!.level;
+                    }
+                  },
+                  {
+                    childrenKey: CHILDREN,
                   }
-                },
-                {
-                  childrenKey: CHILDREN,
-                }
-              );
+                );
+                dragNodeWithChildLevel = childMaxLevel - dragNode.level + 1;
+              }
               const willLevel =
-                childMaxLevel -
-                dragNode.level +
-                1 +
-                (dp.parent ? dp.parent.level : 0);
+                dragNodeWithChildLevel + (dp.parent ? dp.parent.level : 0);
               if (willLevel > targetTree!.maxLevel) {
                 setDroppable(false);
                 return;
