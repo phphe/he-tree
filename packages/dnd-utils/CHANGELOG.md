@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.4](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.3...@he-tree/dnd-utils@0.1.0-alpha.4) (2023-12-20)
+
+
+### Bug Fixes
+
+* **undraggable:** fix: click a draggable node, then you can drag undraggable nodes ([46a0611](https://github.com/phphe/he-tree/commit/46a06116901cb266af42e416f5cf1e18a8e10f2e))
+
+
+
+
+
 # [0.1.0-alpha.3](https://github.com/phphe/he-tree/compare/@he-tree/dnd-utils@0.1.0-alpha.2...@he-tree/dnd-utils@0.1.0-alpha.3) (2023-06-03)
 
 

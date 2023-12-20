@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.1...@he-tree/vue@2.7.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* **undraggable:** fix: click a draggable node, then you can drag undraggable nodes ([46a0611](https://github.com/phphe/he-tree/commit/46a06116901cb266af42e416f5cf1e18a8e10f2e))
+
+
+
+
+
 ## [2.7.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.0...@he-tree/vue@2.7.1) (2023-11-24)
 
 
