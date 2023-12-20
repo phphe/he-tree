@@ -30,6 +30,7 @@ export function extendedDND(root: Element, options: Options = {}) {
   DragEventService.on(root, "start", beforeDragStart, {
     touchArgs: [{ passive: true }],
   });
+  DragEventService.on(root, "end", onClickEnd);
   // methods
   function beforeDragStart(e: MouseEvent | TouchEvent) {
     const node = e.target as Node;
@@ -48,6 +49,13 @@ export function extendedDND(root: Element, options: Options = {}) {
     if (dragElement) {
       dragElement.setAttribute("draggable", "true");
       ctx.dragElement = dragElement;
+    }
+  }
+
+  // triggered when quick click
+  function onClickEnd(e: MouseEvent | TouchEvent) {
+    if (ctx.dragElement) {
+      ctx.dragElement.removeAttribute("draggable");
     }
   }
 

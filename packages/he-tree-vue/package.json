@@ -53,7 +53,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@he-tree/dnd-utils": "latest",
+    "@he-tree/dnd-utils": "^0.1.0",
     "@he-tree/tree-utils": "latest",
     "@virtual-list/vue": "^1.2.0",
     "helper-js": "^3.1.2",
