@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.6](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.5...@he-tree/vue@2.7.6) (2023-12-26)
+
+
+### Bug Fixes
+
+* **types:** update types ([34b8a1a](https://github.com/phphe/he-tree/commit/34b8a1a30357c22b1e4681ff516129a8768d439c))
+
+
+
+
+
 ## [2.7.5](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.4...@he-tree/vue@2.7.5) (2023-12-26)
 
 **Note:** Version bump only for package @he-tree/vue
