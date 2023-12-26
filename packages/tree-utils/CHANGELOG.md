@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.4](https://github.com/phphe/he-tree/compare/@he-tree/tree-utils@0.1.0-alpha.3...@he-tree/tree-utils@0.1.0-alpha.4) (2023-12-26)
+
+
+### Bug Fixes
+
+* add comment ([41c6c8d](https://github.com/phphe/he-tree/commit/41c6c8d943a395398d91c15fd76dad0b46917a27))
+
+
+
+
+
 # [0.1.0-alpha.3](https://github.com/phphe/he-tree/compare/@he-tree/tree-utils@0.1.0-alpha.2...@he-tree/tree-utils@0.1.0-alpha.3) (2023-12-26)
 
 

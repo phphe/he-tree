@@ -1,6 +1,6 @@
 {
   "name": "@he-tree/vue",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "description": "Vue tree component. Features: Vue2 & 3, TypeScript, SSR, nested, virtual list, draggable, sortable, placeholder for drag, table tree, based on Drag and Drop API, deal with any other code based on Drag and Drop API.",
   "keywords": [
     "Vue tree component",
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@he-tree/dnd-utils": "latest",
-    "@he-tree/tree-utils": "^0.1.0-alpha.3",
+    "@he-tree/tree-utils": "^0.1.0-alpha.4",
     "@virtual-list/vue": "^1.2.0",
     "helper-js": "^3.1.2",
     "vue-demi": "latest"
