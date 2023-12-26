@@ -127,6 +127,7 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
     },
     _ignoreCheckedOnce(stat: Stat<T>) {
       stat._ignoreCheckedOnce = true;
+      // cancel ignore immediately if not triggered
       setTimeout(() => {
         if (stat._ignoreCheckedOnce) {
           stat._ignoreCheckedOnce = false;
