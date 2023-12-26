@@ -11,6 +11,7 @@ export declare function vueMakeTreeProcessor<T>(data: T[], options?: Options): {
     has(nodeData: T | Stat<T>): boolean;
     _getPathByStat(stat: Stat<T> | null): any;
     afterOneCheckChanged(stat: Stat<T>): boolean;
+    _ignoreCheckedOnce(stat: Stat<T>): void;
     isVisible(statOrNodeData: T | Stat<T>): boolean;
     updateCheck(): void;
     getChecked(withDemi?: boolean | undefined): Stat<T>[];

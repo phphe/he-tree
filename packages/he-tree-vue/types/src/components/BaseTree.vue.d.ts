@@ -25,6 +25,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: unknown): boolean;
             _getPathByStat(stat: Stat<unknown> | null): any;
             afterOneCheckChanged(stat: Stat<unknown>): boolean;
+            _ignoreCheckedOnce(stat: Stat<unknown>): void;
             isVisible(statOrNodeData: unknown): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -32,7 +33,9 @@ declare const cpt: DefineComponent<{
             openAll(): void;
             closeAll(): void;
             openNodeAndParents(nodeOrStat: unknown): void;
-            _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
+            _calcFlatIndex(parent: Stat<unknown> | null, index: number): number; /**
+             * Enable virtual list. 启用虚拟列表
+             */
             add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<unknown>): boolean;
             getSiblings(stat: Stat<unknown>): Stat<unknown>[];
@@ -64,6 +67,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: Stat<never>): boolean;
             _getPathByStat(stat: Stat<never> | null): any;
             afterOneCheckChanged(stat: Stat<never>): boolean;
+            _ignoreCheckedOnce(stat: Stat<never>): void;
             isVisible(statOrNodeData: Stat<never>): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -71,7 +75,9 @@ declare const cpt: DefineComponent<{
             openAll(): void;
             closeAll(): void;
             openNodeAndParents(nodeOrStat: Stat<never>): void;
-            _calcFlatIndex(parent: Stat<never> | null, index: number): number;
+            _calcFlatIndex(parent: Stat<never> | null, index: number): number; /**
+             * Enable virtual list. 启用虚拟列表
+             */
             add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<never>): boolean;
             getSiblings(stat: Stat<never>): Stat<never>[];
@@ -197,6 +203,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: unknown): boolean;
             _getPathByStat(stat: Stat<unknown> | null): any;
             afterOneCheckChanged(stat: Stat<unknown>): boolean;
+            _ignoreCheckedOnce(stat: Stat<unknown>): void;
             isVisible(statOrNodeData: unknown): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -204,7 +211,9 @@ declare const cpt: DefineComponent<{
             openAll(): void;
             closeAll(): void;
             openNodeAndParents(nodeOrStat: unknown): void;
-            _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
+            _calcFlatIndex(parent: Stat<unknown> | null, index: number): number; /**
+             * Enable virtual list. 启用虚拟列表
+             */
             add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<unknown>): boolean;
             getSiblings(stat: Stat<unknown>): Stat<unknown>[];
@@ -236,6 +245,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: Stat<never>): boolean;
             _getPathByStat(stat: Stat<never> | null): any;
             afterOneCheckChanged(stat: Stat<never>): boolean;
+            _ignoreCheckedOnce(stat: Stat<never>): void;
             isVisible(statOrNodeData: Stat<never>): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -243,7 +253,9 @@ declare const cpt: DefineComponent<{
             openAll(): void;
             closeAll(): void;
             openNodeAndParents(nodeOrStat: Stat<never>): void;
-            _calcFlatIndex(parent: Stat<never> | null, index: number): number;
+            _calcFlatIndex(parent: Stat<never> | null, index: number): number; /**
+             * Enable virtual list. 启用虚拟列表
+             */
             add(nodeData: never, parent?: Stat<never> | null | undefined, index?: number | null | undefined): void;
             remove(stat: Stat<never>): boolean;
             getSiblings(stat: Stat<never>): Stat<never>[];
@@ -374,6 +386,7 @@ declare const cpt: DefineComponent<{
         has(nodeData: unknown): boolean;
         _getPathByStat(stat: Stat<unknown> | null): any;
         afterOneCheckChanged(stat: Stat<unknown>): boolean;
+        _ignoreCheckedOnce(stat: Stat<unknown>): void;
         isVisible(statOrNodeData: unknown): boolean;
         updateCheck(): void;
         getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -381,7 +394,9 @@ declare const cpt: DefineComponent<{
         openAll(): void;
         closeAll(): void;
         openNodeAndParents(nodeOrStat: unknown): void;
-        _calcFlatIndex(parent: Stat<unknown> | null, index: number): number;
+        _calcFlatIndex(parent: Stat<unknown> | null, index: number): number; /**
+         * Enable virtual list. 启用虚拟列表
+         */
         add(nodeData: unknown, parent?: Stat<unknown> | null | undefined, index?: number | null | undefined): void;
         remove(stat: Stat<unknown>): boolean;
         getSiblings(stat: Stat<unknown>): Stat<unknown>[];

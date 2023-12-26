@@ -37,6 +37,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -57,7 +58,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -106,6 +109,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -126,7 +130,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -145,6 +151,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -165,7 +172,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -419,6 +428,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -439,7 +449,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -458,6 +470,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -478,7 +491,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -567,6 +582,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -587,7 +603,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -606,6 +624,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -626,7 +645,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -720,6 +741,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -740,7 +762,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -809,6 +833,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -829,7 +854,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -848,6 +875,7 @@ export declare const context: {
                 has(nodeData: Stat<never>): boolean;
                 _getPathByStat(stat: Stat<never> | null): any;
                 afterOneCheckChanged(stat: Stat<never>): boolean;
+                _ignoreCheckedOnce(stat: Stat<never>): void;
                 isVisible(statOrNodeData: Stat<never>): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -868,7 +896,9 @@ export declare const context: {
                 _count(stat: Stat<never>): number;
                 getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1057,6 +1087,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1077,7 +1108,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1126,6 +1159,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1146,7 +1180,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1165,6 +1201,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -1185,7 +1222,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1439,6 +1478,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1459,7 +1499,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1478,6 +1520,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -1498,7 +1541,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1587,6 +1632,7 @@ export declare const context: {
                     has(nodeData: unknown): boolean;
                     _getPathByStat(stat: Stat<unknown> | null): any;
                     afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<unknown>): void;
                     isVisible(statOrNodeData: unknown): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1607,7 +1653,9 @@ export declare const context: {
                     _count(stat: Stat<unknown>): number;
                     getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1626,6 +1674,7 @@ export declare const context: {
                     has(nodeData: Stat<never>): boolean;
                     _getPathByStat(stat: Stat<never> | null): any;
                     afterOneCheckChanged(stat: Stat<never>): boolean;
+                    _ignoreCheckedOnce(stat: Stat<never>): void;
                     isVisible(statOrNodeData: Stat<never>): boolean;
                     updateCheck(): void;
                     getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -1646,7 +1695,9 @@ export declare const context: {
                     _count(stat: Stat<never>): number;
                     getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                     noInitialization: boolean;
-                    childrenKey: string;
+                    childrenKey: string; /**
+                     * if remove placeholder when drag leave a tree
+                     */
                     defaultOpen: boolean;
                     statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                     statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1740,6 +1791,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1760,7 +1812,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1829,6 +1883,7 @@ export declare const context: {
                 has(nodeData: unknown): boolean;
                 _getPathByStat(stat: Stat<unknown> | null): any;
                 afterOneCheckChanged(stat: Stat<unknown>): boolean;
+                _ignoreCheckedOnce(stat: Stat<unknown>): void;
                 isVisible(statOrNodeData: unknown): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -1849,7 +1904,9 @@ export declare const context: {
                 _count(stat: Stat<unknown>): number;
                 getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -1868,6 +1925,7 @@ export declare const context: {
                 has(nodeData: Stat<never>): boolean;
                 _getPathByStat(stat: Stat<never> | null): any;
                 afterOneCheckChanged(stat: Stat<never>): boolean;
+                _ignoreCheckedOnce(stat: Stat<never>): void;
                 isVisible(statOrNodeData: Stat<never>): boolean;
                 updateCheck(): void;
                 getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -1888,7 +1946,9 @@ export declare const context: {
                 _count(stat: Stat<never>): number;
                 getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
                 noInitialization: boolean;
-                childrenKey: string;
+                childrenKey: string; /**
+                 * if remove placeholder when drag leave a tree
+                 */
                 defaultOpen: boolean;
                 statsHandler: (stats: Stat<any>[]) => Stat<any>[];
                 statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -2153,6 +2213,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: unknown): boolean;
             _getPathByStat(stat: Stat<unknown> | null): any;
             afterOneCheckChanged(stat: Stat<unknown>): boolean;
+            _ignoreCheckedOnce(stat: Stat<unknown>): void;
             isVisible(statOrNodeData: unknown): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -2173,7 +2234,9 @@ declare const cpt: DefineComponent<{
             _count(stat: Stat<unknown>): number;
             getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
             noInitialization: boolean;
-            childrenKey: string;
+            childrenKey: string; /**
+             * if remove placeholder when drag leave a tree
+             */
             defaultOpen: boolean;
             statsHandler: (stats: Stat<any>[]) => Stat<any>[];
             statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -2192,6 +2255,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: Stat<never>): boolean;
             _getPathByStat(stat: Stat<never> | null): any;
             afterOneCheckChanged(stat: Stat<never>): boolean;
+            _ignoreCheckedOnce(stat: Stat<never>): void;
             isVisible(statOrNodeData: Stat<never>): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -2212,7 +2276,9 @@ declare const cpt: DefineComponent<{
             _count(stat: Stat<never>): number;
             getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
             noInitialization: boolean;
-            childrenKey: string;
+            childrenKey: string; /**
+             * if remove placeholder when drag leave a tree
+             */
             defaultOpen: boolean;
             statsHandler: (stats: Stat<any>[]) => Stat<any>[];
             statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -2301,6 +2367,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: unknown): boolean;
             _getPathByStat(stat: Stat<unknown> | null): any;
             afterOneCheckChanged(stat: Stat<unknown>): boolean;
+            _ignoreCheckedOnce(stat: Stat<unknown>): void;
             isVisible(statOrNodeData: unknown): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -2321,7 +2388,9 @@ declare const cpt: DefineComponent<{
             _count(stat: Stat<unknown>): number;
             getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
             noInitialization: boolean;
-            childrenKey: string;
+            childrenKey: string; /**
+             * if remove placeholder when drag leave a tree
+             */
             defaultOpen: boolean;
             statsHandler: (stats: Stat<any>[]) => Stat<any>[];
             statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -2340,6 +2409,7 @@ declare const cpt: DefineComponent<{
             has(nodeData: Stat<never>): boolean;
             _getPathByStat(stat: Stat<never> | null): any;
             afterOneCheckChanged(stat: Stat<never>): boolean;
+            _ignoreCheckedOnce(stat: Stat<never>): void;
             isVisible(statOrNodeData: Stat<never>): boolean;
             updateCheck(): void;
             getChecked(withDemi?: boolean | undefined): Stat<never>[];
@@ -2360,7 +2430,9 @@ declare const cpt: DefineComponent<{
             _count(stat: Stat<never>): number;
             getData(filter?: ((data: never) => never) | undefined, root?: Stat<never> | undefined): never[];
             noInitialization: boolean;
-            childrenKey: string;
+            childrenKey: string; /**
+             * if remove placeholder when drag leave a tree
+             */
             defaultOpen: boolean;
             statsHandler: (stats: Stat<any>[]) => Stat<any>[];
             statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
@@ -2454,6 +2526,7 @@ declare const cpt: DefineComponent<{
         has(nodeData: unknown): boolean;
         _getPathByStat(stat: Stat<unknown> | null): any;
         afterOneCheckChanged(stat: Stat<unknown>): boolean;
+        _ignoreCheckedOnce(stat: Stat<unknown>): void;
         isVisible(statOrNodeData: unknown): boolean;
         updateCheck(): void;
         getChecked(withDemi?: boolean | undefined): Stat<unknown>[];
@@ -2474,7 +2547,9 @@ declare const cpt: DefineComponent<{
         _count(stat: Stat<unknown>): number;
         getData(filter?: ((data: unknown) => unknown) | undefined, root?: Stat<unknown> | undefined): unknown;
         noInitialization: boolean;
-        childrenKey: string;
+        childrenKey: string; /**
+         * if remove placeholder when drag leave a tree
+         */
         defaultOpen: boolean;
         statsHandler: (stats: Stat<any>[]) => Stat<any>[];
         statsFlatHandler: (statsFlat: Stat<any>[]) => Stat<any>[];
