@@ -93,18 +93,19 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
           let hasChecked;
           let hasUnchecked;
           for (const child of parent.children) {
-            if (child.checked) {
+            if (child.checked || child.checked === 0) {
               hasChecked = true;
             } else {
               hasUnchecked = true;
-              if (hasChecked) {
+              if (hasChecked && hasUnchecked) {
                 break;
               }
             }
           }
           const parentChecked = !hasUnchecked ? true : hasChecked ? 0 : false;
+
           if (parent.checked !== parentChecked) {
-            parent._ignoreCheckedOnce = true;
+            this._ignoreCheckedOnce(parent);
             parent.checked = parentChecked;
           }
           checkParent(parent);
@@ -116,13 +117,21 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
         stat.children,
         (child) => {
           if (child.checked !== checked) {
-            child._ignoreCheckedOnce = true;
+            this._ignoreCheckedOnce(child);
             child.checked = checked;
           }
         },
         { childrenKey: CHILDREN }
       );
       return true;
+    },
+    _ignoreCheckedOnce(stat: Stat<T>) {
+      stat._ignoreCheckedOnce = true;
+      setTimeout(() => {
+        if (stat._ignoreCheckedOnce) {
+          stat._ignoreCheckedOnce = false;
+        }
+      }, 100);
     },
     isVisible(statOrNodeData: T | Stat<T>) {
       // @ts-ignore
@@ -142,7 +151,7 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
           if (stat.children && stat.children.length > 0) {
             const checked = stat.children.every((v) => v.checked);
             if (stat.checked !== checked) {
-              stat._ignoreCheckedOnce = true;
+              this._ignoreCheckedOnce(stat);
               stat.checked = checked;
             }
           }
