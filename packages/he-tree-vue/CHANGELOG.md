@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.7](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.6...@he-tree/vue@2.7.7) (2024-01-12)
+
+
+### Bug Fixes
+
+* **checked, open states:** toggle above node, after nodes' states 'checked' & 'open' will be updated ([f1ba81f](https://github.com/phphe/he-tree/commit/f1ba81fea80ca6a413287facfd5974a7fb65a105))
+
+
+
+
+
 ## [2.7.6](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.5...@he-tree/vue@2.7.6) (2023-12-26)
 
 
