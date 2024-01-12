@@ -16,6 +16,14 @@
 <script lang="ts">
 import { defineComponent, computed, watch } from "vue-demi";
 
+let justToggleOpen = false
+const afterToggleOpen = () => {
+  justToggleOpen = true
+  setTimeout(() => {
+    justToggleOpen = false
+  }, 100)
+}
+
 const cpt = defineComponent({
   // components: {},
   props: ["stat", "rtl", "btt", "indent", "table", "treeLine", "treeLineOffset", "processor"],
@@ -31,6 +39,11 @@ const cpt = defineComponent({
     watch(
       () => props.stat.checked,
       (checked) => {
+        // fix issue: https://github.com/phphe/he-tree/issues/98
+        // when open/close above node, the after nodes' states 'checked' and 'open' will be updated. It should be caused by Vue's key. We don't use Vue's key prop.
+        if (justToggleOpen) {
+          return
+        }
         if (props.processor.afterOneCheckChanged(props.stat)) {
           emit("check", props.stat);
         }
@@ -40,11 +53,15 @@ const cpt = defineComponent({
     watch(
       () => props.stat.open,
       (open) => {
+        if (justToggleOpen) {
+          return
+        }
         if (open) {
           emit("open", props.stat);
         } else {
           emit("close", props.stat);
         }
+        afterToggleOpen()
       }
     );
     // tree lines
