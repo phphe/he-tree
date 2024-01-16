@@ -46,7 +46,7 @@
   },
   "scripts": {
     "dev": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite --config vite.dev.js --host 0.0.0.0",
-    "dev2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite --config vite.dev.js",
+    "dev2": "!!!this command can't run!!!. node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && npx vue-demi-switch 2 && npm run serve",
     "build": "npm run build2 && npm run build3 && cp dist/v3/style.css style/default.css && cp src/assets/material-design.css style/material-design.css",
     "build3": "node switch-virtual-list.js 3 && npx vue-demi-switch 3 && vite build && vite build -- --iife",
     "build2": "node switch-virtual-list.js 2 && npx vue-demi-switch 2 && cd sub-vue2 && vite build && vite build -- --iife",

@@ -341,7 +341,9 @@ const cpt = defineComponent({
     },
     valueComputed: {
       handler(value) {
-        if (this._ignoreValueChangeOnce) {
+        // isDragging triggered in Vue2 because its array is not same with Vue3
+        const isDragging = this.dragOvering || this.dragNode
+        if (isDragging || this._ignoreValueChangeOnce) {
           this._ignoreValueChangeOnce = false;
         } else {
           const { processor } = this;
