@@ -105,7 +105,7 @@ function createData() {
 }
 
 export default {
-  components: { BaseTree, Draggable: pro('paul@liza.app', 'diB3ZCxkMG5yMCBueih2ICFkcDt5PXpsPWNjZn0maGVlYXJyKD5kem9kKWNwcldlYSxfRGcuKD50dWRlcG9hZSlkckN5'), OpenIcon },
+  components: { BaseTree, Draggable, OpenIcon },
   data() {
     return {
       treeData1: createData(),
