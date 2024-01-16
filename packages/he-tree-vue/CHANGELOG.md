@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.8](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.7...@he-tree/vue@2.7.8) (2024-01-16)
+
+
+### Bug Fixes
+
+* **vue2:** fix drag issue in Vue2 ([f7cea3a](https://github.com/phphe/he-tree/commit/f7cea3a60ba3d936fa91c3d254ddb108eececa39))
+
+
+
+
+
 ## [2.7.7](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.6...@he-tree/vue@2.7.7) (2024-01-12)
 
 
