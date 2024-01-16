@@ -5,9 +5,11 @@
 ```sh
 # Vue3
 npm i --save @he-tree/vue
-# Vue2
+# Vue2. Only Vue@2.6 supported
 npm i --save @he-tree/vue @vue/composition-api
 ```
+
+**!!! IMPORTANT**, if use Vue2, he-tree does not work with Vue2.7, you can copy this example folder to start: https://github.com/phphe/he-tree/tree/dev/examples/example-vue2-no-ts
 
 ## CDN
 
@@ -751,6 +753,8 @@ When dropped from outside by Drag and Drop API, you can use hook props: [onExter
 ## Touch & Mobile
 
 It is based on HTML5 Drag and Drop API. So it works in any device that supports Drag and Drop API. For others, you can try Drag and Drop API polyfill.
+
+**NOTICE**: In mobile, user need touch and hold to trigger drag.
 
 ## Watermark
 

@@ -5,9 +5,11 @@
 ```sh
 # Vue3
 npm i --save @he-tree/vue
-# Vue2
+# Vue2. 仅支持Vue@2.6
 npm i --save @he-tree/vue @vue/composition-api
 ```
+
+**!!! 重要**, 使用 Vue2 时，he-tree 在 Vue2.7 下不工作, 你可以复制这个示例文件夹来开始你的项目: https://github.com/phphe/he-tree/tree/dev/examples/example-vue2-no-ts
 
 ### CDN
 
@@ -749,6 +751,8 @@ import { dragContext } from '@he-tree/vue/vue2'
 ## 触摸 & 移动设备
 
 此组件基于 HTML5 Drag and Drop API, 所以在支持 Drag and Drop API 到移动设备上也能工作. 如果不支持, 可以尝试使设备兼容 Drag and Drop API 的库.
+
+**注意**: 触摸时, 用户需要触摸并等一会儿才能触发拖拽。
 
 ## 水印
 
