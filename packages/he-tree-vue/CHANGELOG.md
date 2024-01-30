@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.8.0...@he-tree/vue@2.8.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* nothing ([01f21fe](https://github.com/phphe/he-tree/commit/01f21fe5f3127686cfba0eabdf33f77b0a181dd9))
+
+
+
+
+
 # [2.8.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.8...@he-tree/vue@2.8.0) (2024-01-30)
 
 
