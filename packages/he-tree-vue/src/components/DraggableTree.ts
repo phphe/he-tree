@@ -94,6 +94,7 @@ const cpt = defineComponent({
     externalDataHandler: {
       type: Function as PropType<ExternalDataHandler>,
     },
+    // hook of event HTML5 Drag and Drop API's dragstart event
     ondragstart: {
       type: Function as PropType<(event: DragEvent) => void>,
     },
