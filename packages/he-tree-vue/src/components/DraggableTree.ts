@@ -94,6 +94,9 @@ const cpt = defineComponent({
     externalDataHandler: {
       type: Function as PropType<ExternalDataHandler>,
     },
+    ondragstart: {
+      type: Function as PropType<(event: DragEvent) => void>,
+    },
   },
   data() {
     return {
@@ -378,6 +381,7 @@ const cpt = defineComponent({
             movePlaceholder(dragNode!.parent, indexBeforeDrop + 1);
           }, 0);
         }
+        this.ondragstart?.(event);
       },
       // onDragEnter, onDragLeave, onDragOver, onDrop execute on target tree
       onEnter: (event) => {

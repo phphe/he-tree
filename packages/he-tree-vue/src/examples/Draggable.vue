@@ -38,8 +38,7 @@
     <div>
       <label>
         <input type="checkbox" v-model="dragOpen" />
-        dragOpen </label
-      ><br />
+        dragOpen </label><br />
       dragOpenDelay<input type="number" v-model="dragOpenDelay" />
     </div>
     <div>maxLevel<input type="number" v-model="maxLevel" /></div>
@@ -54,41 +53,23 @@
       btt(display from bottom to top)
     </label>
     <hr />
-    <Refresh
-      :watch="[
-        enableEachDraggable,
-        enableEachDroppable,
-        rootDroppable,
-        disableDrag,
-        disableDrop,
-        dragOpen,
-        dragOpenDelay,
-        maxLevel,
-        keepPlaceholder,
-      ]"
-    >
-      <DraggableTree
-        v-model="data"
-        ref="tree"
-        virtualization
-        :statHandler="statHandler"
-        :eachDraggable="eachDraggable"
-        :eachDroppable="eachDroppable"
-        :rootDroppable="rootDroppable"
-        :disableDrag="disableDrag"
-        :disableDrop="disableDrop"
-        :dragOpen="dragOpen"
-        :dragOpenDelay="dragOpenDelay"
-        :maxLevel="maxLevel"
-        :beforeDragOpen="beforeDragOpen"
-        :keepPlaceholder="keepPlaceholder"
-        :resolveMovePoint="useMouseAsMovePoint ? 'mouse' : 'top_left'"
-        :rtl="rtl"
-        :btt="btt"
-        style="height: 500px"
-        :onExternalDragOver="()=> true"
-        :externalDataHandler="externalDataHandler"
-      >
+    <Refresh :watch="[
+      enableEachDraggable,
+      enableEachDroppable,
+      rootDroppable,
+      disableDrag,
+      disableDrop,
+      dragOpen,
+      dragOpenDelay,
+      maxLevel,
+      keepPlaceholder,
+    ]">
+      <DraggableTree v-model="data" ref="tree" virtualization :statHandler="statHandler" :eachDraggable="eachDraggable"
+        :eachDroppable="eachDroppable" :rootDroppable="rootDroppable" :disableDrag="disableDrag"
+        :disableDrop="disableDrop" :dragOpen="dragOpen" :dragOpenDelay="dragOpenDelay" :maxLevel="maxLevel"
+        :beforeDragOpen="beforeDragOpen" :keepPlaceholder="keepPlaceholder"
+        :resolveMovePoint="useMouseAsMovePoint ? 'mouse' : 'top_left'" :rtl="rtl" :btt="btt" style="height: 500px"
+        :onExternalDragOver="() => true" :externalDataHandler="externalDataHandler" :ondragstart="customDragImage">
         <template #default="{ node, stat }">
           <span v-if="stat.children.length" @click="stat.open = !stat.open">
             {{ stat.open ? "-" : "+" }}
@@ -97,12 +78,12 @@
         <input type="checkbox" v-model="stat.checked" /> -->
           {{ node.text }}
         </template>
-      </DraggableTree></Refresh
-    >
-    <hr/>
+      </DraggableTree>
+    </Refresh>
+    <hr />
     Follow list item can be dragged into above tree
     <ul>
-      <li v-for="i in 10" draggable="true" @dragstart="ondragstart($event, i)">{{i}}</li>
+      <li v-for="i in 10" draggable="true" @dragstart="ondragstart($event, i)">{{ i }}</li>
     </ul>
   </div>
 </template>
@@ -178,7 +159,19 @@ const ondragstart = (e, i) => {
   window._externalDraggingData = i
 }
 const externalDataHandler = (e) => {
-  return {text: 'external_'+ window._externalDraggingData}
+  return { text: 'external_' + window._externalDraggingData }
+}
+const customDragImage = (e: DragEvent) => {
+  var div = document.createElement("div");
+  div.style.backgroundColor = "red";
+  div.style.color = "white";
+  div.innerText = "This is a div with blue background and white text.";
+  document.body.appendChild(div);
+  e.dataTransfer.setDragImage(div, 10, 10)
+
+  setTimeout(() => {
+    div.remove()
+  }, 100)
 }
 </script>
 
