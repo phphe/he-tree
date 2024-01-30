@@ -316,6 +316,9 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
+            ondragstart: {
+                type: PropType<(event: DragEvent) => void>;
+            };
         }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "btt" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
@@ -395,6 +398,9 @@ export declare const context: {
             };
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
+            };
+            ondragstart: {
+                type: PropType<(event: DragEvent) => void>;
             };
         }>>, unknown, {
             treeDraggableInstance: ExtendedDND | null;
@@ -1039,6 +1045,9 @@ export declare const context: {
         };
         externalDataHandler: {
             type: PropType<ExternalDataHandler>;
+        };
+        ondragstart: {
+            type: PropType<(event: DragEvent) => void>;
         };
     }>> & ShallowUnwrapRef<{}> & {
         treeDraggableInstance: {
@@ -1366,6 +1375,9 @@ export declare const context: {
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
             };
+            ondragstart: {
+                type: PropType<(event: DragEvent) => void>;
+            };
         }>> & VNodeProps & AllowedComponentProps & ComponentCustomProps, ("rtl" | "btt" | "indent" | "table" | "treeLine" | "treeLineOffset" | "processor" | "childrenKey" | "defaultOpen" | "updateBehavior" | "textKey" | "virtualization" | "virtualizationPrerenderCount" | "watermark" | "nodeKey") | ("disableDrag" | "disableDrop" | "rootDroppable" | "dragOpen" | "dragOpenDelay" | "keepPlaceholder" | "dragCopy")>;
         $attrs: {
             [x: string]: unknown;
@@ -1445,6 +1457,9 @@ export declare const context: {
             };
             externalDataHandler: {
                 type: PropType<ExternalDataHandler>;
+            };
+            ondragstart: {
+                type: PropType<(event: DragEvent) => void>;
             };
         }>>, unknown, {
             treeDraggableInstance: ExtendedDND | null;
@@ -2090,6 +2105,9 @@ export declare const context: {
         externalDataHandler: {
             type: PropType<ExternalDataHandler>;
         };
+        ondragstart: {
+            type: PropType<(event: DragEvent) => void>;
+        };
     }>> & ShallowUnwrapRef<{}> & {
         treeDraggableInstance: {
             ingoreHTMLTags: string[];
@@ -2180,6 +2198,9 @@ declare const cpt: DefineComponent<{
     };
     externalDataHandler: {
         type: PropType<ExternalDataHandler>;
+    };
+    ondragstart: {
+        type: PropType<(event: DragEvent) => void>;
     };
 }, unknown, {
     treeDraggableInstance: ExtendedDND | null;
@@ -2630,6 +2651,9 @@ declare const cpt: DefineComponent<{
     };
     externalDataHandler: {
         type: PropType<ExternalDataHandler>;
+    };
+    ondragstart: {
+        type: PropType<(event: DragEvent) => void>;
     };
 }>>, {
     disableDrag: boolean;
