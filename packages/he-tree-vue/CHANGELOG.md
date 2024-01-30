@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.8...@he-tree/vue@2.8.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* **types:** update types ([14dab5a](https://github.com/phphe/he-tree/commit/14dab5a028d7757c6a35a55ad40157dd2458026e))
+
+
+### Features
+
+* **event:** add ondragstart event hook ([13071ff](https://github.com/phphe/he-tree/commit/13071ffa74215a7e22aadcb1fba52031c926a9ac))
+
+
+
+
+
 ## [2.7.8](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.7.7...@he-tree/vue@2.7.8) (2024-01-16)
 
 
