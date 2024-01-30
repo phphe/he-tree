@@ -704,6 +704,14 @@ Detect if node draggable.
 
 Detect if node droppable.
 
+#### ondragstart
+
+```ts
+(event: DragEvent) => void
+```
+
+A hook of dragstart event of HTML Drag and Drop API. You can use HTML Drag and Drop API's [setDragImage](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setDragImage) method to custom drag image. Refer issue: https://github.com/phphe/he-tree/issues/99#issuecomment-1916000535
+
 ### events
 
 #### before-drag-start

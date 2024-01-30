@@ -703,6 +703,14 @@ boolean | () : boolean
 
 判断节点是否可**拖入**.
 
+#### ondragstart
+
+```ts
+(event: DragEvent) => void
+```
+
+HTML 拖放 API 的 dragstart 事件钩子。您可以使用 HTML 拖放 API 的 [setDragImage](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setDragImage) 方法自定义拖动图像。请参考问题: https://github.com/phphe/he-tree/issues/99#issuecomment-1916000535
+
 ### events(事件)
 
 #### before-drag-start
