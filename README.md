@@ -11,6 +11,8 @@ Vue 树组件. 特点: 支持 Vue2, Vue3, TypeScript, SSR, 嵌套, 虚拟列表,
 
 [Docs & Demo](https://hetree.phphe.com) | [文档和示例](https://hetree.phphe.com/zh)
 
+[React Tree](https://github.com/phphe/he-tree-react) | [React 版树组件](https://github.com/phphe/he-tree-react)
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
