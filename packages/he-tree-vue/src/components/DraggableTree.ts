@@ -250,7 +250,7 @@ const cpt = defineComponent({
     const rootEl = this.getRootEl();
     let dragElement: HTMLElement | null = null; // dragElement is the drag node element
     const removePlaceholderWhenEnd = () => {
-      if (targetTree!.has(targetTree!.placeholderData)) {
+      if (targetTree?.has(targetTree!.placeholderData)) {
         targetTree!.ignoreUpdate(() => {
           targetTree!.remove(targetTree!.getStat(targetTree!.placeholderData));
           // update together to prevent flick
