@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.8.1...@he-tree/vue@2.8.2) (2024-03-12)
+
+
+### Bug Fixes
+
+* **drag:** error when drop selection text to outside ([1be2490](https://github.com/phphe/he-tree/commit/1be24900939845e572e482cac272ac5349316a23))
+
+
+
+
+
 ## [2.8.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.8.0...@he-tree/vue@2.8.1) (2024-01-30)
 
 
