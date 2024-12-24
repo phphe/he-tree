@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.4](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.9.3...@he-tree/vue@2.9.4) (2024-12-24)
+
+
+### Bug Fixes
+
+* nuxt3 "Cannot use import statement outside a module" ([4e2f0cd](https://github.com/phphe/he-tree/commit/4e2f0cdbb33a582d8fb0a52f97ce1be90324a317))
+
+
+
+
+
 ## [2.9.3](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.9.2...@he-tree/vue@2.9.3) (2024-12-02)
 
 
