@@ -15,6 +15,16 @@ Vue 树组件. [React 点这](https://github.com/phphe/he-tree-react). 特点: �
 
 ## Sponsors
 
+## Sponsors
+
+<p align="center">
+Silver Sponsors
+<br/>
+<a href="https://www.edoobox.com"><img src="./sponsors/edoobox.svg" alt="edoobox" width="120"><br/>
+edoobox
+</a>
+</p>
+
 Sponsors' logos and links will be displayed here and in the documentation. [Become a Sponsor](https://www.patreon.com/phphe).
 
 ## License
