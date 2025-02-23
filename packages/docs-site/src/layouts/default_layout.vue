@@ -163,4 +163,9 @@
       margin-right: 10px;
     }
   }
+  .sponsors-block {
+    img {
+      display: inline;
+    }
+  }
 </style>

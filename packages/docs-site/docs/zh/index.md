@@ -81,6 +81,16 @@
 
 ## 赞助商
 
+<div class="not-prose sponsors-block">
+<p align="center">
+白银赞助者
+<br/>
+<a href="https://www.edoobox.com"><img src="/sponsors/edoobox.svg" alt="edoobox" width="150"><br/>
+edoobox
+</a>
+</p>
+</div>
+
 赞助商的 logo 和链接将会显示在这里. [赞助我们](https://www.patreon.com/phphe).
 
 ## React

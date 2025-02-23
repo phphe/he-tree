@@ -81,6 +81,16 @@
 
 ## Sponsors
 
+<div class="not-prose sponsors-block">
+<p align="center">
+Silver Sponsors
+<br/>
+<a href="https://www.edoobox.com"><img src="/sponsors/edoobox.svg" alt="edoobox" width="150"><br/>
+edoobox
+</a>
+</p>
+</div>
+
 Sponsors' logos and links will be displayed in the documentation and github page. [Become a Sponsor](https://www.patreon.com/phphe).
 
 ## React
