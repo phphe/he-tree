@@ -717,6 +717,8 @@ walkTreeData(tree.rootChildren, (stat) => {
 可通过节点[stat](api.md#Stat)控制每个节点. 也可通过钩子函数控制.
 相关 props: [disableDrag](api.md#disableDrag), [disableDrop](api.md#disableDrop), [eachDraggable](api.md#eachDraggable), [eachDroppable](api.md#eachDroppable), [rootDroppable](api.md#rootDroppable), [maxLevel](api.md#maxLevel)
 
+**重要**：即使禁用节点的拖拽，节点内被选中的文字，链接，图片仍然可以触发拖拽。如果想避免，给链接和图片添加`draggable="false"`属性。用 css `user-select:none` 禁用文字被选中。
+
 ### 拖拽时限制最大层数/深度
 
 相关 props: [maxLevel](api.md#maxLevel)

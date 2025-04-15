@@ -719,6 +719,8 @@ Related props: [triggerClass](api.md#triggerClass)
 Use [stat](api.md#Stat) to control draggable and droppable for each node. Also can be controled by hooks.
 Related props: [disableDrag](api.md#disableDrag), [disableDrop](api.md#disableDrop), [eachDraggable](api.md#eachDraggable), [eachDroppable](api.md#eachDroppable), [rootDroppable](api.md#rootDroppable), [maxLevel](api.md#maxLevel)
 
+**Important**: Even if you disable dragging of a node, the selected text, link, or image in the node can still trigger dragging. To avoid this, add the `draggable="false"` attribute to links and images. Use css `user-select:none` to disable text selection.
+
 ### Max Level
 
 Related props: [maxLevel](api.md#maxLevel)
