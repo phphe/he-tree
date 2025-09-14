@@ -106,8 +106,10 @@ const cpt = defineComponent({
   data() {
     return {
       treeDraggableInstance: null,
+      dragOverRAF: null,
     } as {
       treeDraggableInstance: ExtendedDND | null;
+      dragOverRAF: number | null;
     };
   },
   computed: {},
@@ -115,6 +117,16 @@ const cpt = defineComponent({
     getNodeByElement(el: HTMLElement): Stat<any> | null {
       const i = el.getAttribute("vt-index");
       return i == null ? null : this.visibleStats[i];
+    },
+    throttleDragOver(processingFn: () => void) {
+      if (this.dragOverRAF !== null) {
+        return;
+      }
+
+      this.dragOverRAF = requestAnimationFrame(() => {
+        this.dragOverRAF = null;
+        processingFn();
+      });
     },
     isDraggable(node: Stat<any>): boolean {
       if (this.disableDrag) {
@@ -429,7 +441,9 @@ const cpt = defineComponent({
                 y: startMovePoint.y + (mouse.y - startMouse.y),
               }
             : { ...mouse };
-          const { btt, rtl } = targetTree;
+
+          this.throttleDragOver(() => {
+            const { btt, rtl } = targetTree;
           // if undroppable, return
           if (targetTree!.disableDrop) {
             ctx.dropEffect = "none";
@@ -708,6 +722,7 @@ const cpt = defineComponent({
             // move placeholder
             movePlaceholder(dp.parent, dp.index);
           });
+          });
         },
         () => {
           // do nothing
@@ -842,6 +857,10 @@ const cpt = defineComponent({
   },
   unmounted() {
     this.treeDraggableInstance?.destroy();
+    if (this.dragOverRAF !== null) {
+      cancelAnimationFrame(this.dragOverRAF);
+      this.dragOverRAF = null;
+    }
   },
 });
 export default cpt;
