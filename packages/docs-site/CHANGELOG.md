@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/phphe/he-tree/compare/docs-site@1.4.16...docs-site@1.5.0) (2025-09-14)
+
+
+### Features
+
+* add sponsor to docs-site ([d64b24d](https://github.com/phphe/he-tree/commit/d64b24d9e81ee342bcd3b0adc56cc2fb3b3b2992))
+
+
+
+
+
 ## [1.4.16](https://github.com/phphe/he-tree/compare/docs-site@1.4.15...docs-site@1.4.16) (2024-12-24)
 
 **Note:** Version bump only for package docs-site

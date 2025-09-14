@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0-beta.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.9.4...@he-tree/vue@2.10.0-beta.2) (2025-09-14)
+
+
+### Bug Fixes
+
+* **type:** fix type ([7a44ea8](https://github.com/phphe/he-tree/commit/7a44ea8ac261374d500b95898540cd21cd21b86d))
+
+
+### Features
+
+* **props:** add prop dragOverThrottleInterval ([7dae823](https://github.com/phphe/he-tree/commit/7dae8234257b2628eac860996a5c3a323089e326))
+
+
+
+
+
 ## [2.9.4](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.9.3...@he-tree/vue@2.9.4) (2024-12-24)
 
 
