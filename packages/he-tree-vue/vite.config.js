@@ -19,6 +19,7 @@ export const globals = {
   vue: "Vue",
   "vue-demi": "VueDemi",
   "@virtual-list/vue": "virtualListVue",
+  "@virtual-list/vue/vue2": "virtualListVue",
 };
 // ============================ config area end ============================
 
