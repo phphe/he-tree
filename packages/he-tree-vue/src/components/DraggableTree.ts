@@ -419,14 +419,18 @@ const cpt = defineComponent({
           }
           // dragOverThrottleInterval
           if (this.dragOverThrottleInterval > 0) {
+            // @ts-expect-error
             if (this._lastValidDragOver == null) {
+              // @ts-expect-error
               this._lastValidDragOver = new Date().getTime();
             } else {
               let nowTime = new Date().getTime();
               if (
+                // @ts-expect-error
                 nowTime - this._lastValidDragOver >
                 this.dragOverThrottleInterval
               ) {
+                // @ts-expect-error
                 this._lastValidDragOver = nowTime;
               } else {
                 return;
