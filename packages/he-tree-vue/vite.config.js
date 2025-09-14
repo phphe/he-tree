@@ -18,6 +18,7 @@ export const banner = `
 export const globals = {
   vue: "Vue",
   "vue-demi": "VueDemi",
+  "@virtual-list/vue": "virtualListVue",
 };
 // ============================ config area end ============================
 
