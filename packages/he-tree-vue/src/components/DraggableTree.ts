@@ -102,6 +102,11 @@ const cpt = defineComponent({
     ondragstart: {
       type: Function as PropType<(event: DragEvent) => void>,
     },
+    // throttle interval for dragover event
+    dragOverThrottleInterval: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -410,6 +415,22 @@ const cpt = defineComponent({
               return;
             } else {
               ctx.preventDefault = true;
+            }
+          }
+          // dragOverThrottleInterval
+          if (this.dragOverThrottleInterval > 0) {
+            if (this._lastValidDragOver == null) {
+              this._lastValidDragOver = new Date().getTime();
+            } else {
+              let nowTime = new Date().getTime();
+              if (
+                nowTime - this._lastValidDragOver >
+                this.dragOverThrottleInterval
+              ) {
+                this._lastValidDragOver = nowTime;
+              } else {
+                return;
+              }
             }
           }
           // return if not moved
