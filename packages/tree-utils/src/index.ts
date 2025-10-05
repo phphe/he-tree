@@ -156,7 +156,9 @@ export function makeTreeProcessor<T>(data: T[], opt: Options = {}) {
         this.stats!,
         (stat) => {
           if (stat.children && stat.children.length > 0) {
-            const checked = stat.children.every((v) => v.checked);
+            const allChecked = stat.children.every((v) => v.checked === true);
+            const allUnchecked = stat.children.every((v) => v.checked === false);
+            const checked = allChecked ? true : allUnchecked ? false : 0;
             if (stat.checked !== checked) {
               this._ignoreCheckedOnce(stat);
               stat.checked = checked;
