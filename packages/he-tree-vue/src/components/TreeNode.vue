@@ -1,8 +1,22 @@
 <template>
-  <div v-if="!table" class="tree-node" :class="{ 'tree-node--with-tree-line': treeLine }" :style="indentStyle" ref="el">
+  <div
+    v-if="!table"
+    class="tree-node"
+    :class="{ 'tree-node--with-tree-line': treeLine }"
+    :style="indentStyle"
+    ref="el"
+  >
     <template v-if="treeLine">
-      <div v-for="line in vLines" class="tree-line tree-vline" :style="line.style"></div>
-      <div v-if="stat.level > 1" class="tree-line tree-hline" :style="hLineStyle"></div>
+      <div
+        v-for="line in vLines"
+        class="tree-line tree-vline"
+        :style="line.style"
+      ></div>
+      <div
+        v-if="stat.level > 1"
+        class="tree-line tree-hline"
+        :style="hLineStyle"
+      ></div>
     </template>
     <div class="tree-node-inner">
       <slot :indentStyle="indentStyle"></slot>
@@ -16,17 +30,26 @@
 <script lang="ts">
 import { defineComponent, computed, watch } from "vue-demi";
 
-let justToggleOpen = false
+let justToggleOpen = false;
 const afterToggleOpen = () => {
-  justToggleOpen = true
+  justToggleOpen = true;
   setTimeout(() => {
-    justToggleOpen = false
-  }, 100)
-}
+    justToggleOpen = false;
+  }, 100);
+};
 
 const cpt = defineComponent({
   // components: {},
-  props: ["stat", "rtl", "btt", "indent", "table", "treeLine", "treeLineOffset", "processor"],
+  props: [
+    "stat",
+    "rtl",
+    "btt",
+    "indent",
+    "table",
+    "treeLine",
+    "treeLineOffset",
+    "processor",
+  ],
   emits: ["open", "close", "check"],
   setup(props, { emit }) {
     const indentStyle = computed(() => {
@@ -41,8 +64,9 @@ const cpt = defineComponent({
       (checked) => {
         // fix issue: https://github.com/phphe/he-tree/issues/98
         // when open/close above node, the after nodes' states 'checked' and 'open' will be updated. It should be caused by Vue's key. We don't use Vue's key prop.
+        // 将勾选组件拖动到下一个父级组件,再拖回去,会丢失勾选状态, 直接在BaseTree给TreeNode组件添加:key="stat.data"可以解决. 暂时不应用
         if (justToggleOpen) {
-          return
+          return;
         }
         if (props.processor.afterOneCheckChanged(props.stat)) {
           emit("check", props.stat);
@@ -54,14 +78,14 @@ const cpt = defineComponent({
       () => props.stat.open,
       (open) => {
         if (justToggleOpen) {
-          return
+          return;
         }
         if (open) {
           emit("open", props.stat);
         } else {
           emit("close", props.stat);
         }
-        afterToggleOpen()
+        afterToggleOpen();
       }
     );
     // tree lines
@@ -71,52 +95,52 @@ const cpt = defineComponent({
         if (stat.parent) {
           let i = stat.parent?.children.indexOf(stat);
           do {
-            i++
-            let next = stat.parent.children[i]
+            i++;
+            let next = stat.parent.children[i];
             if (next) {
               if (!next.hidden) {
-                return true
+                return true;
               }
             } else {
-              break
+              break;
             }
           } while (true);
         }
-        return false
-      }
-      const leftOrRight = props.rtl ? 'right' : 'left'
-      const bottomOrTop = props.btt ? 'top' : 'bottom'
-      let current = props.stat
+        return false;
+      };
+      const leftOrRight = props.rtl ? "right" : "left";
+      const bottomOrTop = props.btt ? "top" : "bottom";
+      let current = props.stat;
       while (current) {
-        let left = (current.level - 2) * props.indent + props.treeLineOffset
-        const hasNext = hasNextVisibleNode(current)
+        let left = (current.level - 2) * props.indent + props.treeLineOffset;
+        const hasNext = hasNextVisibleNode(current);
         const addLine = () => {
           lines.push({
             style: {
-              [leftOrRight]: left + 'px',
-              [bottomOrTop]: hasNext ? 0 : '50%',
-            }
-          })
-        }
+              [leftOrRight]: left + "px",
+              [bottomOrTop]: hasNext ? 0 : "50%",
+            },
+          });
+        };
         if (current === props.stat) {
           if (current.level > 1) {
-            addLine()
+            addLine();
           }
         } else if (hasNext) {
-          addLine()
+          addLine();
         }
-        current = current.parent
+        current = current.parent;
       }
-      return lines
-    })
+      return lines;
+    });
     const hLineStyle = computed(() => {
-      let left = (props.stat.level - 2) * props.indent + props.treeLineOffset
-      const leftOrRight = props.rtl ? 'right' : 'left'
+      let left = (props.stat.level - 2) * props.indent + props.treeLineOffset;
+      const leftOrRight = props.rtl ? "right" : "left";
       return {
-        [leftOrRight]: left + 'px',
-      }
-    })
-    return { indentStyle, vLines, hLineStyle, }
+        [leftOrRight]: left + "px",
+      };
+    });
+    return { indentStyle, vLines, hLineStyle };
   },
   // data() {
   //   return {}
