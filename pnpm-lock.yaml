@@ -24,7 +24,7 @@ importers:
     dependencies:
       '@he-tree/vue':
         specifier: latest
-        version: 2.10.0-beta.2(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)
+        version: 2.10.0-beta.3(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)
       '@vue/composition-api':
         specifier: ^1.4.6
         version: 1.4.9(vue@3.2.31)
@@ -63,7 +63,7 @@ importers:
   packages/docs-site:
     dependencies:
       '@he-tree/vue':
-        specifier: workspace:^2.9.4
+        specifier: workspace:^2.10.1
         version: link:../he-tree-vue
       '@tailwindcss/forms':
         specifier: ^0.5.2
@@ -1792,11 +1792,11 @@ packages:
   '@he-tree/dnd-utils@0.1.0-alpha.4':
     resolution: {integrity: sha512-DuxkFOQ8eztoHrX1/VelqOnQphQbRszemfMKSKlAEEhVjqR/IkaOE2QSRlAdj6OC6AfMvHDPvIZOiEPFwP6/ZQ==}
 
-  '@he-tree/tree-utils@0.1.0-alpha.6':
-    resolution: {integrity: sha512-TIH1iIRLpn3sjd4EuIfKQzFd6ToY8GLYk3i5bfK1njCW7lBBDHLqSyK0mlJPbCPk4PfkZBC4K+sMcYyH4hokyg==}
+  '@he-tree/tree-utils@0.1.0-alpha.8':
+    resolution: {integrity: sha512-4M4BzXbjCg2uY/GDPUGzq1EFGgna5L7NGFF85fF2pSnCIUkWOZY18eaSqvvlOFtyD5DWkkDqxzu0GHFlp/Zb4g==}
 
-  '@he-tree/vue@2.10.0-beta.2':
-    resolution: {integrity: sha512-YiJx+6HyBW8svUGLZZ2z0QWztFv4BezAoOpkis+mrIp+uUn1YUiA/UrgrIZNPcp5Smx9BiGXedl6J60YFfSuXQ==}
+  '@he-tree/vue@2.10.0-beta.3':
+    resolution: {integrity: sha512-k7czIPnPhUhNA4rrw68DiijI9Ze7wxQBzeKqDIDFsZ2I18lnR4AuiIK9yFzgXWaMpcMaD+KZsSzz4vRvnn+dhA==}
     engines: {node: '>=12'}
     peerDependencies:
       '@vue/composition-api': ^1.4.6
@@ -11074,16 +11074,16 @@ snapshots:
       drag-event-service: 2.0.0
       helper-js: 3.1.2
 
-  '@he-tree/tree-utils@0.1.0-alpha.6':
+  '@he-tree/tree-utils@0.1.0-alpha.8':
     dependencies:
       '@babel/runtime': 7.22.15
       drag-event-service: 2.0.0
       helper-js: 3.1.2
 
-  '@he-tree/vue@2.10.0-beta.2(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)':
+  '@he-tree/vue@2.10.0-beta.3(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)':
     dependencies:
       '@he-tree/dnd-utils': 0.1.0-alpha.4
-      '@he-tree/tree-utils': 0.1.0-alpha.6
+      '@he-tree/tree-utils': 0.1.0-alpha.8
       '@virtual-list/vue': 1.2.1(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)
       helper-js: 3.1.2
       vue: 3.2.31

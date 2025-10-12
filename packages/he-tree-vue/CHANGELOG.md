@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.0-beta.3...@he-tree/vue@2.10.1) (2025-10-12)
+
+
+### Bug Fixes
+
+* update version ([f50d0c5](https://github.com/phphe/he-tree/commit/f50d0c5f1e449df0dd1458f6939ad5940094df30))
+
+
+
+
+
 # [2.10.0-beta.3](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.0-beta.2...@he-tree/vue@2.10.0-beta.3) (2025-10-12)
 
 **Note:** Version bump only for package @he-tree/vue
