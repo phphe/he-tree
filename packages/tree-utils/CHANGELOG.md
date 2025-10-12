@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.8](https://github.com/phphe/he-tree/compare/@he-tree/tree-utils@0.1.0-alpha.6...@he-tree/tree-utils@0.1.0-alpha.8) (2025-10-12)
+
+
+### Bug Fixes
+
+* fix pull request 160 ([9ed0247](https://github.com/phphe/he-tree/commit/9ed0247bddadffc54ca85b2595463d1fed3e07d3))
+* **tree-utils:** correct half-checked state calculation in updateCheck ([45e421f](https://github.com/phphe/he-tree/commit/45e421f3240e929ceaeddb7c3dec35914a2e4a66))
+
+
+
+
+
 # [0.1.0-alpha.6](https://github.com/phphe/he-tree/compare/@he-tree/tree-utils@0.1.0-alpha.4...@he-tree/tree-utils@0.1.0-alpha.6) (2024-10-02)
 
 

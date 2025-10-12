@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/phphe/he-tree/compare/docs-site@1.5.0...docs-site@1.6.0) (2025-10-12)
+
+
+### Features
+
+* add prop dragOverThrottleInterval ([8feab65](https://github.com/phphe/he-tree/commit/8feab653217b2e8cdbed8f097a06d9aa3898a722))
+
+
+
+
+
 # [1.5.0](https://github.com/phphe/he-tree/compare/docs-site@1.4.16...docs-site@1.5.0) (2025-09-14)
 
 

@@ -24,7 +24,7 @@ importers:
     dependencies:
       '@he-tree/vue':
         specifier: latest
-        version: 2.9.4(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)
+        version: 2.10.0-beta.2(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)
       '@vue/composition-api':
         specifier: ^1.4.6
         version: 1.4.9(vue@3.2.31)
@@ -229,7 +229,7 @@ importers:
         specifier: workspace:^0.1.0-alpha.4
         version: link:../dnd-utils
       '@he-tree/tree-utils':
-        specifier: workspace:^0.1.0-alpha.6
+        specifier: workspace:^0.1.0-alpha.8
         version: link:../tree-utils
       '@virtual-list/vue':
         specifier: ^1.2.1
@@ -1795,8 +1795,8 @@ packages:
   '@he-tree/tree-utils@0.1.0-alpha.6':
     resolution: {integrity: sha512-TIH1iIRLpn3sjd4EuIfKQzFd6ToY8GLYk3i5bfK1njCW7lBBDHLqSyK0mlJPbCPk4PfkZBC4K+sMcYyH4hokyg==}
 
-  '@he-tree/vue@2.9.4':
-    resolution: {integrity: sha512-n8yycL4fk46mlg6sIkcdSZmSCRvdzqj7Ts14ulKXLqmyR6NyTSnP6O9pj6dPk2S2wJIuX2Ad6MOzpg0qDhlBXA==}
+  '@he-tree/vue@2.10.0-beta.2':
+    resolution: {integrity: sha512-YiJx+6HyBW8svUGLZZ2z0QWztFv4BezAoOpkis+mrIp+uUn1YUiA/UrgrIZNPcp5Smx9BiGXedl6J60YFfSuXQ==}
     engines: {node: '>=12'}
     peerDependencies:
       '@vue/composition-api': ^1.4.6
@@ -11080,7 +11080,7 @@ snapshots:
       drag-event-service: 2.0.0
       helper-js: 3.1.2
 
-  '@he-tree/vue@2.9.4(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)':
+  '@he-tree/vue@2.10.0-beta.2(@vue/composition-api@1.4.9(vue@3.2.31))(vue@3.2.31)':
     dependencies:
       '@he-tree/dnd-utils': 0.1.0-alpha.4
       '@he-tree/tree-utils': 0.1.0-alpha.6
