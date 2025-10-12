@@ -711,6 +711,12 @@ boolean | () : boolean
 
 HTML 拖放 API 的 dragstart 事件钩子。您可以使用 HTML 拖放 API 的 [setDragImage](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setDragImage) 方法自定义拖动图像。请参考问题: https://github.com/phphe/he-tree/issues/99#issuecomment-1916000535
 
+#### dragOverThrottleInterval
+
+`number, default: 0`.
+
+dragover 事件的处理间隔, 增大可以提高性能, 单位毫秒.
+
 ### events(事件)
 
 #### before-drag-start
