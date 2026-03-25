@@ -5,6 +5,7 @@
     :class="{ 'tree-node--with-tree-line': treeLine }"
     :style="indentStyle"
     ref="el"
+    v-bind="ariaAttrs"
   >
     <template v-if="treeLine">
       <div
@@ -22,7 +23,7 @@
       <slot :indentStyle="indentStyle"></slot>
     </div>
   </div>
-  <tr v-else class="tree-node" ref="el">
+  <tr v-else class="tree-node" ref="el" v-bind="ariaAttrs">
     <slot :indentStyle="indentStyle"></slot>
   </tr>
 </template>
@@ -49,6 +50,8 @@ const cpt = defineComponent({
     "treeLine",
     "treeLineOffset",
     "processor",
+    "activeDescendant",
+    "isPlaceholder",
   ],
   emits: ["open", "close", "check"],
   setup(props, { emit }) {
@@ -140,7 +143,46 @@ const cpt = defineComponent({
         [leftOrRight]: left + "px",
       };
     });
-    return { indentStyle, vLines, hLineStyle };
+    // ARIA accessibility
+    const siblings = computed(
+      () => props.stat.parent?.children || props.processor.stats
+    );
+    const ariaSetSize = computed(() => siblings.value.length);
+    const ariaPosInSet = computed(
+      () => siblings.value.indexOf(props.stat) + 1
+    );
+    const ariaAttrs = computed(() => {
+      if (props.isPlaceholder) {
+        return { "aria-hidden": "true" };
+      }
+      const stat = props.stat;
+      const hasChildren = stat.children && stat.children.length > 0;
+      const attrs: Record<string, any> = {
+        role: "treeitem",
+        "aria-level": stat.level,
+        "aria-setsize": ariaSetSize.value,
+        "aria-posinset": ariaPosInSet.value,
+        tabindex: stat === props.activeDescendant ? 0 : -1,
+      };
+      if (hasChildren) {
+        attrs["aria-expanded"] = stat.open ? "true" : "false";
+      }
+      // Checkbox state
+      if (stat.checked === true) {
+        attrs["aria-checked"] = "true";
+      } else if (stat.checked === 0) {
+        attrs["aria-checked"] = "mixed";
+      } else if (stat.checked === false && stat.checked !== undefined) {
+        // Only include aria-checked if checkboxes are in use
+        // We detect this by checking if checked is explicitly set
+      }
+      // Disabled state (non-draggable in a draggable tree)
+      if (stat.draggable === false) {
+        attrs["aria-disabled"] = "true";
+      }
+      return attrs;
+    });
+    return { indentStyle, vLines, hLineStyle, ariaAttrs };
   },
   // data() {
   //   return {}
@@ -179,4 +221,26 @@ export type TreeNodeType = InstanceType<typeof cpt>;
 }
 
 /* tree line end */
+
+/* accessibility */
+.tree-node:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: -2px;
+}
+
+@media (forced-colors: active) {
+  .tree-node:focus-visible {
+    outline: 2px solid Highlight;
+  }
+  .tree-line {
+    background-color: CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .he-tree,
+  .he-tree * {
+    transition: none !important;
+  }
+}
 </style>

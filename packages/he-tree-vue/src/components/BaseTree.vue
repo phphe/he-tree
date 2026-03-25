@@ -5,6 +5,10 @@
       'he-tree--rtl rtl': rtl,
       'he-tree--drag-overing drag-overing': dragOvering,
     }"
+    role="tree"
+    :aria-label="ariaLabel"
+    :aria-describedby="ariaInstructions ? ariaInstructionsId : undefined"
+    @keydown="_onKeydown"
     ref="vtlist"
     :items="visibleStats"
     :disabled="!virtualization"
@@ -33,6 +37,8 @@
         :treeLine="treeLine"
         :treeLineOffset="treeLineOffset"
         :processor="processor"
+        :activeDescendant="activeDescendant"
+        :isPlaceholder="stat.data === placeholderData"
         @click="$emit('click:node', stat)"
         @open="$emit('open:node', $event)"
         @close="$emit('close:node', $event)"
@@ -65,6 +71,17 @@
     </template>
     <template #append>
       <slot name="append" :tree="self"></slot>
+      <div
+        v-if="liveAnnouncement != null"
+        class="he-tree-sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+      >{{ liveAnnouncement }}</div>
+      <div
+        v-if="ariaInstructions"
+        :id="ariaInstructionsId"
+        class="he-tree-sr-only"
+      >{{ ariaInstructions }}</div>
     </template>
   </VirtualList>
 </template>
@@ -139,6 +156,7 @@ const cpt = defineComponent({
     },
     treeLine: { type: Boolean, default: false },
     treeLineOffset: { type: Number, default: 8 },
+    ariaLabel: { type: String, default: "Tree" },
   },
   emits: [
     "update:modelValue",
@@ -164,6 +182,10 @@ const cpt = defineComponent({
       batchUpdateWaiting: false,
       self: this,
       _ignoreValueChangeOnce: false,
+      activeDescendant: null,
+      liveAnnouncement: null,
+      ariaInstructions: "",
+      ariaInstructionsId: "he-tree-inst-" + Math.random().toString(36).slice(2, 9),
     } as {
       stats: Exclude<TreeProcessor["stats"], null>;
       statsFlat: Exclude<TreeProcessor["statsFlat"], null>;
@@ -174,6 +196,10 @@ const cpt = defineComponent({
       batchUpdateWaiting: boolean;
       self: any;
       _ignoreValueChangeOnce: boolean;
+      activeDescendant: Stat<any> | null;
+      liveAnnouncement: string | null;
+      ariaInstructions: string;
+      ariaInstructionsId: string;
     };
   },
   computed: {
@@ -270,6 +296,9 @@ const cpt = defineComponent({
       TreeProcessor["getData"],
       any[]
     >,
+    _onKeydown(_e: KeyboardEvent) {
+      // no-op in BaseTree, overridden by DraggableTree
+    },
     getRootEl() {
       // @ts-ignore
       return this.$refs.vtlist.listElRef as HTMLElement;
@@ -373,6 +402,19 @@ const cpt = defineComponent({
         }
       },
     },
+    visibleStats: {
+      handler(stats: Stat<any>[]) {
+        if (
+          this.activeDescendant &&
+          !stats.includes(this.activeDescendant)
+        ) {
+          this.activeDescendant = stats.length > 0 ? stats[0] : null;
+        }
+        if (!this.activeDescendant && stats.length > 0) {
+          this.activeDescendant = stats[0];
+        }
+      },
+    },
     valueComputed: {
       handler(value) {
         // isDragging triggered in Vue2 because its array is not same with Vue3
@@ -451,5 +493,17 @@ function reactiveFirstArg(func: any) {
   border: 1px dashed #00d9ff;
   height: 22px;
   width: 100%;
+}
+
+.he-tree-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>

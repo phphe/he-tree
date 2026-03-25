@@ -167,6 +167,219 @@ const cpt = defineComponent({
     _eachDroppable() {
       return hp.resolveValueOrGettter(this["_isDragCopy"]?.(), [this]);
     },
+    _focusNode(stat: Stat<any>) {
+      this.activeDescendant = stat;
+      this.$nextTick(() => {
+        const rootEl = this.getRootEl();
+        const el = rootEl.querySelector(
+          '.tree-node[tabindex="0"]'
+        ) as HTMLElement | null;
+        el?.focus();
+      });
+    },
+    _announce(message: string) {
+      this.liveAnnouncement = null;
+      // Reset then set to ensure screen readers announce repeated messages
+      this.$nextTick(() => {
+        this.liveAnnouncement = message;
+      });
+    },
+    _getVisibleStats() {
+      return this.visibleStats.filter(
+        (s: Stat<any>) => s.data !== this.placeholderData
+      );
+    },
+    _onKeydown(e: KeyboardEvent) {
+      const nodeEl = (e.target as HTMLElement).closest(
+        ".tree-node"
+      ) as HTMLElement | null;
+      if (!nodeEl) return;
+      const stat = this.getNodeByElement(nodeEl);
+      if (!stat || stat.data === this.placeholderData) return;
+
+      const visible = this._getVisibleStats();
+      const currentIndex = visible.indexOf(stat);
+      if (currentIndex === -1) return;
+
+      let handled = false;
+
+      if (e.altKey && !this.disableDrag) {
+        // Alt+Arrow: reorder
+        const siblings = stat.parent
+          ? stat.parent.children
+          : this.stats;
+        const siblingIndex = siblings.indexOf(stat);
+
+        switch (e.key) {
+          case "ArrowUp": {
+            if (siblingIndex > 0) {
+              this.move(stat, stat.parent || null, siblingIndex - 1);
+              this.$emit("change");
+              const newSiblings = stat.parent
+                ? stat.parent.children
+                : this.stats;
+              const newIndex = newSiblings.indexOf(stat);
+              this._announce(
+                `Moved to position ${newIndex + 1} of ${newSiblings.length}`
+              );
+              this._focusNode(stat);
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowDown": {
+            if (siblingIndex < siblings.length - 1) {
+              this.move(stat, stat.parent || null, siblingIndex + 2);
+              this.$emit("change");
+              const newSiblings = stat.parent
+                ? stat.parent.children
+                : this.stats;
+              const newIndex = newSiblings.indexOf(stat);
+              this._announce(
+                `Moved to position ${newIndex + 1} of ${newSiblings.length}`
+              );
+              this._focusNode(stat);
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowLeft": {
+            // Outdent: move after parent
+            if (stat.parent) {
+              const grandparent = stat.parent.parent || null;
+              const parentSiblings = grandparent
+                ? grandparent.children
+                : this.stats;
+              const parentIndex = parentSiblings.indexOf(stat.parent);
+              this.move(stat, grandparent, parentIndex + 1);
+              this.$emit("change");
+              const newSiblings = grandparent
+                ? grandparent.children
+                : this.stats;
+              const newIndex = newSiblings.indexOf(stat);
+              this._announce(
+                `Outdented to level ${stat.level}, position ${newIndex + 1} of ${newSiblings.length}`
+              );
+              this._focusNode(stat);
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowRight": {
+            // Indent: move as last child of previous sibling
+            if (siblingIndex > 0) {
+              const prevSibling = siblings[siblingIndex - 1];
+              if (this.isDroppable(prevSibling)) {
+                prevSibling.open = true;
+                const targetIndex = prevSibling.children.filter(
+                  (c: Stat<any>) => c !== stat
+                ).length;
+                this.move(stat, prevSibling, targetIndex);
+                this.$emit("change");
+                this._announce(
+                  `Indented to level ${stat.level}, position ${prevSibling.children.indexOf(stat) + 1} of ${prevSibling.children.length}`
+                );
+                this._focusNode(stat);
+              }
+            }
+            handled = true;
+            break;
+          }
+        }
+      } else if (!e.altKey && !e.ctrlKey && !e.metaKey) {
+        // Standard tree navigation
+        switch (e.key) {
+          case "ArrowUp": {
+            if (currentIndex > 0) {
+              this._focusNode(visible[currentIndex - 1]);
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowDown": {
+            if (currentIndex < visible.length - 1) {
+              this._focusNode(visible[currentIndex + 1]);
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowRight": {
+            if (
+              stat.children &&
+              stat.children.length > 0 &&
+              !stat.open
+            ) {
+              stat.open = true;
+            } else if (
+              stat.children &&
+              stat.children.length > 0 &&
+              stat.open
+            ) {
+              // Focus first child
+              const firstChild = stat.children.find(
+                (c: Stat<any>) => !c.hidden
+              );
+              if (firstChild) {
+                this._focusNode(firstChild);
+              }
+            }
+            handled = true;
+            break;
+          }
+          case "ArrowLeft": {
+            if (
+              stat.children &&
+              stat.children.length > 0 &&
+              stat.open
+            ) {
+              stat.open = false;
+            } else if (stat.parent) {
+              this._focusNode(stat.parent);
+            }
+            handled = true;
+            break;
+          }
+          case "Home": {
+            if (visible.length > 0) {
+              this._focusNode(visible[0]);
+            }
+            handled = true;
+            break;
+          }
+          case "End": {
+            if (visible.length > 0) {
+              this._focusNode(visible[visible.length - 1]);
+            }
+            handled = true;
+            break;
+          }
+          case "Enter":
+          case " ": {
+            this.$emit("click:node", stat);
+            handled = true;
+            break;
+          }
+          case "*": {
+            // Expand all siblings at same level
+            const sibsForStar = stat.parent
+              ? stat.parent.children
+              : this.stats;
+            for (const sib of sibsForStar) {
+              if (sib.children && sib.children.length > 0) {
+                sib.open = true;
+              }
+            }
+            handled = true;
+            break;
+          }
+        }
+      }
+
+      if (handled) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
   },
   mounted() {
     // Deprecated old watermark
@@ -270,6 +483,10 @@ const cpt = defineComponent({
         });
       }
     };
+    // Accessibility: keyboard instructions
+    this.ariaInstructions =
+      "Use arrow keys to navigate. Alt plus arrow keys to reorder.";
+
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
         // triggerElement trigger click
