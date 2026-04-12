@@ -176,6 +176,11 @@ const cpt = defineComponent({
         // Only include aria-checked if checkboxes are in use
         // We detect this by checking if checked is explicitly set
       }
+      // Aria label from stat or stat.data
+      const ariaLabel = stat.ariaLabel ?? stat.data?.ariaLabel;
+      if (ariaLabel) {
+        attrs["aria-label"] = ariaLabel;
+      }
       // Disabled state (non-draggable in a draggable tree)
       if (stat.draggable === false) {
         attrs["aria-disabled"] = "true";
