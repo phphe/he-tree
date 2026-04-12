@@ -220,7 +220,9 @@ const cpt = defineComponent({
                 : this.stats;
               const newIndex = newSiblings.indexOf(stat);
               this._announce(
-                `Moved to position ${newIndex + 1} of ${newSiblings.length}`
+                this.i18n?.movedToPosition
+                  ? this.i18n.movedToPosition(newIndex + 1, newSiblings.length)
+                  : `Moved to position ${newIndex + 1} of ${newSiblings.length}`
               );
               this._focusNode(stat);
             }
@@ -236,7 +238,9 @@ const cpt = defineComponent({
                 : this.stats;
               const newIndex = newSiblings.indexOf(stat);
               this._announce(
-                `Moved to position ${newIndex + 1} of ${newSiblings.length}`
+                this.i18n?.movedToPosition
+                  ? this.i18n.movedToPosition(newIndex + 1, newSiblings.length)
+                  : `Moved to position ${newIndex + 1} of ${newSiblings.length}`
               );
               this._focusNode(stat);
             }
@@ -258,7 +262,9 @@ const cpt = defineComponent({
                 : this.stats;
               const newIndex = newSiblings.indexOf(stat);
               this._announce(
-                `Outdented to level ${stat.level}, position ${newIndex + 1} of ${newSiblings.length}`
+                this.i18n?.outdentedToLevel
+                  ? this.i18n.outdentedToLevel(stat.level, newIndex + 1, newSiblings.length)
+                  : `Outdented to level ${stat.level}, position ${newIndex + 1} of ${newSiblings.length}`
               );
               this._focusNode(stat);
             }
@@ -277,7 +283,9 @@ const cpt = defineComponent({
                 this.move(stat, prevSibling, targetIndex);
                 this.$emit("change");
                 this._announce(
-                  `Indented to level ${stat.level}, position ${prevSibling.children.indexOf(stat) + 1} of ${prevSibling.children.length}`
+                  this.i18n?.indentedToLevel
+                    ? this.i18n.indentedToLevel(stat.level, prevSibling.children.indexOf(stat) + 1, prevSibling.children.length)
+                    : `Indented to level ${stat.level}, position ${prevSibling.children.indexOf(stat) + 1} of ${prevSibling.children.length}`
                 );
                 this._focusNode(stat);
               }
@@ -485,6 +493,7 @@ const cpt = defineComponent({
     };
     // Accessibility: keyboard instructions
     this.ariaInstructions =
+      this.i18n?.instructions ||
       "Use arrow keys to navigate. Alt plus arrow keys to reorder.";
 
     this.treeDraggableInstance = extendedDND(rootEl, {
