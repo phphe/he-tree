@@ -229,7 +229,7 @@ const cpt = defineComponent({
           }
           case "ArrowDown": {
             if (siblingIndex < siblings.length - 1) {
-              this.move(stat, stat.parent || null, siblingIndex + 2);
+              this.move(stat, stat.parent || null, siblingIndex + 1);
               this.$emit("change");
               const newSiblings = stat.parent
                 ? stat.parent.children
