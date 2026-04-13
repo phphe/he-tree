@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.4](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.2...@he-tree/vue@2.10.4) (2026-04-13)
+
+
+### Bug Fixes
+
+* fix @he-tree/vue 2.10.3 not installable ([40bd208](https://github.com/phphe/he-tree/commit/40bd208e38ae71d39283ee8fc2dc35e608449085))
+* Fixed off-by-one when moving nodes by keyboard; Allow ARIA texts to be translated ([37245b3](https://github.com/phphe/he-tree/commit/37245b38b2d870b85b0853a4dff65025ec586d5d))
+
+
+
+
+
 ## [2.10.2](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.1...@he-tree/vue@2.10.2) (2026-03-25)
 
 **Note:** Version bump only for package @he-tree/vue
