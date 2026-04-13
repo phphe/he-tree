@@ -157,6 +157,15 @@ const cpt = defineComponent({
     treeLine: { type: Boolean, default: false },
     treeLineOffset: { type: Number, default: 8 },
     ariaLabel: { type: String, default: "Tree" },
+    i18n: {
+      type: Object as PropType<{
+        instructions?: string;
+        movedToPosition?: (position: number, total: number) => string;
+        outdentedToLevel?: (level: number, position: number, total: number) => string;
+        indentedToLevel?: (level: number, position: number, total: number) => string;
+      }>,
+      default: () => ({}),
+    },
   },
   emits: [
     "update:modelValue",
