@@ -7,7 +7,7 @@
     }"
     role="tree"
     :aria-label="ariaLabel"
-    :aria-describedby="ariaInstructions ? ariaInstructionsId : undefined"
+    :aria-describedby="ariaInstructionsId"
     @keydown="_onKeydown"
     ref="vtlist"
     :items="visibleStats"
@@ -78,10 +78,10 @@
         aria-atomic="true"
       >{{ liveAnnouncement }}</div>
       <div
-        v-if="ariaInstructions"
+        v-if="i18n?.instructions"
         :id="ariaInstructionsId"
         class="he-tree-sr-only"
-      >{{ ariaInstructions }}</div>
+      >{{ i18n.instructions }}</div>
     </template>
   </VirtualList>
 </template>
@@ -193,7 +193,6 @@ const cpt = defineComponent({
       _ignoreValueChangeOnce: false,
       activeDescendant: null,
       liveAnnouncement: null,
-      ariaInstructions: "",
       ariaInstructionsId: "he-tree-inst-" + Math.random().toString(36).slice(2, 9),
     } as {
       stats: Exclude<TreeProcessor["stats"], null>;
@@ -207,7 +206,6 @@ const cpt = defineComponent({
       _ignoreValueChangeOnce: boolean;
       activeDescendant: Stat<any> | null;
       liveAnnouncement: string | null;
-      ariaInstructions: string;
       ariaInstructionsId: string;
     };
   },

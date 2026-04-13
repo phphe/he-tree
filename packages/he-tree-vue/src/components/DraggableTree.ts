@@ -491,11 +491,6 @@ const cpt = defineComponent({
         });
       }
     };
-    // Accessibility: keyboard instructions
-    this.ariaInstructions =
-      this.i18n?.instructions ??
-      "Use arrow keys to navigate. Alt plus arrow keys to reorder.";
-
     this.treeDraggableInstance = extendedDND(rootEl, {
       beforeDragStart: (event) => {
         // triggerElement trigger click
