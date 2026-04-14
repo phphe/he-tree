@@ -73,14 +73,14 @@
       <slot name="append" :tree="self"></slot>
       <div
         v-if="liveAnnouncement != null"
-        class="he-tree-sr-only"
+        class="sr-only"
         aria-live="polite"
         aria-atomic="true"
       >{{ liveAnnouncement }}</div>
       <div
         v-if="i18n?.instructions"
         :id="ariaInstructionsId"
-        class="he-tree-sr-only"
+        class="sr-only"
       >{{ i18n.instructions }}</div>
     </template>
   </VirtualList>
@@ -502,7 +502,7 @@ function reactiveFirstArg(func: any) {
   width: 100%;
 }
 
-.he-tree-sr-only {
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -510,6 +510,7 @@ function reactiveFirstArg(func: any) {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
