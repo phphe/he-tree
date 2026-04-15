@@ -7,7 +7,7 @@ export const pkg = require("./package.json");
 export const name = "heTreeVue"; // for umd, iife
 export const banner = `
 /*!
- * ${pkg.name} v${pkg.version}
+ * ${pkg.name}
  * Author: ${pkg.author}
  * Homepage: ${pkg.homepage || null}
  * Released under the ${pkg.license} License.
