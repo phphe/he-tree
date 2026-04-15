@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.5](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.4...@he-tree/vue@2.10.5) (2026-04-15)
+
+**Note:** Version bump only for package @he-tree/vue
+
+
+
+
+
 ## [2.10.4](https://github.com/phphe/he-tree/compare/@he-tree/vue@2.10.2...@he-tree/vue@2.10.4) (2026-04-13)
 
 

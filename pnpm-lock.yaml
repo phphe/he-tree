@@ -63,7 +63,7 @@ importers:
   packages/docs-site:
     dependencies:
       '@he-tree/vue':
-        specifier: workspace:^2.10.4
+        specifier: workspace:^2.10.5
         version: link:../he-tree-vue
       '@tailwindcss/forms':
         specifier: ^0.5.2
