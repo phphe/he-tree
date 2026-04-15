@@ -7,7 +7,7 @@
     }"
     role="tree"
     :aria-label="ariaLabel"
-    :aria-describedby="ariaInstructions ? ariaInstructionsId : undefined"
+    :aria-describedby="ariaInstructionsId"
     @keydown="_onKeydown"
     ref="vtlist"
     :items="visibleStats"
@@ -73,15 +73,15 @@
       <slot name="append" :tree="self"></slot>
       <div
         v-if="liveAnnouncement != null"
-        class="he-tree-sr-only"
+        class="sr-only"
         aria-live="polite"
         aria-atomic="true"
       >{{ liveAnnouncement }}</div>
       <div
-        v-if="ariaInstructions"
+        v-if="i18n?.instructions"
         :id="ariaInstructionsId"
-        class="he-tree-sr-only"
-      >{{ ariaInstructions }}</div>
+        class="sr-only"
+      >{{ i18n.instructions }}</div>
     </template>
   </VirtualList>
 </template>
@@ -193,7 +193,6 @@ const cpt = defineComponent({
       _ignoreValueChangeOnce: false,
       activeDescendant: null,
       liveAnnouncement: null,
-      ariaInstructions: "",
       ariaInstructionsId: "he-tree-inst-" + Math.random().toString(36).slice(2, 9),
     } as {
       stats: Exclude<TreeProcessor["stats"], null>;
@@ -207,7 +206,6 @@ const cpt = defineComponent({
       _ignoreValueChangeOnce: boolean;
       activeDescendant: Stat<any> | null;
       liveAnnouncement: string | null;
-      ariaInstructions: string;
       ariaInstructionsId: string;
     };
   },
@@ -504,7 +502,7 @@ function reactiveFirstArg(func: any) {
   width: 100%;
 }
 
-.he-tree-sr-only {
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -512,6 +510,7 @@ function reactiveFirstArg(func: any) {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
